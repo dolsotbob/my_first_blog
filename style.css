@@ -1,0 +1,41 @@
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            background-color: blueviolet; 
+            padding: 15px;
+            border: none; 
+        }
+        
+        .item{
+            background-color:rgb(86, 8, 77);
+            justify-content: flex-start;
+            color: white;
+            text-align: center;
+            padding: 7px; 
+            flex: 1 1 150px;
+            border-radius: 5px;
+            align-items: center; 
+            flex-grow: 1;
+            flex-wrap: nowrap;
+            align-items: stretch;
+        }
+        
+        h1 {
+            color: green;
+            text-align: center; 
+        }
+        h2 {
+            color: blue;
+        }
+        h3 {
+            color: brown;
+        }
+        h4{
+            color:darkcyan
+        }
+    
