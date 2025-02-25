@@ -1139,42 +1139,60 @@
                         <ul>function sum(x, y, z) {<br>
                             <ul>return x + y + z; } </ul><br>
                             <ul>const numbers = [1, 2, 3];</ul>
-                            <ul>sum(...numbers) //6</ul></ul>
-                        
+                            <ul>sum(...numbers) //6</ul>
+                        </ul>
+
                     </li>
                     <li>rest 문법
                         <ul>
                             <li>파라미터를 배열의 형태로 받아서 사용할 수 있음.</li>
-                                <ul>function sum(...theArgs) {
-                                    <ul>return theArgs.reduce((previous, current) => {
-                                        <ul>return previous + current; }); }</ul>
-                                    </ul>
-                                </ul><br>
-                                <ul>sum(1,2,2) ///6</ul>
+                            <ul>function sum(...theArgs) {
+                                <ul>return theArgs.reduce((previous, current) => {
+                                    <ul>return previous + current; }); }</ul>
+                                </ul>
+                            </ul><br>
+                            <ul>sum(1,2,2) ///6</ul>
                         </ul>
                     </li>
                 </ul>
 
                 <h4>화살표 함수</h4>
-                <p>함수를 정의하는 방법: 
-                    <ul><li>함수 선언문
+                <p>함수를 정의하는 방법:
+                <ul>
+                    <li>함수 선언문
                         <ul>function sum (x, y) { </ul>
                         <ul>return x + y; }</ul>
                     </li>
                     <li>함수 표현식
                         <ul>const subtract = function (x, y) {</ul>
                         <ul>return x - y; }</ul>
-                    </li></ul>
+                    </li>
+                </ul>
                 </p>
                 <p>여기에 더해 화살표 함수가 있음. function 키워드 대신 화살표(=>)를 사용함.
-                    <ul>const multiply = (x, y) => {</ul>
-                    <ul>return x * y; }</ul>
-                    매개변수가 한 개일 때 소괄호 생략 가능.<br>
-                    함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능.
+                <ul>const multiply = (x, y) => {</ul>
+                <ul>return x * y; }</ul>
+                매개변수가 한 개일 때 소괄호 생략 가능.<br>
+                함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능.
                 </p>
-
-
             </article>
+
+
+            <article>
+                <h3>DOM</h3>
+                <p>Document Object Model. HTML 요소를 Object처럼 조작할 수 있는 모델.</p>
+                <p>아래는 HTML 파일과 같은 디렉토리에 존재하는 myScriptFile.js를 불러옴.<br>
+                <pre><code>src="myScriptFile.js</pre></code>
+                </p>
+                <p>script 코드는 body가 끝나기 전에 넣기</p><br>
+                <p>CREATE, APPEND, READ를 통해 새로운 DOM 객체를 만들고, 기존의 DOM 객체에 붙이고, DOM 객체를 선택해서 조회할 수 있음.</p>
+                <p>READ, UPDATE, DELETE</p>
+                
+                <h4>여러 개의 자식 요소 지우기</h4>
+                <p>innerHTML로 모든 자식 요소 지울 수 있지만, 보안 문제가 있음.<br>
+                removeChild는 자식 요소를 지정해 삭제하는 메서드. for, while 반복문을 활용해 자식 요소가 남아있지 않을 때까지 모든 자식 요소 삭제할 수 있음.</p>
+            </article>
+
 
             <article>
                 <h3 style="color:darkmagenta">2025 최신 탈중앙화 애플리케이션(DApp) 동향</h3>
