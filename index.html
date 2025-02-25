@@ -1105,19 +1105,79 @@
                         <br>
                         <ul> const recipe = createFoodRecipe('하이볼');</ul>
                         <ul>recipe(); // '탄산수 + 위스키 = 하이볼!'</ul><br>
-
                     </ul>
                     <li>커링</li>
-                    <li>모듈 패턴</li>
+                    <ul>
+                        <li>여러 전달인자를 가진 함수를 함수를 연속적으로 리턴하는 함수로 변경하는 행위</li>
+                        <ul>function sum(a, b) {return a + b;}</ul><br>
+                        <ul>function currySum(a)
+                            <ul>{return function (b) {
+                                <ul>return a + b; }; }</ul>
+                            </ul>
+                        </ul><br>
+                        <ul>console.log(sum(10,20) === currySum(10)(20))</ul>
+                    </ul>
+                    <ul>
+                        <li>전체 프로세스의 일정 부분까지 실행하는 경우 유용 </li>
+                    </ul><br>
+                    <li>모듈 패턴
+                        <ul>
+                            <li>모듈은 하나의 기능을 온전히 수행하기 위한
+                                모든 코드를 가지고 있는 코드 모음으로 하나의 단위로서 역할을 함.
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <p>클로저는 특정 데이터를 다른 코드의 실행으로부터 보호해야할 때 용이하다.</p>
 
+                <h4>spread/rest 문법</h4>
+                <ul>
+                    <li>spread 문법
+                        <ul>
+                            <li>배열을 풀어서 인자로 전달하거나, 배열을 풀어서 각각의 요소로 넣을 때 사용</li>
+                        </ul>
+                        <ul>function sum(x, y, z) {<br>
+                            <ul>return x + y + z; } </ul><br>
+                            <ul>const numbers = [1, 2, 3];</ul>
+                            <ul>sum(...numbers) //6</ul></ul>
+                        
+                    </li>
+                    <li>rest 문법
+                        <ul>
+                            <li>파라미터를 배열의 형태로 받아서 사용할 수 있음.</li>
+                                <ul>function sum(...theArgs) {
+                                    <ul>return theArgs.reduce((previous, current) => {
+                                        <ul>return previous + current; }); }</ul>
+                                    </ul>
+                                </ul><br>
+                                <ul>sum(1,2,2) ///6</ul>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>화살표 함수</h4>
+                <p>함수를 정의하는 방법: 
+                    <ul><li>함수 선언문
+                        <ul>function sum (x, y) { </ul>
+                        <ul>return x + y; }</ul>
+                    </li>
+                    <li>함수 표현식
+                        <ul>const subtract = function (x, y) {</ul>
+                        <ul>return x - y; }</ul>
+                    </li></ul>
+                </p>
+                <p>여기에 더해 화살표 함수가 있음. function 키워드 대신 화살표(=>)를 사용함.
+                    <ul>const multiply = (x, y) => {</ul>
+                    <ul>return x * y; }</ul>
+                    매개변수가 한 개일 때 소괄호 생략 가능.<br>
+                    함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능.
+                </p>
 
 
             </article>
 
             <article>
-                <h3>2025 최신 탈중앙화 애플리케이션(DApp) 동향</h3>
+                <h3 style="color:darkmagenta">2025 최신 탈중앙화 애플리케이션(DApp) 동향</h3>
                 <p style="font-style: italic;">다음 보고서는 전 세계에서 가장 성과가 뛰어난 탈중앙화 애플리케이션(DApp)을 추적하는 DappRadar의 최신 순위를 기반으로,
                     OpenAI의 ChatGPT 인사이트를 활용하여 작성되었습니다.</p>
                 <h4>소개</h4>
@@ -1351,12 +1411,10 @@
                 <p style="font-style: italic;">
                     자바스크립트는 프로토타입 기반 언어이고 객체지향 언어로 쓰기 어렵다.
                 </p>
-                <ul><li>은닉화(private 키워드)의 한계</li>
-                <li>추상화(interface 키워드) 기능의 부재</li></ul>
-
-
-
-
+                <ul>
+                    <li>은닉화(private 키워드)의 한계</li>
+                    <li>추상화(interface 키워드) 기능의 부재</li>
+                </ul>
             </article>
 
         </section>
