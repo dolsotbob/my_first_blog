@@ -1502,8 +1502,25 @@
                 <p>Node.js 내장 모듈 목록은 다음 링크에서 찾을 수 있다: 
                     <a href ="https://nodejs.org/docs/latest-v18.x/api/index.html">Node.js v18.20.6 Documentation</a>
                 </p>
+                <p>
+                    모든 모듈은 모듈을 사용하기 위해 불러오는 과정이 필요함.<br>
+                    브라우저에서 다른 파일을 불러올 때는: 스크립트 src=...<br>
+                    <br> Node.js는 자바스크립트 코드 가장 상단에 require 구문을 이용해 다른 파일을 부른다. 
+                    <ul><li>const fs = require('fs'); // 파일 시스템 모듈을 불러옵니다</li></ul>
+                </p>
+                <p>3rd-party 모듈 사용 방법<br>
+                외부 모듈. 예를 들어 Node.js공식 문서에 없는 underscore 모듈을 설치하려면: npm install underscore<br>
+                require 구문으로 불러오기: const _ = require('underscore');</p>
 
+                <h3>fs.readFile을 통해 알아보는 Node.js 공식문서 가이드</h3>
 
+                <h3>fetch API</h3>
+                <p>특정 URL로부터 정보를 받아오는 역할을 함.</p>
+
+                <h3>Axios</h3>
+                <p>Node.js를 위한 Promise API를 활용하는 HTTP 비동기 통신 라이브러리.<br>
+                Fetch API보다 사용이 간편하면서 추가적 기능이 포함되어 있음.<br>
+                자동으로 JSON데이터 형식으로 변환됨 (Fetch API는 .json()메서드를 사용해야 함)</p>
 
             </article>
 
