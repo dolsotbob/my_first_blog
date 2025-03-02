@@ -1526,7 +1526,7 @@
 
 
             <article>
-                <h3>리액트</h3>
+                <h3>리액트 기초</h3>
                 <ul><li>자바스크립트 프레임워크로 UI 구축 위해 사용됨</li>
                     <li>특히 단일 페이지 애플리케이션(SPA) 만들 때 유용</li>
                     <li>데이트 변경 시 효율적으로 UI 업데이트 하는데 강점</li>
@@ -1585,8 +1585,23 @@
 
                 <p>이벤트 핸들러를 통해 State 업데이트 가능</p>
 
+            </article>
 
-            
+
+            <article>
+                <h4>JSX(Javascript XML)</h4>
+                <p>React에서 UI를 구성할 때 사용하는 문법으로 JavaScript를 확장한 문법. 이 문법을 통해 React 엘리먼트를 만들 수 있다.<br>
+                Babel은 JSX를 브라우저가 이해할 수 있는 JavaScript로 컴파일한다.<br>
+                JSX 규칙
+                <ul><li>하나의 엘리먼트 안에 모든 엘리먼트가 포함</li>
+                <li>CSS class 속성을 지정하려면 "className"으로 표기(만약 class로 작성하면 React에서 이를 html속성 대신 자바스크립트 클래스로 받아들임)</li>
+                <li>중괄호{ } 이용</li>
+                <li>사용자 정의 컴포넌트는 대문자로 시작. 예: function Hello()</li>
+                <li>조건부 렌더링에 삼항연사자 사용</li>
+                <li>여러 개의 HTML 엘리먼트를 표시할 때 map() 함수 이용
+                    <ul><li>반드시 "key" JSX 속성을 넣어햐 함</li></ul>
+                </li></ul></p>
+
             </article>
 
 
@@ -1608,8 +1623,16 @@
             
                 <h4>React Router</h4>
                 <p>리액트 애플리케이션에서 클라이언트 사이드 라우팅을 구현하기 위해 사용되는 가장 인기 있는 라이브러리<br>
-                SPA에서 페이지 전환 없이 URL에 따라 다른 컴포넌트 렌더링할 수 있음 
+                SPA에서 페이지 전환 없이 URL에 따라 다른 컴포넌트 렌더링할 수 있음 <br>
+                라우팅: 다른 주소에 따라 다른 뷰를 보여주는는데 "경로에 따라 변경한다"라는 의미로 라우팅이라고 함.<br>
+                리액트 라우터의 주요 컴포넌트: 
+                <ul><li>BrowserRouter: 라우터 역할</li>
+                <li>Routes와 Route: 경로 매칭</li>
+                <li>Link: 경로 변경</li></ul>
+                이 컴포넌트를 사용하기 위해서는 React Router 라이브러리에서 따로 불러와야 한다. 다음 명령어 사용: 
+                <ul>import { BrowserRouter, Routes, Route, Link } from "react-router-dom";</ul>
                 </p>
+                <p></p>
 
             </article>
 
