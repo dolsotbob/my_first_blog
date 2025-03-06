@@ -1,0 +1,28 @@
+
+
+function ParentComponent() {
+  const [value, setValue] = useState("날 바꿔줘!");
+
+  //값 변경 함수: setValue를 호출해 value 상태를 "달라진 값"으로 업데이트 한다
+  const handleChangeValue = () => {
+    setValue("달라진 값");
+  };
+
+  //ChildComponent에 onChangeValue라는 이름으로 handleChangeValue 함수 전달 
+  return (
+    <div>
+      <div>값은 {value} 입니다</div>
+      <ChildComponent onChangeValue={handleChangeValue} />
+    </div>
+  );
+}
+
+//ChildComponent는 버튼을 클릭하면 부모 컴포넌트로부터 받은 함수 OnChangeValue를 실행함 
+//ChildComponent는 이 함수를 props로 받음 
+function ChildComponent({ onChangeValue }) {
+  return (
+    <div>
+      <button onClick={onChangeValue}>값 바꾸기</button>
+    </div>
+  );
+}
