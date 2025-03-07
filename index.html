@@ -2202,9 +2202,50 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
                     상태가 업데이트 될 때 effect 함수가 실행됨 
                 </li></ul>
             </li></ol> 
-
             
             <h4>컴포넌트 내에서의 Ajax 요청</h4>
+            <p>목록 내 필링을 구현하기 위한 두 가 접근은?</p>
+            <ol><li>컴포넌트 내에서 필터링
+                <ul><li>전체 목록 데이터를 불러오고 목록을 검색어로 필터링</li>
+                <li>예: 처음 단 한 번 외부 API로부터 명언 목록을 받아와 필터 함수 이용</li></ul>
+            </li>
+            <li>컴포넌트 외부에서 필터링
+                <ul><li>컴포넌트 외부로 API 요청할 때 필터링한 결과를 받아오는 방법 (보통, 서버에 매번 검색어와 함께 요청하는 경우)
+                </li>
+                <li>검색어가 바뀔 때마다 외부 API 호출</li></ul>
+            </li></ol>
+            <br> 
+            <p>seEffect를 써서 AJAX 요청을 보내는 코드를 로컬 파일에서 가져오는 것과 비교해보세요. </p>
+            <pre><code>
+                useEffect(() => {
+                    fetch(`http://서버주소/proverbs?q=${filter}`)
+                      .then(resp => resp.json())
+                      .then(result => {
+                        setProverbs(result);});}, [filter]);
+            </code></pre>
+            반면 컴포넌트 내부에서 필터일 할 때는 useEffect 다음과 같이 쓸 수 있다: 
+            <pre><code>
+                import { getProverbs } from "./storageUtil"; 
+                useEffect(() => {
+                    console.log("Effect 함수 실행: 컴포넌트가 마운트되었습니다.");
+                    const result = getProverbs();
+                    setProverbs(result);}, []);
+            </code></pre>
+            <br>
+            
+            <p>AJAX 요청이 매우 느릴 경우에는? 
+            <br>외부 API 접속이 느릴 경우를 고려해 로딩 화면(loading indicator)의 구현은 필수</p>
+            <br>Loading indicator의 구현은 어떻게 처리할 수 있을까? 상태처리 필요 
+            <pre><code>
+                const [isLoading, setIsLoading] = useState(true);
+                    // 생략, LoadingIndicator 컴포넌트는 별도로 구현했음을 가정합니다
+                return {isLoading ? (꺽쇠)LoadingIndocator /> : (꺽쇠)div로딩 완료 화면</ div>}
+                </code></pre>
+            <br>fetch 요청 전후로 setIsLoading을 설정해 보다 나은 UX 구현할 수 있음.
+            <pre><code>
+                setIsloading(true);
+            </code></pre>
+
             
             
         </article>
