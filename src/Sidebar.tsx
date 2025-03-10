@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom';
+
 function Sidebar() {
-    return (
-        <div className="SideBar">
-            <a href="/about">소개</a>
-            <a href="/blog">블로그</a>
-            <a href="/misc">기타</a>
-        </div>
-    );
+  return (
+    <div className="SideBar">
+      <Link to="/about">소개</Link>
+      <Link to="/blog">블로그</Link>
+      <Link to="/misc">기타</Link>
+    </div>
+  );
 }
 
-export default Sidebar
+export default Sidebar;
