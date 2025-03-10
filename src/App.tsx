@@ -13,7 +13,7 @@ import Blogpage from './Pages/Blogpage';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/my_first_blog">
         <header className="App-header">
           <p>
             My First Blog
