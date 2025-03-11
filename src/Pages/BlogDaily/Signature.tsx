@@ -12,7 +12,7 @@ const Signature = () => {
   };
 
   return (
-    <div>
+    <div className='Signature'>
       {/* <h2>{date}</h2> */}
       {/* {getPostContent(date)}s */}
       <div>
