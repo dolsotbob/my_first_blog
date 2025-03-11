@@ -60,3 +60,13 @@
 .Daily div {
   cursor: pointer;
 }
+
+.Research {
+  text-align: left;
+}
+
+.Subtitle {
+  display: block; /* 블록 요소로 표시 */
+  margin: 0;      /* 불필요한 여백을 없앰 */
+  color:#ff4d94;
+}
