@@ -2,7 +2,7 @@ import React from 'react'
 
 const Introduction = () => {
   return (
-    <div className='Introduction'>
+    <div className='BlogDaily'>
       <h3>비트코인의 탄생 배경</h3>
       <p>2025년 2월 3일 </p>
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 const TIL0307 = () => {
   return (
-    <div className='TIL0307'>TIL0307
+    <div className='BlogDaily'>TIL0307
     <p>2025년 3월 7일</p>
     <h3>Python</h3>
     <p>Python의 특징은? 

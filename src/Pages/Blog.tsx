@@ -10,10 +10,16 @@ const Blog = () => {
 
     return (
     <div className="Daily">
-        <div onClick={() => navigate("/blog/0202")}>0202</div>
+        <div onClick={() => navigate("/blog/0203")}>0203</div>
         <div onClick={() => navigate("/blog/0204")}>0204</div>
         <div onClick={() => navigate("/blog/0205")}>0205</div>
         <div onClick={() => navigate("/blog/0206")}>0206</div>
+        <div onClick={() => navigate("/blog/0207")}>0207</div>
+        <div onClick={() => navigate("/blog/0210")}>0210</div>
+        <div onClick={() => navigate("/blog/0211")}>0211</div>
+        <div onClick={() => navigate("/blog/0212")}>0212</div>
+        <div onClick={() => navigate("/blog/0213")}>0213</div>
+        <div onClick={() => navigate("/blog/0214")}>0214</div>
         <div onClick={() => navigate("/blog/0307")}>0307</div>
         <div onClick={() => navigate("/blog/0311")}>0311</div>
         <div onClick={() => navigate("/blog/0312")}>0312</div>

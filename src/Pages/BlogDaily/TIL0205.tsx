@@ -2,7 +2,7 @@ import React from 'react'
 
 const TIL0205 = () => {
   return (
-    <div className='TIL0205'>
+    <div className='BlogDaily'>
 
 <h3>블록체인의 기본 구조</h3>
                 <p>

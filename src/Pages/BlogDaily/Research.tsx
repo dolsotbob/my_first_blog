@@ -2,7 +2,7 @@ import React from 'react'
 
 const Research = () => {
   return (
-    <div className="Research">
+    <div className='BlogDaily'>
         <h3>알위브(Arweave)에 대해서</h3>
 
             <p>
