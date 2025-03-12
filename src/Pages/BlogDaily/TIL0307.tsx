@@ -30,7 +30,18 @@ const TIL0307 = () => {
     
     
     <h3>TypeScript</h3>
+    <p>TypeScript 프로젝트 환경 구성하기 
+      <ol><li>프로젝트 폴더 생성</li>
+      <li>npm init -y 실행해 새 프로젝트 초기화</li>
+      <li>pm install typescript --save-dev 실행해 TypeScript 설치</li>
+      <li>npm install -g ts-node 설치 - 타입스크립트 파일 실행</li>
+      </ol>
+    </p>
 
+    <p>깨끗한 코딩을 위해 설치하면 좋은 것: 
+      <ul><li>TypeScript ESLint와 Prettier</li></ul>
+    </p>
+    
     </div>
   )
 }
