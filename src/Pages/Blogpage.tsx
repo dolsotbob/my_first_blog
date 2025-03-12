@@ -18,6 +18,7 @@ const Blogpage = () => {
             {date === "0206" && <TIL0206></TIL0206>}
             {date === "0307" && <TIL0307></TIL0307>}
             {date === "0311" && <Research></Research>}
+            
         </div>
     );
 };
