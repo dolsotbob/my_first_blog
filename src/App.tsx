@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/about" element={<About></About>}></Route>
           <Route path="/blog" element={<Blog></Blog>}></Route>
-          <Route path="/blog/:date" element={<Blogpage></Blogpage>}></Route>
+          <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
           <Route path="/misc" element={<Misc></Misc>}></Route>
           {/* Wallet, Explorer, NFT도 넣어야 함  */}
         </Routes>

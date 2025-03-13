@@ -70,3 +70,24 @@
   margin: 0;      /* 불필요한 여백을 없앰 */
   color:#ff4d94;
 }
+
+.jetImage {
+  width: 500px;
+  height: 400px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.jetImage2 {
+  width: 700px;
+  height: 800px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.jetImage3 {
+  width: 800px;
+  height: 500px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
