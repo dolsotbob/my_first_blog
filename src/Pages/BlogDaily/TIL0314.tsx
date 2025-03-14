@@ -1,5 +1,7 @@
 import React from 'react'
 import hdwalletimg4 from '../../assets/hdwallet.png'
+import mnemonic7img from '../../assets/mnemonic7step.png'
+import mnemonic9img from '../../assets/mnemonic9step.png' 
 
 const TIL0314 = () => {
     return (
@@ -78,7 +80,22 @@ const TIL0314 = () => {
             </p>
 
             <h4>니모닉</h4>
-            <p>난수를 12개 또는 24개의 영어 단어로 변환한 시드 복구 방법</p>
+            <p>난수를 12개 또는 24개의 영어 단어로 변환한 시드 복구 방법
+                <ul><li>HD 월렛: 시드 키를 가지고 지갑과 지갑에 있는 비밀키와 주소를 복구하고 백업할 수 있다</li>
+                <li>니모닉 월렛: 시드 키 대신 시드키를 생성하는 데 사용하는 니모닉 연상 단어를 사용해 지갑 관리</li></ul>
+            </p>
+
+            <h4>암호화폐 지갑을 복구하면 안에 있는 코인과 토큰도 복구가 될까?</h4>
+            <p>NO 아 니 요 
+                <ul><li>암호화폐 지갑은 코인 또는 토큰을 사용할 수 있는 비밀키를 관리하는 일종의 키 관리 시스템</li>
+                <li>지갑을 복구하더라도 탈취당한 자산은 복구되지 않음</li></ul>
+            </p>
+
+            <h4>니모닉 코드와 시드 생성 9단계</h4>
+            <p>
+            <img className='mnemonic7img' src={mnemonic7img} alt="mnemonic-step7-img"></img> <br/>
+            <img className='mnemonic9img' src={mnemonic9img} alt="mnemonic-step9-img"></img>
+            </p>
 
 
         </div>
