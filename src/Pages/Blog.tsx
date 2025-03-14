@@ -28,6 +28,7 @@ const Blog = () => {
         <div onClick={() => navigate("/blog/0312")}>0312</div>
         <div onClick={() => navigate("/blog/research2")}>Research2</div>
         <div onClick={() => navigate('/blog/0313')}>0313</div>
+        <div onClick={() => navigate('/blog/0314')}>0314</div>
         {/* <div href="/signature">0203</div> */}
     </div>
   )
