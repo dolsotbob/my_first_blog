@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -44,6 +44,31 @@
   display: flex;
   gap: 50px;
   flex-direction: row;
+  order: -1;
+} */
+
+.App {
+  text-align: center;
+  display: flex; /* 가로 정렬을 위한 flex 설정 */
+  flex-direction: row; /* 왼쪽에서 오른쪽 배치 */
+}
+
+.SideBar {
+  width: 250px; /* 적절한 너비 설정 */
+  min-width: 150px; /* 최소 너비 설정 */
+  max-width: 300px; /* 최대 너비 설정 */
+  flex-shrink: 1; /* 창이 줄며녀 같이 줄도록 설정 */
+  background-color: lightgray; /* 가독성을 위해 추가 */
+  display: flex; /* 내부 요소 배치를 위해 flex 사용 */
+  flex-direction: column; /* 내부 요소들을 세로 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 (필요에 따라 center로 변경 가능) */
+  padding: 20px;
+  padding-right: 20px;
+  gap: 10px;
+}
+
+.MainContent {
+  flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
 }
 
 .about_email {

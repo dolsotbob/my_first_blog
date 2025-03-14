@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter basename="/my_first_blog">
         <header className="App-header">
           <p>
-            My First Blog
+            jungahTeaHouse
           </p>
           {/* <Sidebar></Sidebar> */}
           <Sidebar />
