@@ -1,18 +1,21 @@
 {
   "files": {
-    "main.css": "/my_first_blog/static/css/main.caf3a0e0.css",
-    "main.js": "/my_first_blog/static/js/main.b6b9ef4a.js",
+    "main.css": "/my_first_blog/static/css/main.04429b1f.css",
+    "main.js": "/my_first_blog/static/js/main.6f5c95ba.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
+    "static/media/mnemonic7step.png": "/my_first_blog/static/media/mnemonic7step.a50657bed5f9c66210b5.png",
     "static/media/JetToken.jpg": "/my_first_blog/static/media/JetToken.db8b1653e7f642d3b7a6.jpg",
+    "static/media/mnemonic9step.png": "/my_first_blog/static/media/mnemonic9step.9c7f532f292ddf7fd2a4.png",
+    "static/media/hdwallet.png": "/my_first_blog/static/media/hdwallet.8f1ef922d5ce94d39526.png",
     "index.html": "/my_first_blog/index.html",
-    "main.caf3a0e0.css.map": "/my_first_blog/static/css/main.caf3a0e0.css.map",
-    "main.b6b9ef4a.js.map": "/my_first_blog/static/js/main.b6b9ef4a.js.map",
+    "main.04429b1f.css.map": "/my_first_blog/static/css/main.04429b1f.css.map",
+    "main.6f5c95ba.js.map": "/my_first_blog/static/js/main.6f5c95ba.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.caf3a0e0.css",
-    "static/js/main.b6b9ef4a.js"
+    "static/css/main.04429b1f.css",
+    "static/js/main.6f5c95ba.js"
   ]
 }
