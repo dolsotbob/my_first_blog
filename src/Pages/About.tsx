@@ -6,7 +6,7 @@ const About = () => {
     };
 
     return (
-        <div>
+        <div className='About'>
             <div>
                 안녕하세요, 이 곳은 블록체인 꿈나무 윤정아의 블로그입니다. 반갑습니다.
                 <br />

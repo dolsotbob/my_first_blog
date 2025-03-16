@@ -1,56 +1,37 @@
-/* .App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App {
+  display: flex; /* 가로 정렬을 위한 flex 설정 */
+  flex-direction: row; /* 왼쪽에서 오른쪽 배치 */
 }
 
 .App-header {
-  background-color: skyblue;
-  min-height: 80px;
+  width: 100%; /* 전체 너비 */
+  text-align: center; /* 가운데 정렬 */
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Dancing Script';
+  font-size: 36px;
+  color: lightgreen;
+  background-color: darkgreen;
+  z-index: 20; /* Sidebar보다 위에 표시되도록 설정 */
+  padding: 10px 0; /* 상단 여백 추가 */
+  
+}
+
+.Container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(20px + 2vmin);
-  color: rgb(255, 255, 255);
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.SideBar {
-  display: flex;
-  gap: 50px;
-  flex-direction: row;
-  order: -1;
-} */
-
-.App {
-  text-align: center;
-  display: flex; /* 가로 정렬을 위한 flex 설정 */
   flex-direction: row; /* 왼쪽에서 오른쪽 배치 */
+  width: 100%;
+}
+
+.Container.has-header {
+  padding-top: 60px; /* 헤더가 있을 때의 padding */
+}
+
+.Container:not(.has-header) {
+  padding-top: 0; /* 헤더가 없을 때는 padding을 0으로 설정 */
 }
 
 .SideBar {
@@ -58,18 +39,36 @@
   min-width: 150px; /* 최소 너비 설정 */
   max-width: 300px; /* 최대 너비 설정 */
   flex-shrink: 1; /* 창이 줄며녀 같이 줄도록 설정 */
-  background-color: lightgray; /* 가독성을 위해 추가 */
+  background-color: lightpink; /* 가독성을 위해 추가 */
   display: flex; /* 내부 요소 배치를 위해 flex 사용 */
   flex-direction: column; /* 내부 요소들을 세로 정렬 */
   align-items: flex-start; /* 왼쪽 정렬 (필요에 따라 center로 변경 가능) */
   padding: 20px;
   padding-right: 20px;
-  gap: 10px;
+  padding-top: 100px;
+  gap: 20px;
+  height: 100vh; /* Sidebar의 높이를 화면 전체 높이에 맞추기 */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  
 }
 
 .MainContent {
   flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* 가운데 정렬 대신 왼쪽 정렬로 수정 */
 }
+
+.About, .Daily {
+  display: flex;
+  flex-direction: column; /* 세로로 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  justify-content: flex-start; /* 위로 정렬 */
+  padding-top: 10px;
+  padding-left: 10px; /* 여백 추가 */
+}
+
 
 .about_email {
   color: #46922f;
@@ -82,12 +81,24 @@
   color: darkblue
 }
 
-.Daily div {
+.Daily div, .About div {
+  padding-left: 20px; /* 각 항목에 왼쪽 여백 추가 */
   cursor: pointer;
+  margin: 5px 0; /* 각 항목 간 간격 */
 }
+
 
 .BlogDaily {
   text-align: left;
+  padding-left: 10px;
+}
+
+.blogpage {
+  padding-left: 20px;
+}
+
+.blogpage div {
+  padding-left: 20px; /* 각 블로그 항목에 여백 추가 */
 }
 
 .Subtitle {
