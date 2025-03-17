@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import 'font-awesome/css/font-awesome.min.css';
 
 // React 18에서는 createRoot로 렌더링합니다.
 const root = ReactDOM.createRoot(
@@ -12,9 +13,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-      <BrowserRouter basename="/my_first_blog">
-        <App />
-      </BrowserRouter>
+    <BrowserRouter basename="/my_first_blog">
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
