@@ -1,21 +1,26 @@
 {
   "files": {
-    "main.css": "/my_first_blog/static/css/main.1a05ea5e.css",
-    "main.js": "/my_first_blog/static/js/main.ec2be140.js",
+    "main.css": "/my_first_blog/static/css/main.66104f94.css",
+    "main.js": "/my_first_blog/static/js/main.fc081d49.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
     "static/media/mnemonic7step.png": "/my_first_blog/static/media/mnemonic7step.a50657bed5f9c66210b5.png",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/JetToken.jpg": "/my_first_blog/static/media/JetToken.db8b1653e7f642d3b7a6.jpg",
     "static/media/mnemonic9step.png": "/my_first_blog/static/media/mnemonic9step.9c7f532f292ddf7fd2a4.png",
     "static/media/hdwallet.png": "/my_first_blog/static/media/hdwallet.8f1ef922d5ce94d39526.png",
+    "static/media/fontawesome-webfont.eot": "/my_first_blog/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "/my_first_blog/index.html",
-    "main.1a05ea5e.css.map": "/my_first_blog/static/css/main.1a05ea5e.css.map",
-    "main.ec2be140.js.map": "/my_first_blog/static/js/main.ec2be140.js.map",
+    "main.66104f94.css.map": "/my_first_blog/static/css/main.66104f94.css.map",
+    "main.fc081d49.js.map": "/my_first_blog/static/js/main.fc081d49.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a05ea5e.css",
-    "static/js/main.ec2be140.js"
+    "static/css/main.66104f94.css",
+    "static/js/main.fc081d49.js"
   ]
 }
