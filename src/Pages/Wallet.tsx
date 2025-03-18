@@ -1,21 +1,19 @@
 import React from 'react'
-import { useState } from 'react'; //궁금 
-import Web3 from 'web3'; //궁금 
+import { useState } from 'react';
+import Web3 from 'web3';
 import { Web3Account } from 'web3-eth-accounts';
 import './Wallet.css';
 
-const web3 = new Web3('https://public-en-kairos.node.kaia.io'); // 웹3 인스턴스 생성 //궁금2
+const web3 = new Web3('https://public-en-kairos.node.kaia.io'); // 웹3 인스턴스 생성
 
-const Wallet = () => { //리액스 상태 정의 // 궁금3 
+const Wallet = () => {
     const [wallet, setWallet] = useState<Web3Account | null>(null);
     const [balance, setBalance] = useState<string | null>(null);
     const [recipient, setRecipient] = useState('');
     const [amount, setAmount] = useState('');
-    const [faucetAmount, setFaucetAmount] = useState('');
     const [txHash, setTxHash] = useState<Uint8Array | string | null>(null);
     const [copyAddressSuccess, setCopyAddressSuccess] = useState<boolean>(false);
     const [copyPrivateKeySuccess, setCopyPrivateKeySuccess] = useState<boolean>(false);
-    const [showAddress, setShowAddress] = useState<boolean>(false);
     const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
 
     //지갑 생성 함수 
@@ -25,11 +23,6 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
         setWallet(newWallet); //생성된 새 지갑 정보를 wallet 상태에 저장 
         setBalance(null); //지갑 생성 후 잔액 초기화 
         setTxHash(null); //지갑 생성 후 트랜잭션 해시 상태 초기화 
-    };
-
-    // 주소 표시/숨김 토글 함수 
-    const toggleAddress = () => {
-        setShowAddress(!showAddress);
     };
 
     const copyAddress = async () => {
