@@ -7,6 +7,16 @@
 
 h2 {
     color: darkslategray;
+    font-family: "Ballet", cursive;
+    font-size: 40px;
+}
+
+h3 {
+    color: palevioletred;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 /* 버튼 스타일 */
@@ -15,11 +25,12 @@ button {
     color: lightgreen;
     border: none;
     padding: 10px 15px;
-    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
     margin: 10px 5px;
     transition: background-color 0.3s;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 25px;
 }
 
 button:hover {
@@ -95,6 +106,11 @@ input {
     word-wrap: break-word;
 }
 
+.address-private-section .toggle-btn {
+    margin-right: 10px;
+    /* 'show/hide' 버튼을 왼쪽에 배치하기 위한 여백 */
+}
+
 .copy-add-btn,
 .copy-btn,
 .toggle-btn {
@@ -102,12 +118,13 @@ input {
     color: darkmagenta;
     border: none;
     padding: 5px 8px;
-    font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
     width: 50px;
     transition: background-color 0.3s;
     text-align: center;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 20px;
 }
 
 .copy-add-btn:hover,
@@ -147,8 +164,8 @@ input {
 }
 
 .coinImage {
-    width: 400px;
-    height: 300px;
+    width: 300px;
+    height: 150px;
     padding-left: 20px;
     padding-bottom: 20px;
 }

@@ -11,9 +11,11 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
     const [balance, setBalance] = useState<string | null>(null);
     const [recipient, setRecipient] = useState('');
     const [amount, setAmount] = useState('');
+    const [faucetAmount, setFaucetAmount] = useState('');
     const [txHash, setTxHash] = useState<Uint8Array | string | null>(null);
     const [copyAddressSuccess, setCopyAddressSuccess] = useState<boolean>(false);
     const [copyPrivateKeySuccess, setCopyPrivateKeySuccess] = useState<boolean>(false);
+    const [showAddress, setShowAddress] = useState<boolean>(false);
     const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
 
     //지갑 생성 함수 
@@ -23,6 +25,11 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
         setWallet(newWallet); //생성된 새 지갑 정보를 wallet 상태에 저장 
         setBalance(null); //지갑 생성 후 잔액 초기화 
         setTxHash(null); //지갑 생성 후 트랜잭션 해시 상태 초기화 
+    };
+
+    // 주소 표시/숨김 토글 함수 
+    const toggleAddress = () => {
+        setShowAddress(!showAddress);
     };
 
     const copyAddress = async () => {
@@ -109,34 +116,79 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
         setShowPrivateKey(!showPrivateKey);
     };
 
+    //Facucet 받기 함수 
+    const myMetaMaskAddress = process.env.REACT_APP_FAUCET_WALLET_ADDRESS;
+    const myMetaMaskPrivateKey = process.env.REACT_APP_FAUCET_PRIVATE_KEY || '';
+
+    // console.log("지갑 주소:", myMetaMaskAddress);
+
+    const faucetTokens = async () => {
+        if (!wallet) return alert("지갑을 먼저 생성하세요.");
+
+        const recipient = wallet.address; // 방문자가 생성한 지갑 주소
+        const faucetAmount = "0.1"; // faucet으로 보낼 토큰 수량 (KAIA)
+
+        try {
+            const value = web3.utils.toWei(faucetAmount, "ether");
+            const gasPrice = await web3.eth.getGasPrice();
+            const estimate = await web3.eth.estimateGas({
+                from: myMetaMaskAddress, // 사용자의 메타마스크 주소
+                to: recipient,
+                value,
+                gasPrice,
+            });
+
+            const tx = {
+                from: myMetaMaskAddress,
+                to: recipient,
+                value,
+                gas: estimate,
+                gasPrice,
+            };
+
+            const signedTx = await web3.eth.accounts.signTransaction(tx, myMetaMaskPrivateKey);
+            const sentTx = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+            // console.log("sentTx", sentTx);
+
+            setTxHash(sentTx.transactionHash);
+            getBalance(); // 잔액 업데이트
+            alert("0. 1 KAIA 테스트 토큰이 전송되었습니다!");
+        } catch (error) {
+            console.error("Faucet 전송 실패:", error);
+        }
+    };
+
+
 
     return (
         <div className="Wallet">
-            <h2>블록체인 지갑</h2>
+            <h2>Blockchain Wallet</h2>
 
             <p>
                 <img className='coinImage' src="https://contenthub-static.crypto.com/wp_media/2024/01/WHAT-IS-A-BITCOIN-WALLET-1.jpg"></img>
             </p>
 
             {!wallet ? (
-                <button className="button" onClick={createWallet}>새 지갑 생성</button>
+                <button className="button" onClick={createWallet}>Create Wallet</button>
             ) : (
                 <div>
                     <div className="wallet-info">
-                        <div className="address-private-section">
-                            <strong>주소:</strong> {wallet.address}
 
-                            <button onClick={copyAddress} className="copy-add-btn">
-                                복사
-                            </button>
-                            {copyAddressSuccess && <span className="copy-address-success">✔ 복사됨!</span>}
+                        <div className="address-private-section address-section">
+                            <strong>Address:</strong> {wallet.address.slice(0, 30) + "..."}
+                            <div>
+                                <button onClick={copyAddress} className="copy-add-btn">
+                                    Copy
+                                </button>
+                                {copyAddressSuccess && <span className="copy-address-success">✔ Copied!</span>}
+                            </div>
                         </div>
 
                         <div className="address-private-section private-key-section">
-                            <strong>프라이빗 키:</strong>
+                            <strong>Private Key:</strong>
                             <div>
                                 {showPrivateKey ? (
-                                    <span>{wallet.privateKey.slice(0,20) + "..."}</span>
+                                    <span>{wallet.privateKey.slice(0, 20) + "..."}</span>
                                 ) : (
                                     <span>⚫️⚫️⚫️⚫️⚫️</span>
                                 )}
@@ -144,44 +196,51 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
 
                             <div className="private-key-actions">
                                 <button onClick={togglePrivateKey} className="toggle-btn">
-                                    {showPrivateKey ? "숨기기" : "보기"}
+                                    {showPrivateKey ? "Hide" : "Show"}
                                 </button>
 
                                 <button onClick={copyPrivateKey} className="copy-btn">
-                                    복사
+                                    Copy
                                 </button>
-                                {copyPrivateKeySuccess && <span className="copy-privatekey-success">✔ 복사됨!</span>}
+                                {copyPrivateKeySuccess && <span className="copy-privatekey-success">✔ Copied!</span>}
                             </div>
                         </div>
                     </div>
 
-                    <button className='button' onClick={getBalance}>잔액 조회</button>
+                    <button className='button' onClick={getBalance}>Balance</button>
                     {balance !== null && (
                         <p>
-                            <strong>잔액:</strong> {balance} KAIA
+                            <strong>Balance:</strong> {balance} KAIA
                         </p>
                     )}
 
-                    <h3>송금</h3>
+                    {/* faucet 버튼  */}
+                    <h3>Free KAIA Test Tokens</h3>
+                    <button className='button' onClick={faucetTokens}>
+                        Receive
+                    </button>
+
+                    {/* 송금 버튼  */}
+                    <h3>Send</h3>
                     <div className="send-transaction">
                         <input
                             type="text"
-                            placeholder="받는 주소"
+                            placeholder="Recipient Address"
                             value={recipient}
                             onChange={(e) => setRecipient(e.target.value)}
                         />
                         <input
                             type="text"
-                            placeholder="보낼 금액 (KAIA)"
+                            placeholder="Amount (KAIA)"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
                         />
                     </div>
-                    <button className='button' onClick={sendTransaction}>송금</button>
+                    <button className='button' onClick={sendTransaction}>Send</button>
 
                     {txHash && (
                         <p>
-                            ✅ <strong>트랜잭션 해시:</strong>{' '}
+                            ✅ <strong>Transaction Hash:</strong>{' '}
                             <a
                                 href={`https://kairos.kaiascan.io/tx/${txHash}`}
                                 target="_blank"
@@ -192,9 +251,12 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
                         </p>
                     )}
                 </div>
-            )}
-        </div>
+
+            )
+            }
+        </div >
     );
 };
 
-export default Wallet;
+
+export default Wallet
