@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/my_first_blog/static/css/main.0c72d9e9.css",
-    "main.js": "/my_first_blog/static/js/main.4cc283a9.js",
+    "main.js": "/my_first_blog/static/js/main.412f6ed3.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
@@ -16,11 +16,11 @@
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "/my_first_blog/index.html",
     "main.0c72d9e9.css.map": "/my_first_blog/static/css/main.0c72d9e9.css.map",
-    "main.4cc283a9.js.map": "/my_first_blog/static/js/main.4cc283a9.js.map",
+    "main.412f6ed3.js.map": "/my_first_blog/static/js/main.412f6ed3.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0c72d9e9.css",
-    "static/js/main.4cc283a9.js"
+    "static/js/main.412f6ed3.js"
   ]
 }
