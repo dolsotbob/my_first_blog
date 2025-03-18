@@ -29,7 +29,7 @@ const Wallet = () => {
         if (wallet) {
             try {
                 // console.log('Address', wallet.address);
-                await navigator.clipboard.writeText(wallet.address);
+                await navigator.clipboard.writeText(wallet.address); //navigator.clipboard.writeText는 클립보드에 텍스트를 복사하는 기능을 제공하는 웹 API 
                 setCopyAddressSuccess(true);
                 setTimeout(() => setCopyAddressSuccess(false), 2000);
             } catch (err) {
@@ -111,7 +111,7 @@ const Wallet = () => {
 
     //Facucet 받기 함수 
     const myMetaMaskAddress = process.env.REACT_APP_FAUCET_WALLET_ADDRESS;
-    const myMetaMaskPrivateKey = process.env.REACT_APP_FAUCET_PRIVATE_KEY || '';
+    const myMetaMaskPrivateKey = process.env.REACT_APP_FAUCET_PRIVATE_KEY || ''; //REACT_APP_FAUCET_PRIVATE_KEY 값이 **undefined**나 **null**일 경우 기본값으로 빈 문자열('')을 사용하겠다는 뜻
 
     // console.log("지갑 주소:", myMetaMaskAddress);
 
