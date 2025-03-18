@@ -12,7 +12,9 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
     const [recipient, setRecipient] = useState('');
     const [amount, setAmount] = useState('');
     const [txHash, setTxHash] = useState<Uint8Array | string | null>(null);
-    const [copySuccess, setCopySuccess] = useState<boolean>(false);
+    const [copyAddressSuccess, setCopyAddressSuccess] = useState<boolean>(false);
+    const [copyPrivateKeySuccess, setCopyPrivateKeySuccess] = useState<boolean>(false);
+    const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
 
     //지갑 생성 함수 
     const createWallet = () => {
@@ -21,6 +23,19 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
         setWallet(newWallet); //생성된 새 지갑 정보를 wallet 상태에 저장 
         setBalance(null); //지갑 생성 후 잔액 초기화 
         setTxHash(null); //지갑 생성 후 트랜잭션 해시 상태 초기화 
+    };
+
+    const copyAddress = async () => {
+        if (wallet) {
+            try {
+                // console.log('Address', wallet.address);
+                await navigator.clipboard.writeText(wallet.address);
+                setCopyAddressSuccess(true);
+                setTimeout(() => setCopyAddressSuccess(false), 2000);
+            } catch (err) {
+                console.error('복사 실패:', err);
+            }
+        }
     };
 
     //잔액 조회 함수 
@@ -75,17 +90,14 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
         }
     };
 
-    //프라이빗 키 표시 여부 상태 
-    const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
-
     // 프라이빗 키 복사 함수 
     const copyPrivateKey = async () => {
         if (wallet) {
             try {
                 // console.log('Private Key', wallet.privateKey);
                 await navigator.clipboard.writeText(wallet.privateKey);
-                setCopySuccess(true);
-                setTimeout(() => setCopySuccess(false), 2000);
+                setCopyPrivateKeySuccess(true);
+                setTimeout(() => setCopyPrivateKeySuccess(false), 2000);
             } catch (err) {
                 console.error('복사 실패:', err);
             }
@@ -111,12 +123,24 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
             ) : (
                 <div>
                     <div className="wallet-info">
-                        <p className="address-private-section">
+                        <div className="address-private-section">
                             <strong>주소:</strong> {wallet.address}
-                        </p>
+
+                            <button onClick={copyAddress} className="copy-add-btn">
+                                복사
+                            </button>
+                            {copyAddressSuccess && <span className="copy-address-success">✔ 복사됨!</span>}
+                        </div>
+
                         <div className="address-private-section private-key-section">
                             <strong>프라이빗 키:</strong>
-                            {showPrivateKey ? <span>{wallet.privateKey}</span> : <span>⚫️⚫️⚫️⚫️⚫️</span>}
+                            <div>
+                                {showPrivateKey ? (
+                                    <span>{wallet.privateKey.slice(0,20) + "..."}</span>
+                                ) : (
+                                    <span>⚫️⚫️⚫️⚫️⚫️</span>
+                                )}
+                            </div>
 
                             <div className="private-key-actions">
                                 <button onClick={togglePrivateKey} className="toggle-btn">
@@ -126,10 +150,9 @@ const Wallet = () => { //리액스 상태 정의 // 궁금3
                                 <button onClick={copyPrivateKey} className="copy-btn">
                                     복사
                                 </button>
-                                {copySuccess && <span className="copy-success">✔ 복사됨!</span>}
+                                {copyPrivateKeySuccess && <span className="copy-privatekey-success">✔ 복사됨!</span>}
                             </div>
                         </div>
-
                     </div>
 
                     <button className='button' onClick={getBalance}>잔액 조회</button>
