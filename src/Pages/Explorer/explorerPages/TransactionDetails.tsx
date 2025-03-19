@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getTransactionReceipt, getTransaction, fromWei } from '../utils/web3';
 import { Transaction, TransactionReceipt } from 'web3-types';
 import '../Explorer.css'
+import { useNavigate } from 'react-router-dom';
 
 const TransactionDetails: React.FC = () => {
   const { txHash } = useParams<{ txHash: string }>();
@@ -17,6 +18,8 @@ const TransactionDetails: React.FC = () => {
   );
   const [amount, setAmount] = useState<string | null>(null);
   const [gasPrice, setGasPrice] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!txHash) {
@@ -96,7 +99,13 @@ const TransactionDetails: React.FC = () => {
         {transaction.status ? '✅ Success' : '❌ Failed'}
       </p>
       <p>
-        <strong>From:</strong> {txDetails.from}
+        <strong>From:</strong>{' '}
+        <span onClick={() =>
+          navigate(`/furtherdetails/${txDetails.from}`)}
+          style={{ cursor: 'pointer', color: 'blue' }}
+        >
+          {txDetails.from}
+        </span>
       </p>
       <p>
         <strong>To:</strong> {txDetails.to}
