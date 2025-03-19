@@ -3,13 +3,9 @@ import { useParams } from 'react-router-dom';
 import { getBlock } from '../utils/web3';
 import '../Explorer.css'
 
-const BlockDetail: React.FC = () => {
+const BlockDetails: React.FC = () => {
   const { blockNumber } = useParams<{ blockNumber: string }>();
   const [block, setBlock] = useState<any>(null);
-
-  // useEffect(() => {
-  //   getBlock(Number(blockNumber)).then(setBlock);
-  // }, [blockNumber]);
 
   useEffect(() => {
     const fetchBlock = async () => {
@@ -46,4 +42,4 @@ const BlockDetail: React.FC = () => {
   );
 };
 
-export default BlockDetail;
+export default BlockDetails;

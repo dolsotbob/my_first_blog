@@ -10,8 +10,9 @@ import Wallet from './Pages/Wallet';
 import 'font-awesome/css/font-awesome.min.css';
 import Explorer from './Pages/Explorer';
 import ExplorerHome from './Pages/Explorer/explorerPages/explorerHome';
-import BlockDetail from './Pages/Explorer/explorerPages/BlockDetail';
-import TransactionDetail from './Pages/Explorer/explorerPages/TransactionDetail';
+import BlockDetail from './Pages/Explorer/explorerPages/BlockDetails';
+import TransactionDetail from './Pages/Explorer/explorerPages/TransactionDetails';
+import TxFurtherDetails from './Pages/Explorer/explorerPages/TxFurtherDetails';
 
 function App() {
   const location = useLocation(); //현재 경로 확인 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/explorerhome" element={<ExplorerHome />} />
             <Route path="/block/:blockNumber" element={<BlockDetail />} />
             <Route path="/transaction/:txHash" element={<TransactionDetail />} />
+            <Route path="/account/:address" element={<TxFurtherDetails />} />
             {/* NFT도 넣어야 함  */}
           </Routes>
         </div>

@@ -4,7 +4,7 @@ import { getTransactionReceipt, getTransaction, fromWei } from '../utils/web3';
 import { Transaction, TransactionReceipt } from 'web3-types';
 import '../Explorer.css'
 
-const TransactionDetail: React.FC = () => {
+const TransactionDetails: React.FC = () => {
   const { txHash } = useParams<{ txHash: string }>();
   const [transaction, setTransaction] = useState<TransactionReceipt | null>(
     null
@@ -115,4 +115,4 @@ const TransactionDetail: React.FC = () => {
   );
 };
 
-export default TransactionDetail;
+export default TransactionDetails;
