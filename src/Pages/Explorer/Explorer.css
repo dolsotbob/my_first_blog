@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&display=swap');
+
+.explorerHome {
+  padding-left: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  justify-content: center;
+  width: 80%;
+  /* 부모 요소의 너비를 화면 너비의 80%로 설정 */
+  height: 400px;
+  /* 부모 요소의 높이를 400px로 설정 */
+}
+
+h1 {
+  font-family: ballet;
+  margin-left: 60px;
+  color: mediumseagreen;
+}
+
+h2 {
+  color: rgb(73, 71, 71);
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: green;
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: black;
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.search-container {
+  display: flex;
+  /* 가로 정렬 */
+  align-items: center;
+  /* 세로 중앙 정렬 */
+  gap: 10px;
+  /* 검색창과 버튼 사이 간격 */
+}
+
+.search-btn {
+  background-color: darkgreen;
+  color: lightgreen;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px 5px;
+  transition: background-color 0.3s;
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-size: 20px;
+}
+
+.search-btn:hover {
+  background-color: greenyellow;
+  color: darkgreen;
+}
+
+.blockDetails,
+.tnxdetails {
+  padding-left: 30px;
+}
