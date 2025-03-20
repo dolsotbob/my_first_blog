@@ -24,11 +24,11 @@ const TransactionDetails: React.FC = () => {
   useEffect(() => {
     if (!txHash) {
       setError('트랜잭션 해시가 제공되지 않았습니다.');
-      setLoading(false);
+      setLoading(false); //로딩 상태 종료(false) 
       return;
     }
 
-    let isMounted = true;
+    let isMounted = true; // 컴포넌트가 언마운트 되었다면 상태 업데이트 안 함 
 
     const fetchTx = async () => {
       try {
@@ -108,7 +108,14 @@ const TransactionDetails: React.FC = () => {
         </span>
       </p>
       <p>
-        <strong>To:</strong> {txDetails.to}
+        <strong>To:</strong>{' '}
+        <span onClick={() =>
+          navigate(`/furtherdetails/${txDetails.to}`)}
+          style={{ cursor: 'pointer', color: 'blue' }}
+        >
+          {txDetails.to}
+        </span>
+
       </p>
       <p>
         <strong>Amount:</strong> {amount} KAIA

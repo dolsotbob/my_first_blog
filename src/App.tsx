@@ -44,7 +44,7 @@ function App() {
             {/* <Route path="/explorerhome" element={<ExplorerHome />} /> */}
             <Route path="/block/:blockNumber" element={<BlockDetail />} />
             <Route path="/transaction/:txHash" element={<TransactionDetail />} />
-            <Route path="/furtherdetails/:details" element={<TxFurtherDetails />} />
+            <Route path="/furtherdetails/:address" element={<TxFurtherDetails />} />
             {/* NFT도 넣어야 함  */}
           </Routes>
         </div>
