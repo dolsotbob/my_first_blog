@@ -12,6 +12,7 @@ import Explorer from './Pages/Explorer';
 import BlockDetail from './Pages/Explorer/explorerPages/BlockDetails';
 import TransactionDetail from './Pages/Explorer/explorerPages/TransactionDetails';
 import TxFurtherDetails from './Pages/Explorer/explorerPages/TxFurtherDetails';
+import TxFurtherDetails_2 from './Pages/Explorer/explorerPages/TxFurtherDetails_2';
 
 function App() {
   const location = useLocation(); //현재 경로 확인 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/block/:blockNumber" element={<BlockDetail />} />
             <Route path="/transaction/:txHash" element={<TransactionDetail />} />
             <Route path="/furtherdetails/:address" element={<TxFurtherDetails />} />
+            <Route path="/furtherdetails/:address" element={<TxFurtherDetails_2 />} />
             {/* NFT도 넣어야 함  */}
           </Routes>
         </div>

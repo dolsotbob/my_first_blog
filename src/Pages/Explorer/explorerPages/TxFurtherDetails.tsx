@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { getBalance } from '../utils/web3';
+import './TxFurtherDetails_2';
+import TxFurtherDetails_2 from './TxFurtherDetails_2';
 
-const TxFurtherDetails_1: React.FC = () => {
+const TxFurtherDetails: React.FC = () => {
     const { address } = useParams<{ address: string }>();
     const [balance, setBalance] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -52,8 +54,9 @@ const TxFurtherDetails_1: React.FC = () => {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {balance && <p><strong>Balance:</strong> {balance} <strong>KAIA</strong></p>}
+            <TxFurtherDetails_2 />
         </div>
     );
 }
 
-export default TxFurtherDetails_1
+export default TxFurtherDetails
