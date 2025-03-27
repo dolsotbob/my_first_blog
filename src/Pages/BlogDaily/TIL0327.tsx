@@ -1,4 +1,5 @@
 import React from 'react'
+import attackContract from "../../assets/attackContract.png"
 
 const TIL0327 = () => {
     return (
@@ -26,7 +27,7 @@ const TIL0327 = () => {
                 <li>block.timestamp: 현재 블록이 생성된 시간 (초 단위, 유닉스 타임스탬프); uint 타입</li>
                 <li>block.number: 현재 블록의 번호; uint 타입</li>
                 <li>block.prevrandao: 이전 블록의 난수 값
-                    <ul><li>이더리움이 PoS로 전환되면서 생김</li>
+                    <ul><li>이더리움이 PoS로 전환되면서 block.difficulty대체</li>
                         <li style={{ color: 'deeppink' }} >Solidity에서 랜덤 값을 구할 때: </li>
                         <pre><code>{`
                     function getRandom() external view returns (uint256) {
@@ -44,24 +45,36 @@ const TIL0327 = () => {
                 <li>gasleft(): 현재 실행 중인 함수에 남아 있는 가스량; uint 타입 </li>
             </ul>
 
-            <p></p>
-            이 메모는 Solidity에서 msg.sender와 tx.origin의 차이점을 설명하는 내용입니다.
-            •	msg.sender: 현재 실행 중인 함수나 트랜잭션을 호출한 주소를 나타냅니다. 즉, 함수 호출 시 직접 호출한 주소가 msg.sender입니다.
-            •	tx.origin: 트랜잭션을 시작한 원래의 주소를 나타냅니다. 트랜잭션의 처음 호출자는 tx.origin입니다.
+            <h4>msg.sender와 tx.origin의 차이를 보여주는 예시</h4>
+            <ol><li>EOA가 tx을 실핸한다(사용자가 어떤 tx을 처음 시작한다)</li>
+                <li>컨트랙트 1이 호출되고, 컨트랙트 1의 함수가 실행된다</li>
+                <li>컨트랙트 1은 그 내부에서 컨트랙트 2를 호출한다</li></ol>
+            <ul><li>여기서 msg.sender는 컨트랙트 1이 컨트랙트 2를 호출하기 때문에, 컨트랙트 1이 msg.sender로 설정됨</li>
+                <li>tx.origin은 트랜잭션을 처음 시작한 주소인 EOA로 설정됨</li>
+                <li>따라서, 컨트랙트 2에서 msg.sender는 컨트랙트 1, tx.origin은 EOA가 된다</li></ul>
 
-            메모에 나와 있는 예시를 보면:
-            1.	**EOA (Externally Owned Account)**가 트랜잭션을 생성합니다. 즉, 사용자가 어떤 트랜잭션을 처음 시작하는 경우입니다.
-            2.	컨트랙트 1이 호출됩니다. 그러면 컨트랙트 1의 함수가 실행됩니다.
-            3.	컨트랙트 1은 그 내부에서 컨트랙트 2를 호출합니다.
+            <p>tx.origin을 사용한 컨트랙트 보안의 취약성을 사용해 공격하는 예시</p>
+            <img className="attackContract" src={attackContract} alt="attack-contract-code-image"></img>
 
-            여기서:
-            •	**msg.sender**는 컨트랙트 1이 컨트랙트 2를 호출하기 때문에, 컨트랙트 1이 msg.sender로 설정됩니다.
-            •	**tx.origin**은 트랜잭션을 처음 시작한 주소인 EOA로 설정됩니다.
+            <h4>전역 함수</h4>
+            <p>스마트 계약 내에서 호출할 수 있는 내장 함수로 주로 tx 관리나 블록 상태 추적에 사용됨</p>
+            <ul><li>gasleft(): 현재 tx에 남아있는 가스 양 확인</li>
+                <li>keccak256(): 입력된 데이터 해시 처리(SHA3)</li>
+                <li>blockhash*(uint): 특정 블록 번호에 대한 해시 값을 반환(256개 이내의 최근 블록)</li></ul>
 
-            따라서, 컨트랙트 2에서 msg.sender는 컨트랙트 1, tx.origin은 EOA가 됩니다.
-
-            이 차이를 이해하는 것은 트랜잭션의 흐름을 추적하거나, 보안 관련 로직을 작성할 때 중요합니다. tx.origin을 사용하면 중간의 호출자가 아닌, 최초 트랜잭션을 시작한 주소를 추적할 수 있어 보안상 위험할 수 있습니다.
-
+            <h4>전역 변수와 함수의 활용 시 주의 사항</h4>
+            <ol><li>보안 문제
+                <ul><li>tx.origin은 재진입 공격에 취약해 인증에 사용X</li>
+                    <li>대신 msg.sender를 활용하는 것이 권장됨</li></ul>
+            </li>
+                <li>타임스탬프 조작
+                    <ul><li>block.timestamp는 채굴자에 의해 소폭 자작될 수 있음(약 15초 범위 내에서)</li>
+                        <li>시간 기반 게임 로직에 주의 필요</li></ul>
+                </li>
+                <li>가스 관리
+                    <ul><li>반복문이나 복잡한 로직은 가스 비용 증가에 주의</li>
+                        <li>gasleft() 함수를 활용해 남은 가스량을 실시간으로 추적</li></ul>
+                </li></ol>
 
         </div>
     )
