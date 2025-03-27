@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/my_first_blog/static/css/main.84cffaef.css",
-    "main.js": "/my_first_blog/static/js/main.d2b5626c.js",
+    "main.css": "/my_first_blog/static/css/main.b1f0ae71.css",
+    "main.js": "/my_first_blog/static/js/main.ac629591.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
@@ -10,6 +10,7 @@
     "static/media/JetToken.jpg": "/my_first_blog/static/media/JetToken.db8b1653e7f642d3b7a6.jpg",
     "static/media/mnemonic9step.png": "/my_first_blog/static/media/mnemonic9step.9c7f532f292ddf7fd2a4.png",
     "static/media/hdwallet.png": "/my_first_blog/static/media/hdwallet.8f1ef922d5ce94d39526.png",
+    "static/media/attackContract.png": "/my_first_blog/static/media/attackContract.4286299fa510fa34548f.png",
     "static/media/fontawesome-webfont.eot": "/my_first_blog/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
     "static/media/smartContractStructure.png": "/my_first_blog/static/media/smartContractStructure.2f3c79caa25f4cee1c81.png",
@@ -18,12 +19,12 @@
     "static/media/contractCheck.png": "/my_first_blog/static/media/contractCheck.e5ecab7c9d1c587453e2.png",
     "static/media/contractState.png": "/my_first_blog/static/media/contractState.d0c1ffa7800f1e58c445.png",
     "index.html": "/my_first_blog/index.html",
-    "main.84cffaef.css.map": "/my_first_blog/static/css/main.84cffaef.css.map",
-    "main.d2b5626c.js.map": "/my_first_blog/static/js/main.d2b5626c.js.map",
+    "main.b1f0ae71.css.map": "/my_first_blog/static/css/main.b1f0ae71.css.map",
+    "main.ac629591.js.map": "/my_first_blog/static/js/main.ac629591.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.84cffaef.css",
-    "static/js/main.d2b5626c.js"
+    "static/css/main.b1f0ae71.css",
+    "static/js/main.ac629591.js"
   ]
 }
