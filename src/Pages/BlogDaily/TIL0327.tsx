@@ -1,5 +1,7 @@
 import React from 'react'
 import attackContract from "../../assets/attackContract.png"
+import interfaceVsAbstract from "../../assets/interfaceVsAbstract.png"
+import libraryVsContract from "../../assets/libraryVsContract.png"
 
 const TIL0327 = () => {
     return (
@@ -76,8 +78,136 @@ const TIL0327 = () => {
                         <li>gasleft() 함수를 활용해 남은 가스량을 실시간으로 추적</li></ul>
                 </li></ol>
 
+            <h3>상속Inheritance</h3>
+            <ul><li>OOP에서 파생된 개념</li>
+                <li>기존 계약의 기능을 확정하거나 재사용하기 위한 기능</li>
+                <li>특징:
+                    <ul><li>코드 재사용</li>
+                        <li>계약의 유지 보수 용이성</li>
+                        <li>가독성 향상 및 코드의 명확성 증가</li></ul>
+                </li></ul>
+
+            <h4>기본 상속 문법</h4>
+            <ul><li>is 키워드로 부모 계약 상속</li>
+                <li>자식 계약은 부모 계약의 함수나 변수에 접근할 수 있음</li>
+                <li>상속된 함수와 상태 변수는 별도의 선언 없이도 사용 가능</li>
+                <li>자식 파일에서 부모 컨트랙트를 import 할 수 있음</li>
+                <li>JavaScript와 다른 점: Solidity에서는 가시성이 있음</li>
+            </ul>
+
+            <h4 style={{ color: 'deeppink' }}>함수 Overriding</h4>
+            <ul><li>"다형성"과 "확장성"을 위한 기능</li>
+                <li>다형성: 하나의 함수가 여러 형태를 가질 수 있다는 의미
+                    <ul><li>Animal 부모 클래스에서 소리를 출력하도록 하고, Cat, Dog 자식 클래스에서 “야옹” “멍멍” 등 다르게 출력하도록 하는 것</li>
+                        <li>코드 유연성을 높이고 코드 중복 줄일 수 있음</li></ul>
+                </li>
+                <li>확장성: 기존 코드를 변경하지 않고 새 기능을 추가하거나 기존 기능을 변경할 수 있음</li>
+                <li>virtual과 override 사용 </li></ul>
+
+            <h4>다중 상속 예시</h4>
+            <pre><code>{`
+            // 부모 계약 A
+            contract A {
+                function getValue() public pure virtual returns (string memory) {
+                    return "A";
+                }
+            }
+
+            // 부모 계약 B
+            contract B {
+                function getValue() public pure virtual returns (string memory) {
+                    return "B";
+                }
+            }
+
+            // 자식 계약 C (A와 B를 상속)
+            contract C is A, B {
+                function getValue() public pure override(A, B) returns (string memory) {
+                    return "C";
+                }
+            }
+            `}</code></pre>
+
+            <ul><li>우선 순위를 내가 컨트랙트 안에서 정할 수 있다</li>
+                <li>상속 우선순위는 상속 선언 순서에 따라 결정됨</li></ul>
+
+            <h4>접근 제어자Visibility Specifiers와 상속</h4>
+            <ul><li>public: 상속받은 계약에서 접근 가능</li>
+                <li>internal: 상속받은 계약에서 접근 가능 (외부에서는 접근 불가)</li>
+                <li>private: 상속받은 계약서에서도 접근 불가</li></ul>
+
+            <h3>인터페이스와 추상 계약</h3>
+            <h4>인터페이스Interface</h4>
+            <ul><li>외부 계약 이 따를 수 있는 표준 함수 시그니처만 정의하는 계약</li>
+                <li>특징:
+                    <ul><li>함수 정의만 존재하고 구현은 없음</li>
+                        <li>상태 변수는 가질 수 없음</li>
+                        <li>모든 함수는 external로 선언되어야 함</li>
+                        <li>다른 계약에서 상속받아 구현해야 함</li></ul>
+                </li>
+                <li>문법: </li>
+                <pre><code>{`
+                interface IExample { 
+                    function doSomething(uint256 value) external returns (bool);
+                }
+                `}</code></pre>
+            </ul>
+
+            <h4>추상 계약Abstract Contracts</h4>
+            <ul><li>하나 이상의 구현되지 않은 함수를 가진 계약</li>
+                <li>주로 기본 로직이나 공통 기능을 정의하고, 이를 상속받은 계약에서 구현하도록 설계됨</li>
+                <li>중복 코드 제거할 수 있음</li>
+                <li>특징:
+                    <ul><li>직접 배포할 수 없음</li>
+                        <li>최소한 하나 이상의 virtual 함수가 존재해야 함</li>
+                        <li>상속받은 계약에서 반드시 override 해야 함</li></ul>
+                </li>
+                <li>문법:</li>
+                <pre><code>{`
+                abstract contract BaseContract { 
+                    function doTask() public virtual returns (string memory);
+                }
+                `}</code></pre>
+            </ul>
+
+            <h4>인터페이스 vs 추상 계약 비교</h4>
+            <img className="interfaceVsAbstractContract" src={interfaceVsAbstract} alt="interface-vs-abstract-contract-img"></img>
+
+            <h3>라이브러리</h3>
+            <ul><li>Solidity에서 재사용 가능한 코드 집합</li>
+                <li>스마트 계약과 유사하지만, 상태 변수가 없고, 배포 불가능하며, 오직 함수 집합만을 제공</li>
+                <li>특징:
+                    <li>library 키워드를 사용해 정의함</li>
+                    <li>pure 또는 view 함수를 주로 포함함</li>
+                    <li>스마트 계약에서 직접 호출되거나 using for 구문을 통해 사용할 수 있음</li>
+                    <li>내장된 가스 최적화 기능이 적용됨</li>
+                </li>
+                <li>문법: </li>
+                <pre><code>{`
+            library LibraryName { 
+                function functionName(parameters) public pure returns (type) {
+                    // logic here 
+                }
+            }
+            `}</code></pre>
+            </ul>
+
+            <h4>using for 구문 활용</h4>
+            <ul><li>라이브러리 함수를 특정 데이터 타입에 연결시켜, 메서드 형식으로 사용할 수 있게 해줌</li>
+                <li>장점:
+                    <ul><li>코드의 가독성이 높아짐</li>
+                        <li>특정 데이터 타입에 맞는 함수를 명확하게 사용할 수 있음</li></ul>
+                </li>
+                <li>문법: using LibraryName for Type; </li>
+            </ul>
+
+            <h4>라이브러리 vs. 계약의 차이점</h4>
+            <img className="libraryVsContract" src={libraryVsContract} alt="library-vs-contract-img"></img>
+
+
         </div>
     )
 }
 
 export default TIL0327
+
