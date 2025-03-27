@@ -43,6 +43,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0324')}>0324</div>
       <div onClick={() => navigate('/blog/0325')}>0325</div>
       <div onClick={() => navigate('/blog/0326')}>0326</div>
+      <div onClick={() => navigate('/blog/0327')}>0327 Solidity 기본 문법 4 - 주요 전역 변수와 전역 함수</div>
       {/* <div href="/signature">0203</div> */}
     </div>
   )
