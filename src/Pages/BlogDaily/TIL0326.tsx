@@ -209,18 +209,56 @@ const TIL0326 = () => {
 
             <h4>Solidity에서 에러 처리란?</h4>
             <p>에러 처리 메커니즘</p>
-            <ul><li>require() → 조건 검사 및 입력값 검증</li>
-                <li>revert() → 명시적으로 오류 발생</li>
-                <li>assert() → 내부 논리 오류 체크 (코드의 일관성 유지)</li>
-                <li>try/catch → 외부 호출 실패를 처리</li></ul>
+            <ul><li>require() → 주로 입력값 검증이나 특정 조건이 만족되지 않을 경우 사용
+                <ul><li>require(condition, "Error message")</li></ul>
+            </li>
+                <li>revert() → 특정 조건이 충족되지 않을 때 명시적으로 오류 발생
+                    <pre><code>{`
+                    if (amount > balance) { 
+                        revert("Insufficient balance)}
+                    `}</code></pre>
+                    <ul><li>출금 하려는 금액이 잔액보다 많으면 오류 발생</li>
+                        <li>가스 낭비 방지 및 상태 변경 방지</li></ul>
+                </li>
+                <li>assert() → 내부 오류나 불변성 검사를 위해 사용됨
+                    <ul><li>assert(condition);</li>
+                        <li>실패 시 남은 모든 가스를 다 소모해서 주의해야 함; 쌤은 실무에서 써 본적 없으심</li>
+                        <li>코드 로직의 버그나 계약 내 일관성 유지를 위해 사용</li></ul>
+                </li>
+                <li>try/catch → 외부 호출이나 저수준 함수 호출에서 발생할 수 있는 실패를 처리</li>
+                <pre><code>{`
+                function callExternalFunction() public {
+                    try externalContract.riskyFunction() {   // 성공적으로 실행
+                    } catch Error(string memory reason) {
+                        revert(reason);                     // 명시적인 에러 처리 
+                    } catch (bytes memory lowLevelData) {
+                        revert("Low-level error occurred"); // 저수준 에러 처리
+                    }
+                }
+                `}</code></pre>
+            </ul>
+
+            <p>가스 소비 최적화 에러 처리</p>
+            <ul><li>require() → 입력값 검사 및 가스 절약에 가장 효율적</li>
+                <li>revert() → 특정 조건을 명시적으로 처리, 트랜잭션 중단 및 가스 반환</li>
+                <li>assert() → 코드 버그 및 불변성 유지, 실패 시 모든 가스 소모</li></ul>
 
             <h4>Solidity에서 이더 송금이란?</h4>
             <p>Solidity에서는 이더를 스마트 컨트랙트 간에 송금하거나 스마트 컨트랙트에서 외부 계정으로 이더를 전송할 수 있음</p>
+
             <p>이더 송금을 위한 3가지 방법:</p>
-            <ul><li>transfer() → 안전한 이더 송금 (가스 제한: 2300)</li>
-                <li>send() → 실패 시 반환값으로 성공 여부 확인</li>
-                <li>call() → 가장 유연하지만 주의가 필요한 송금 방법</li>
+            <ul><li>transfer() → 안전한 이더 송금 (가스 제한: 2300); 기본적인 이더 전송 시 사용</li>
+                <li>send() → 반환값으로 성공 여부 확인; 실패 시 tx은 롤백되지 않음; 비추</li>
+                <li>call() → 가장 유연하고 강력함; 가스 제한 없음; 재진입 공격에 취약할 수도 &rarr; 주의가 필요한 송금 방법
+                    <ul><li>고급 이더 전송, 계약 호출 시 사용 (항상 보안 검토 필요)</li></ul>
+                </li>
             </ul>
+
+            <p>이더 수신 함수</p>
+            <ul><li>receive() 함수</li>
+                <li>fallback() 함수</li></ul>
+
+
 
         </div>
     )
