@@ -126,6 +126,17 @@ const TIL0326 = () => {
 
             <h4>함수 오버로딩</h4>
             <ul><li>같은 이름의 함수를 서로 다른 매개변수로 선언할 수 있음</li>
+                <pre><code>{`
+            contract OverloadingExample {
+                function getValue() public pure returns (uint256) {
+                    return 1;
+                }
+
+                function getValue(uint256 _value) public pure returns (uint256) {
+                    return _value;
+                }
+            }
+            `}</code></pre>
                 <li>동일한 함수 이름을 사용하지만, 매개변수에 따라 다른 함수가 호출됨</li>
                 <li>매개변수 있을 때는 이렇게, 없을 때는 저렇게 하고 싶다고 하는 것</li>
             </ul>
@@ -137,14 +148,50 @@ const TIL0326 = () => {
             <ol><li>storage: Persistent Storage
                 <ul><li>함수를 통해 접근할 때 상태 변수를 직접 참조하기 위해 사용</li>
                     <li>가스 비용이 높지만 블록체인에 영구적으로 데이터 기록</li></ul>
+                <pre><code>{`
+                //사용자의 의름과 잔액을 저장하고 업뎃하는 기능 제공
+                contract StorageExample {     
+                    struct User {      // 사용자 정보 저장하는 구조체struct인 User 정의 
+                        string name;
+                        uint256 balance;
+                    }
+
+                    User public user;   // user 라는 상태 변수 선언
+
+                    // 매개변수: _name은 업데이트 할 사용자 이름, _balance는 업데이트 할 사용자 잔액
+                    function updateUser(string memory _name, uint256 _balance) public {
+                        User storage storedUser = user; // 상태 변수를 직접 참조 (영구 저장소)
+                        storedUser.name = _name;       // 영구적으로 상태 변경
+                        storedUser.balance = _balance;
+                    }
+                }
+                    `}</code></pre>
+                <ul><li>함수 로직:
+                    <ol><li>user 상태 변수를 User storage storedUser에 저장 (스토리지 참고)</li>
+                        <li>storedUser.name에 _name 값 할당</li>
+                        <li>storedUser.balance에 _balance값 할당</li>
+                        <li>변경된 값이 user 상태 변수에 직접 반영됨 (영구 저장)</li></ol>
+                </li></ul>
             </li>
+                <br />
+
                 <li>memory: Temporary memory
                     <ul><li>함수 호출 중에만 데이터 저장; 실행 끝나면 자동으로 삭제</li>
                         <li>주로 계산에 필요한 임시 데이터를 저장하거나 상태 변수의 복사본을 만들 때 사용됨</li>
+                    </ul>
+                    <pre><code>{`
+                function viewUser() public view returns (string memory, uint256) {
+                    User memory tempUser = user; // 메모리로 복사
+                    return (tempUser.name, tempUser.balance);
+                }
+                `}</code></pre>
+                    <ul><li>User memory tempUser = user; → 상태 변수를 메모리로 복사</li>
                         <li>수정해도 원본 상태 변수는 변경되지 않음</li>
                         <li>함수가 끝나면 복사된 데이터는 삭제됨</li>
                         <li>가스 비용이 상대적으로 저렴</li></ul>
                 </li>
+                <br />
+
                 <li>calldata: Read-Only External Input
                     <ul><li>외부에서 입력된 데이터를 처리할 때 사용 (함수의 매개변수로 전달됨)</li>
                         <li>데이터를 복사하지 않고 직접 참조 → 가스 비용이 가장 낮음</li>
@@ -185,7 +232,8 @@ const TIL0326 = () => {
             `}</code></pre>
 
             <h4>조건문 및 반복문Control Structure</h4>
-            <ul><li>스마트 컨트랙트의 동작 흐름을 제어하는 데 사용됨</li></ul>
+            <ul><li>스마트 컨트랙트의 동작 흐름을 제어하는 데 사용됨</li>
+                <li>반복문 제어 키워드: break, continue</li></ul>
 
             <p>반복문 사용 시 주의사항(가스 비용 최적화)</p>
             <ol><li>가스 비용 고려: 반복문은 실행 횟수에 비례하여 가스 비용이 증가함</li>
@@ -197,6 +245,58 @@ const TIL0326 = () => {
             <ul><li>스마트 컨트랙트와 외부 애플리케이션(예: DApp 또는 프론트엔드) 간의 통신을 위한 메커니즘</li>
                 <li>블록체인에 기록되어 외부에서 읽기 가능</li>
                 <li>tnx log로 저장; 영구 저장은 아니지만 검색 가능</li></ul>
+
+            <h4>이벤트 선언 및 사용 방법</h4>
+            <ul><li>이벤트 선언
+                <pre><code>{`
+            contract EventExample {
+                event ValueChanged(uint256 oldValue, uint256 newValue);
+            }
+            `}</code></pre>
+                <ul><li>ValueChanged 이벤트는 값이 변경될 때 트리거됨</li></ul>
+            </li>
+                <br />
+                <li>이벤트 발생emit
+                    <pre><code>{`
+            contract EventExample {
+                uint256 public value;
+
+                event ValueChanged(uint256 oldValue, uint256 newValue);
+
+                function updateValue(uint256 newValue) public {
+                    uint256 oldValue = value;
+                    value = newValue;
+                    emit ValueChanged(oldValue, newValue); // 이벤트 발생
+                }
+            }
+            `}</code></pre>
+                    <ul><li>이벤트 로그가 블록체인에 기록되어 외부 애플리케이션이 감지할 수 있음</li></ul>
+                </li>
+            </ul>
+
+            <h4>이벤트 필터링Indexed Parameters</h4>
+            <ul><li>이벤트 로그는 인덱스를 사용해 값 타입을 빠르게 검색할 수 있다</li>
+                <li>예: event Transfer(address indexed from, address indexed to, uint256 amount);</li>
+                <li>외부 애플리케이션 필터링 예시:
+                    <ul><li>from 주소로 필터링(topics 영역에서 조회 가능)</li>
+                        <li>특정 amount 이상의 tx 조회 가능 - amount는 indexed가 아니어서 이벤트 로그 전체를 다 훑어야 함</li>
+                        <li>인덱스 제한: 최대 3개의 인덱스 필드만 설정 가능</li>
+                    </ul>
+                </li></ul>
+
+            <h4>이벤트 활용 사례</h4>
+            <ol><li>상태 변경 로그 기록:
+                <ul><li>event StateChanged(string oldState, string newState);</li></ul>
+            </li>
+                <li>거래 기록:
+                    <ul><li>event PaymentReceived(address sender, uint256 amount);
+                    </li></ul>
+                </li>
+                <li>액세스 제어 기록
+                    <ul><li>event AccessGranted(address indexed user, string role);
+                    </li></ul>
+                </li>
+            </ol>
 
             <p>가스 비용 최적화와 이벤트</p>
             <ul><li>이벤트는 가스 비용이 낮음 - 상태 변수에 데이터를 저장하는 것보다 효율적</li>
