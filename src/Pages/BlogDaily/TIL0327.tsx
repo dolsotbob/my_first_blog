@@ -151,7 +151,64 @@ const TIL0327 = () => {
                     function doSomething(uint256 value) external returns (bool);
                 }
                 `}</code></pre>
+                <li>다형성을 보여주는 예제 (IAnimal 인터페이스를 통해 Dog와 Cat을 동일한 방식으로 사용 가능):
+                    <ul><li>인터페이스 정의
+                        <pre><code>{`
+                    // SPDX-License-Identifier: MIT
+                    pragma solidity ^0.8.0;
+
+                    interface IAnimal {
+                        function makeSound() external view returns (string memory);                            
+                    }
+                    `}</code></pre>
+                        <ul><li>interface IAnimal: IAnimal 이라는 이름의 인터페이스 정의</li>
+                            <li>makesound 함수는 모든 동물이 구현해야 하는 공통적인 함수</li>
+                            <li>exernal view: 외부에서 호출 가능하며 상태를 변경하지 않음</li>
+                            <li>returns (string memory): 문자열 반환</li></ul>
+                    </li>
+                        <li>인테피이스 구현
+                            <pre><code>{`
+                        // SPDX-License-Identifier: MIT
+                        pragma solidity ^0.8.0;
+
+                        import "./IAnimal.sol";
+
+                        contract Dog is IAnimal {
+                            function makeSound() external pure override returns (string memory) {
+                                return "Bark";
+                            }
+                        }
+
+                        contract Cat is IAnimal {
+                            function makeSound() external pure override returns (string memory) {
+                                return "Meow";
+                            }
+                        }
+                        `}</code></pre>
+                            <ul><li>Dog, Cat 계약은 IAnimal 인터페이스를 구현하고 있음</li>
+                                <li>makeSound 함수를 반드시 구현해야 하며 override 키워드를 사용해 명시적으로 재정의</li>
+                                <li>pure 키워드는 상태를 변경하거나 읽지 않음을 의미함</li></ul>
+
+                        </li>
+                        <li>사용 방법
+                            <pre><code>{`
+                        // SPDX-License-Identifier: MIT
+                        pragma solidity ^0.8.0;
+
+                        import "./IAnimal.sol";
+
+                        contract AnimalSound {
+                            function getSound(IAnimal animal) public view returns (string memory) {
+                                return animal.makeSound();
+                            }
+                        }
+                        `}</code></pre>
+                            <ul><li>getSound 함수는 IAnimal 타입의 변수를 받아 makeSound() 함수를 호출함</li>
+                                <li>즉 Dog나 Cat 계약의 인스턴스를 IAnimal 타입으로 전달하면, 해당 계약의 makeSound 함수가 실행됨</li></ul>
+                        </li></ul>
+                </li>
             </ul>
+
 
             <h4>추상 계약Abstract Contracts</h4>
             <ul><li>하나 이상의 구현되지 않은 함수를 가진 계약</li>
