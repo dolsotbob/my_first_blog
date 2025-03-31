@@ -33,16 +33,16 @@ const Blog = () => {
       <div onClick={() => navigate("/blog/0304")}>0304</div>
       <div onClick={() => navigate("/blog/0305")}>0305</div>
       <div onClick={() => navigate("/blog/0306")}>0306</div>
-      <div onClick={() => navigate("/blog/0307")}>0307</div>
-      <div onClick={() => navigate("/blog/0311")}>0311</div>
-      <div onClick={() => navigate("/blog/0312")}>0312</div>
+      <div onClick={() => navigate("/blog/0307")}>0307 파이썬/타입스크립트</div>
+      <div onClick={() => navigate("/blog/0311")}>0311 Research1 - Arweave에 대해서</div>
+      <div onClick={() => navigate("/blog/0312")}>0312 다양한 개발 도구 1 - Ganache, Infura, Web3.js</div>
       <div onClick={() => navigate("/blog/research2")}>Research2</div>
-      <div onClick={() => navigate('/blog/0313')}>0313</div>
-      <div onClick={() => navigate('/blog/0314')}>0314</div>
-      <div onClick={() => navigate('/blog/0321')}>0321</div>
-      <div onClick={() => navigate('/blog/0324')}>0324</div>
-      <div onClick={() => navigate('/blog/0325')}>0325</div>
-      <div onClick={() => navigate('/blog/0326')}>0326</div>
+      <div onClick={() => navigate('/blog/0313')}>0313 Dapp</div>
+      <div onClick={() => navigate('/blog/0314')}>0314 Dapp - 지갑 1 </div>
+      <div onClick={() => navigate('/blog/0321')}>0321 다양한 개발 도구 2 - Truffle과 Hardhat</div>
+      <div onClick={() => navigate('/blog/0324')}>0324 Solidity - 기본 문법 1 - 원시 타입</div>
+      <div onClick={() => navigate('/blog/0325')}>0325 Solidity - 기본 문법 2 - 참조 타입</div>
+      <div onClick={() => navigate('/blog/0326')}>0326 Solidity - 기본 문법 3 - 변수와 함수</div>
       <div onClick={() => navigate('/blog/0327')}>0327 Solidity 기본 문법 4 - 주요 전역 변수와 전역 함수</div>
       <div onClick={() => navigate('/blog/0328')}>0328 Solidity 기본 문법 5 - 데이터 타입 심화</div>
       <div onClick={() => navigate('/blog/0331')}>0331 Solidity 실습 1 - Getter & Setter</div>
