@@ -46,6 +46,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0327')}>0327 Solidity 기본 문법 4 - 주요 전역 변수와 전역 함수</div>
       <div onClick={() => navigate('/blog/0328')}>0328 Solidity 기본 문법 5 - 데이터 타입 심화</div>
       <div onClick={() => navigate('/blog/0331')}>0331 Solidity 실습 1 - Getter & Setter</div>
+      <div onClick={() => navigate('/blog/0401')}>0401 Solidity 실습 2 - 구조체의 Getter & Setter</div>
       {/* <div href="/signature">0203</div> */}
     </div>
   )
