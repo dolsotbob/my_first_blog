@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/my_first_blog/static/css/main.c5e02d8f.css",
-    "main.js": "/my_first_blog/static/js/main.d7a768b6.js",
+    "main.css": "/my_first_blog/static/css/main.8cccf0ca.css",
+    "main.js": "/my_first_blog/static/js/main.39d89b33.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
@@ -21,12 +21,12 @@
     "static/media/contractCheck.png": "/my_first_blog/static/media/contractCheck.e5ecab7c9d1c587453e2.png",
     "static/media/contractState.png": "/my_first_blog/static/media/contractState.d0c1ffa7800f1e58c445.png",
     "index.html": "/my_first_blog/index.html",
-    "main.c5e02d8f.css.map": "/my_first_blog/static/css/main.c5e02d8f.css.map",
-    "main.d7a768b6.js.map": "/my_first_blog/static/js/main.d7a768b6.js.map",
+    "main.8cccf0ca.css.map": "/my_first_blog/static/css/main.8cccf0ca.css.map",
+    "main.39d89b33.js.map": "/my_first_blog/static/js/main.39d89b33.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5e02d8f.css",
-    "static/js/main.d7a768b6.js"
+    "static/css/main.8cccf0ca.css",
+    "static/js/main.39d89b33.js"
   ]
 }
