@@ -18,7 +18,7 @@ const Blog = () => {
       <div onClick={() => navigate("/blog/0210")}>0210 기초 - 웹 개발 이해하기</div>
       <div onClick={() => navigate("/blog/0211")}>0211 Git</div>
       <div onClick={() => navigate("/blog/0212")}>0212 HTML</div>
-      <div onClick={() => navigate("/blog/0213")}>0213</div>
+      <div onClick={() => navigate("/blog/0213")}>0213 Link 태그와 미디어 쿼리</div>
       <div onClick={() => navigate("/blog/0214")}>0214 Javascript 1</div>
       <div onClick={() => navigate("/blog/0217")}>0217 Javascript 2</div>
       <div onClick={() => navigate("/blog/0218")}>0218 계산기 만들기</div>
