@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/my_first_blog/static/css/main.8cccf0ca.css",
-    "main.js": "/my_first_blog/static/js/main.cef20a47.js",
+    "main.js": "/my_first_blog/static/js/main.daeb0ab5.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
@@ -22,11 +22,11 @@
     "static/media/contractState.png": "/my_first_blog/static/media/contractState.d0c1ffa7800f1e58c445.png",
     "index.html": "/my_first_blog/index.html",
     "main.8cccf0ca.css.map": "/my_first_blog/static/css/main.8cccf0ca.css.map",
-    "main.cef20a47.js.map": "/my_first_blog/static/js/main.cef20a47.js.map",
+    "main.daeb0ab5.js.map": "/my_first_blog/static/js/main.daeb0ab5.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8cccf0ca.css",
-    "static/js/main.cef20a47.js"
+    "static/js/main.daeb0ab5.js"
   ]
 }
