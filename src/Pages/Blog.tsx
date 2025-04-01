@@ -15,24 +15,24 @@ const Blog = () => {
       <div onClick={() => navigate("/blog/0205")}>0205</div>
       <div onClick={() => navigate("/blog/0206")}>0206</div>
       <div onClick={() => navigate("/blog/0207")}>0207</div>
-      <div onClick={() => navigate("/blog/0210")}>0210</div>
-      <div onClick={() => navigate("/blog/0211")}>0211</div>
-      <div onClick={() => navigate("/blog/0212")}>0212</div>
+      <div onClick={() => navigate("/blog/0210")}>0210 기초 - 웹 개발 이해하기</div>
+      <div onClick={() => navigate("/blog/0211")}>0211 Git</div>
+      <div onClick={() => navigate("/blog/0212")}>0212 HTML</div>
       <div onClick={() => navigate("/blog/0213")}>0213</div>
-      <div onClick={() => navigate("/blog/0214")}>0214</div>
-      <div onClick={() => navigate("/blog/0217")}>0217</div>
-      <div onClick={() => navigate("/blog/0218")}>0218</div>
-      <div onClick={() => navigate("/blog/0219")}>0219</div>
-      <div onClick={() => navigate("/blog/0220")}>0220</div>
-      <div onClick={() => navigate("/blog/0221")}>0221</div>
-      <div onClick={() => navigate("/blog/0224")}>0224</div>
-      <div onClick={() => navigate("/blog/0225")}>0225</div>
-      <div onClick={() => navigate("/blog/0226")}>0226</div>
-      <div onClick={() => navigate("/blog/0227")}>0227</div>
-      <div onClick={() => navigate("/blog/0228")}>0228</div>
-      <div onClick={() => navigate("/blog/0304")}>0304</div>
-      <div onClick={() => navigate("/blog/0305")}>0305</div>
-      <div onClick={() => navigate("/blog/0306")}>0306</div>
+      <div onClick={() => navigate("/blog/0214")}>0214 Javascript 1</div>
+      <div onClick={() => navigate("/blog/0217")}>0217 Javascript 2</div>
+      <div onClick={() => navigate("/blog/0218")}>0218 계산기 만들기</div>
+      <div onClick={() => navigate("/blog/0219")}>0219 Javascript 3</div>
+      <div onClick={() => navigate("/blog/0220")}>0220 Javascript 4</div>
+      <div onClick={() => navigate("/blog/0221")}>0221 DOM</div>
+      <div onClick={() => navigate("/blog/0224")}>0224 Javascript 5</div>
+      <div onClick={() => navigate("/blog/0225")}>0225 객체 지향 프로그래밍(OOP)</div>
+      <div onClick={() => navigate("/blog/0226")}>0226 심화 - 비동기</div>
+      <div onClick={() => navigate("/blog/0227")}>0227 심화 - React 기초</div>
+      <div onClick={() => navigate("/blog/0228")}>0228 심화 - ReactSPA</div>
+      <div onClick={() => navigate("/blog/0304")}>0304 심화 - React State & Props</div>
+      <div onClick={() => navigate("/blog/0305")}>0305 HTT/네트워크</div>
+      <div onClick={() => navigate("/blog/0306")}>0306 React 클라이언트 Ajax 요청</div>
       <div onClick={() => navigate("/blog/0307")}>0307 파이썬/타입스크립트</div>
       <div onClick={() => navigate("/blog/0311")}>0311 Research1 - Arweave에 대해서</div>
       <div onClick={() => navigate("/blog/0312")}>0312 다양한 개발 도구 1 - Ganache, Infura, Web3.js</div>

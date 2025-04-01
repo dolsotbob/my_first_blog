@@ -8,24 +8,24 @@ const TIL0324 = () => {
         <div className='BlogDaily'>
             <p>2025년 3월 24일</p>
             <h3>Solidity - 기본 문법 1</h3>
-            <p><ul><li>Solidity: 이더리움 스마트 컨트랙트를 작성하기 위한 프로그래밍 언어</li>
+            <ul><li>Solidity: 이더리움 스마트 컨트랙트를 작성하기 위한 프로그래밍 언어</li>
                 <li>EVM에서 실행됨</li>
                 <li>Binance Smart Chain, Polygon 등 EVM 호환 네트워크에서도 활용됨</li>
                 <li>Hardhat, Truffle, Remix IDE 사용할 수 있음</li></ul>
-            </p>
 
-            <p>Solidity의 특징
-                <ol><li>스마트 컨트랙트 기반</li>
-                    <li>정적 타입 언어: 변수 타입을 명확히 선언해야 함</li>
-                    <li>EVM에서 실행 가능</li>
-                    <li>이벤트 기반 프로그래밍: 블록체인 데이터 쉽게 추적 가능</li>
-                    <li>보안 중심 개발: modifier, require, assert 등을 활용한 보안 강화 기능 제공</li></ol>
-            </p>
+
+            <p>Solidity의 특징</p>
+            <ol><li>스마트 컨트랙트 기반</li>
+                <li>정적 타입 언어: 변수 타입을 명확히 선언해야 함</li>
+                <li>EVM에서 실행 가능</li>
+                <li>이벤트 기반 프로그래밍: 블록체인 데이터 쉽게 추적 가능</li>
+                <li>보안 중심 개발: modifier, require, assert 등을 활용한 보안 강화 기능 제공</li></ol>
+
 
             <h4>Remix</h4>
-            <p><ul><li>웹 기반 IDE(Integrated Development Environment, 통합 개발 환경)</li>
+            <ul><li>웹 기반 IDE(Integrated Development Environment, 통합 개발 환경)</li>
                 <li>remix.ethereum.org</li></ul>
-            </p>
+
 
             <h4>Solidity 코드 실행 흐름</h4>
             <ol><li>변수를 선언하고 초기화</li>
