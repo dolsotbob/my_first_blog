@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import About from './Pages/About';
 import Blog from './Pages/Blog';
-import Misc from './Pages/Misc';
+import Misc from './Pages/FurtherStudies';
 import Blogpage from './Pages/Blogpage';
 import Wallet from './Pages/Wallet';
 import 'font-awesome/css/font-awesome.min.css';
@@ -13,6 +13,9 @@ import BlockDetail from './Pages/Explorer/explorerPages/BlockDetails';
 import TransactionDetail from './Pages/Explorer/explorerPages/TransactionDetails';
 import TxFurtherDetails from './Pages/Explorer/explorerPages/TxFurtherDetails';
 import TxFurtherDetails_2 from './Pages/Explorer/explorerPages/TxFurtherDetails_2';
+import FurtherStudies from './Pages/FurtherStudies';
+import Furtherpage from './Pages/Furtherpage';
+
 
 function App() {
   const location = useLocation(); //현재 경로 확인 
@@ -39,7 +42,8 @@ function App() {
             <Route path="/about" element={<About></About>}></Route>
             <Route path="/blog" element={<Blog></Blog>}></Route>
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
-            <Route path="/misc" element={<Misc></Misc>}></Route>
+            <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
+            <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
             <Route path="/wallet" element={<Wallet></Wallet>}></Route>
             <Route path="/explorer" element={<Explorer></Explorer>}></Route>
             {/* <Route path="/explorerhome" element={<ExplorerHome />} /> */}

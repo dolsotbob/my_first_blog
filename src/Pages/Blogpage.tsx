@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import Introduction from './BlogDaily/Introduction';
 import Signature from './BlogDaily/Signature';
-import Research from './BlogDaily/Research';
 import TIL0205 from './BlogDaily/TIL0205';
 import TIL0206 from './BlogDaily/TIL0206';
 import TIL0307 from './BlogDaily/TIL0307';
@@ -16,7 +15,6 @@ import TIL0214 from './BlogDaily/TIL0214';
 import TIL0217 from './BlogDaily/TIL0217';
 import TIL0218 from './BlogDaily/TIL0218';
 import TIL0219 from './BlogDaily/TIL0219';
-import Research0313 from './BlogDaily/Research0313';
 import TIL0313 from './BlogDaily/TIL0313';
 import TIL0314 from './BlogDaily/TIL0314';
 import TIL0220 from './BlogDaily/TIL0220';
@@ -37,6 +35,7 @@ import TIL0327 from './BlogDaily/TIL0327';
 import TIL0328 from './BlogDaily/TIL0328';
 import TIL0331 from './BlogDaily/TIL0331';
 import TIL0401 from './BlogDaily/TIL0401';
+import TIL0318 from './BlogDaily/TIL0318';
 
 const Blogpage = () => {
     const { slug } = useParams();
@@ -67,11 +66,10 @@ const Blogpage = () => {
             {slug === "0305" && <TIL0305></TIL0305>}
             {slug === "0306" && <TIL0306></TIL0306>}
             {slug === "0307" && <TIL0307></TIL0307>}
-            {slug === "0311" && <Research></Research>}
             {slug === "0312" && <TIL0312></TIL0312>}
-            {slug === "research2" && <Research0313></Research0313>}
             {slug === "0313" && <TIL0313></TIL0313>}
             {slug === "0314" && <TIL0314></TIL0314>}
+            {slug === "0318" && <TIL0318></TIL0318>}
             {slug === "0321" && <TIL0321></TIL0321>}
             {slug === "0324" && <TIL0324></TIL0324>}
             {slug === "0325" && <TIL0325></TIL0325>}

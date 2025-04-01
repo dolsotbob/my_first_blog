@@ -126,7 +126,8 @@
 }
 
 .Daily div,
-.About div {
+.About div,
+.furtherStudies div {
   padding-left: 20px;
   /* 각 항목에 왼쪽 여백 추가 */
   cursor: pointer;

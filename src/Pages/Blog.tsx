@@ -38,7 +38,8 @@ const Blog = () => {
       <div onClick={() => navigate("/blog/0312")}>0312 다양한 개발 도구 1 - Ganache, Infura, Web3.js</div>
       <div onClick={() => navigate("/blog/research2")}>Research2</div>
       <div onClick={() => navigate('/blog/0313')}>0313 Dapp</div>
-      <div onClick={() => navigate('/blog/0314')}>0314 Dapp - 지갑 1 </div>
+      <div onClick={() => navigate('/blog/0314')}>0314 Dapp - 지갑</div>
+      <div onClick={() => navigate('/blog/0318')}>0318 Explorer 만들기</div>
       <div onClick={() => navigate('/blog/0321')}>0321 다양한 개발 도구 2 - Truffle과 Hardhat</div>
       <div onClick={() => navigate('/blog/0324')}>0324 Solidity - 기본 문법 1 - 원시 타입</div>
       <div onClick={() => navigate('/blog/0325')}>0325 Solidity - 기본 문법 2 - 참조 타입</div>

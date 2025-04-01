@@ -4,6 +4,7 @@ const Research = () => {
     return (
         <div className='BlogDaily'>
             <h3>알위브(Arweave)에 대해서</h3>
+            <p>2025년 3월 11일</p>
 
             <p>
                 알위브는 블록체인 기술을 기반으로 한 분산형 영구 저장소이며 데이터를 안전하게 장기적으로 보존하는 것을 주요 목표로 하고 있습니다.
