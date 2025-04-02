@@ -184,9 +184,38 @@ const TIL0402 = () => {
                 `}</code></pre>
                         <li>트랜잭션을 생성하여 0.1ETH 전송</li></ul>
                 </li>
-                <li>스마트 컨트랙트와 상호작용</li>
+                <li>스마트 컨트랙트와 상호작용
+                    <ul><li>스마트 컨트랙트 ABI와 주소를 사용해 특정 함수를 호출할 수 있음
+                        <ul><li>ABI(Application Binary Interface): 이더리움 스마트 컨트랙트와 외부 애플리케이션(예: 프론트엔드, web3.js, ethers.js 등)이 상호작용할 수 있도록 정의된 인터페이스</li>
+                            <li>ABI는 스마트 컨트랙트와 대화하는 설명서와 같은 것</li>
+                            <li>이더리움 스마트 컨트랙트는 EVM에서 동작하는 바이트코드(이진 코드) 형태로 배포됨. 그런데 사람이나 다른 프로그램이 이 바이너리 코드를 직접 해석하기 어렵기 때뭅ㄴ에 함수 및 데이터 구조를 설명하는 JSON 형태의 인터페이스(ABI)가 필요함</li></ul>
+                    </li>
+                        <pre><code>{`
+                const contractAddress = "0xYourContractAddress"; 
+                const abi = [
+                    "function getValue() public view returns (uint256)", 
+                    "function setValue(uint256 _value) public",
+                ];
+
+                const contract = new ethers.Contract(contractAddress, abi, provider); 
+
+                async function readContract() { 
+                    const value = await contract.getValue(); 
+                    console.log(₩컨트랙트 값: S{value}₩);
+                }
+
+                readContract();
+                `}</code></pre>
+                        <ul><li>배포된 스마트 컨트랙트에서 값 읽기</li></ul>
+                    </ul>
+                </li>
             </ol>
 
+            <p>참고</p>
+            <ul><li>과제: <a href='https://github.com/dolsotbob/SolidityConcepts'>SolidityConcepts Repository</a></li>
+                <li><a href='https://hardhat.org/tutorial/testing-contracts'>Hardhat testing contracts tutorial</a></li>
+                <li><a href='https://hardhat.org/tutorial/testing-contracts'>ethers.js</a></li>
+            </ul>
 
         </div>
     )
