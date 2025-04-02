@@ -401,6 +401,7 @@ const TIL0326 = () => {
                     }
                 }
                 `}</code></pre>
+                    <ul><li>call 쓰면 반드시 require 들어가야 함</li></ul>
                 </li>
             </ol>
 
@@ -441,6 +442,41 @@ const TIL0326 = () => {
             }
             `}</code></pre>
 
+            <p>이더 출금</p>
+            <ul><li>예시: withDraw 함수 호출 시 소유자(owner)가 컨트랙트의 모든 잔액을 인출하도록, 소유자가 아닌 계정이 withDraw를 호출하면 실패하도록(modifier) 만든 컨트랙트</li></ul>
+            <pre><code>{`
+            // SPDX-License-Identifier: MIT 
+            pragma solidity ^0.8.0; 
+
+            contract WithdrawContract { 
+                address public immutable owner; 
+
+                constructor() { 
+                    owner = msg.sender; 
+                }
+
+                modifier onlyOwner() { 
+                    require(msg.sender == owner, "Not the contract owner"); 
+                    _;
+                }
+
+                receive() external payable {} // 컨트랙트가 이더를 받을 수 있도록 설정 
+
+                function withdraw() public onlyOwner { 
+                    (bool success, ) = msg.sender.call{value: address(this).balance}("");
+                    require(success, "Failed to withdraw");
+                }
+
+                function getContractBalance() public view returns (uint256) { 
+                    return address(this).balance; 
+                }
+            }
+            `}</code></pre>
+            <ul><li>modifier에서 require 아래 _;는 onlyOwner가 들어간 함수의 실제 코드를 실행 하라는 뜻. 여기서는 바로 아래 withDraw 함수</li>
+                <li>owner는 address 타입이므로 그냥 owner.transfer(...)를 호출하면 컴파일 오류 발생</li>
+                <li>payable(owner)를 사용하면 일반 주소를 이더를 받을 수 있는 payable address로 변환할 수 있음</li>
+                <li>실무에서는 withdraw 할 때 정말로 받아지는지 반드시 확인 후 넘어가야 함(태스트 많이 할수록 좋음)</li>
+                <li>bool success, 다음에 빈칸인 이유: call 함수의 반환값이 두 개이지만 우리는 첫 번째 값만 사용하기 때문에; 또 다른 값은 bytes memory data(호출한 함수가 반환하는 데이터)</li></ul>
         </div>
     )
 }

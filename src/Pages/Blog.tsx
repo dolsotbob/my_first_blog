@@ -49,6 +49,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0331')}>0331 Solidity 실습 1 - Getter & Setter</div>
       <div onClick={() => navigate('/blog/0401')}>0401 Solidity 실습 2 - 구조체의 Getter & Setter</div>
       <div onClick={() => navigate('/blog/0402')}>0402 Solidity 실습 3 - 테스트의 중요성</div>
+      <div onClick={() => navigate('/blog/0402hw')}>주말 과제 및 예고</div>
       {/* <div href="/signature">0203</div> */}
     </div>
   )
