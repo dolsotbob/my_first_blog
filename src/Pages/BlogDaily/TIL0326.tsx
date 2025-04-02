@@ -346,19 +346,100 @@ const TIL0326 = () => {
             <h4>Solidity에서 이더 송금이란?</h4>
             <p>Solidity에서는 이더를 스마트 컨트랙트 간에 송금하거나 스마트 컨트랙트에서 외부 계정으로 이더를 전송할 수 있음</p>
 
-            <p>이더 송금을 위한 3가지 방법:</p>
-            <ul><li>transfer() → 안전한 이더 송금 (가스 제한: 2300); 기본적인 이더 전송 시 사용</li>
-                <li>send() → 반환값으로 성공 여부 확인; 실패 시 tx은 롤백되지 않음; 비추</li>
-                <li>call() → 가장 유연하고 강력함; 가스 제한 없음; 재진입 공격에 취약할 수도 &rarr; 주의가 필요한 송금 방법
-                    <ul><li>고급 이더 전송, 계약 호출 시 사용 (항상 보안 검토 필요)</li></ul>
+            <p>이더를 받기 위한 설정(payable 키워드)</p>
+            <pre><code>{`
+            contract ReceiveEther { 
+                receive() external payable {}
+
+                fallback() external payable {}
+            }
+            `}</code></pre>
+            <ul><li>receive() 함수: 순수 이더 전송 시 호출(데이터 없이 전송)</li>
+                <li>fallback() 함수: 이더와 함께 데이터가 전송되거나 함수가 없을 때 호출</li></ul>
+
+            <p>이더 송금 방법</p>
+            <ol><li>transfer() 함수
+                <ul><li>이더 전송 시 가장 안전한 방법</li>
+                    <li>가스 한도: 2300 gas &rarr; 상태 변결 로직 없는 수신자만 사용 가능</li>
+                    <li>실패 시 자동으로 트랜잭션이 롤백됨</li>
+                    <li>사용 추천: 기본적인 이더 전송 시 사용</li></ul>
+                <pre><code>{`
+                contract TransferExample { 
+                    function sendEther(address payable recipient) public payable { 
+                        recipient.transfer(msg.value);
+                    }
+                }
+                `}</code></pre>
+            </li>
+
+                <li>send() 함수
+                    <ul><li>가스 한도: 2300 gas</li>
+                        <li>반환값으로 성공 여부(true/false) 확인 가능</li>
+                        <li>실패 시 tx 롤백되지 않음 &rarr; 명시적으로 처리해야 함</li>
+                        <li>사용 비추</li></ul>
+                    <pre><code>{`
+                contract SendExample { 
+                    function sendEther(address payable recipent) public payable returns (bool) { 
+                        boold sent = recipient.send(msg.value); 
+                        require(sent, "Failed to send Ether"); 
+                        return sent; 
+                    }
+                }
+                `}</code></pre>
                 </li>
-            </ul>
 
-            <p>이더 수신 함수</p>
-            <ul><li>receive() 함수</li>
-                <li>fallback() 함수</li></ul>
+                <li>call() 함수
+                    <ul><li>가장 유연하고 강력함</li>
+                        <li>가스 제한 없음</li>
+                        <li>재진입 공격(Reentrancy Attack)에 취약할 수도 &rarr; 보안 조치 필요</li>
+                        <li>사용 추천: 고급 이더 전송, 계약 호출 시 사용 (항상 보안 검토 필요)</li></ul>
+                    <pre><code>{`
+                contract CallExample { 
+                    function sendEther(address payable recipient) public payable { 
+                        (bool sent, ) = recipient.call{value: msg.value}(""); 
+                        require(sent, "Failed to send Ether");
+                    }
+                }
+                `}</code></pre>
+                </li>
+            </ol>
 
+            <p>이더 송금 시 보안 고려사항</p>
+            <p>재진입 공격 방지Reentrancy Attack Protection</p>
+            <ul><li>call() 사용 시 재진입 공격 방지를 위한 ReentrancyGuard 패턴 사용</li></ul>
+            <pre><code>{`
+            contract SecureTransfer { 
+                bool private locked; 
 
+                modifier noReentrancy() { 
+                    require(!locked, "No reentrancy allowed"); 
+                    locked = true; 
+                    _; 
+                    locked = false; 
+                }
+                
+                function withdraw(address payable recipient) public payable noReentrancy { 
+                    (bool sent, ) = recipient.call{value: msg.value}(""); 
+                    require(sent, "Withdrawal failed");
+                }
+            }
+            `}</code></pre>
+            <ul><li>transfer() 또는 send() 함수는 가스 소비가 제한되어 있으므로 외부 호출에 안전</li>
+                <li>call() 사용 시 가스 한도 설정 필요</li></ul>
+
+            <p>이더 잔액 확인</p>
+            <ul><li>address.balace는 해당 주소의 잔액 반환(단위: Wei)</li></ul>
+            <pre><code>{`
+            contract BalanceChecker { 
+                function getContractBalance() public veiw returns (uint256) { 
+                    return address(this).balance; 
+                }
+
+                function getAddressBalance(address _addr) public view returns (uint256) { 
+                    return _addr.balance; 
+                }
+            }
+            `}</code></pre>
 
         </div>
     )
