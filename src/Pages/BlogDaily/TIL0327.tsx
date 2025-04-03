@@ -150,7 +150,7 @@ const TIL0327 = () => {
             pragma solidity ^0.8.0; 
 
             contract HashGenerator { 
-                function generateHash(string memory data) public pure returns (byte32) {
+                function generateHash(string memory data) public pure returns (bytes32) {
                     return keccak256(abi.encodePacked(data));      // 해시 값 생성 
                 }
             }
