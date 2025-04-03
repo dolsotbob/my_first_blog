@@ -2,6 +2,8 @@ import React from 'react'
 import contractStructure from '../../assets/smartContractStructure.png'
 import contractState from '../../assets/contractState.png'
 import contractCheck from '../../assets/contractCheck.png'
+import til0324uint from '../../assets/til0324uint.png'
+import til0324int from '../../assets/til0324int.png'
 
 const TIL0324 = () => {
     return (
@@ -58,15 +60,46 @@ const TIL0324 = () => {
             `}</code></pre>
 
             <p>Solidity 코드의 오류 처리</p>
-            <ul><li>Solidity 코드의 오류 처리: 트랜잭션이 롤백되며 특정 지점에서 실행이 멈춤</li></ul>
+            <ul><li>Solidity 코드의 오류 처리: 트랜잭션이 롤백되며 특정 지점에서 실행이 멈춤</li>
+                <li>오류 처리 방법:
+                    <ul><li>require(condition, message): 조건이 참이 아니면 오류 발생</li>
+                        <li>assert(condition): 내부 오류 체크(개발자용)</li>
+                        <li>revert(message): 강제적으로 실행을 취소하고 트랜잭션 롤백</li></ul>
+                </li>
+            </ul>
 
             <h4>스마트 컨트랙트 구조</h4>
             <img className='contractStructure' src={contractStructure} alt="smart-contract-img"></img>
+            <ul><li>Solidity 컨트랙트를 오픈소스 프로잭트에 사용할 경우 필수적으로 라이선스 정보를 명시해야 함</li>
+                <li>MIT는 가장 널리 사용되는 오픈 라이선스 중 하나임</li>
+                <li>컨트랙트의 이름은 대문자로 시작하는 PascalCase를 사용하는 것이 일반적임</li>
+                <li>상태 변수: 블록체인에 저장되는 데이터로 컨트랙트의 영구적 상태를 유지함</li>
+                <li>생성자: 컨트랙트 배포 시 한 번만 실행되며 초기 값을 설정하는 역하을 함</li>
+                <pre><code>{`
+                contract Example { 
+                     address public owner; 
+
+                     constructor() {
+                          owner = msg.sender;   // 컨트랙트 배포자의 주소 저장 
+                     }
+                }
+                `}</code></pre>
+            </ul>
+
+            <p>왜 버전 선언이 필요한가?</p>
+            <ul><li>버전 호환성 문제 방지
+                <ul><li>Solidity 0.8.x 버전에서는 정수 오버플로우(overflow)와 언더플로우(underflow)가 기본적으로 방지됨</li>
+                    <li>이전 버전(0.7.x 이하)에서는 이 기능이 자동으로 활성화되지 않음 → SafeMath 라이브러리를 따로 사용해야 했음
+                    </li></ul>
+            </li>
+                <li>안정성과 예측 가능성 확보</li></ul>
 
             <h4>Solidity 데이터 타입</h4>
             <p>값 타입과 참조 타입</p>
+            <ul><li>"데이터 타입"은 스마트 컨트랙트가 변수를 저장하고 처리하는 방법을 정의하는 것</li></ul>
+
             <p>값 타입: 변수가 직접 데이터를 저장하는 유형</p>
-            <ul><li>정수형: uint8 ~ uint256, int8 ~ int256</li>
+            <ul><li>정수형: uint8 ~ uint256, int8 ~ int256 까지 8비트 단위로 선언 가능</li>
                 <li>불리언</li>
                 <li>주소: address payable 은 이더를 송금할 수 있는 주소</li>
                 <li>바이트: 고정 크기의 바이트 배열을 저장하는 타입</li>
@@ -80,10 +113,34 @@ const TIL0324 = () => {
             <h4>Type: Number</h4>
             <ul><li>0으로 나누는 연산은 require을 사용해 방지해야 함</li>
                 <li>uint와 int 타입이 혼합되면 컴파일 오류 발생 가능</li>
+                <li>uint 범위:
+                    <img className="til0324uint" src={til0324uint} alt='uint-range-image'></img>
+                </li>
+                <li>int 범위:
+                    <img className="til0324int" src={til0324int} alt='int-range-image'></img>
+                </li>
                 <li>제곱 연산 (** 연산자 사용)</li>
                 <li>삼항 연산자(condition ? true : false)를 활용하여 최소/최대값 비교 가능</li>
-                <li>오버플로우 및 언더플로우 방지 기본 적용</li>
-                <li>Solidity 0.8.x 이전 버전에서는 SafeMath 라이브러리를 사용해야 했지만, 이제는 필요 없음</li>
+                <pre><code>{`
+                contract MinMaxExample {
+                    function min(uint256 a, uint256 b) public pure returns (uint256) {
+                        return a < b ? a : b; 
+                    }
+                    function max(uint256 a, uint256 b) public pure returns (uint256) { 
+                        return a > b ? a : b;
+                    }
+                }
+                `}</code></pre>
+                <li>오버플로우 및 언더플로우 방지
+                    <ul><li>Solidity 0.8.x 이전 버전에서는 SafeMath 라이브러리를 사용해야 했지만, 이제는 필요 없음</li></ul>
+                </li>
+                <pre><code>{`
+                contract OverflowProtection {
+                    function testOverflow(uint8 a, uint8 b) public pure returns (uint8) {
+                        return a + b; // 값이 255를 초과하면 자동으로 예외 발생
+                    }
+                }
+                `}</code></pre>
             </ul>
 
             <h4>Type: Boolean</h4>

@@ -1,16 +1,16 @@
 import React from 'react'
 
 const TIL0403 = () => {
-    return (
-        <div className='BlogDaily'>
-            <p>2025년 4월 3일</p>
-            <h3>Solidity - 실습 4</h3>
-            <ul><li>Solidity - 기본 문법4의 문법 개념 활용</li></ul>
+  return (
+    <div className='BlogDaily'>
+      <p>2025년 4월 3일</p>
+      <h3>Solidity - 실습 4</h3>
+      <ul><li>Solidity - 기본 문법4의 문법 개념 활용</li></ul>
 
-            <h4>Vault 컨트랙트</h4>
-            <ul><li>코인을 저장하는 금고Vault 컨트랙트 개발하기</li></ul>
-            <ul><li>npm run test:Vault</li></ul>
-            <pre><code>{`
+      <h4>Vault 컨트랙트</h4>
+      <ul><li>코인을 저장하는 금고Vault 컨트랙트 개발하기</li></ul>
+      <ul><li>npm run test:Vault</li></ul>
+      <pre><code>{`
             Vault
     라이선스 및 Solidity 버전 검사
       ✔ 컨트랙트에서 SPDX 주석으로 라이선스가 있어야 합니다.
@@ -35,8 +35,8 @@ const TIL0403 = () => {
       ✔ 함수 generateHash는 string 타입을 인자(string)로 받아 keccak256 해시 값(bytes32)을 리턴해야 합니다.
 
             `}</code></pre>
-            <ul><li>금고 컨트랙트: </li></ul>
-            <pre><code>{`
+      <ul><li>금고 컨트랙트: </li></ul>
+      <pre><code>{`
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0; 
 
@@ -46,6 +46,7 @@ contract Vault {
     uint256 public timestamp;
     uint256 public gasUsed;
 
+    // 인자 넣어줄 수도 있음 (그러면 배포 스크립트에 주소 넣어주어야)
     constructor() { 
         owner = msg.sender; 
     }
@@ -68,6 +69,7 @@ contract Vault {
     return (block.number, block.prevrandao, block.gaslimit, block.coinbase);
     }
 
+    // 확인용 함수; 내가 만든 이 컨트랙트가 얼마나 많은 가스비를 소모하는지 확인하기 위함 
     function trackGasUsage() public {
         uint256 initalGas = gasleft(); 
         uint256 result = 0; 
@@ -79,19 +81,22 @@ contract Vault {
         uint finalGas = gasleft(); 
         gasUsed = initialGas - finalGas; 
     }
-
-    function generateHash(string memory data) public pure returns (bytes32) { 
-        return keccak256(abi.encodePacked(data));
+    
+    // 상태 변수를 바꾸지 않기 때문에 memory가 아닌 calldata 사용 
+    function generateHash(
+         string calldata message
+    ) public pure returns (bytes32) { 
+        return keccak256(abi.encodePacked(message));  // string은 bytes로도 변경 가능; encode vs encodePacked 
     }
 }
 `}</code></pre>
 
 
 
-            <h4>Bank 컨트랙트</h4>
-            <ul><li>코인을 저장하는 금고Vault 컨트랙트를 상속받아 출금 기능이 있는 Bank 컨트랙트 개발하기</li></ul>
-            <ul><li>npm run test:Bank</li></ul>
-            <pre><code>{`
+      <h4>Bank 컨트랙트</h4>
+      <ul><li>코인을 저장하는 금고Vault 컨트랙트를 상속받아 출금 기능이 있는 Bank 컨트랙트 개발하기</li></ul>
+      <ul><li>npm run test:Bank</li></ul>
+      <pre><code>{`
 Bank
     라이선스 및 Solidity 버전 검사
       ✔ 컨트랙트에서 SPDX 주석으로 라이선스가 있어야 합니다.
@@ -126,14 +131,15 @@ Bank
       ✔ 함수 withdraw는 인자로 들어오는 값이 sentValue를 초과할 경우 "Insufficient balance in Vault."를 에러로 출력해야 합니다.
 
             `}</code></pre>
-            <ul><li>Bank 컨트랙트</li></ul>
-            <pre><code>{`
+      <ul><li>Bank 컨트랙트</li></ul>
+      <pre><code>{`
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "./Vault.sol";
 
 contract Bank is Vault {
+    // indexed: 필터 용으로, tx 후 영수증으로 ... 나중에 찾아볼 수 있도록
     event Withdrawn(address indexed user, uint256 amount); 
 
     modifier onlyOwner() { 
@@ -153,8 +159,8 @@ contract Bank is Vault {
     receive() external payable {}
 }
             `}</code></pre>
-        </div>
-    )
+    </div>
+  )
 }
 
 export default TIL0403
