@@ -13,6 +13,9 @@ const TIL0324 = () => {
                 <li>Binance Smart Chain, Polygon 등 EVM 호환 네트워크에서도 활용됨</li>
                 <li>Hardhat, Truffle, Remix IDE 사용할 수 있음</li></ul>
 
+            <p>Solidity 컴파일러 설치</p>
+            <ul><li>npm install -g solc</li>
+                <li>Hardhat과 함께 사용하려면: npm intall --save-dev hardhat</li></ul>
 
             <p>Solidity의 특징</p>
             <ol><li>스마트 컨트랙트 기반</li>
@@ -31,9 +34,31 @@ const TIL0324 = () => {
             <ol><li>변수를 선언하고 초기화</li>
                 <li>함수 실행</li>
                 <li>트랜잭션 처리
-                    <ul><li>콘솔 출력: 자바스크립트의 console.log와 달리 Solidity는 블록체인 상에서 로그를 기록할 수 있도록 이벤트(event) 기능을 제공함</li>
-                        <li>Solidity 코드의 오류 처리: 트랜잭션이 롤백되며 특정 지점에서 실행이 멈춤</li></ul>
                 </li></ol>
+            <pre><code>{`
+                contract SimpleContract { 
+                    string public message = "Hello, Solidity!"; 
+
+                    function setMessage(string memory _newMessage) public { 
+                        message = _newMessage; 
+                    }
+                }
+                `}</code></pre>
+
+            <p>Solidity 콘솔 출력</p>
+            <ul><li>자바스크립트의 console.log와 달리 Solidity는 블록체인 상에서 로그를 기록할 수 있도록 이벤트(event) 기능을 제공함</li></ul>
+            <pre><code>{`
+            contract Logger {
+                event Log(string message);
+
+                function logMessage(string memory _message) public {
+                    emit Log(_message);
+                }
+            }
+            `}</code></pre>
+
+            <p>Solidity 코드의 오류 처리</p>
+            <ul><li>Solidity 코드의 오류 처리: 트랜잭션이 롤백되며 특정 지점에서 실행이 멈춤</li></ul>
 
             <h4>스마트 컨트랙트 구조</h4>
             <img className='contractStructure' src={contractStructure} alt="smart-contract-img"></img>

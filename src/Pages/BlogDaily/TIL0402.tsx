@@ -217,6 +217,120 @@ const TIL0402 = () => {
                 <li><a href='https://hardhat.org/tutorial/testing-contracts'>ethers.js</a></li>
             </ul>
 
+            <p>참고: 과제</p>
+            <ul><li>npm run test</li>
+                <pre><code>{`
+            SolidityConcepts
+    라이선스 및 Solidity 버전 검사
+      ✔ 컨트랙트에서 SPDX 주석으로 라이선스가 있어야 합니다.
+      ✔ 컨트랙트에서 Solidity 버전이 0.8.0 이상, 0.9.0 미만이어야 합니다.
+    상태 변수 검사
+      ✔ uint256 타입의 public 상수(constant) FIXED_VALUE 변수의 초기값은 100이어야 합니다.
+      ✔ address 타입의 public 불변(immutable) owner 변수가 배포자의 주소여야 합니다.
+      ✔ uint256 타입의 public 일반 상태변수 value 의 초기값은 50이어야 합니다.
+    조건문 검사(checkValue)
+      ✔ 함수 checkValue 호출 시 인자(uint256)를 받아 string 타입이 리턴되어야 합니다.
+      ✔ 함수 checkValue 호출 시 인자값이 100보다 큰 경우 "Value is greater than 100"이 리턴되어야 합니다.
+      ✔ 함수 checkValue 호출 시 인자값이 100인 경우 "Value is exactly 100"이 리턴되어야 합니다.
+      ✔ 함수 checkValue 호출 시 인자값이 100보다 작은 경우 "Value is less than 100"이 리턴되어야 합니다.
+    반복문 검사
+      ✔ 함수 sumUpTo 호출 시 인자(uint256)를 받아 uint256 타입이 리턴되어야 합니다.
+      ✔ 함수 sumUpTo 호출 시 인자(uint256)를 받아 uint256 타입이 리턴되어야 합니다.
+      ✔ sumUpTo 함수는 for 문을 사용해야 합니다.
+      ✔ sumUpTo 함수는 1부터 인자(uint256)까지 모든 정수를 더한 값을 반환해야 합니다.
+    이벤트(event) 검사
+      ✔ 이벤트 ValueChanged는 인자 (uint256 oldValue, uint256 newValue)와 함께 발생해야 합니다.
+      ✔ 함수 updateValue 호출 시 상태변수 value에 새로운 값이 저장되고 ValueChanged 이벤트가 발생(emit)해야 합니다.
+    접근 제어자(modifier) & 에러 처리(require) 검사
+      ✔ modifier onlyOwner가 존재해야 합니다.
+      ✔ onlyOwner modifier가 함수 ownerFunction에 적용되어야 합니다.
+      ✔ modifier onlyOwner는 소유자(owner)가 아닌 경우 "Not the contract owner"를 에러로 출력(require)해야 합니다.
+      ✔ 소유자(owner)가 함수 ownerFunction을 실행시 "Hello, Owner!"를 리턴해야 합니다.
+    코인 송금 & 에러 처리(require) 검사
+      ✔ 컨트랙트에 receive() 함수가 정의되어 있어야 합니다.
+      ✔ 컨트랙트는 코인을 받을 수 있어야 합니다.
+      ✔ sendEther 함수 호출 시 인자(address)로 들어오는 수신자가 이더를 정상적으로 받아야 합니다.
+      ✔ sendEther 함수 호출 시 송금액(msg.value)이 0 미만일 경우 "Must send ether"를 오류로 출력(require)해야 합니다.
+      ✔ getContractBalance 함수는 현재 컨트랙트 잔액을 반환해야 합니다.
+      ✔ withDraw 함수 호출 시 소유자(owner)가 컨트랙트의 모든 잔액을 인출해야 합니다.
+      ✔ 소유자(owner)가 아닌 계정이 withDraw를 호출하면 실패해야 합니다.(modifier)
+`}</code></pre>
+                <li>컨트랙트</li>
+                <pre><code>{`
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SolidityConcepts {
+    uint256 public constant FIXED_VALUE = 100;
+    uint256 public value = 50;
+    address public immutable owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function checkValue(uint256 _value) public pure returns (string memory) {
+        if (_value > 100) {
+            return "Value is greater than 100";
+        } else if (_value == 100) {
+            return "Value is exactly 100";
+        } else {
+            return "Value is less than 100";
+        }
+    }
+
+    function sumUpTo(uint256 _number) public pure returns (uint256) {
+        uint256 sum = 0;
+
+        for (uint256 i = 1; i <= _number; i++) {
+            unchecked {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+
+    event ValueChanged(uint256 oldValue, uint256 newValue);
+
+    function updateValue(uint256 newValue) public onlyOwner {
+        uint256 oldValue = value; //oldValue는 function 안에 있는 로컬 변수이고 로컬에 저장됨
+        value = newValue;
+        emit ValueChanged(oldValue, newValue);
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the contract owner");
+        _; // onlyOwner가 들어간 함수의 실제 코드 실행(여기선 아래 함수)
+    }
+
+    function ownerFunction() public view onlyOwner returns (string memory) {
+        return "Hello, Owner!";
+    }
+
+    receive() external payable {}
+
+    function sendEther(address payable _to) public payable {
+        require(msg.value > 0, "Must send ether");
+        (bool success, ) = _to.call{value: msg.value}("");
+        require(success, "Failed to send ether");
+    }
+
+    function getContractBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
+    // 실무에서는 정말로 받아지는지 반드시 확인 하고 넘어갸야 함(테스크 많이 해볼수록 좋음)
+    //call 쓰면 require 쓴다
+    function withDraw() public onlyOwner {
+        (bool success, ) = msg.sender.call{value: address(this).balance}("");
+        require(success, "Failed to withdraw");
+        // require(address(this).balance > 0, "No funds to withdraw");
+        // payable(owner).transfer(address(this).balance);
+    }
+}
+`}</code></pre>
+            </ul>
+
         </div>
     )
 }
