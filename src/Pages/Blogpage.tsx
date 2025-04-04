@@ -39,6 +39,7 @@ import TIL0318 from './BlogDaily/TIL0318';
 import TIL0402 from './BlogDaily/TIL0402';
 import TIL0402HW from './BlogDaily/TIL0402HW';
 import TIL0403 from './BlogDaily/TIL0403';
+import TIL0404 from './BlogDaily/TIL0404';
 
 const Blogpage = () => {
     const { slug } = useParams();
@@ -84,6 +85,7 @@ const Blogpage = () => {
             {slug === "0402" && <TIL0402></TIL0402>}
             {slug === "0402hw" && <TIL0402HW></TIL0402HW>}
             {slug === "0403" && <TIL0403></TIL0403>}
+            {slug === "0403" && <TIL0404></TIL0404>}
         </div>
     );
 };

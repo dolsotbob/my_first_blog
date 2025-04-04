@@ -51,6 +51,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0402')}>0402 Solidity 실습 3 - 테스트의 중요성</div>
       <div onClick={() => navigate('/blog/0402hw')}>주말 과제 및 예고</div>
       <div onClick={() => navigate('/blog/0403')}>0403 Solidity 실습 4 - Vault & Bank 컨트랙트</div>
+      <div onClick={() => navigate('/blog/0404')}>0404 Solidity 실습 5 - Interface, Library, Abstract Contract</div>
       {/* <div href="/signature">0203</div> */}
     </div>
   )
