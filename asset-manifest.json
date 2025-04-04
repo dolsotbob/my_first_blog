@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/my_first_blog/static/css/main.547b5194.css",
-    "main.js": "/my_first_blog/static/js/main.bcaec138.js",
+    "main.css": "/my_first_blog/static/css/main.689357e4.css",
+    "main.js": "/my_first_blog/static/js/main.02cd176e.js",
     "static/js/453.a806bb98.chunk.js": "/my_first_blog/static/js/453.a806bb98.chunk.js",
     "static/media/JetToken3.png": "/my_first_blog/static/media/JetToken3.0a4bd92f779680d03f9f.png",
     "static/media/JetToken2.png": "/my_first_blog/static/media/JetToken2.11359c85953bbf884245.png",
@@ -15,13 +15,13 @@
     "static/media/til0402truffleTest.png": "/my_first_blog/static/media/til0402truffleTest.95c8242609dffd8f7fcc.png",
     "static/media/fontawesome-webfont.eot": "/my_first_blog/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
-    "static/media/til0321_config1.png": "/my_first_blog/static/media/til0321_config1.da57dd3c5b713f8a9e5a.png",
+    "static/media/til0321_config1.jpeg": "/my_first_blog/static/media/til0321_config1.da57dd3c5b713f8a9e5a.jpeg",
     "static/media/smartContractStructure.png": "/my_first_blog/static/media/smartContractStructure.2f3c79caa25f4cee1c81.png",
     "static/media/interfaceVsAbstract.png": "/my_first_blog/static/media/interfaceVsAbstract.1dc87b62da9542339e45.png",
     "static/media/til0324int.png": "/my_first_blog/static/media/til0324int.995ccd3e078ce39b1c09.png",
     "static/media/libraryVsContract.png": "/my_first_blog/static/media/libraryVsContract.a41442d80452fb65c10e.png",
     "static/media/fontawesome-webfont.woff?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
-    "static/media/til0321_config2.png": "/my_first_blog/static/media/til0321_config2.4847d3d9c18268717b47.png",
+    "static/media/til0321_config2.jpeg": "/my_first_blog/static/media/til0321_config2.4847d3d9c18268717b47.jpeg",
     "static/media/til0324uint.png": "/my_first_blog/static/media/til0324uint.40f44694dbbb25b29bea.png",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/my_first_blog/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "static/media/til0402.png": "/my_first_blog/static/media/til0402.759c9ed05146295f881d.png",
@@ -30,12 +30,12 @@
     "static/media/til0321_config4.png": "/my_first_blog/static/media/til0321_config4.f3b06ae3a424d1ebd42e.png",
     "static/media/contractState.png": "/my_first_blog/static/media/contractState.d0c1ffa7800f1e58c445.png",
     "index.html": "/my_first_blog/index.html",
-    "main.547b5194.css.map": "/my_first_blog/static/css/main.547b5194.css.map",
-    "main.bcaec138.js.map": "/my_first_blog/static/js/main.bcaec138.js.map",
+    "main.689357e4.css.map": "/my_first_blog/static/css/main.689357e4.css.map",
+    "main.02cd176e.js.map": "/my_first_blog/static/js/main.02cd176e.js.map",
     "453.a806bb98.chunk.js.map": "/my_first_blog/static/js/453.a806bb98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.547b5194.css",
-    "static/js/main.bcaec138.js"
+    "static/css/main.689357e4.css",
+    "static/js/main.02cd176e.js"
   ]
 }
