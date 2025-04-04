@@ -321,7 +321,7 @@ const TIL0327 = () => {
                     `}</code></pre>
                         <ul><li>interface IAnimal: IAnimal 이라는 이름의 인터페이스 정의</li>
                             <li>makesound 함수는 모든 동물이 구현해야 하는 공통적인 함수</li>
-                            <li>exernal view: 외부에서 호출 가능하며 상태를 변경하지 않음</li>
+                            <li>external view: 외부에서 호출 가능하며 상태를 변경하지 않음</li>
                             <li>returns (string memory): 문자열 반환</li></ul>
                     </li>
                         <li>인테피이스 구현
@@ -550,6 +550,8 @@ const TIL0327 = () => {
             <h4>라이브러리 vs. 계약의 차이점</h4>
             <img className="libraryVsContract" src={libraryVsContract} alt="library-vs-contract-img"></img>
 
+            <p>참고:</p>
+            <ul><li>과제: <a href='https://github.com/dolsotbob/animal_contract_practice'>Animal Contract</a></li></ul>
 
         </div>
     )

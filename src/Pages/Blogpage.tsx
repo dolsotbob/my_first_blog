@@ -85,7 +85,7 @@ const Blogpage = () => {
             {slug === "0402" && <TIL0402></TIL0402>}
             {slug === "0402hw" && <TIL0402HW></TIL0402HW>}
             {slug === "0403" && <TIL0403></TIL0403>}
-            {slug === "0403" && <TIL0404></TIL0404>}
+            {slug === "0404" && <TIL0404></TIL0404>}
         </div>
     );
 };

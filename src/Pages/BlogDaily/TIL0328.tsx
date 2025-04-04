@@ -36,6 +36,9 @@ const TIL0328 = () => {
                 } 
             }
             `}</code></pre>
+                <ul><li>매핑(address &rarr; Profile): 사용자 주소별로 정보를 저장</li>
+                    <li>setProfile: 사용자의 정보를 입력</li>
+                    <li>getProfile: 사용자의 정보를 조회</li></ul>
             </ul>
 
             <h4>다중 매핑 구조(Nested Mappings)</h4>
@@ -79,7 +82,7 @@ const TIL0328 = () => {
             <ul><li>스마트 계약이 이더를 수신할 때 호출하는 특별한 함수</li>
             </ul>
 
-            <h4>Receive</h4>
+            <p>Receive</p>
             <ul><li>이더를 직접 수신할 때 호출되는 함수</li>
                 <li>external과 payable로 선언해야 함</li>
                 <pre><code>{`
@@ -94,7 +97,7 @@ const TIL0328 = () => {
             `}</code></pre>
             </ul>
 
-            <h4>Fallback</h4>
+            <p>Fallback</p>
             <ul><li>정의되지 않은 함수가 호출되거나 데이터가 포함된 호출이 발생할 때 자동으로 실행</li>
                 <li>external로 선언되어야 함; 이더 전송이 포함되었다면 payable도 필요</li>
                 <li>Proxy 패턴에서 쓰임; 프록시 계약에서 사용자가 호출한 요청을 실제 로직을 처리하는 로직 계약으로 전달하는 역할</li>
@@ -114,7 +117,7 @@ const TIL0328 = () => {
             <ul><li>기본적인 에러 핸들러 require, revert, assert 외 심화적인 에러 처리 방식</li>
                 <li>try/catch 문법과 Custom Errors</li></ul>
 
-            <h4>try/catch 문법</h4>
+            <p>try/catch 문법</p>
             <ul><li>에러 날 경우 따로 처리하고 싶을 때 사용할 수 있음</li>
                 <li>예시:</li>
                 <pre><code>{`
@@ -128,7 +131,7 @@ const TIL0328 = () => {
             `}</code></pre>
             </ul>
 
-            <h4>사용자 정의 에러Custom Errors</h4>
+            <p>사용자 정의 에러Custom Errors</p>
             <ul><li>특정 조건이 충족되지 않았을 때 발생할 수 있는 에러를 명확하게 정의할 수 있음</li>
                 <li>string이 없어서 require, revert 보다 가스 비용 절감됨</li>
                 <li>emit이 아닌 revert 키워드로 출력</li>
