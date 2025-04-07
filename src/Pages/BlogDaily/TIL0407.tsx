@@ -32,6 +32,9 @@ const TIL0407 = () => {
                         const contract = new ethers.Contract(contractAddress, abi, signer); 
                         await contract.setValue(42);  // 상태 변경 -> 가스 필요 
                         `}</code></pre>
+                        <ul><li>signer: set 함수 쓸 때 signer가 가스비를 소모함</li>
+                            <li>signer는 msg.sender (혹은 tx.origin이 될 수도)</li></ul>
+
                     </li>
                         <li>조회 호출(Call)
                             <ul><li>읽기 전용 함수 호출; 가스 비용 없음; tx이 블록체인에 기록되지 않음</li>
@@ -230,7 +233,27 @@ const TIL0407 = () => {
             📌 setValue 트랜잭션 완료!
             📌 현재 저장된 값: 42
             `}</code></pre>
+                <ul><li>컨트랙트 함수 호출할 때 await tx.wait()에서 wait 를 쓰는 이유
+                    <ul><li>내가 tx을 만들면 이 tx은 pending 상태로 멤풀에 들어감. 내 tx이 선택되어 블록체인에 올라갈 때까지 기다리게 해줌</li>
+                        <li>wait가 사용되는 예:
+                            <ul><li>10 BTC를 친구에게 보냈다. 이게 확실히 처리 되었는지 확인하고 싶다</li>
+                                <li>setValue로 바꾼 결과를 fixedValue로 바로 다음 tx에서 쓰고 싶다</li></ul>
+                        </li>
+                        <li>wait 이해하고 활용하기</li></ul>
+                </li></ul>
+
             </ul>
+
+            <h4>참고</h4>
+            <ul><li><a href='https://docs.ethers.org/v5/'>ethers.js</a></li>
+                <li><a href='https://github.com/dolsotbob/abi'>과제</a>: 이번엔 Web3.js가 아닌 Ethers.js를 이용해 컨트랙트 호출하기
+                    <ul><li><a href='https://archive.trufflesuite.com/ganache/'>Ganache(로컬 블록체인 기능)</a>이 설치되어 있어야 함</li>
+                        <li>ignition 형식으로 배포해도 되고 이 과제 처럼 Script 만들어 배포해도 됨</li>
+                        <li>npm run test 하면 세터 함수 부분이 느림 &rarr; 댑이 느린 이유 &rarr; 확정된 값만 블록체인에 올리고 나머지는 서버에 두는 것이 현재 추세</li>
+                        <li>신입일 때 종종 ABI 관련 에러 겪을 수 있음. 대부분 함수에 필요한 인자를 주지 않아서 생김. estimateGas()로 호출을 미리 시도해보면 에러 메세지를 통해 원인 파악할 수 있음
+                            <li>참고: Getter 함수도 인자를 가질 수 있음</li>
+                        </li></ul>
+                </li></ul>
         </div>
     )
 }
