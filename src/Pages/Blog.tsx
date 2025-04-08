@@ -49,10 +49,11 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0331')}>0331 Solidity 실습 1 - Getter & Setter</div>
       <div onClick={() => navigate('/blog/0401')}>0401 Solidity 실습 2 - 구조체의 Getter & Setter</div>
       <div onClick={() => navigate('/blog/0402')}>0402 Solidity 실습 3 - 테스트의 중요성</div>
-      <div onClick={() => navigate('/blog/0402hw')}>주말 과제 및 예고</div>
       <div onClick={() => navigate('/blog/0403')}>0403 Solidity 실습 4 - Vault & Bank 컨트랙트</div>
       <div onClick={() => navigate('/blog/0404')}>0404 Solidity 실습 5 - Interface, Library, Abstract Contract</div>
       <div onClick={() => navigate('/blog/0407')}>0407 컨트랙트 호출(ABI)</div>
+      <div onClick={() => navigate('/blog/0408')}>0408 ERC-20</div>
+      <div onClick={() => navigate('/blog/0402hw')}>주말 과제 및 예고</div>
       {/* <div href="/signature">0203</div> */}
     </div>
   )
