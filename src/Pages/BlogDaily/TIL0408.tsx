@@ -92,8 +92,78 @@ const TIL0408 = () => {
 
             <p>참고:</p>
             <ul><li><a href='https://eips.ethereum.org/EIPS/eip-20'>EIP20 공식 제안문서</a></li>
-                <li><a href='https://github.com/OpenZeppelin/openzeppelin-contracts'>OpenZeppelin 깃헙 문서</a></li></ul>
+                <li><a href='https://github.com/OpenZeppelin/openzeppelin-contracts'>OpenZeppelin 깃헙 문서</a>
+                    <ul><li>오픈 재플린 문서에서 ERC-20 관련 함수들 뜯어보기 (그냥 넘기지 말기)</li></ul>
+                </li>
+                <li>과제: <a href='https://github.com/dolsotbob/erc20'>나만의 토큰 만들기</a></li>
+            </ul>
 
+            <h4>OpenZeppelin</h4>
+            <ul><li>이더리움 및 스마트 컨트랙트 개발을 위한 보안 강화 라이브러리 및 프레임워크를 제공하는 오픈소스 프로젝트</li>
+                <li>ERC-20, ERC-721, ERC-1155 등의 표준을 포함한 스마트 컨트랙트의 재사용 가능한 코드 제공</li></ul>
+
+            <p>OpenZeppelin의 주요 특징</p>
+            <ol><li>스마트 컨트랙트 라이브러리 제공
+                <ul><li>ERC-20(토큰 표준), ERC-721(NFT), 접근 제어(Ownable), 수학 연산(SafeMath) 등 다양한 컨트랙트 모듈을 제공하여 개발자가 직접 작성해야 하는 코드를 줄여줌</li></ul>
+            </li>
+                <li>보안성 검증</li>
+                <li>Upgradeable Contracts 지원
+                    <ul><li>스마트 컨트랙트 배포 후에도 업그레이드가 가능하도록 Proxy 패턴을 활용한 업그레이드 가능한 컨트랙트 기능 제공</li></ul>
+                </li>
+                <li>Access Control (권한 관리)
+                    <ul><li>Ownable, Roles 등의 접근 제어 기능을 제공하여 특정 역할을 가진 사용자만 실행할 수 있는 함수를 정의할 수 있음</li></ul>
+                </li>
+                <li>문서화 및 커뮤니티 지원
+                    <ul><li>공식 문서와 GitHub 리포지토리를 통해 코드 예제 및 설명이 제공되며, 개발자 커뮤니티에서 적극적으로 지원됨                    </li></ul>
+                </li></ol>
+
+            <p>OpenZeppelin을 사용한 ERC-20 예시</p>
+            <ul><li>OpenZeppelin의 ERC20 컨트랙트를 부모 컨트랙트로 상속받아 MyToken 컨트랙트를 만드는 예시
+                <ul><li>ERC20을 상속받아 표준 토큰을 쉽게 만들 수 있다</li></ul>
+            </li>
+                <li>OpenZeppelin 라이브러리 설치</li>
+                <pre><code>{`
+                npm install @openzeppelin/contracts
+                `}</code></pre>
+                <li>ERC-20 토큰 생성(컨트랙트 개발)</li>
+                <pre><code>{`
+                // SPDX-License-Identifier: MIT
+                pragma solidity ^0.8.0;
+
+                import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+                contract MyToken is ERC20 {
+                    constructor() ERC20("MyToken", "MTK") {
+                        _mint(msg.sender, 1000000 * 10 ** decimals());
+                    }
+                }
+                `}</code></pre>
+                <ul><li>_mint 함수는 오픈 재플린의 ERC-20에서 가져온 것</li>
+                    <li>언더바: 내부에서만 사용됨을 식별하기 위해; 상속 받은자까지 사용 가능</li></ul>
+            </ul>
+
+            <h4>과제:</h4>
+            <ul><li>ERC20 토큰 컨트랙트를 구현하고, Web3.js를 이용하여 컨트랙트 호출(Call) 해보기</li>
+                <li>개발 도구: <a href='https://archive.trufflesuite.com/ganache/'>Ganache</a>가 설치 되어 있어야 함</li>
+                <li>먼저 할 일: Ganache 로컬 블록체인을 Hardhat에 연결
+                    <ol><li>Ganache 실행</li>
+                        <li>hardhat.config.ts에서 url 값에 Ganache의 RPC Server 주소 입력</li>
+                        <li>.env.example 파일 이름에서 .example을 지운 후 프라이빗키 입력
+                            <li>Ganache의 계정 중 하나를 선택해 열쇠모양 아이콘을 클릭해 프라이빗 키 입력</li>
+                        </li></ol>
+                </li>
+                <li>npm install 하고 필요한 모듈 설치</li>
+                <li>이제 package.json의 scripts 실행할 수 있음
+                    <ul><li>배포 명령어도 확인 가능: npm run deploy</li></ul>
+                </li>
+                <li>node modules에서 오픈 재플린의 ERC-20 확인할 수 있음 </li>
+                <li>web3.ts 만들 때는
+                    <ol><li><a href='https://web3js.readthedocs.io/en/v1.10.0/'>web3.js</a> 활용하기</li>
+                        <li><a href='https://github.com/OpenZeppelin/openzeppelin-contracts'>OpenZeppelin 깃헙 문서</a>에서 ERC-20 함수 뜯어 보면서 하기</li>
+                        <li>MyToken.json에서도 함수 인자 확인할 수 있음</li>
+                    </ol>
+                </li>
+            </ul>
 
         </div>
     )
