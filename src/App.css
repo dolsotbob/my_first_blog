@@ -163,6 +163,13 @@
   color: palevioletred;
 }
 
+.blogpage h5 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  color: rgb(85, 176, 215);
+  padding-left: 20px;
+}
+
 .blogpage p {
   font-family: 'Courier New', Courier, monospace;
   font-size: 20px;
