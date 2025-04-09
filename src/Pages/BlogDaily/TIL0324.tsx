@@ -282,6 +282,57 @@ const TIL0324 = () => {
             `}</code></pre>
             <ul><li>결과: getNumericValue() 호출 시 1 반환 (Pending=0, Shipped=1)</li></ul>
 
+            <p>3. Enum을 활용한 상태 전화나 제어</p>
+            <ul><li>Enum을 사용하면 특정 상태 변경만 허용하도록 로직을 구성할 수 있음</li>
+                <li>특정 상태만 허용하는 로직 추가</li></ul>
+            <pre><code>{`
+            contract Workflow { 
+                enum Stage { Start, Process, Completed}
+                Stage public currentStage; 
+
+                modifier onlyAtStage(Stage _stage) { 
+                    require(currentStage == _stage, "Invalid stage transition");
+                    _;
+                }
+                
+                function proceedToNextStage() public onlyAtStage(Stage.Start) {
+                    currentStage = Stage.Process;
+                }
+            }
+            `}</code></pre>
+            <ul><li>modifier onlyAtStage(Stage _stage)를 사용하여 특정 상태에서만 함수 실행 가능</li>
+                <li>proceedToNextStage()는 현재 상태가 Start일 때만 Process로 변경 가능</li></ul>
+
+            <p>4. Enum과 조건문 활용</p>
+            <ul><li>enum을 사용하면 상태에 따라 다른 동작을 수행할 수 있음</li>
+                <li>Enum을 조건문과 함께 사용하기</li></ul>
+            <pre><code>{`
+            contract EnumWithConditions {
+                enum Light { Red, Yellow, Green }  // Light는 Red, Yellow, Green 세 가지 상태를 가질 수 있는 사용자 정의 타입
+                Light public trafficLight;        // 상태변수 traficLight는 Light 타입이다
+
+                function setLight(Light _light) public {  // 외부에서 Light 타입 값을 넣으면 trafficLight 값을 설정할 수 있다
+                    trafficLight = _light               // 예: setLight(Light.Green) 호출 -> trafficLight는 Green으로 바뀜
+                }
+
+                function getAction() public view returns (string memory) { 
+                    if (traffidLight == Light.Red) {
+                        return "Stop";
+                    } else if (trafficLight == Light.Yellow) { 
+                        return "Slow Down";
+                    } else { 
+                        return "Go";
+                    }
+                }
+            }
+            `}</code></pre>
+            <ul><li>Light enum을 선언하여 신호등 상태(Red, Yellow, Green)를 정의</li>
+                <li>setLight()를 사용하여 상태를 설정하고, getAction()을 호출하면 해당 상태에 맞는 메시지 반환</li></ul>
+            <ul><li>실행 예시: </li></ul>
+            <pre><code>{`
+            setLight(Light.Red);
+            getAction(); // 반환 값: "Stop"
+            `}</code></pre>
         </div>
     )
 }
