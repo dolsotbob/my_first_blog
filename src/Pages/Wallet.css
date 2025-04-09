@@ -20,6 +20,7 @@ h3 {
 }
 
 /* 버튼 스타일 */
+
 button {
     background-color: darkgreen;
     color: lightgreen;
@@ -39,6 +40,7 @@ button:hover {
 }
 
 /* 입력 필드 스타일 */
+
 input {
     padding: 10px;
     font-size: 16px;
