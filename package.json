@@ -1,6 +1,4 @@
 {
-  "homepage": "https://dolsotbob.github.io/my_first_blog",
-  "name": "my_first_blog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
