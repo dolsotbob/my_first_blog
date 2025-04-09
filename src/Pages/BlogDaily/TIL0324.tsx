@@ -168,17 +168,119 @@ const TIL0324 = () => {
             <h4>Type: Byptes</h4>
             <ul><li>고정 크기와 가변 크기의 바이트 배열을 저장하는 데 사용됨</li>
                 <li>문자열보다 낮은 가스 비용</li>
+                <li>특정 데이터 조작을 더 효율적으로 수행 가능</li>
                 <li>고정 크기 바이트 배열(bytes1 ~ bytes32): 더 적은 가스 사용, 연산 속도 빠름</li>
                 <li>가변 크기 바이트 배열(bytes): string과 유사하지만 메모리 최적화 측면에서 더 효율적; 개별 바이트 접근 가능</li>
                 <li>Solidity에서 문자열을 조작할 필요가 있다면 bytes를 사용하는 것이 더 가스 효율적입니다.
                 </li>
             </ul>
 
+            <p>바이트 배열의 주요 기능</p>
+            <ul><li>바이트 배열 길이 확인
+                <pre><code>{`
+                contract BytesLength { 
+                    function getLength(bytes memory data) public pure returns (uint) { 
+                        return data.length; 
+                    }
+
+                    // string을 bytes화 시켜서 길이 리텅 
+                    function getStrLength() public pure rerturns (uint256) { 
+                        string memory str = "Hello World"; 
+                        return bytes(str).length; 
+                    }
+                }
+                `}</code></pre>
+                <ul><li>bytes("Hello")를 입력하면 5 반환</li></ul> <br />
+            </li>
+
+                <li>특정 바이트 값 접근
+                    <pre><code>{`
+                contract BytesAccess {
+                    function getByteAt(bytes memory data, uint256 index) public pure returns (bytes1) {
+                        require(index < data.length, "Index out of bounds");
+                        return data[index];
+                    }
+                    
+                    // 문자열의 특정 인덱스 접근 방법
+                    function getStrToByteAt() public pure returns (string memory) {
+                        string memory str = "Hello World";
+                        bytes1 firstIndex = bytes(str)[0];
+                        string memory result = string(abi.encodePacked(firstIndex));
+
+                        return result; 
+                    }
+                }
+                `}</code></pre>
+                    <ul><li>getByteAt(bytes("Hello"), 1) → "e" 반환</li></ul>
+                </li>
+
+                <li>바이트 배열 추가
+                    <pre><code>{`
+            contract BytesAppend {
+                function appendByte(bytes memory original, bytes1 newByte) public pure returns (bytes memory) {
+                    bytes memory newArray = new bytes(original.length + 1);
+                    for (uint256 i = 0; i < original.length; i++) {
+                        newArray[i] = original[i];
+                    }
+                    newArray[original.length] = newByte;
+                    return newArray;
+                }
+            }
+            `}</code></pre>
+                    <ul><li>appendByte(bytes("Hi"), "!") 실행 시 "Hi!"가 반환됨</li></ul>
+                </li></ul>
+
             <h4>Type: Enum</h4>
             <ul><li>여러 개의 상수 값들을 한정된 집합으로 정의할 때 사용</li>
-                <li>스마트 컨트랙트에서 상태나 옵션을 명확하게 표현하는 데 유용함</li>
-                <li>값을 숫자로 저장하지만 가독성을 위해 명명된 요소 사용 가능</li>
+                <li>스마트 컨트랙트에서 상태나 옵션을 명확하게 표현하는 데 유용함
+                    <pre><code>{`enum Status { Pending, Shipped, Delivered, Canceled }`}</code></pre>
+                </li>
+                <li>특징:
+                    <ul><li>값을 숫자로 저장하지만 가독성을 위해 명명된 요소 사용 가능</li>
+                        <li>기본적으로 첫 번째 요소는 0, 두 번째 요소는 1의 값으로 저장됨</li>
+                        <li>스마트 컨트랙트에서 상태 관리 등에 유용하게 활용됨</li></ul>
+                </li>
             </ul>
+
+            <p>1. Enum 선언 및 기본 사용</p>
+            <ul><li>기본적인 Enum 선언 및 값 설정</li></ul>
+            <pre><code>{`
+            contract OrderManagement {
+                enum Status { Pending, Shipped, Delivered, Canceled }
+                Status public orderStatus; 
+
+                function setStatus(Status _status) public { 
+                    orderStatus = _status;
+                }
+
+                function getStatus() public view returns (Status) {
+                    return orderStatus;    
+                }
+            }
+            `}</code></pre>
+            <ul><li>Status라는 enum을 선언하여 주문 상태를 표현</li>
+                <li>setStatus(Status _status)를 사용하여 상태 변경 가능</li>
+                <li>getStatus()를 통해 현재 상태를 확인 가능</li></ul><br />
+
+            <ul><li>실행 예시:</li></ul>
+            <pre><code>{`
+            setStatus(Status.Shipped);
+            getStatus(); // 반환 값: Status.Shipped (1)
+            `}</code></pre>
+
+            <p>2. Enum의 기본 값과 숫자 매핑</p>
+            <ul><li>Solidity에서 enum의 값은 기본적으로 0부터 시작하는 숫자로 저장됨</li>
+                <li>Enum 값의 숫자 확인</li></ul>
+            <pre><code>{`
+            contract EnumValues {
+                enum Status { Pending, Shipped, Delivered, Canceled }
+
+                function getNumericValue() public pure returns (uint) {
+                    return uint(Status.Shipped);
+                }
+            }
+            `}</code></pre>
+            <ul><li>결과: getNumericValue() 호출 시 1 반환 (Pending=0, Shipped=1)</li></ul>
 
         </div>
     )
