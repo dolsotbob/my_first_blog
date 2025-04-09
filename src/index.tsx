@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/my_first_blog">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
