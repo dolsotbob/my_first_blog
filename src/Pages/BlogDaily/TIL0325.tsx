@@ -5,8 +5,10 @@ const TIL0325 = () => {
         <div className='BlogDaily'>
             <p>2025년 3월 25일</p>
             <h3>Solidity - 기본 문법 2: 참조 타입</h3>
+            <ul><li>참조 타입은 데이터를 직접 저장하는 대신 참조하는 방식으로 동작함</li>
+                <li>문자열, 배열, 매핑, 구조체, 바이트 배열</li></ul>
 
-            <h4>문자열</h4>
+            <h4>Type: String 문자열</h4>
             <ul><li>Solidity는 문자열 조작 기능이 제한적이며 가스 비용이 높은 연산이 많음 =&gt; bytes 타입 사용이 더 효율적</li>
                 <li>UTF-8 인코딩된 문자들을 저장</li>
                 <li>동적 크기를 가지며 배열처럼 개별 문자에 직접 접근할 수 없음</li>
@@ -40,7 +42,23 @@ const TIL0325 = () => {
             `}</code></pre>
 
                 <li>문자열을 바이트로 변환: bytes(str) 사용</li>
+                <pre><code>{`
+            contract StringToBytes {
+                function convertToBytes(string memory str) public pure returns (bytes memory) {
+                    return bytes(str);
+                }
+            }
+            `}</code></pre>
+
                 <li>바이트를 문자열로 변환: string(byteData) 사용</li>
+                <pre><code>{`
+            contract BytesToString {
+                function convertToString(bytes memory byteData) public pure returns (string memory) {
+                    return string(byteData);
+                }
+            }
+            `}</code></pre>
+
                 <li>문자열 비교: string 타입에 대해 직접 비교 연산을 지원하지 않아서 keccak256 해시 값을 비교하는 방법 사용</li>
                 <pre><code>{`
             contract StringCompare { 
@@ -50,6 +68,13 @@ const TIL0325 = () => {
             }
             `}</code></pre>
 
+                <li>Solidity에서 문자열을 다룰 때 주의할 점
+                    <ul>
+                        <li>Solidity는 문자열 조작 기능이 제한적 → bytes 타입을 활용하는 것이 더 효율적</li>
+                        <li>string.length가 없기 때문에 bytes(str).length를 사용해야 함</li>
+                        <li>문자열을 비교할 때 keccak256(abi.encodePacked(str))를 사용해야 함</li>
+                        <li>문자열 연결은 abi.encodePacked()를 사용하여 처리</li></ul>
+                </li>
             </ol>
 
             <h4>배열</h4>
