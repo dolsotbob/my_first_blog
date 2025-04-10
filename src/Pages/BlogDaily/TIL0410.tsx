@@ -156,8 +156,164 @@ const TIL0410 = () => {
                 </li>
             </ol><br />
 
-            <p>참고 자료:</p>
-            <ul><li><a href='https://eips.ethereum.org/EIPS/eip-721'>ERC-721 공식 문서</a></li></ul>
+            <h4>참고 자료:</h4>
+            <ul><li><a href='https://eips.ethereum.org/EIPS/eip-721'>EIP721 공식 제안문서</a></li></ul>
+
+            <h4>메타데이터</h4>
+            <p>ERC-721에서 메타데이터(tokenURI)가 필요한 이유</p>
+            <ul><li>NFT는 디지털 자산을 소유 및 추적할 수 있도록 하는 블록체인 기술이다</li>
+                <li>그러나 NFT 자체는 이미지, 비디오, 음악 등의 데이터를 직접 저장하지 않는다
+                    <ul><li>1MB의 이미지를 저장하려면 ETH 수백 개 이상의 비용이 필요할 수 있음</li></ul>
+                </li>
+                <li>대신, 메타데이터(tokenURI)를 사용하여 외부 저장소(예: IPFS, Arweave, AWS, 온체인 등)에 저장된 디지털 자산을 참조한다</li></ul>
+
+            <p>tokenURI란?</p>
+            <ul><li>NFT의 메타데이터(JSON 형식)을 저장하는 URI(Uniform Resource Identifier)</li>
+                <li>NFT의 정보를 설명하는 JSON 파일의 URL 반환</li>
+                <li>tokenURI(uint256 tokenId) 함수가 호출되면, 해당 토큰의 메타데이터 URL을 반환</li>
+                <li>예제: tokenURI() 함수
+                    <pre><code>{`
+            function tokenURI(uint256 tokenId) public view override returns (string memory) {
+                return string(abi.encodePacked("https://example.com/metadata/", Strings.toString(tokenId), ".json"));
+            }
+            `}</code></pre>
+                    <ul><li>위 함수가 실행되면 https://example.com/metadata/1.json 같은 URL이 반환됨</li></ul>
+                </li>
+            </ul>
+
+            <p>tokenURI에 저장된 메타데이터(JSON) 구조</p>
+            <ul><li>NFT 메타데이터는 일반적으로 JSON 형식으로 작성됨</li>
+                <li>예제: NFT 메타데이터 (tokenURI가 가리키는 JSON)</li></ul>
+            <pre><code>{`
+            {
+                "name": "CryptoKitty #1",
+                "description": "이 고양이는 세상에서 하나뿐입니다!",
+                "image": "https://example.com/images/1.png",
+                "attributes": [
+                    { "trait_type": "색상", "value": "노랑" },
+                    { "trait_type": "눈 모양", "value": "둥근 눈" }
+                ]
+            }
+            `}</code></pre>
+            <ul><li>각 필드의 역할:
+                <ul><li>name: NFT의 이름</li>
+                    <li>description: NFT에 대한 설명</li>
+                    <li>image: NFT가 나타내는 이미지의 URL</li>
+                    <li>attributes: NFT의 속성(특성)</li></ul>
+            </li></ul>
+
+            <p>tokenURI가 필요한 이유</p>
+            <ul><li>NFT의 실제 데이터를 저장할 공간 제공: 블록체인에 저장하는 것은 가스비가 너무 높음</li>
+                <li>NFT에 대한 정보를 쉽게 조회 가능: 오픈씨에서 정보 쉽게 불러올 수 있음</li>
+                <li>유동성과 거래 가능성 증가: tokenURI가 없으면 NFT를 보유해도 어떤 자산인지 확인할 수 없음</li>
+                <li>확장성 제공: NFT에 새로운 속성을 추가하거나 변경할 수 있음</li></ul>
+
+            <p>tokenURI가 사용되는 실제 예제</p>
+            <ul><li>NFT 생성 후 tokenURI 설정</li></ul>
+            <pre><code>{`
+            // ERC721URIStorage는 OpenZeppelin에서 제공하는 확장된 ERC721 표준
+            // 각 토큰 ID에 개별 URI(메타데이터)를 저장할 수 있는 기능을 제공함
+
+            contract MyNFT is ERC721URIStorage {          
+                uint256 private _tokenIds;                  // _tokenIds는 현재까지 발행된 NFT의 수를 추적하는 변수; private으로 선언되서 계약 외부에서 접근 불가 
+
+                // 계약이 배포될 때 ERC721("MyNFT", "MNFT")는 부모 계약의 생성자를 호출하면서 NFT의 이름("MyNFT")과 심볼("MNFT")을 설정합니다
+                constructor() ERC721("MyNFT", "MNFT") {}   
+
+                // mint 함수는 외부에서 호출할 수 있는 공개 함수로 NFT를 발행한다 
+                // 인자1: recipient: NFT 받을 사람의 지갑 주소 
+                // 인자2: metadataURI: 발행할 NFT에 연겷할 메타데이터(보통 IPFS링크)
+                // 발행한 NFT의 토큰 ID(uint256) 반환 
+                function mint(address recipient, string memory metadataURI) public returns (uint256) { 
+                    _tokenIds++;                            // _tokenIds를 1 증가시켜 새로운 토큰 ID를 생성한다 
+                    uint256 newItemId = _tokenIds;          // 방금 증가시킨 _tokenIds 값을 newItemId 변수에 저장; 이 ID를 새 NFT의 고유 번호(토큰ID)로 사용한다  
+
+                    _mint(recipient, newItemId);            // recipient 주소로 ID가 newItemId인 NFT를 실제로 발행한다 
+                    _setTokenURI(newItemId, metadataURI);  // 방금 발행한 토큰에 metadataURI를 연결(즉, 이 NFT가 어떤 이미지/정보를 가지는지 정의하는 메타데이터 설정)
+                
+                    return newItemId;                      // 새로 발행한 NFT의 ID(토큰ID) 반환
+                }
+            }
+            `}</code></pre>
+
+            <p>오픈씨같은 마켓플레이스에서 NFT 표시</p>
+            <ul><li>tokenURI()를 호출하여 NFT의 이미지와 속성을 불러옴</li></ul>
+
+            <h4>OpenZeppelin을 사용한 ERC-721 예시</h4>
+            <ul><li>OpenZeppelin 라이브러리 설치:
+                <ul><li>npm install @openzeppelin/contracts</li></ul>
+            </li>
+                <li>Reference ERC-721 토큰 생성(컨트랙트 개발)</li>
+            </ul>
+            <pre><code>{`
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+
+contract MyNFT is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
+    uint256 private _tokenIds;
+
+    constructor(
+        string memory name_,
+        string memory symbol_
+    ) ERC721(name_, symbol_) Ownable(msg.sender) {}
+
+    function mint(
+        address recipient,
+        string memory _tokenURI
+    ) public onlyOwner returns (uint256) {
+        unchecked {
+            ++_tokenIds;
+        }
+
+        _safeMint(recipient, _tokenIds);
+        _setTokenURI(_tokenIds, _tokenURI);
+
+        return _tokenIds;
+    }
+
+    function supportsInterface(
+        bytes4 interfaceId
+    )
+        public
+        view
+        override(ERC721, ERC721Enumerable, ERC721URIStorage)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function tokenURI(
+        uint256 _tokenId
+    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+        return super.tokenURI(_tokenId);
+    }
+
+    function _increaseBalance(
+        address account,
+        uint128 value
+    ) internal override(ERC721, ERC721Enumerable) {
+        super._increaseBalance(account, value);
+    }
+
+    function _update(
+        address to,
+        uint256 tokenId,
+        address auth
+    ) internal override(ERC721, ERC721Enumerable) returns (address) {
+        return super._update(to, tokenId, auth);
+    }
+}
+            `}</code></pre>
+
+            <ul><li>ERC721을 상속받아 표준 토큰을 쉽게 만들 수 있음</li>
+                <li>Ownable 을 상속받아 컨트랙트 owner와 관련된 기능을 사용할 수 있음</li>
+                <li>ERC721URIStorage 를 상속받아 각 NFT(토큰 ID)에 대한 메타데이터(URI)를 저장하고 관리할 수 있도록 하는 기능을 사용할 수 있음</li>
+                <li>ERC721Enumerable 을 상속받아 총 공급량 조회 및 개별 보유자 목록 조회 기능을 사용할 수 있음</li></ul>
 
         </div >
     )
