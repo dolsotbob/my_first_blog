@@ -1,4 +1,8 @@
 import React from 'react'
+import CodeBlock from '../../components/CodeBlock';
+import { til0410tokenURIJSONExample } from '../codeExamples';
+import { til0410tokenURIExample } from '../codeExamples';
+import { til0410ERC721Example } from '../codeExamples';
 
 const TIL0410 = () => {
     return (
@@ -185,17 +189,9 @@ const TIL0410 = () => {
             <p>tokenURI에 저장된 메타데이터(JSON) 구조</p>
             <ul><li>NFT 메타데이터는 일반적으로 JSON 형식으로 작성됨</li>
                 <li>예제: NFT 메타데이터 (tokenURI가 가리키는 JSON)</li></ul>
-            <pre><code>{`
-            {
-                "name": "CryptoKitty #1",
-                "description": "이 고양이는 세상에서 하나뿐입니다!",
-                "image": "https://example.com/images/1.png",
-                "attributes": [
-                    { "trait_type": "색상", "value": "노랑" },
-                    { "trait_type": "눈 모양", "value": "둥근 눈" }
-                ]
-            }
-            `}</code></pre>
+
+            <CodeBlock code={til0410tokenURIJSONExample} />
+
             <ul><li>각 필드의 역할:
                 <ul><li>name: NFT의 이름</li>
                     <li>description: NFT에 대한 설명</li>
@@ -211,31 +207,8 @@ const TIL0410 = () => {
 
             <p>tokenURI가 사용되는 실제 예제</p>
             <ul><li>NFT 생성 후 tokenURI 설정</li></ul>
-            <pre><code>{`
-            // ERC721URIStorage는 OpenZeppelin에서 제공하는 확장된 ERC721 표준
-            // 각 토큰 ID에 개별 URI(메타데이터)를 저장할 수 있는 기능을 제공함
 
-            contract MyNFT is ERC721URIStorage {          
-                uint256 private _tokenIds;                  // _tokenIds는 현재까지 발행된 NFT의 수를 추적하는 변수; private으로 선언되서 계약 외부에서 접근 불가 
-
-                // 계약이 배포될 때 ERC721("MyNFT", "MNFT")는 부모 계약의 생성자를 호출하면서 NFT의 이름("MyNFT")과 심볼("MNFT")을 설정합니다
-                constructor() ERC721("MyNFT", "MNFT") {}   
-
-                // mint 함수는 외부에서 호출할 수 있는 공개 함수로 NFT를 발행한다 
-                // 인자1: recipient: NFT 받을 사람의 지갑 주소 
-                // 인자2: metadataURI: 발행할 NFT에 연겷할 메타데이터(보통 IPFS링크)
-                // 발행한 NFT의 토큰 ID(uint256) 반환 
-                function mint(address recipient, string memory metadataURI) public returns (uint256) { 
-                    _tokenIds++;                            // _tokenIds를 1 증가시켜 새로운 토큰 ID를 생성한다 
-                    uint256 newItemId = _tokenIds;          // 방금 증가시킨 _tokenIds 값을 newItemId 변수에 저장; 이 ID를 새 NFT의 고유 번호(토큰ID)로 사용한다  
-
-                    _mint(recipient, newItemId);            // recipient 주소로 ID가 newItemId인 NFT를 실제로 발행한다 
-                    _setTokenURI(newItemId, metadataURI);  // 방금 발행한 토큰에 metadataURI를 연결(즉, 이 NFT가 어떤 이미지/정보를 가지는지 정의하는 메타데이터 설정)
-                
-                    return newItemId;                      // 새로 발행한 NFT의 ID(토큰ID) 반환
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={til0410tokenURIExample} />
 
             <p>오픈씨같은 마켓플레이스에서 NFT 표시</p>
             <ul><li>tokenURI()를 호출하여 NFT의 이미지와 속성을 불러옴</li></ul>
@@ -246,70 +219,7 @@ const TIL0410 = () => {
             </li>
                 <li>Reference ERC-721 토큰 생성(컨트랙트 개발)</li>
             </ul>
-            <pre><code>{`
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-
-contract MyNFT is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
-    uint256 private _tokenIds;
-
-    constructor(
-        string memory name_,
-        string memory symbol_
-    ) ERC721(name_, symbol_) Ownable(msg.sender) {}
-
-    function mint(
-        address recipient,
-        string memory _tokenURI
-    ) public onlyOwner returns (uint256) {
-        unchecked {
-            ++_tokenIds;
-        }
-
-        _safeMint(recipient, _tokenIds);
-        _setTokenURI(_tokenIds, _tokenURI);
-
-        return _tokenIds;
-    }
-
-    function supportsInterface(
-        bytes4 interfaceId
-    )
-        public
-        view
-        override(ERC721, ERC721Enumerable, ERC721URIStorage)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
-    }
-
-    function tokenURI(
-        uint256 _tokenId
-    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        return super.tokenURI(_tokenId);
-    }
-
-    function _increaseBalance(
-        address account,
-        uint128 value
-    ) internal override(ERC721, ERC721Enumerable) {
-        super._increaseBalance(account, value);
-    }
-
-    function _update(
-        address to,
-        uint256 tokenId,
-        address auth
-    ) internal override(ERC721, ERC721Enumerable) returns (address) {
-        return super._update(to, tokenId, auth);
-    }
-}
-            `}</code></pre>
+            <CodeBlock code={til0410ERC721Example} />
 
             <ul><li>ERC721을 상속받아 표준 토큰을 쉽게 만들 수 있음</li>
                 <li>Ownable 을 상속받아 컨트랙트 owner와 관련된 기능을 사용할 수 있음</li>
