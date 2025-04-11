@@ -315,6 +315,12 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
                 <li>ERC721URIStorage 를 상속받아 각 NFT(토큰 ID)에 대한 메타데이터(URI)를 저장하고 관리할 수 있도록 하는 기능을 사용할 수 있음</li>
                 <li>ERC721Enumerable 을 상속받아 총 공급량 조회 및 개별 보유자 목록 조회 기능을 사용할 수 있음</li></ul>
 
+            <h4>과제: 나만의 NFT 만들기</h4>
+            <ul><li>ERC721 토큰 컨트랙트를 구현하고, Ethers.js를 이용하여 컨트랙트 호출(Call) 해보기</li>
+                <li>Ganache 로컬 블록체인을 Hardhat에 연결</li>
+                <li>과제물:<a href='https://github.com/dolsotbob/erc721'>ERC721</a></li>
+            </ul>
+
         </div >
     )
 }
