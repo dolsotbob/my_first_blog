@@ -21,6 +21,7 @@ const TIL0410 = () => {
                         <li>개별적 가치를 지닌 디지털 자산이 필요한 경우 NFT가 적합한 솔루션임</li></ul>
                 </li>
             </ul>
+            <ul><li>한 마디로 ERC-20은 수량, ERC-721은 개체/ID</li></ul>
 
             <p>ERC-721의 주요 특징</p>
             <ul><li>대체 불가능(Non-Fungible): 각 토큰이 고유하며, 다른 토큰과 1:1로 교환할 수 없음</li>
@@ -319,6 +320,12 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {
             <ul><li>ERC721 토큰 컨트랙트를 구현하고, Ethers.js를 이용하여 컨트랙트 호출(Call) 해보기</li>
                 <li>Ganache 로컬 블록체인을 Hardhat에 연결</li>
                 <li>과제물:<a href='https://github.com/dolsotbob/erc721'>ERC721</a></li>
+                <li>교제 6쪽 예제을 MyNFT.sol에 복붙한 후 부모 컨트랙트 살펴보기</li>
+                <li>ethers.ts: ethers.js를 사용해 블록체인과 통신해서 자바스크립트에서 내가 배포한 컨트랙트의 함수를 하나씩 실행 해보는 것
+                    <ul><li>서버든 프론트든 자바스크립트 기반에서 콘트랙트와 통신이 가능하다</li>
+                        <li>abi는 모델하우스, 혹은 설명서 같은 것. 우리는 abi를 통해 배포한 컨트랙트의 함수를 호출하는 것을 연습하는 것임</li></ul>
+                </li>
+                <li>npm run test 하면 후반부에 오래 걸리는 이유: 무언가 꼬였다가 스스로 풀렀다는 의미 &rarr; 웹3에서 테스트 여러 번 해야 하는 이유임</li>
             </ul>
 
         </div >
