@@ -110,3 +110,41 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable, ERC721URIStorage {    // �
     }
 }
 `;
+
+export const til0414MetadataExample = `
+{
+  "name": "CryptoPunk #5822",
+  "description": "이 NFT는 희귀한 CryptoPunk 중 하나입니다.",
+  "image": "https://ipfs.io/ipfs/QmExampleImageHash",
+  "attributes": [
+    { "trait_type": "Type", "value": "Alien" },
+    { "trait_type": "Accessory", "value": "Bandana" }
+  ]
+}
+`;
+
+export const til0414OnChainTokenURIExample = `
+// 오픈씨나 NFT 마켓플레이스가 호출하는 함수; ERC721 표준에서 NFT의 메타데이터 위치를 제공하는 역할 
+function tokenURI(uint256 tokenId) public view override returns (string memory) {
+    return string(abi.encodePacked("data:application/json;base64,", base64EncodedMetadata));
+}
+`;
+
+export const til0414OffChainMintExample = `
+// 새 NFT를 발행하고, 해당 NFT에 메타데이터 URI를 설정한 뒤 발행된 토큰의 ID를 반환하는 함수; 
+function mint(
+        address recipient,   // NFT 받을 지갑 주소 
+        string memory _tokenURI   // 새로 발행되는 NFT의 메타데이터 URI 
+    ) public onlyOwner returns (uint256) {  // onlyOwner만 호출 가능 
+        unchecked {   // 오버플로우 검사 없이 정수 연산 수행 
+            ++_tokenIds;   // tokenId를 1 증가시켜서 새로운 토큰 ID를 생성 
+        }
+
+        // recipient 주소로 _tokenIds ID를 가진 NFT를 안전하게 발행
+        _safeMint(recipient, _tokenIds);   // 해당 주소가 스마트 계약인 경우 토큰 받을 준비가 되어 있는지도 확인해주는 더 안전한 민트 방법
+        _setTokenURI(_tokenIds, _tokenURI);  // 발행한 NFT에 URI 연결해서 해당 토큰의 정보를 지정함  
+
+        return _tokenIds;  // 이 함수가 생성한 NFT 토큰의 ID 반환 
+    }
+`
+
