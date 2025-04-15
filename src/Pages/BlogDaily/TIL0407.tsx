@@ -1,5 +1,8 @@
 import React from 'react'
 import TIL0407abi from '../../assets/TIL0407abi.png'
+import CodeBlock from '../../components/CodeBlock'
+import { til0407deployExample } from '../codeExamples'
+import { til0407callContractExample } from '../codeExamples'
 
 const TIL0407 = () => {
     return (
@@ -137,27 +140,7 @@ const TIL0407 = () => {
                     <li>이 파일에는 ABI, 바이트코드, 컨트랙트 정보가 포함됨</li></ul><br />
 
                 <li>배포 스크립트 작성(scripts/deploy.js)</li>
-                <pre><code>{`
-            const hre = require("hardhat");
-
-            async function main() {
-                const MyContract = await hre.ethers.getContractFactory("MyContract");
-                const contract = await MyContract.deploy();
-
-                await contract.waitForDeployment();
-
-                console.log(₩📌 스마트 컨트랙트 배포 완료! 주소: S{contract.target}₩);
-
-                // ABI 저장 (artifacts 폴더에서 가져오기)
-                const contractArtifact = await hre.artifacts.readArtifact("MyContract");
-                console.log("📌 ABI:", JSON.stringify(contractArtifact.abi, null, 2));
-            }
-
-            main().catch((error) => {
-                console.error(error);
-                process.exitCode = 1;
-            });
-            `}</code></pre>
+                <CodeBlock code={til0407deployExample}></CodeBlock>
             </ol>
 
             <p>3. Hardhat을 사용해 배포 (ABI가 생성됨)</p>
@@ -190,43 +173,7 @@ const TIL0407 = () => {
                 <ul><li>npm install ethers dotenv</li></ul>
             </li>
                 <li>배포된 컨트랙트의 주소 + ABI를 활용해 컨트랙트 메서드를 호출</li>
-                <pre><code>{`
-            require("dotenv").config(); 
-            const { ethers } = require("ethers"); 
-
-            // 배포된 컨트랙트 주소 (배포 후 콘솔에서 확인 가능)
-            const contractAddress = "0x1234567890abcdef1234567890abcdef12345678";
-
-            // ABI 불러오기 
-            const contractArtifact = require("../artifacts/contracts/MyContract.sol/MyContract.json");
-            const abi = montractArtifact.abi; 
-            
-            // 이더리움 네트워크 프로바이더 설정 
-            const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
-
-            // 지갑 연결 (Hardhat 테스트 계정 사용) 
-            const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-
-            // 스마트 컨트랙트 인스턴스 생성 
-            const contract = new ethers.Contract(contractAddress, abi, wallet); 
-
-            // 컨트랙트 함수 호출 (쓰기 트랜잭션)
-            async function setContractValue() { 
-                const tx = await contract.setValue(42); 
-                await tx.wait(); 
-                console.log("📌 setValue 트랜잭션 완료!");
-            }
-
-            // 컨트랙트 값 조회 (읽기 호출)
-            async function getContractValue() { 
-                const value = await contract.getValue(); 
-                console.log("📌 현재 저장된 값:", value.toString());
-            }
-
-            // 실행 
-            setContractValue(); 
-            getContractValue(); 
-            `}</code></pre>
+                <CodeBlock code={til0407callContractExample}></CodeBlock>
 
                 <li>실행 결과</li>
                 <pre><code>{`
@@ -246,7 +193,7 @@ const TIL0407 = () => {
 
             <h4>참고</h4>
             <ul><li><a href='https://docs.ethers.org/v5/'>ethers.js</a></li>
-                <li><a href='https://github.com/dolsotbob/abi'>과제</a>: 이번엔 Web3.js가 아닌 Ethers.js를 이용해 컨트랙트 호출하기
+                <li>과제: <a href='https://github.com/dolsotbob/abi'>abi</a> -  이번엔 Web3.js가 아닌 Ethers.js를 이용해 컨트랙트 호출하기
                     <ul><li><a href='https://archive.trufflesuite.com/ganache/'>Ganache(로컬 블록체인 기능)</a>이 설치되어 있어야 함</li>
                         <li>ignition 형식으로 배포해도 되고 이 과제 처럼 Script 만들어 배포해도 됨</li>
                         <li>npm run test 하면 세터 함수 부분이 느림 &rarr; 댑이 느린 이유 &rarr; 확정된 값만 블록체인에 올리고 나머지는 서버에 두는 것이 현재 추세</li>

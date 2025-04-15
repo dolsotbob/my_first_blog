@@ -119,6 +119,16 @@ const TIL0312 = () => {
                 <li>web3-bzz: 탈중앙화 파일 스토리지를 위한 스왐 프로토콜 모듈</li>
                 <li>web3-utils: dApp 개발자를 위한 유용한 헬퍼 함수들을 모아둔 모듈</li></ul>
 
+            <h4>과제</h4>
+            <ul><li>src/utils/0_web3.setting.ts부터 시작</li>
+                <li>web3.js 이용해 다음 기능 구현하기
+                    <ul><li>web3.setting: RPC endpoints를 이용해 노드와 연결</li>
+                        <li>chain.info: Web3 공식문서에서 'getChainId' 검색; getChainId는 비동기 작업이므로 'await'로 함수 처리</li>
+                        <li>create.account: Web3 공식문서에서 'create' 검색</li>
+                        <li>account.balance: getBalance는 비동기 작업이라 'await'로 함수 처리</li>
+                        <li>convertBalance: Web3 공식문서에서 'fromWei'를 검색해 기능 구현</li></ul>
+                </li>
+                <li><a href='https://github.com/dolsotbob/web3-js'>web3-js</a></li></ul>
 
         </div>
     )

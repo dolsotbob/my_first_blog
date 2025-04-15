@@ -4,6 +4,7 @@ import til0321_config1 from '../../assets/til0321_config1.jpeg'
 import til0321_config2 from '../../assets/til0321_config2.jpeg'
 import til0321_config4 from '../../assets/til0321_config4.png'
 
+
 const TIL0321 = () => {
     return (
         <div className='BlogDaily'>
@@ -93,7 +94,7 @@ const TIL0321 = () => {
             <img className='til0321_config4' src={til0321_config4} alt="config_db_img"></img>
 
             <h4>Hardhat으로 배포하기</h4>
-            <p><a href="https://hardhat.org/hardhat-runner/docs/config">Truffle 공식 문서</a>참고</p>
+            <p><a href="https://hardhat.org/hardhat-runner/docs/config">Hardhat 공식 문서</a>참고</p>
             <ol>
                 <li>폴더 만들고 npx hardhat init로 hardhat 프로젝트 초기화</li>
                 <li>npx hardhat node로 로컬 블록체인 네트워크 실행</li>
