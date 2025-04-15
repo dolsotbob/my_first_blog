@@ -87,7 +87,8 @@ const TIL0227 = () => {
                 <li>함수형 쓸지 클래스형 쓸지는 회사마다 다를 것 </li>
             </ul>
 
-
+            <h4>과제</h4>
+            <ul><li>과제: <a href='https://github.com/dolsotbob/react-twittler-intro'>twittler-intro</a></li></ul>
 
         </div>
 
