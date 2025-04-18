@@ -15,6 +15,10 @@ import TxFurtherDetails from './Pages/Explorer/explorerPages/TxFurtherDetails';
 import TxFurtherDetails_2 from './Pages/Explorer/explorerPages/TxFurtherDetails_2';
 import FurtherStudies from './Pages/FurtherStudies';
 import Furtherpage from './Pages/Furtherpage';
+import NFT from './Pages/NFT';
+import Mint from './Pages/NFT/NFTpages/Mint';
+import Viewer from './Pages/NFT/NFTpages/Viewer';
+import NFTHeader from './Pages/NFT/components/NFTHeader';
 
 
 function App() {
@@ -51,7 +55,9 @@ function App() {
             <Route path="/transaction/:txHash" element={<TransactionDetail />} />
             <Route path="/furtherdetails/:address" element={<TxFurtherDetails />} />
             <Route path="/furtherdetails/:address" element={<TxFurtherDetails_2 />} />
-            {/* NFT도 넣어야 함  */}
+            <Route path="/nft" element={<NFT></NFT>}></Route>
+            <Route path="/nft/viewer" element={<Viewer></Viewer>}></Route>
+            <Route path="/nft/mint" element={<Mint></Mint>}></Route>
           </Routes>
         </div>
       </div>
