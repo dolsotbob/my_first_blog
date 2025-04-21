@@ -1,4 +1,36 @@
 
+export const til0227stateExample = `
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+`;
+
+export const til0227eventHandlerExample = `
+function Input() {
+    const [text, setText] = useState("");
+
+    const handleChange = (event) => {
+        setText(event.target.value);
+    };
+
+    return (
+        <div>
+            <input type="text" value={text} onChange={handleChange} />
+            <p>You typed: {text}</p>
+        </div>
+    );
+}
+`
+
 export const til0407deployExample = `
 // hre = Hardhat Runtime Environment 
 // hre는 hardhat.config.js설정과 연결되어 있고 Hardhat에서 제공하는 기능을 사용할 수 있게 해줌 (배포, 컴파일, 테스트 등)

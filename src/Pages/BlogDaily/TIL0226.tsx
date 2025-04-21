@@ -63,34 +63,59 @@ const TIL0226 = () => {
                 <li>JavaScript를 사용하여 서버 사이드 애플리케이션을 개발할 수 있게 해주는 런타임 환경</li>
                 <li>기존에 JavaScript가 브라우저에서만 실행되던 것과 달리 서버측에서도 Javascript를 실행할 수 있도록 해줌</li></ul>
 
-            <h3>Node.js 내장 모듈을 사용하는 방법</h3>
-            <p>모듈이란? 건축에서 온 단어로 어떤 기능을 조립할 수 있는 형태로 만든 부분이란 뜻. <br />
-                그중 fs(FileSystem) 모듈은 PC의 파일을 읽거나 저장하는 등의 일을 할 수 있게 도와줌.</p>
-            <p>Node.js 내장 모듈 목록은 다음 링크에서 찾을 수 있다:
-                <a href="https://nodejs.org/docs/latest-v18.x/api/index.html">Node.js v18.20.6 Documentation</a>
-            </p>
-            <p>
-                모든 모듈은 모듈을 사용하기 위해 불러오는 과정이 필요함.<br />
-                브라우저에서 다른 파일을 불러올 때는: 스크립트 src=...<br />
-                <br /> Node.js는 자바스크립트 코드 가장 상단에 require 구문을 이용해 다른 파일을 부른다.
-                <ul>
-                    <li>const fs = require('fs'); // 파일 시스템 모듈을 불러옵니다</li>
-                </ul>
-            </p>
-            <p>3rd-party 모듈 사용 방법<br />
-                외부 모듈. 예를 들어 Node.js공식 문서에 없는 underscore 모듈을 설치하려면: npm install underscore<br />
-                require 구문으로 불러오기: const _ = require('underscore');</p>
+            <h4>Node.js 내장 모듈을 사용하는 방법</h4>
+            <ul><li>모듈이란? 건축에서 온 단어로 어떤 기능을 조립할 수 있는 형태로 만든 부분이란 뜻</li>
+                <li>그중 fs(FileSystem) 모듈은 PC의 파일을 읽거나 저장하는 등의 일을 할 수 있게 도와줌</li>
+                <li>Node.js 내장 모듈 목록은 <a href="https://nodejs.org/docs/latest-v18.x/api/index.html">Node.js v18.20.6 Documentation</a>에서 찾을 수 있음</li>
+                <li>모든 모듈은 모듈을 사용하기 위해 불러오는 과정이 필요함</li>
+                <li>브라우저에서 다른 파일을 불러올 때는 script 태그 이용</li>
+                <pre><code>{`<script src="불러오고싶은_스크립트.js"></script>`}</code></pre>
+                <li>Node.js는 자바스크립트 코드 가장 상단에 require 구문을 이용해 다른 파일을 부른다</li>
+                <pre><code>{`
+                const fs = require('fs'); // 파일 시스템 모듈을 불러옵니다
+                const dns = require('dns'); // DNS 모듈을 불러옵니다
 
-            <h3>fs.readFile을 통해 알아보는 Node.js 공식문서 가이드</h3>
+                // 이제 fs.readFile 메서드 등을 사용할 수 있습니다!
+                `}</code></pre>
+            </ul>
+
+            <h4>3rd-party 모듈 사용 방법</h4>
+            <ul><li>외부 모듈. 예를 들어 Node.js공식 문서에 없는 underscore 모듈을 설치하려면: npm install underscore</li>
+                <li>설치 후에는 require 구문으로 사용할 수 있음:
+                    <pre><code>{`const _ = require('underscore');`}</code></pre>
+                </li>
+            </ul>
+
+
+            <h4>fs.readFile을 통해 알아보는 Node.js 공식문서 가이드</h4>
+            <ul><li>메서드 fs.readFile은 로컬에 존재하는 파일을 읽어옴</li>
+                <li><a href='https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_fs_readfile_path_options_callback'>fs.readFile의 공식 API 문서</a></li></ul>
 
             <h3>fetch API</h3>
-            <p>특정 URL로부터 정보를 받아오는 역할을 함.</p>
+            <ul><li>비동기 요청의 가장 대표적인 사례가 네트워크 요청이다</li>
+                <li>네트워크를 통해 이루어지는 요청중 가장 흔한 것이 URL로 요청하는 것</li>
+                <li>URL로 요청하는 것을 가능하게 해주는 API가 fetch API</li></ul>
 
             <h3>Axios</h3>
-            <p>Node.js를 위한 Promise API를 활용하는 HTTP 비동기 통신 라이브러리.<br />
-                Fetch API보다 사용이 간편하면서 추가적 기능이 포함되어 있음.<br />
-                자동으로 JSON데이터 형식으로 변환됨 (Fetch API는 .json()메서드를 사용해야 함)</p>
-        </div>
+            <ul><li>브라우저, Node.js를 위한 Promise API를 활용하는 HTTP 비동기 통신 라이브러리</li>
+                <li>Fetch API보다 사용이 간편하면서 추가적 기능이 포함되어 있음</li>
+                <li>써드파티 라이브러리로 설치가 필요함 (cf. Fetch API는 빌트인 API라 별도의 설치 필요 없음)
+                    <ul><li>npm install axios</li></ul>
+                </li>
+                <li>자동으로 JSON데이터 형식으로 변환됨 (cf. Fetch API는 .json()메서드를 사용해야 함)</li>
+            </ul>
+
+            <p>GET 요청</p>
+            <ul><li>일반적으로 정보를 요청하기 위해 사용되는 메서드</li>
+                <li>첫 번째 인자에는 url 주소가 들어감 </li>
+                <li>두 번째 인자에는 요청 시 사용할 수 있는 옵션들을 설정</li></ul>
+
+            <p>POST 요청</p>
+            <ul><li>서버에게 데이터를 보내기 위해 사용되는 메서드</li>
+                <li>첫 번째 인자에는 url 주소가 들어감 </li>
+                <li>두 번째 인자에는 요청 시 보낼 데이터 설정</li></ul>
+
+        </div >
     );
 };
 
