@@ -55,7 +55,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0408')}>0408 ERC-20</div>
       <div onClick={() => navigate('/blog/0410')}>0410 ERC-721</div>
       <div onClick={() => navigate('/blog/0414')}>0414 NFT Storage</div>
-      <div onClick={() => navigate('/blog/0414')}>0421 Test-Driven Contract Development</div>
+      <div onClick={() => navigate('/blog/0421')}>0421 Test-Driven Contract Development</div>
       <div onClick={() => navigate('/blog/0402hw')}>주말 과제 예고</div>
       {/* <div href="/signature">0203</div> */}
     </div>

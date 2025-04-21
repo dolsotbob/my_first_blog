@@ -24,9 +24,9 @@ const NFTHeader = () => {
             <nav className={styles.nav}>
                 {isAccount ? (
                     <>
-                        <Link className={styles.nav_item} to="/">홈</Link>
-                        <Link className={styles.nav_item} to="/viewer">NFT</Link>
-                        <Link className={styles.nav_item} to="/mint">Mint</Link>
+                        <Link className={styles.nav_item} to="/nft">홈</Link>
+                        <Link className={styles.nav_item} to="/nft/viewer">NFT</Link>
+                        <Link className={styles.nav_item} to="/nft/mint">Mint</Link>
                     </>
                 ) : (
                     <Link className={styles.nav_item} to="/">홈</Link>

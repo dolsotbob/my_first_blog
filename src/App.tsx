@@ -58,6 +58,7 @@ function App() {
             <Route path="/nft" element={<NFT></NFT>}></Route>
             <Route path="/nft/viewer" element={<Viewer></Viewer>}></Route>
             <Route path="/nft/mint" element={<Mint></Mint>}></Route>
+            <Route path="*" element={<div>404 Not Found</div>}></Route>
           </Routes>
         </div>
       </div>

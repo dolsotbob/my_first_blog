@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { privateKeyToAccount } from './NFTPlatform/utils/web3';
 import NFTHeader from './NFTPlatform/components/NFTHeader';
-// import styles from './Pages.module.css';
+import styles from './NFTPlatform/NFTpages/Pages.module.css';
 
 const NFT = () => {
     const [inputValue, setInputValue] = useState('');
@@ -39,7 +39,7 @@ const NFT = () => {
 
             window.dispatchEvent(new Event('storage'));
 
-            navigate('/viewer', { state: { account } });
+            navigate('/nft/viewer', { state: { account } });
         } else {
             alert('Private Key를 입력하세요.')
         }
