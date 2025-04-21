@@ -16,9 +16,9 @@ import TxFurtherDetails_2 from './Pages/Explorer/explorerPages/TxFurtherDetails_
 import FurtherStudies from './Pages/FurtherStudies';
 import Furtherpage from './Pages/Furtherpage';
 import NFT from './Pages/NFT';
-import Mint from './Pages/NFT/NFTpages/Mint';
-import Viewer from './Pages/NFT/NFTpages/Viewer';
-import NFTHeader from './Pages/NFT/components/NFTHeader';
+import Mint from './Pages/NFTPlatform/NFTpages/Mint';
+import Viewer from './Pages/NFTPlatform/NFTpages/Viewer';
+import NFTHeader from './Pages/NFTPlatform/components/NFTHeader';
 
 
 function App() {

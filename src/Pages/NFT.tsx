@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { privateKeyToAccount } from './NFT/utils/web3';
-import NFTHeader from './NFT/components/NFTHeader';
+import { privateKeyToAccount } from './NFTPlatform/utils/web3';
+import NFTHeader from './NFTPlatform/components/NFTHeader';
 // import styles from './Pages.module.css';
 
 const NFT = () => {
@@ -54,7 +54,7 @@ const NFT = () => {
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Private Key를 넣어주세요."
             />
-            <button>
+            <button onClick={handleSubmit}>
                 Wallet Connect
             </button>
         </div>
