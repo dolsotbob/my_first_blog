@@ -1,4 +1,7 @@
 import React from 'react';
+import CodeBlock from '../../components/CodeBlock';
+import { til0304useStateExample } from '../codeExamples';
+import cartimage from '../../assets/til0304shoppingcart.png'
 
 const TIL0304 = () => {
     return (
@@ -8,7 +11,52 @@ const TIL0304 = () => {
                 <li>이 때 장바구니의 상태(State)가 변했고, 결제 페이지에 변경된 장바구니의 상태를 전달(Props)해야 했다</li></ul>
 
             <h4>State</h4>
-            <p>React에서는 state를 다루는 방법 중 하나로 useState라는 특별한 함수를 제공함</p>
+            <ul><li>상태는 컴포넌트 내에서 변경될 수 있는 데이터다. 컴포넌트의 상태가 변경되면 자동으로 리렌더링이 발생한다</li>
+                <li>State의 특징:
+                    <ul><li>컴포넌트 내부에서 관리됨 (Private)</li>
+                        <li>변경될 수 있는 동적인 데이터(Mutable)</li>
+                        <li>useState 등을 사용하여 관리</li>
+                        <li>값이 변경되면 해당 컴포넌트와 하위 컴포넌트가 리렌더링 됨</li></ul>
+                </li>
+            </ul>
+            <img className="til0304cart" src={cartimage} alt='shopping-cart-image'></img>
+            <CodeBlock code={til0304useStateExample}></CodeBlock>
+            <ul><li>노트 1:
+                <ul><li>const [state 저장 변수, state 갱신 함수] = useState(state 초깃값);</li>
+                    <li>isChecked는 state를 저장하는 변수, setIsChecked는 상태 isChecked를 변경하는 함수;</li>
+                    <li>useState는 state hook; false는 상태 초깃값 </li>
+                </ul>
+            </li>
+                <li>노트 2:
+                    <ul><li>input[type=checkbox] JSX 엘리먼트의 값 변경에 따라서 isChecked가 변경되어야 함
+                        <ol>
+                            <li>사용자가 체크박스 값 변경</li>
+                            <li>onChange 이벤트가 이벤트 핸들러 함수인 handleChecked를 호출</li>
+                            <li>handleChecked 함수가 setIsChecked를 호출</li>
+                            <li>setIsChecked가 호출되면 호출된 결과에 따라 isChecked 변수가 갱신됨</li>
+                            <li>React는 새로운 isChecked 변수를 CheckboxExample 컴포넌트에 넘겨 해당 컴포넌트를 다시 렌더링 함</li>
+                        </ol>
+                    </li></ul>
+                </li>
+                <li>노트 3:
+                    <ul><li>이 상태 변수에 저장된 값을 사용하려면 JSX 엘리먼트 안에 직접 불러서 사용하면 됨</li>
+                        <li>여기서는 isChecked가 boolean 값을 가지기 때문에 true or false 여부에 따라 다른 결과가 보이도록 삼항연산자 사용 </li></ul>
+                </li>
+            </ul>
+
+            <p>State hook, useState</p>
+            <ul><li>useState란, React에서 State를 관리하기 위한 Hook
+                <ul><li>Hook: 함수형 컴포넌트에서 상태 관리, 생명주기 메서드, 기타 React 기능을 사용할 수 있게 해주는 함수. 예: useState, useEffect...</li></ul>
+            </li>
+                <li>React에서는 state를 다루는 방법 중 하나로 useState라는 특별한 함수를 제공함</li>
+                <li>state hook 사용 시 주의점:
+                    <ul><li>React 컴포넌트 state가 변경되면 새롭게 호출되고 리렌더링 됨</li>
+                        <li>즉 컴포넌트의 상태가 변경될 때마다 새롭게 호출되고 리렌더링 됨</li>
+                        <li>React state는 상태 변경 함수 호출로 변경해야 함. 강제로 변경시도 하면 안됨</li></ul>
+                </li>
+            </ul>
+
+
             <ul>
                 <li>import ... from "react";</li>
                 <li>useState를 컴포넌트 안에서 호출</li>

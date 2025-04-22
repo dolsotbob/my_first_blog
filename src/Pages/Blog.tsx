@@ -10,11 +10,13 @@ const Blog = () => {
 
   return (
     <div className="Daily">
-      <div onClick={() => navigate("/blog/0203")}>0203</div>
-      <div onClick={() => navigate("/blog/0204")}>0204</div>
-      <div onClick={() => navigate("/blog/0205")}>0205</div>
-      <div onClick={() => navigate("/blog/0206")}>0206</div>
-      <div onClick={() => navigate("/blog/0207")}>0207</div>
+      <div className='section-wrapper'>
+        <div onClick={() => navigate("/blog/0203")}>0203</div>
+        <div onClick={() => navigate("/blog/0204")}>0204</div>
+        <div onClick={() => navigate("/blog/0205")}>0205</div>
+        <div onClick={() => navigate("/blog/0206")}>0206</div>
+        <div onClick={() => navigate("/blog/0207")}>0207</div>
+      </div>
       <div onClick={() => navigate("/blog/0210")}>0210 기초 - 웹 개발 이해하기</div>
       <div onClick={() => navigate("/blog/0211")}>0211 Git</div>
       <div onClick={() => navigate("/blog/0212")}>0212 HTML</div>
@@ -56,6 +58,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0410')}>0410 ERC-721</div>
       <div onClick={() => navigate('/blog/0414')}>0414 NFT Storage</div>
       <div onClick={() => navigate('/blog/0421')}>0421 Test-Driven Contract Development</div>
+      <div onClick={() => navigate('/blog/0422')}>0422 Gass less - EIP 2612(Permit)</div>
       <div onClick={() => navigate('/blog/0402hw')}>주말 과제 예고</div>
       {/* <div href="/signature">0203</div> */}
     </div>

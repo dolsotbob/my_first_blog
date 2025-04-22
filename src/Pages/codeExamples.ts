@@ -65,6 +65,29 @@ function App() {
 }
 `
 
+export const til0304useStateExample = `
+import React, { useState } from "react";
+import "./styles.css";
+
+function CheckboxExample() {
+    // 노트 1 
+	const [isChecked, setIsChecked] = useState(false);
+	
+	const handleChecked = (event) => {setIsChecked(event.target.checked);};
+	
+	return (
+		<div className="App">
+			// 노트 2
+            <input type="checkbox" checked={isChecked} onChange={handleChecked} />
+            // 노트 3 
+            <span>{isChecked ? "Checked!!" : "Unchecked"}</span>
+		</div>
+	);
+}
+
+export default CheckboxExample;
+`
+
 export const til0407deployExample = `
 // hre = Hardhat Runtime Environment 
 // hre는 hardhat.config.js설정과 연결되어 있고 Hardhat에서 제공하는 기능을 사용할 수 있게 해줌 (배포, 컴파일, 테스트 등)

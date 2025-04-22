@@ -263,9 +263,14 @@
   padding-bottom: 20px;
 }
 
+.til0304cart {
+  width: 900px;
+  height: 500px;
+}
+
 .til0321img {
   width: 600px;
-  height: 200px;
+  height: 150px;
 }
 
 .til0321_config1 {
@@ -317,4 +322,12 @@
 .til0414CreatingNFT {
   width: 800px;
   height: 500px;
+}
+
+.section-wrapper {
+  border: solid 1px gray;
+  width: 200px;
+  height: auto;
+  background-color: white;
+  padding: 4px;
 }
