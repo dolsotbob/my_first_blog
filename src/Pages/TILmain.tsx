@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import "./TILmain.css";
+import blockchain from '../../assets/blockchain.png'
 
 const topics = [
     { path: "/blog/theory", label: "Blockchain Theory" },
