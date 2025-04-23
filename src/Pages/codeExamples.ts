@@ -389,6 +389,30 @@ const message = {
 const signature = await signer.signTypedData(domain, types, message);
 `
 
+export const til0423getUserAddressExample = `
+    /**
+     * @dev Indicates whether any particular address is the trusted forwarder.
+     */
+    function isTrustedForwarder(address forwarder) public view virtual returns (bool) {
+        return forwarder == trustedForwarder();
+    }
+
+    /**
+     * @dev Override for 'msg.sender'. Defaults to the original 'msg.sender' whenever
+     * a call is not performed by the trusted forwarder or the calldata length is less than
+     * 20 bytes (an address length).
+     */
+    function _msgSender() internal view virtual override returns (address) {
+        uint256 calldataLength = msg.data.length;
+        uint256 contextSuffixLength = _contextSuffixLength();
+        if (isTrustedForwarder(msg.sender) && calldataLength >= contextSuffixLength) {
+            return address(bytes20(msg.data[calldataLength - contextSuffixLength:]));
+        } else {
+            return super._msgSender();
+        }
+    }
+`
+
 export const til0423erc277MetaTnxExecuteExample = `
 export const excute = async () => {
   try {
