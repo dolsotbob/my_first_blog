@@ -1,9 +1,10 @@
 import React from 'react'
-import contractStructure from '../../assets/smartContractStructure.png'
 import contractState from '../../assets/contractState.png'
 import contractCheck from '../../assets/contractCheck.png'
 import til0324uint from '../../assets/til0324uint.png'
 import til0324int from '../../assets/til0324int.png'
+import CodeBlock from '../../components/CodeBlock'
+import { til0324contractExample } from '../codeExamples'
 
 const TIL0324 = () => {
     return (
@@ -27,7 +28,7 @@ const TIL0324 = () => {
                 <li>보안 중심 개발: modifier, require, assert 등을 활용한 보안 강화 기능 제공</li></ol>
 
 
-            <h4>Remix</h4>
+            <h4>Remix IDE</h4>
             <ul><li>웹 기반 IDE(Integrated Development Environment, 통합 개발 환경)</li>
                 <li>remix.ethereum.org</li></ul>
 
@@ -69,12 +70,12 @@ const TIL0324 = () => {
             </ul>
 
             <h4>스마트 컨트랙트 구조</h4>
-            <img className='contractStructure' src={contractStructure} alt="smart-contract-img"></img>
+            <CodeBlock code={til0324contractExample}></CodeBlock>
             <ul><li>Solidity 컨트랙트를 오픈소스 프로잭트에 사용할 경우 필수적으로 라이선스 정보를 명시해야 함</li>
                 <li>MIT는 가장 널리 사용되는 오픈 라이선스 중 하나임</li>
                 <li>컨트랙트의 이름은 대문자로 시작하는 PascalCase를 사용하는 것이 일반적임</li>
                 <li>상태 변수: 블록체인에 저장되는 데이터로 컨트랙트의 영구적 상태를 유지함</li>
-                <li>생성자: 컨트랙트 배포 시 한 번만 실행되며 초기 값을 설정하는 역하을 함</li>
+                <li>생성자: 컨트랙트 배포 시 한 번만 실행되며 초기 값을 설정하는 역할을 함</li>
                 <pre><code>{`
                 contract Example { 
                      address public owner; 
@@ -102,26 +103,46 @@ const TIL0324 = () => {
             <ul><li>정수형: uint8 ~ uint256, int8 ~ int256 까지 8비트 단위로 선언 가능</li>
                 <li>불리언</li>
                 <li>주소: address payable 은 이더를 송금할 수 있는 주소</li>
-                <li>바이트: 고정 크기의 바이트 배열을 저장하는 타입</li>
-                <li>열거형(Enum): 특정 값들 중 하나를 선택할 때 사용</li></ul>
+                <li>바이트: 고정 크기의 바이트 배열을 저장하는 타입; bytes1 ~ bytes32
+                    <ul><li>bytes 타입도 있지만 가변 크기여서 참조 타입으로 취급됨</li></ul>
+                </li>
+                <li>열거형(Enum): 특정 값들 중 하나를 선택할 때 사용
+                    <pre><code>{`
+                enum State { Created, Active, Inactvie }
+                State public state = State.Active; 
+                `}</code></pre>
+                    <ul><li>기본값: 첫 번째 값 (예: State.Created)</li></ul>
+                </li></ul>
 
-            <h4>데이터 타입을 올바르게 사용하는 이유</h4>
+            <p>데이터 타입을 올바르게 사용하는 이유</p>
             <ul><li>블록체인에서 저장 비용을 절감(가변 크기보다는 고정 크기 타입 사용 추천)</li>
                 <li>불필요한 연산 방지(최적화된 데이터 타입 사용)</li>
                 <li>코드 오류 예방(정적 타입 선언으로 실수 방지)</li></ul>
 
             <h4>Type: Number</h4>
-            <ul><li>0으로 나누는 연산은 require을 사용해 방지해야 함</li>
+            <ul><li>Solidity에서는 정수형만 지원; JavaScript의 Number 타입처럼 부동소수점 연산을 지원하지 않음</li>
+                <li>0으로 나누는 연산은 require을 사용해 방지해야 함</li>
                 <li>uint와 int 타입이 혼합되면 컴파일 오류 발생 가능</li>
-                <li>uint 범위:
-                    <img className="til0324uint" src={til0324uint} alt='uint-range-image'></img>
-                </li>
-                <li>int 범위:
-                    <img className="til0324int" src={til0324int} alt='int-range-image'></img>
-                </li>
-                <li>제곱 연산 (** 연산자 사용)</li>
-                <li>삼항 연산자(condition ? true : false)를 활용하여 최소/최대값 비교 가능</li>
-                <pre><code>{`
+                <li>uint 범위:</li>
+                <img className="til0324uint" src={til0324uint} alt='uint-range-image'></img>
+
+                <li>int 범위:</li>
+                <img className="til0324int" src={til0324int} alt='int-range-image'></img>
+
+                <p>Solidity에서 숫자 연산</p>
+                <ul><li>사칙연산 수행 가능</li>
+                    <li>Solidity에서는 0으로 나누는 연산은 require을 사용하여 방지해야 함</li>
+                    <li>uint와 int 타입이 혼합되면 컴파일 오류 발생 가능</li>
+                    <li>제곱 연산: ** 연산자 사용</li>
+                    <pre><code>{`
+                contract PowerExample { 
+                    function power(uint256 base, uint256 exponent) public pure returns (uint256) {
+                        return base ** exponent;   // 2 ** 5 결과는 32 
+                    }
+                }
+                    `}</code></pre>
+                    <li>최소값과 최대값 비교: 삼항 연산자(condition ? true : false) 활용</li>
+                    <pre><code>{`
                 contract MinMaxExample {
                     function min(uint256 a, uint256 b) public pure returns (uint256) {
                         return a < b ? a : b; 
@@ -130,7 +151,10 @@ const TIL0324 = () => {
                         return a > b ? a : b;
                     }
                 }
-                `}</code></pre>
+            `}</code></pre>
+                </ul>
+
+
                 <li>오버플로우 및 언더플로우 방지
                     <ul><li>Solidity 0.8.x 이전 버전에서는 SafeMath 라이브러리를 사용해야 했지만, 이제는 필요 없음</li></ul>
                 </li>

@@ -1,6 +1,7 @@
 import React from 'react';
 import CodeBlock from '../../components/CodeBlock';
-import { til0304useStateExample } from '../codeExamples';
+import { til0304onClickExample, til0304useStateExample } from '../codeExamples';
+import { til0304onChangeExample } from '../codeExamples';
 import cartimage from '../../assets/til0304shoppingcart.png'
 
 const TIL0304 = () => {
@@ -81,13 +82,11 @@ const TIL0304 = () => {
 
 
             <h4>Props</h4>
-            <p>Props 특징:</p>
-            <ul>
-                <li>부모 컴포넌트에서 자식 컴포넌트로 전달하는 값</li>
+            <ul><li>Props(속성, Properties)는 부모 컴포넌트에서 자식 컴포넌트로 전달하는 값</li>
+                <li>Props는 변경할 수 없으며(Read-only), 부모가 변경해야 함</li>
                 <li>객체 형태</li>
-                <li>읽기 전용</li>
+                <li>특징: </li>
             </ul>
-
 
             <p>Props 사용 방법:</p>
             <ol>
@@ -102,12 +101,35 @@ const TIL0304 = () => {
             <ul>
                 <li>React에서 이벤트는 소문자 대신 카멜 케이스를 사용</li>
                 <li>JSX를 사용해 문자열이 아닌 함수로 이벤트 처리 함수(Event handler)를 전달함
+                    <ul><li>HTML 이벤트 처리 방식:
+                        <pre><code>{`<button onclick="handleEvent()">Event</button>`}</code></pre>
+                    </li>
+                        <li>React의 이벤트 처리 방식:
+                            <pre><code>{`<button onClick={handleEvent}>Event</button>`}</code></pre>
+                        </li></ul>
                 </li>
+            </ul>
+
+            <p>이벤트 처리 예시 1: onChange</p>
+            <ul><li>input, textarea, select와 같은 폼(Form) 엘리먼트는 사용자의 입력값을 제어하는 데 사용됨</li>
+                <li>React에서는 이러한 변경될 수 있는 입력값을 일반적으로 컴포넌트의 state로 관리하고 업데이트한다</li>
+                <li>onChange 이벤트 발생 &rarr; e.target.value를 통해 이벤트 객체에 담겨있는 input 값을 읽어올 수 있다 </li>
+                <li>컴포넌트 return 문 안의 input 태그에 value와 onChange를 넣었다</li>
+                <li>onChange는 input의 텍스트가 바뀔 때마다 발생하는 이벤트</li>
+                <li>이벤트가 발생하면 handleChange 함수가 작동하며, 이벤트 객체에 담긴 input 값을 setState를 통해 새로운 state로 변경한다</li>
+                <CodeBlock code={til0304onChangeExample}></CodeBlock>
+            </ul>
+
+            <p>이벤트 처리 예시 2: onClick</p>
+            <ul><li>사용자가 클릭할 때 발생하는 이벤트</li>
+                <li>onChange 예시에 버튼을 추가하여 버튼 클릭 시 input tag에 입력한 이름이 alert을 통해 알림 창이 팝업 되도록 코드 추가한 예시</li>
+                <CodeBlock code={til0304onClickExample}></CodeBlock>
             </ul>
 
 
             <h4>Controlled Component</h4>
-            <p>편지봉투에 보내는 사람, 받는 사람 정보를 쓰는 것과 비슷. 변경되는 값들이 상태로 관리됨</p>
+            <ul><li>편지봉투에 보내는 사람, 받는 사람 정보를 쓰는 것과 비슷. 변경되는 값들이 상태로 관리됨</li>
+                <li>참고: <a href='https://reactwithhooks.netlify.app/docs/forms.html'>리액트 공식 문서의 내용</a></li></ul>
 
             <h4>React 데이터 흐름</h4>
             <ul><li>단방향 데이터 흐름</li>

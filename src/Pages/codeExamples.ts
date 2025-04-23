@@ -88,6 +88,64 @@ function CheckboxExample() {
 export default CheckboxExample;
 `
 
+export const til0304onChangeExample = `
+function NameForm() {
+  const [name, setName] = useState("");
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  }
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange}></input>
+      <h1>{name}</h1>
+    </div>
+  )
+};
+`
+export const til0304onClickExample = `
+function NameForm() {
+  const [name, setName] = useState("");
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  }
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange}></input>
+      <button onClick={() => alert(name)}>Button</button>  // 버튼을 클릭하면 alert(name)을 실행해
+      <h1>{name}</h1>
+    </div>
+  );
+};
+`
+
+export const til0324contractExample = `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract SimpleContract {
+    // 1️⃣ 상태 변수 (State Variables)
+    string public message;
+
+    // 2️⃣ 생성자 (Constructor)
+    constructor(string memory _message) {
+        message = _message;
+    }
+
+    // 3️⃣ 함수 (Functions): 스마트 컨트랙트가 수행할 로직을 정의 
+    function setMessage(string memory _newMessage) public {
+        message = _newMessage;
+    }
+
+    function getMessage() public view returns (string memory) {
+        return message;
+    }
+}
+`
+
 export const til0407deployExample = `
 // hre = Hardhat Runtime Environment 
 // hre는 hardhat.config.js설정과 연결되어 있고 Hardhat에서 제공하는 기능을 사용할 수 있게 해줌 (배포, 컴파일, 테스트 등)
@@ -302,3 +360,84 @@ function mint(
     }
 `
 
+export const til0422eip712SigningExample = `
+const domain = {
+  name: "MyToken",
+  version: "1",
+  chainId: 1,
+  verifyingContract: "0x1234567890abcdef...",
+};
+
+const types = {
+  Permit: [
+    { name: "owner", type: "address" },
+    { name: "spender", type: "address" },
+    { name: "value", type: "uint256" },
+    { name: "nonce", type: "uint256" },
+    { name: "deadline", type: "uint256" },
+  ],
+};
+
+const message = {
+  owner: "0xabc...",
+  spender: "0xdef...",
+  value: 100,
+  nonce: 1,
+  deadline: 1713200000, // Math.floor(Date.now() / 1000) + 3600;
+};
+
+const signature = await signer.signTypedData(domain, types, message);
+`
+
+export const til0423erc277MetaTnxExecuteExample = `
+export const excute = async () => {
+  try {
+    const deadline = Math.floor(Date.now() / 1000) + 3600;
+
+    const nonce = await forwarder.nonces(user1.address);
+    const domain = {
+      name: 'MyForwarder',
+      version: '1',
+      chainId: (await provider.getNetwork()).chainId,
+      verifyingContract: forwarderAddress,
+    };
+
+    const types = {
+      ForwardRequest: [
+        { name: 'from', type: 'address' },
+        { name: 'to', type: 'address' },
+        { name: 'value', type: 'uint256' },
+        { name: 'gas', type: 'uint256' },
+        { name: 'nonce', type: 'uint256' },
+        { name: 'deadline', type: 'uint48' },
+        { name: 'data', type: 'bytes' },
+      ],
+    };
+
+    const message = {
+      from: user1.address,
+      to: tokenAddress,
+      value: ethers.toBigInt(0),
+      nonce: nonce,
+      deadline: deadline,
+      gas: ethers.toBigInt(500000),
+      data: token.interface.encodeFunctionData('transfer', [
+        user2.address,
+        ethers.parseEther('1'),
+      ]),
+    };
+
+    const signature = await user1.signTypedData(domain, types, message);
+
+    const request = {
+      ...message,
+      signature: signature,
+    };
+
+    const execute = await forwarder.execute(request);
+    await execute.wait();
+  } catch (error) {
+    console.error('Error in excute:', error);
+  }
+};
+`
