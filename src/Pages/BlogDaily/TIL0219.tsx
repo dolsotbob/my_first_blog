@@ -104,39 +104,179 @@ const TIL0219 = () => {
 
             <h4>배열의 반복</h4>
             <ul>
-                <li>for 루프: 배열의 길이를 기준으로 각 요소 처리.</li>
-                <li>for...of 루프: 배열의 요소에만 집중하는 간결한 반복문.</li>
+                <li>for 루프: 배열의 길이를 기준으로 각 요소 처리</li>
+                <li>for...of 루프: 배열의 요소에만 집중하는 간결한 반복문
+                    <pre><code>{`
+        const fruits = ["apple", "banana", "cherry"];
+
+        for (const fruit of fruits) {
+            console.log(fruit);   // apple, banana, cherry
+        }
+        `}</code></pre>
+                    <ul><li>배열 요소만 순회하며, 인덱스는 제공되지 않는다</li></ul>
+                </li>
             </ul>
 
             <h4>객체</h4>
             <ul><li>키(key)-값(Value) 형태로 데이터 저장</li>
+                <li>다양한 속성을 가진 복잡한 데이터를 하나의 구조로 묶어 관리할 수 있게 해줌</li>
                 <li>객체 생성 방법:
-                    <ul>
-                        <li>중괄호 { }롤 객체를 정의하는 객체 리터럴 방식. 예</li>
+                    <ol>
+                        <li>중괄호 { }로 객체를 정의하는 객체 리터럴 방식</li>
+                        <pre><code>{`
+                const car = {
+                    brand: "Tesla", 
+                    model: "Model S", 
+                    year: 2022
+                };
+                        `}</code></pre>
                         <li>Object 생성자</li>
-                        <li>Object.create()</li>
-                    </ul>
+                        <pre><code>{`
+                const car = new Object(); 
+                car.brand = "Tesla"; 
+                car.model = "Model S"; 
+                car.year = 2022; 
+                `}</code></pre>
+                        <li>Object.create(): 프로토타입을 기반으로 새로운 객체 생성</li>
+                        <pre><code>{`
+                const prototype = { type: "vehicle" };
+                const car = Object.create(prototype); 
+                car.brand = "Tesla";
+                `}</code></pre>
+                    </ol>
                 </li>
             </ul>
 
 
-            <h4>객체 속성 접근</h4>
-            <ul>
-                <li>점 표기법. 예: console.log(person.name);</li>
+            <p>객체 속성 접근</p>
+            <ol>
+                <li>점 표기법. 예: console.log(person.name);
+                    <ul><li>키가 고정된 문자열이여야 함</li></ul>
+                </li>
+                <pre><code>{`
+            const person = { name: "철수", age: 30 }; 
+            console.log(person.name);  // "철수" 
+            console.log(person.age);   // 30
+            `}</code></pre>
                 <li>대괄호 표기법. 예: console.log(person[key]);</li>
-            </ul>
+                <pre><code>{`
+            const person = { name: "철수", age: 30 };
+            console.log(person["name"]);  // "철수" 
+            
+            const key = "age" 
+            console.log(person[key]);  // 30
+            `}</code></pre>
+            </ol>
 
-            <h4>객체의 주요 메서드</h4>
-            <ul>
-                <li>Object.values()</li>
-                <li>Object.entries()</li>
+            <p>객체의 주요 메서드</p>
+            <ol>
+                <li>Object.keys(): 객체의 모든 키를 배열로 반환</li>
+                <pre><code>{`
+            const person = { name: "철수", age: 30 };
+            console.log(Object.keys(person));  // ["name", "age]
+            `}</code></pre>
+                <li>Object.values(): 객체의 모든 값을 배열로 반환</li>
+                <pre><code>{`
+            console.log(Object.values(person));  // ["철수", 30]
+            `}</code></pre>
+                <li>Object.entries(): 객체의 키와 값을 배열 형태로 반환</li>
+                <pre><code>{`
+            console.log(Object.entries(person));  // [["name", "철수"], ["age", 30]]
+            `}</code></pre>
                 <li>Object.assign()</li>
+                <pre><code>{`
+            const additionalInfo = { job: "개발자" }; 
+            const combined = Object.assign({}, perosn, additionalInfo); 
+            console.log(combined);  // { name: "철수", age: 30, job: "개발자" }
+            `}</code></pre>
+            </ol>
+
+            <p>객체 속성 추가와 삭제</p>
+            <ul><li>속성 추가: 점 표기법 또는 대괄호 표기법으로 추가</li>
+                <pre><code>{`
+            // 점 표기법
+            const person = { name: "철수" };
+            person.age = 30;
+            console.log(person); // { name: "철수", age: 30 }
+
+            // 대괄호 표기법
+            const person = { name: "철수" };
+            person["age"] = 30;
+
+            console.log(person["name"]); // "철수"
+            console.log(person["age"]); // 30
+
+            console.log(person); // { name: "철수", age: 30 }
+            `}</code></pre>
+                <li>속성 삭제: delete 키워드 사용</li>
+                <pre><code>{`
+            delete person.age; 
+            console.log(person);  // { name: "철수" }
+            `}</code></pre>
             </ul>
 
-            <h4>객체와 반복</h4>
-            <p>for...in 반복문: 객체의 속성을 순회할 때 사용</p>
-            <ul>for (const key in person)</ul>
-            <ul>{'실행문: key: 객체[key] 출력해라'}</ul>
+            <p>대괄호 표기법의 특징</p>
+            <ul><li>동적 속성 이름 사용 가능:
+                <ul><li>점 표기법은 정적인 키 이름을 사용할 때 적합하지만, 대괄호 표기법은 동적으로 키를 생성하거나 접근할 때 유용함</li>
+                    <li>예시1:</li>
+                    <pre><code>{`
+            const key = "age";
+            person[key] = 30; // 동적으로 속성 추가
+            console.log(person[key]); // 30
+            `}</code></pre>
+                    <li>예시2:</li>
+                    <pre><code>{`
+            const keyName = "age";
+
+            const dog = {
+            name: "Jindo",
+            [keyName]: 5  // keyName 변수의 값이 키가 됨!
+            };
+
+            console.log(dog);           // { name: "Jindo", age: 5 }
+            console.log(dog[keyName]);  // 5
+            `}</code></pre>
+                </ul>
+            </li>
+                <li>변수 또는 문자열로 속성 접근:
+                    <ul><li>속성 이름이 변수, 공백이 포함된 문자열 또는 특수 문자인 경우 대괄호 표기법이 필요함</li></ul>
+                    <pre><code>{`
+            const person = {};
+
+            // 공백이 포함된 키
+            person["first name"] = "철수";
+            console.log(person["first name"]); // "철수"
+
+            // 특수 문자 포함 키
+            person["@nickname"] = "철";
+            console.log(person["@nickname"]); // "철"
+            `}</code></pre>
+                </li>
+            </ul>
+
+
+            <p>객체와 반복</p>
+            <ol><li>for...in 반복문: 객체의 속성을 순회할 때 사용</li>
+                <pre><code>{`
+            const person = { name: "철수", age: 30 };
+            for (const key in person) {
+                console.log(₩S{key}: S{person[key]}₩);
+            }
+            // 출력:
+            // name: 철수
+            // age: 30
+
+            `}</code></pre>
+                <li>Object.entries()를 사용해 키와 값을 함께 순회
+                    <pre><code>{`
+            for (const [key, value] of Object.entries(person)) { 
+                console.log(₩S{key}: S{value}₩);
+            }
+            `}</code></pre>
+                </li>
+            </ol>
+
+            <pre><code>{``}</code></pre>
 
 
             <h4>기본 내장 함수</h4>
