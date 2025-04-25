@@ -1,4 +1,7 @@
 
+
+
+
 export const til0227stateExample = `
 import React, { useState } from "react";
 
@@ -142,6 +145,127 @@ contract SimpleContract {
 
     function getMessage() public view returns (string memory) {
         return message;
+    }
+}
+`
+
+export const til0327globalVariableExample = `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract GlobalVariablesExample {
+    address public owner;
+    uint256 public sentValue;
+    uint256 public timestamp;
+
+    constructor() {
+        owner = msg.sender; // 계약을 배포한 주소 저장
+    }
+
+    // 이더를 입금하고 관련 데이터를 기록
+    function deposit() public payable {
+        require(msg.value > 0, "Must send some ether.");
+        sentValue = msg.value;           // 송금한 이더 양 기록
+        timestamp = block.timestamp;     // 트랜잭션 발생 시간 기록
+    }
+
+    // 호출자의 주소 반환
+    function getCaller() public view returns (address) {
+        return msg.sender;               // 호출한 주소 반환
+    }
+
+    // 최초 트랜잭션 발신자 확인
+    function getOrigin() public view returns (address) {
+        return tx.origin;                // 트랜잭션 시작 주소 반환; 보안 문제로 주의 필요 
+    }
+}
+`
+
+export const til0327vulnerableContractExample = `
+// 취약한 컨트랙트
+contract VulnerableContract {
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function withdraw() public {
+        // ❌ 취약한 접근 제어
+        require(tx.origin == owner, "Not owner");
+        
+        // 이더 송금 로직 (생략)
+    }
+}
+
+// 공격자가 에어드랍 이벤트라고 속여서 owner에게 어떤 버튼을 누르면 트랜잭션이 생성되어 무엇을 실행되게 합니다. 
+
+// 사실상 공격자가 만든 컨트랙트
+contract AttackContract {
+    address public vulnerableContract;
+
+    constructor(address _victim) {
+        vulnerableContract = _victim;
+    }
+
+    function attack() public {
+        // vulnerableContract = VulnerableContract 주소
+        (bool success, ) = victimContract.call(
+            abi.encodeWithSignature("withdraw()")
+        );
+        require(success, "Call failed");
+    }
+}
+`
+
+export const til0327blockInfoExample = `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BlockInfo {
+    function getBlockDetails() public view returns (
+        uint blockNum, 
+        uint prevrandao, 
+        uint gasLimit, 
+        address miner
+    ) {
+        return (
+            block.number,         // 현재 블록 번호
+            block.prevrandao,     // 이전 블록의 난수; Ethereum 2.0 업그레이드 이후 block.difficulty를 대체 
+            block.gaslimit,       // 블록 가스 한도
+            block.coinbase        // 채굴자의 주소
+        );
+    }
+}
+`
+export const til0327gasTrackerExample = `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract GasTracker {
+    uint256 public gasUsed;
+
+    function trackGasUsage() public {
+        uint256 initialGas = gasleft();  // 시작 시점 가스량 기록
+        uint256 result = 0;
+
+        // 가스를 소모하는 연산 (예: 반복문)
+        for (uint i = 0; i < 100; i++) {
+            result += i;
+        }
+
+        uint256 finalGas = gasleft();    // 종료 시점 가스량 기록
+        gasUsed = initialGas - finalGas; // 사용한 가스 계산
+    }
+}
+`
+export const til0327generateHashExample = `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract HashGenerator {
+    function generateHash(string memory data) public pure returns (bytes32) {
+        return keccak256(abi.encodePacked(data)); // 해시 값 생성
     }
 }
 `

@@ -280,28 +280,94 @@ const TIL0219 = () => {
 
 
             <h4>기본 내장 함수</h4>
-            배열, 문자열, 객체 등 양한 데이터 타입을 쉽게 다룰 수 있도록 자바스크립트에서 미리 제공하는 함수.< br />
-            배열의 기본 내장 함수 예:
-            <ul>
-                <li>indexOf(): 배열에서 특정 요소의 인덱스를 반환. 요소가 없으면 1 반환.</li>
-                <li>includes(): 배열에 특정 요소가 있는지 확인.</li>
-                <li>sort(): 배열의 요소 정렬.</li>
-                <li>slice: 배열의 일부 복사.</li>
-                <li>splice: 배열에서 특정 위치의 요소 제거/추가</li>
-            </ul>
+            <ul><li>배열, 문자열, 객체 등 양한 데이터 타입을 쉽게 다룰 수 있도록 자바스크립트에서 미리 제공하는 함수</li></ul>
 
-            <h4>객체의 내장 함수</h4>
-            <ul>
-                <li>Object.keys(): 객체의 모든 키를 배열로 반환.</li>
-                <li>Object.hasOwnproperty(): 객체에 특정 키가 존재하는지 확인.</li>
-                <li>Object.freeze(): 객체를 동결해 수정할 수 없게 만듬. 새 속송 추가 혹은 기존 속성 변경 불가.</li>
-                <li>Object.seal(): 객체의 속성 추가 혹은 삭제 불가. 기존 속성 값은 수정 가능.</li>
-            </ul>
+            <p>배열의 기본 내장 함수</p>
+            <ol><li>요소의 추가와 제거
+                <ul><li>push(): 배열의 끝에 요소 추가</li>
+                    <li>pop(): 배열의 마지막 요소 제거</li>
+                    <li>shift(): 배열의 첫 번째 요소 제거</li></ul>
+            </li>
+                <li>요소 탐색
+                    <ul><li>indexOf(): 배열에서 특정 요소의 인덱스를 반환. 요소가 없으면 1 반환.</li>
+                        <li>includes(): 배열에 특정 요소가 있는지 확인; 반환값은 true 또는 false</li></ul>
+                </li>
+                <li>배열 변형
+                    <ul><li>reverse(): 배열의 요소 순서를 뒤집는다</li>
+                        <li>sort(): 배열의 요소 정렬.</li></ul>
+                </li>
+                <li>요소 복사와 추출
+                    <ul><li>slice: 배열의 일부 복사; 원본 배열은 변경되지 않는다
+                        <pre><code>{`
+                const fruits = ["apple", "banana", "cherry", "date"];
+                const sliced = fruits.slice(1, 3);
+                console.log(sliced); // ["banana", "cherry"]                
+                `}</code></pre>
+                    </li>
+                        <li>splice: 배열에서 특정 위치의 요소 제거/추가; 원본 배열이 변경된다
+                            <pre><code>{`
+                const fruits = ["apple", "banana", "cherry"];
+                fruits.splice(1, 1, "grape"); // 1번 인덱스에 "grape" 추가, "banana" 제거
+                console.log(fruits); // ["apple", "grape", "cherry"]
+                `}</code></pre>
+                        </li></ul>
+                </li>
+            </ol>
 
-            <h4>문자열의 내장 함수</h4>
-            <ul>
-                <li>indexOf(): 문자열에서 특정 문자 또는 첫 번째 인덱스 반환</li>
-            </ul>
+            <p>객체의 내장 함수</p>
+            <ol><li>객체 탐색
+                <ul><li>Object.keys(): 객체의 모든 키를 배열로 반환</li>
+                    <li>Object.values(): 객체의 모든 값을 배열로 반환</li>
+                    <li>Object.entries(): 각 키-값 쌍이 배열로 묶인 형태의 배열 반환</li></ul>
+            </li>
+                <li>객체 생성
+                    <ul><li>Object.assign(): 객체를 복사하거나 여러 객체를 하나로 합칠 때
+                        <pre><code>{`
+            const person = { name: "철수" };
+            const additionalInfo = { age: 30, job: "개발자" };
+
+            const combined = Object.assign({}, person, additionalInfo);
+            console.log(combined); // { name: "철수", age: 30, job: "개발자" }
+            `}</code></pre>
+                    </li>
+                        <li>Object.create(): 특정 프로토타입을 가진 객체 생성
+                            <pre><code>{`
+            const prototype = { greet: function() { console.log("Hello!"); } };
+            const person = Object.create(prototype);
+            person.name = "철수";
+
+            console.log(person.name); // "철수"
+            person.greet(); // "Hello!"
+            `}</code></pre>
+                        </li></ul>
+                </li>
+                <li>속성 정의 및 조작
+                    <ul><li>Object.defineProperty()</li>
+                        <li>Object.defineProperties()</li></ul>
+                </li>
+                <li>속성 확인 및 비교
+                    <ul><li>Object.hasOwnproperty(): 객체에 특정 키가 존재하는지 확인</li>
+                        <li>Object.is(): 두 값이 엄격하게 같은지 비교</li></ul>
+                </li>
+                <li>객체 고정 및 보호
+                    <ul><li>Object.freeze(): 객체를 동결해 수정할 수 없게 만듬. 새 속송 추가 혹은 기존 속성 변경 불가.</li>
+                        <li>Object.seal(): 객체의 속성 추가 혹은 삭제 불가. 기존 속성 값은 수정 가능.</li></ul>
+                </li>
+            </ol>
+
+
+            <p>문자열의 내장 함수</p>
+            <ol><li>문자 검색
+                <ul><li>indexOf(): 문자열에서 특정 문자 또는 첫 번째 인덱스 반환</li>
+                    <li>includes(): 문자열에 특정 문자 또는 문자열이 포함되어 있는지 확인</li>
+                </ul>
+            </li>
+                <li>문자 변환
+                    <ul><li>toUpperCase()</li>
+                        <li>toLowerCase()</li></ul>
+                </li>
+            </ol>
+
 
 
         </div >

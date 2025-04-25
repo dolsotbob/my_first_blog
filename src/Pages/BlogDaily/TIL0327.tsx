@@ -1,7 +1,12 @@
 import React from 'react'
-import attackContract from "../../assets/attackContract.png"
 import interfaceVsAbstract from "../../assets/interfaceVsAbstract.png"
 import libraryVsContract from "../../assets/libraryVsContract.png"
+import CodeBlock from '../../components/CodeBlock'
+import { til0327globalVariableExample } from '../codeExamples'
+import { til0327vulnerableContractExample } from '../codeExamples'
+import { til0327blockInfoExample } from '../codeExamples'
+import { til0327gasTrackerExample } from '../codeExamples'
+import { til0327generateHashExample } from '../codeExamples'
 
 const TIL0327 = () => {
     return (
@@ -49,37 +54,7 @@ const TIL0327 = () => {
             </ul>
 
             <p>주요 전역 변수의 활용 예제 1</p>
-            <pre><code>{`
-            // SPDX-License-Identifier: MIT 
-            pragma solidity ^0.8.0; 
-
-            contract GlobalVariablesExample { 
-                address public owner; 
-                uint256 public sentValue; 
-                uint256 public timestamp; 
-
-                constructor() { 
-                    owner = msg.sender;  //계약을 배포한 주소 저장 
-                }
-
-                // 이더를 입금하고 관련 데이터를 기록 
-                function deposit() public payable { 
-                    require(msg.value > 0, "Must send some ether."); 
-                    sentValue = msg.value;        // 송금한 이더의 양 기록 
-                    timestamp = block.timestamp;  // 트랜잭션 발생 시간 기록
-                }
-
-                // 호출자의 주소 반환 
-                function getCaller() public view returns (address) { 
-                    return msg.sender;          // 호출한 주소 반환 
-                }
-
-                // 최초 트랜잭션 발신자 확인 
-                function getOrigin() public view returns (address) { 
-                    return tx.origin;           // 트랜잭션 시작 주소 반환 
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={til0327globalVariableExample}></CodeBlock>
 
             <p>msg.sender와 tx.origin의 차이를 보여주는 예시</p>
             <ol><li>EOA가 tx을 실핸한다(사용자가 어떤 tx을 처음 시작한다)</li>
@@ -90,71 +65,23 @@ const TIL0327 = () => {
                 <li>따라서, 컨트랙트 2에서 msg.sender는 컨트랙트 1, tx.origin은 EOA가 된다</li></ul>
 
             <p>tx.origin을 사용한 컨트랙트 보안의 취약성을 사용해 공격하는 예시</p>
-            <img className="attackContract" src={attackContract} alt="attack-contract-code-image"></img>
+            <CodeBlock code={til0327vulnerableContractExample}></CodeBlock>
 
 
             <p>주요 전역 변수의 활용 예제 2 - 블록 정보 확인하기</p>
-            <pre><code>{`
-            // SPDX-License-Identifier: MIT 
-            pragma solidity ^0.8.0; 
-
-            contract BlockInfo { 
-                function getBlockDetails() public view returns (
-                    uint blockNum, 
-                    uint prevrandao, 
-                    uint gasLimit, 
-                    address miner
-                ) { 
-                    return (
-                        block.number,       // 현재 블록 번호 
-                        block.prevrandao,   // 이전 블록의 난수  
-                        block.gaslimit,     // 블로 가스 한도 
-                        block.coinbase      // 채굴자의 주소 
-                    );    
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={til0327blockInfoExample}></CodeBlock>
 
             <h4>전역 함수</h4>
             <p>스마트 계약 내에서 호출할 수 있는 내장 함수로 주로 tx 관리나 블록 상태 추적에 사용됨</p>
             <ul><li>gasleft(): 현재 tx에 남아있는 가스 양 확인</li>
                 <li>keccak256(): 입력된 데이터 해시 처리(SHA3)</li>
-                <li>blockhash*(uint): 특정 블록 번호에 대한 해시 값을 반환(256개 이내의 최근 블록)</li></ul>
+                <li>blockhash(uint): 특정 블록 번호에 대한 해시 값을 반환(256개 이내의 최근 블록)</li></ul>
 
             <p>전역 함수 활용 예제 1 - 가스 소모 추적하기</p>
-            <pre><code>{`
-            // SPDX-License-Identifier: MIT 
-            pragma solidity ^0.8.0; 
-
-            contract GasTracker { 
-                uint256 public gasUsed; 
-
-                function trackGasUsage() public { 
-                    uint256 initialGas = gasleft();    // 시작 시점 가스량 기록 
-                    uint256 result = 0; 
-
-                    // 가스를 소모하는 연산 (예: 반복문)
-                    for (uint i = 0; i < 100; i++) { 
-                        result += i; 
-                    }
-                    
-                    uint256 finalGas = gasleft();      // 종료 시점 가스량 기록 
-                    gasUsed = initialGas - finalGas;   // 사용한 가스 계산
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={til0327gasTrackerExample}></CodeBlock>
 
             <p>전역 함수 활용 예제 2 - 해시 값 계산하기</p>
-            <pre><code>{`
-            // SPDX-License-Identifier: MIT 
-            pragma solidity ^0.8.0; 
-
-            contract HashGenerator { 
-                function generateHash(string memory data) public pure returns (bytes32) {
-                    return keccak256(abi.encodePacked(data));      // 해시 값 생성 
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={til0327generateHashExample}></CodeBlock>
             <ul><li>keccak256(): 입력된 데이터를 해싱 처리(암호학적으로 안전한 해시 함수)</li></ul>
 
             <p>전역 변수와 함수의 활용 시 주의 사항</p>
@@ -312,36 +239,36 @@ const TIL0327 = () => {
                 <li>다형성을 보여주는 예제 (IAnimal 인터페이스를 통해 Dog와 Cat을 동일한 방식으로 사용 가능):
                     <ul><li>인터페이스 정의
                         <pre><code>{`
-                    // SPDX-License-Identifier: MIT
-                    pragma solidity ^0.8.0;
+            // SPDX-License-Identifier: MIT
+            pragma solidity ^0.8.0;
 
-                    interface IAnimal {
-                        function makeSound() external view returns (string memory);                            
-                    }
-                    `}</code></pre>
+            interface IAnimal {
+                function makeSound() external view returns (string memory);                            
+            }
+                `}</code></pre>
                         <ul><li>interface IAnimal: IAnimal 이라는 이름의 인터페이스 정의</li>
                             <li>makesound 함수는 모든 동물이 구현해야 하는 공통적인 함수</li>
                             <li>external view: 외부에서 호출 가능하며 상태를 변경하지 않음</li>
                             <li>returns (string memory): 문자열 반환</li></ul>
-                    </li>
+                    </li><br />
                         <li>인테피이스 구현
                             <pre><code>{`
-                        // SPDX-License-Identifier: MIT
-                        pragma solidity ^0.8.0;
+            // SPDX-License-Identifier: MIT
+            pragma solidity ^0.8.0;
 
-                        import "./IAnimal.sol";
+            import "./IAnimal.sol";
 
-                        contract Dog is IAnimal {
-                            function makeSound() external pure override returns (string memory) {
-                                return "Bark";
-                            }
-                        }
+            contract Dog is IAnimal {
+                function makeSound() external pure override returns (string memory) {
+                    return "Bark";
+                }
+            }
 
-                        contract Cat is IAnimal {
-                            function makeSound() external pure override returns (string memory) {
-                                return "Meow";
-                            }
-                        }
+            contract Cat is IAnimal {
+                function makeSound() external pure override returns (string memory) {
+                    return "Meow";
+                }
+            }
                         `}</code></pre>
                             <ul><li>Dog, Cat 계약은 IAnimal 인터페이스를 구현하고 있음</li>
                                 <li>makeSound 함수를 반드시 구현해야 하며 override 키워드를 사용해 명시적으로 재정의</li>
@@ -350,17 +277,17 @@ const TIL0327 = () => {
                         </li>
                         <li>사용 방법
                             <pre><code>{`
-                        // SPDX-License-Identifier: MIT
-                        pragma solidity ^0.8.0;
+            // SPDX-License-Identifier: MIT
+            pragma solidity ^0.8.0;
 
-                        import "./IAnimal.sol";
+            import "./IAnimal.sol";
 
-                        contract AnimalSound {
-                            function getSound(IAnimal animal) public view returns (string memory) {
-                                return animal.makeSound();
-                            }
-                        }
-                        `}</code></pre>
+            contract AnimalSound {
+                function getSound(IAnimal animal) public view returns (string memory) {
+                    return animal.makeSound();
+                }
+            }
+            `}</code></pre>
                             <ul><li>getSound 함수는 IAnimal 타입의 변수를 받아 makeSound() 함수를 호출함</li>
                                 <li>즉 Dog나 Cat 계약의 인스턴스를 IAnimal 타입으로 전달하면, 해당 계약의 makeSound 함수가 실행됨</li></ul>
                         </li></ul>
