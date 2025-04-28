@@ -368,6 +368,11 @@ const TIL0219 = () => {
                 </li>
             </ol>
 
+            <h4>참고 자료</h4>
+            <ul><li><a href='https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array'>MDN 배열</a></li>
+                <li><a href='https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object'>MDN 객체</a></li>
+                <li><a href='https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String'>MDN 문자열</a></li></ul>
+
 
 
         </div >
