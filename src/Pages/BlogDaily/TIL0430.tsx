@@ -171,6 +171,70 @@ const TIL0430 = () => {
                 </li>
             </ul>
 
+            <h4>v1 - 동작 방식: Uniswap의 거래 구조</h4>
+            <ul><li>P2C(Peer-to-Contract) 거래 방식
+                <ul><li>기존 방식(P2P)
+                    <ul><li>매수자와 매도자가 직접 연결되어 거래</li>
+                        <li>블록체인에서 이 방식은 가스비가 많이 들고 비효율적임
+                        </li></ul>
+                </li>
+                    <li>Uniswap 방식(P2C)
+                        <ul><li>매수자가 스마트 컨트랙트와 직접 거래</li>
+                            <li>유동성 풀(Liquidity Pool)을 이용해 항상 거래 가능
+                            </li></ul>
+                    </li>
+                    <li>유니스왑의 구성
+                        <ul><li>ETH - ERC-20 토큰 페어로 구성된 유동성 풀</li>
+                            <li>각 페어마다 Token Exchange Contract가 생성됨</li>
+                            <li>이 컨트랙트들은 Factory Contract를 통해 만들어짐
+                                <ul><li>사용자는 이 컨트랙트를 통해 자동으로 교환 거래</li></ul>
+                            </li></ul>
+                    </li></ul>
+            </li>
+            </ul>
+
+            <h4>v2 - Uniswap V2</h4>
+            <ul><li>Uniswap V2는 V1의 기본 구조를 유지하면서도, 실질적인 사용성과 기능 측면에서 다양한 개선이 이루어짐</li></ul>
+            <ol><li>ERC-20-ERC20 페어 지원: 직접 ERC20 간 직접 교환이 가능해짐. 이를 통해:
+                <ul><li>더 낮은 수수료</li>
+                    <li>더 적은 슬리피지</li>
+                    <li>간편한 거래 구조 를 실현할 수 있게 됨
+                    </li></ul>
+            </li>
+                <li>TWAP 기반의 가격 오라클(Time-Weighted Average Price)
+                    <ul><li>V2는 외부 컨트랙트가 가격 정보를 읽을 수 있도록 가격 오라클 기능을 추가</li>
+                        <li>하지만 실시간 가격은 쉽게 조작당할 수 있으므로 TWAP 방식 사용
+                            <ul><li>일정 시간 동안의 평균 가격을 기준으로 가격 제공</li>
+                                <li>가격 조작 방지 및 신뢰성 향상</li>
+                                <li>DeFi 생태계에서의 안정적인 가격 참조 가능
+                                </li></ul>
+                        </li></ul>
+                </li>
+                <li>플래시 스왑(Flash Swap)
+                    <ul><li>한 트랜잭션 내에서 유동성 풀의 토큰을 즉시 대출받을 수 있는 기능</li>
+                        <li>사용자는 선불 없이 토큰을 가져올 수 있음</li>
+                        <li>트랜잭션이 끝날 때까지 다음 중 하나를 수행해야 함:
+                            <ol><li>가져간 만큼의 토큰을 다시 반환</li>
+                                <li>가져간 토큰에 상응하는 다른 자산을 풀에 예치</li>
+                                <li>둘 다 일부 수행</li></ol>
+                        </li>
+                        <li>이를 통해:
+                            <ul><li>무담보 대출 기반의 아비트리지, 리밸런싱, 레버리지 전략이 가능</li>
+                                <li>복잡한 금융 전략을 한 트랜잭션 안에서 구현할 수 있음</li></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Core/Periphery 아키텍처 분리
+                    <ul><li>Core Contract: 유동성 풀과 직접 관련된 로직(스왑, 유동성 공급 등)을 담당</li>
+                        <li>Periphery Contract: 사용자 인터페이스, 라우팅, 기타 부가 기능을 처리</li>
+                        <li>이렇게 분리함으로써:
+                            <ul><li>안정성과 보안성 강화</li>
+                                <li>업그레이드와 유지보수 용이성 향상</li></ul>
+                        </li>
+                    </ul>
+
+                </li>
+            </ol>
 
 
         </div>
