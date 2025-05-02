@@ -236,6 +236,147 @@ const TIL0430 = () => {
                 </li>
             </ol>
 
+            <h4>v2 - Uniswap V1 vs V2: ERC20-ERC20 스왑의 변화</h4>
+            <p>Uniswap V2의 개선: ERC20-ERC20 풀 도입</p>
+            <ul><li>Uniswap V2는 위 문제를 해결하기 위해 ERC20 간 직접 유동성 풀을 지원합니다.</li>
+                <li>ERC20-ERC20 유동성 풀
+                    <ul><li>DAI-USDC, UNI-LINK 등 ERC20 간 직접 풀 생성 가능</li>
+                        <li>ETH Bridging 필요 없음</li>
+                        <li>단일 수수료 (0.3%)로 스왑 비용 절감</li>
+                        <li>슬리피지 감소 및 거래 효율성 증가 </li></ul>
+                </li>
+            </ul>
+
+            <p>Uniswap V2의 세 가지 스왑 방식</p>
+            <ol><li>다이렉트 스왑: ERC20-ERC20 유동성 풀이 있는 경우, 직접 스왑</li>
+                <li>ETH 사용 스왑: 유동성 풀이 없을 경우, V1과 유사한 ETH 중개 스왑</li>
+                <li>커스텀 스왑: 사용자가 경로를 직접 지정하여 중간 경유지(토큰)를 선택 가능
+                    <ul><li>예: DAI → OMG → USDC (중간에 OMG 경유)</li>
+                        <li>이를 가능하게 하는 것이 Router 컨트랙트</li>
+                        <li>라우터는 가장 효율적인 경로를 계산하여 다이렉트 또는 다단계 스왑을 자동 실행</li></ul>
+                </li>
+            </ol>
+
+            <p>wETH의 도입으로 구조 개선</p>
+            <ul><li>wETH란?
+                <ul><li>ETH를 ERC20 표준에 맞게 래핑(wrap)한 토큰</li>
+                <li>ETH처럼 사용할 수 있지만 ERC20 토큰처럼 작동</li></ul>
+            </li>
+            <li>효과
+                <ul><li>ETH도 ERC20처럼 처리 가능 → 더 많은 조합의 스왑 가능</li>
+                <li>ETH-ERC20, wETH-ERC20 모두 지원됨</li>
+                <li>코드 복잡성 감소, 통일된 로직 적용 가능</li></ul>
+            </li>
+            </ul>
+
+            <h4>v2 - Flash Swap & Flash Loan: 유니스왑 V2에서의 대출 메커니즘</h4>
+            <ul><li>유니스왑은 본래 토큰을 교환(스왑)하는 프로토콜이지만, V2부터는 대출 개념인 플래시 스왑(Flash Swap) 기능이 추가됨</li>
+            </ul>
+
+            <p>일반적인 대출과 플래시론(Flash Loan)의 차이</p>
+            <ul><li>일반적인 대출
+                <ul><li>대출 후 일정 기간 내에 상환</li>
+                    <li>담보 또는 신용을 기반으로 승인</li>
+                    <li>미상환 시 채권자에게 손실 발생</li></ul>
+            </li>
+                <li>플래시론
+                    <ul><li>한 트랜잭션 내에서 대출 → 사용 → 상환 완료</li>
+                    <li>상환 실패 시 트랜잭션 자체가 취소됨 → 대출자 자산 보호</li>
+            <pre><code>{`
+            function doFlashLoan(uint256 amount){
+                uint256 loanAmount = flashLoan(amount);      // 1. 대출금 수령
+                uint256 profit = doSomething(loanAmount);    // 2. 대출금 사용
+                repay(amount + fee);                         // 3. 대출금 상환
+                transfer(profit - amount - fee);             // 이익 수령
+            }
+            `}</code></pre>
+                    <li>핵심 특징:
+                        <ul><li>초단기 무담보 대출</li>
+                            <li>프로그램 가능한 돈(Ethereum)을 활용</li>
+                            <li>트랜잭션 도중 실패 시 → 전체 취소 → 자금 유출 없음</li></ul>
+                    </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>플래시론의 활용 예: 차인 거래(arbitrage)</p>
+            <ul><li>예: 유니스왑에서 1 DAI = 10 USDC, 스시스왑에서는 1 DAI = 10.5 USDC</li></ul>
+            <ol><li>플래시론으로 100 USDC 대출</li>
+                <li>유니스왑에서 100 USDC로 10 DAI 구매</li>
+                <li>스시스왑에서 10 DAI를 105 USDC에 판매</li>
+                <li>대출 상환 후 5 USDC 이익 확보</li>
+            </ol>
+
+            <p>유니스왑의 Flash Swap</p>
+            <ul><li>동성 풀의 토큰 리저브 일부(또는 전체)를 꺼내서 사용하고, 같은 트랜잭션 내에서 상환할 수 있도록 하는 기능
+                <ul><li>리저브란? 유동성 풀에 예치된 토큰 수량</li></ul>
+            </li>
+            <li>Flash Swap의 순서
+                <ol><li>풀에서 ERC20 토큰을 꺼냄</li>
+                    <li>꺼낸 토큰을 활용해 수익을 창출 (예: 다른 DEX에서 판매)</li>
+                    <li>같은 트랜잭션 내에서 토큰을 전액 상환하거나, 다른 자산으로 교환 후 상환</li></ol>
+            </li>
+            </ul>
+
+            <p>플래시 스왑 활용 (초기 자본 없음)</p>
+            <ol><li>ETH-DAI 풀에서 필요한 만큼의 DAI를 꺼냄</li>
+                <li>DAI로 수익 창출 코드 실행</li>
+                <li>DAI 혹은 ETH로 상환 후 남은 수익은 본인에게</li>
+            </ol>
+            <ul><li>➡ 초기 자본 없이 투자 전략 실행이 가능해짐</li></ul>
+
+            <h4>v2 - Uniswap V2와 Price Oracle: 가격 조작을 막는 방법</h4>
+            <p>Price Oracle이란?</p>
+            <ul><li>외부에서 자산 가격 정보를 스마트 컨트랙트에 제공하는 장치</li>
+            <li>: DAI의 현재 시세를 알고 싶을 때, 오라클을 통해 가져와야 함</li></ul>
+
+            <p>바람직한 Price Oracle의 조건</p>
+            <ul><li>탈중앙화 금융 서비스(DeFi)에서는 조작 불가능하고 신뢰할 수 있는 가격 정보가 중요</li>
+            <li>예시: Alice의 DAI 베팅 dApp</li></ul>
+
+            <p>온체인 Price Oracle로서의 Uniswap</p>
+            <ul><li>Uniswap은 온체인 AMM이기 때문에 언제든지 유동성 풀의 리저브를 통해 실시간 가격을 구할 수 있다</li>
+                <li>DAI가격 = DAI리저브 / ETH리저브</li>
+                <li>Uniswap V1은 이런 방식으로 토큰 가격을 제공하고 이를 Spot Price라고 한다</li>
+                <li>그러나 V1에는 치명적인 문제가 있었다: 가격 조작이 쉬움
+                    <ul><li>공격자는 대량 스왑으로 가격을 올리거나 내림</li>
+                        <li>단기간 동안 유동성 풀의 리저브를 인위적으로 변경 가능</li>
+                        <li>외부 dApp이 이 잘못된 가격에 의존할 경우, 부당한 수익을 얻는 공격이 가능</li>
+                        <li>예:  Bob의 DAI dApp 공격 시나리오
+                            <ol><li>Bob은 DAI가 오를 것에 베팅</li>
+                                <li>ETH-DAI 풀에 ETH를 스왑 → DAI 수요 증가 → 가격 상승</li>
+                                <li>베팅에서 이기고 보상 획득</li>
+                                <li>DAI 다시 매도해 초기 가격으로 복구</li></ol>
+                            <ul><li>➡ 이 모든 과정은 한 명의 공격자가 주도할 수 있음</li>
+                                <li>➡ 특히, 공격자가 채굴자라면 트랜잭션 순서를 조작하여 쉽게 공격 가능</li></ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h5>해결책: Uniswap V2의 TWAP 오라클</h5>
+            <ul><li>Uniswap V2는 TWAP(Time-Weighted Average Price) 방식을 도입하여 가격 조작 위험을 낮춤</li>
+                <li>TWAP이란?
+                    <ul><li>특정 시간 동안의 평균 가격</li>
+                    <li>순간적인 조작이 아닌, 시간을 기준으로 가격을 계산</li>
+                    <li>장기적인 가격 안정성과 신뢰성 확보</li></ul>
+                </li>
+                <li>TWAP의 효과
+                    <ul><li>짧은 시간에 가격을 조작해도 오라클에 미치는 영향 적음</li>
+                    <li>외부 dApp들이 더 안전한 가격 정보에 접근 가능</li>
+                    <li>유니스왑을 보다 신뢰할 수 있는 Price Oracle로 개선</li></ul>
+                </li>
+            </ul>
+
+            <ul><li>Uniswap V2의 TWAP은 조작에 강한 온체인 Price Oracle로, 다양한 DeFi 서비스에 필수적인 도구로 자리잡고 있다.</li></ul>
+
+            <h4>v2 - Uniswap V2의 TWAP 오라클클</h4>
+
+
+
+
+
+
 
         </div>
     )
