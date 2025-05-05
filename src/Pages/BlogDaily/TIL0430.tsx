@@ -1,4 +1,6 @@
 import React from 'react'
+import twapimg from '../../assets/uniswapTWAP.png'
+import calctwapimg from '../../assets/uniswapCalcTWAP.png'
 
 const TIL0430 = () => {
     return (
@@ -370,8 +372,61 @@ const TIL0430 = () => {
 
             <ul><li>Uniswap V2의 TWAP은 조작에 강한 온체인 Price Oracle로, 다양한 DeFi 서비스에 필수적인 도구로 자리잡고 있다.</li></ul>
 
-            <h4>v2 - Uniswap V2의 TWAP 오라클클</h4>
+            <h4>v2 - Uniswap V2의 TWAP 오라클</h4>
+            <p>TWAP의 장점</p>
+            <ul><li>Gas 효율적으로 가격 정보를 확인할 수 있음</li>
+                <li>임의의 시간 구간의 평균 가격을 구할 수 있음</li></ul>
 
+            <p>TWAP 동작 방식</p>
+            <ul><li>Uniswap V2는 다음과 같은 방식으로 가격을 누적하고 관리한다</li></ul>
+            <img className='til0430twap' src={twapimg} alt='twap-image'></img>
+            <ul><li>각 유동성 풀에는 price0Cumulative, price1Cumulative가 존재</li>
+                <li>마지막 스왑 이후 경과한 시간 × 가격을 누적값에 더함</li>
+                <li>스왑이 발생할 때 _update() 함수가 실행되어 누적값이 갱신됨</li></ul>
+            
+            <ul><li>_update() 함수 로직 요약
+                <ol><li>현재 블록 타임스탬프 저장</li>
+                    <li>마지막 스왑 블록 이후 경과 시간 계산</li>
+                    <li>가격 x 시간 값을 누적값에 더함</li>
+                    <li>현재 balance 값을 상태 변수 reserve0, reserve1에 저장</li></ol>
+            </li>
+            </ul>
+
+            <p>조작 방지 메커니즘</p>
+            <ul><li>가격은 블록 단위로 결정됨
+                    <ul><li>특정 블록에서의 가격은 이전 블록의 마지막 스왑 트랜잭션으로 결정됨</li>
+                    <li>따라서, 스왑으로 가격을 바꾸더라도 그 가격은 다음 블록부터 반영됨</li></ul>
+                </li>
+                <li>블록 단위 누적
+                    <ul><li>priceCumulative는 블록마다 갱신됨 → 공격자는 여러 블록을 연속 생성해야 조작 가능
+                    </li></ul>
+                </li>
+                <li>캐싱된 리저브 사용
+                    <ul><li>공격자가 일방적으로 토큰을 풀에 입금하면 balanceOf()로는 조작된 수치를 얻을 수 있음</li>
+                        <li>_update()는 캐싱된 reserve 값으로 계산해 조작을 방지함</li></ul>
+                </li>
+            </ul>
+
+            <p>공격 시나리오 비교</p>
+            <ul><li>V1
+                    <ul><li>한 블록 안에서 여러 트랜잭션 조작 가능 → 베팅 dApp 피해 발생</li></ul>
+                </li>
+                <li>V2
+                    <ul><li>두 블록 연속 조작이 필요 → 현실적으로 매우 어려움</li>
+                        <li>공격자 입장에서 비용 상승 + 실패 확률 증가</li></ul>
+                </li></ul>
+
+            <p>TWAP 가격 계산 방법</p>
+            <img src={calctwapimg} alt='calculate_twap_image'></img>
+            <ol><li>priceCumulative의 두 시점 값을 구함 (예: pc1, pc2)</li>
+            <li>해당 구간의 경과 시간 구함 (예: t2 - t1)</li>
+            <li>평균 가격 = (pc2 - pc1) / (t2 - t1)</li></ol>
+            <ul><li>➡ 이 방식을 통해, 외부 컨트랙트는 안전하고 조작에 강한 가격 정보를 받아볼 수 있음</li></ul>
+            
+            <p>고급 개념: 캐싱 이유</p>
+            <ul><li>reserve는 공격자가 일방적으로 보낸 토큰을 제외한 실제 가격 기준</li>
+            <li>balance는 현재 토큰 풀의 상태로, 조작 가능성 존재</li>
+            <li>_update()는 계산 시 캐시된 reserve를 사용하여 조작을 방지하고, 이후에 balance로 업데이트함</li></ul>
 
 
 
