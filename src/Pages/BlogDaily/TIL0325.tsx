@@ -199,6 +199,45 @@ const TIL0325 = () => {
                 <li>매핑과 함께 사용하면 강력한 데이터 저장 기능을 제공</li>
             </ul>
 
+            <p>구조체 선언 및 변수 생성</p>
+            <pre><code>{`
+            contract StructExample {
+                struct User { 
+                    string name;
+                    uint256 age;
+                    address wallet;
+                }
+
+                User public user; 
+
+                function setUser(string memory _name, uint256 _age, address _wallet) public { 
+                    user = User(_name, _age, _wallet);
+                }
+
+                function getUser() public view returns (string memory, uint256, address) { 
+                    return (user.name, user.age, user.wallet);
+                }
+            }
+            `}</code></pre>
+            <ul><li>📌 구조체를 사용하여 사용자 정보를 저장 및 조회하는 예제</li></ul>
+            
+            <p>구조체를 배열로 저장하기</p>
+            <pre><code>{`
+            contract StructArray {
+                struct User { 
+                    string name; 
+                    uint256 age; 
+                }
+
+                User[] public users; 
+
+                function addUser(string memory _name, uint256 _age) public { 
+                    users.push(User(_name, _age));
+                }
+            }
+            `}</code></pre>
+            <ul><li>📌 구조체를 배열로 선언하고, push()를 사용하여 데이터 추가 가능</li></ul>
+
             <p>매핑과 구조체 결합</p>
             <pre><code>{`
             contract StructMapping {
@@ -218,10 +257,185 @@ const TIL0325 = () => {
                 }
             }
             `}</code></pre>
-            ⁕ 사용자의 address를 키로 하여 데이터를 효율적으로 관리 가능
+            <ul><li>📌사용자의 address를 키로 하여 데이터를 효율적으로 관리 가능</li></ul>
 
-            <h4>바이트 배열</h4>
-            <ul><li>string과 쌍쌍바임</li></ul>
+            <p>구조체 내부 값 수정</p>
+            <pre><code>{`
+            contract StructUpdate {
+                struct User { 
+                    string name; 
+                    uint256 age; 
+                }
+
+                User public user; 
+
+                function setUser(string memory _name, uint256 _age) public { 
+                    user = User(_name, _age); 
+                }
+
+                function updateAge(uint256 _newAge) public { 
+                    user.age = _newAge; 
+                }
+            }
+            `}</code></pre>
+            <ul><li>📌 user.age = _newAge;를 통해 구조체 내부 값 수정 가능</li></ul>
+
+            <p>구조체 삭제 (delete)</p>
+            <pre><code>{`
+            contract StructDelete {
+                struct User {
+                    string name;
+                    uint256 age;
+                }
+
+                User public user; 
+
+                function setUser(string memory _name, uint256 _age) public { 
+                    user = User(_name, _age);
+                }
+
+                function deleteUser() public { 
+                    delete user;   // 모든 필드를 초기화 (name = "", age = 0
+                }
+            }
+            `}</code></pre>
+            <ul><li>📌 delete 키워드를 사용하여 구조체 값을 초기화할 수 있음</li></ul>
+
+            <p> 메모리(Memory) vs. 저장소(Storage)에서 구조체 사용</p>
+            <ul><li>구조체는 storage 또는 memory에 저장할 수 있으며, 가스 비용을 고려하여 적절히 선택해야 한다다</li></ul>
+            <ul><li><span style={{ fontWeight: "bold" }}>메모리 구조체 사용 (임시 데이터 저장)</span></li></ul>
+            <pre><code>{`
+            contract MemoryStruct {
+                struct User {
+                    string name;
+                    uint256 age;
+                }
+
+                function getUser(string memory _name, uint256 _age) public pure returns (User memory) { 
+                    return User(_name, _age);
+                }
+            }
+            `}</code></pre>
+            <ul><li>📌 메모리에서만 사용되는 구조체는 가스 비용 절감 효과가 있음</li></ul>
+
+            <ul><li><span style={{ fontWeight: "bold" }}>저장소(Storage) 구조체 사용 (영구 데이터 저장)</span></li></ul>
+            <pre><code>{`
+            contract StorageStruct {
+                struct User {
+                    string name;
+                    uint256 age;
+                }
+
+                User public user; 
+
+                function setUser(string memory _name, uint256 _age) public { 
+                    user = User(_name, _age);
+                }
+            }
+            `}</code></pre>
+            <ul><li>📌 저장소(storage)에 데이터를 저장하면 영구적으로 보관됨</li></ul>
+            
+            <p></p>
+            <pre><code>{``}</code></pre>
+
+            <h4>바이트 배열 타입</h4>
+            <ul><li>bytes 타입은 UTF-8 문자열을 바이트 형태로 저장할 수 있음</li>
+                <li>고정 크기(bytes1 ~ bytes32)와 가변 크기(bytes) 배열이 존재</li>
+                <li>string 보다 효율적인 저장 및 조작이 가능하며, 가스 비용 절감 효과가 있음</li>
+                <li>string과 쌍쌍바임</li></ul>
+            
+            <p>바이트 배열의 종류</p>
+            <ul><li>고정 크기 바이트 배열(bytes1 ~ bytes32)
+                    <ul><li>더 적은 가스를 사용하며, 연산 속도가 빠름</li>
+                        <li>크기가 정해져 있어 push()나 pop() 등의 조작이 불가능</li></ul>
+                </li>
+                <li>가변 크기 바이트 배열 (bytes)
+                    <ul><li>bytes는 동적 크기의 바이트 배열</li>
+                        <li>string과 유사하지만, 더 적은 가스를 사용하며 개별 바이트 접근 가능</li>
+                        <li>push(), pop() 등을 사용하여 크기를 조정할 수 있음</li></ul>
+                </li>
+            </ul>
+
+            <p>바이트 배열의 주요 기능</p>
+            <ul><li>바이트 배열 길이 확인(.length)
+            <pre><code>{`
+            contract BytesLength {
+                function getLength(bytes memory data) public pure returns (uint) {
+                    return data.length;
+                }
+            }
+            `}</code></pre>
+                    <ul><li>📌 bytes("Hello")를 입력하면 5 반환</li></ul>
+                    </li>
+                <li>특정 바이트 값 접근
+                <pre><code>{`
+                contract BytesAccess {
+                    function getByteAt(bytes memory data, uint256 index) public pure returns (bytes1) {
+                        require(index < data.length, "Index out of bounds");
+                        return data[index];
+                    }
+                }
+                `}</code></pre>
+                    <ul><li>📌 getByteAt(bytes("Hello"), 1) → "e" 반환
+                            <ul><li>bytes("Hello") &rarr;  "Hello"를 바이트 배열로 변환</li>
+                            <li>bytes("Hello") == [0x48, 0x65, 0x6c, 0x6c, 0x6f]</li>
+                            <li>getByteAt(..., 1): 인덱스 1에 해당하는 바이트 값을 가져옴</li></ul>
+                        </li></ul>
+                </li>
+                <li>바이트 배열 추가(push())
+                <pre><code>{`
+                contract BytesPush {
+                    bytes public data; 
+
+                    function addByte(bytes1 newByte) public { 
+                        data.push(newByte);
+                    }
+                }
+                `}</code></pre> 
+                <ul><li>📌 push()를 사용하여 바이트 배열 끝에 요소 추가 가능 (동적 배열에서만 가능)</li>
+                    <li>외부에서 1바이트(bytes1)를 입력 받아 data 배열에 push()로 추가</li></ul>
+                </li>
+                <li>바이트 배열 삭제(pop())
+                <pre><code>{`
+                contract BytesPop {
+                    bytes public data = "Hello"; 
+
+                    function removeLast() public { 
+                        data.pop();
+                    }
+                }
+                `}</code></pre>
+                <ul><li>📌 pop()을 사용하면 배열의 마지막 요소 제거 가능 (고정 크기 배열에서는 불가능)</li></ul>
+                </li>
+                </ul>
+
+                <p>바이트 배열과 문자열 변환</p>
+                <ul><li>Solidity에서 문자열을 다룰 때 bytes 타입을 활용하면 더 효율적임</li>
+                    <li>string → bytes 변환
+                <pre><code>{`
+                contract StringToBytes {
+                    function convertToBytes(string memory str) public pure returns (bytes memory) { 
+                        return bytes(str);
+                    }
+                }
+                `}</code></pre>
+                    </li>
+                    <li>bytes → string 변환
+                <pre><code>{`
+                contract BytesToString {
+                    function convertToString(bytes memory byteData) public pure returns (string memory) { 
+                        return string(byteData);
+                    }
+                } 
+                `}</code></pre>
+                    </li>
+                </ul>
+
+                <p>바이트 배열과 문자열의 차이점</p>
+                <ul><li>string: 문자열 저장, UTF-8 지원; 가스 비용 높음; 개별 문자 접근 불가능</li>
+                    <li>bytes: 바이트 배열 저장, UTF-8 X; 가스 비용 낮음; 개별 문자 접근 가능</li>
+                    <li>📌 Solidity에서 문자열을 조작할 필요가 있다면 bytes를 사용하는 것이 더 가스 효율적임임</li></ul>
+
 
             <h4>컨트랙트 코딩시 꼭 할 일</h4>
             <ul><li>보안성이 입증된 건지 확인하기; Zeppelin에서 코드 가져다 써보기</li></ul>
