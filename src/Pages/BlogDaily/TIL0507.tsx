@@ -302,7 +302,34 @@ const TIL0507 = () => {
 
 
             <p>Chainlink VRF의 Pull 방식</p>
+            <ol><li>사용자 or 계약이 요청을 보냄
+                <pre><code>{`
+    requestRandomWords(...)  // -> Chainlink VRF Coordinator에게 무작위 요청
+    `}</code></pre>
+                <ul><li>이 순간은 스마트 컨트랙트가 "데이터를 달라"고 먼저 요청하는 시점</li>
+                    <li>즉, Pull 방식의 Request 단계에 해당함.</li></ul>
+            </li>
+                <li>Chainlink 노드가 요청을 처리하고 무작위 값을 생성
+                    <ul><li>오라클 노드가 off-chain에서 서명된 랜덤 값을 생성</li>
+                        <li>이를 검증 가능한 형식으로 스마트 컨트랙트에 전달</li></ul>
+                </li>
+                <li>오라클이 fulfillRandomWords()를 호출
+                    <pre><code>{`
+    function fulfillRandomWords(...) internal override { ... } 
+    `}</code></pre>
+                    <ul><li>이 시점이 Pull 방식의 Response 단계에 해당함</li>
+                        <li>오라클이 트랜잭션을 보내서 스마트 컨트랙트의 콜백 함수에 응답하는 방식</li>
+                    </ul>
+                </li>
+            </ol>
 
+            <h4>실습</h4>
+            <ol><li><a href='https://faucet.stakepool.dev.br/amoy'>Polygon(Amoy) Facucet</a></li>
+                <li>만약 '24hr...'문구 뜨면 <a href='https://protonvpn.com/download-macos'>vpn 우회</a></li>
+                <li><a href='https://faucets.chain.link/polygon-amoy'>테스트넷에 해당하는 LINK 토큰 Faucet</a></li>
+                <li><a href='https://vrf.chain.link/polygon-amoy'>체인링크 VRF 구독하기</a></li>
+                <li>컨트랙트 배포 후 계약 주소를 consumer로 등록</li></ol>
+            <ul><li>과제물: <a href='https://github.com/dolsotbob/vrf'>vrf</a></li></ul>
 
         </div >
     )
