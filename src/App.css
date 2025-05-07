@@ -43,39 +43,27 @@
 }
 
 .SideBar {
-  width: 250px;
-  /* 적절한 너비 설정 */
-  min-width: 150px;
-  /* 최소 너비 설정 */
-  max-width: 300px;
-  /* 최대 너비 설정 */
-  flex-shrink: 1;
-  /* 창이 줄며녀 같이 줄도록 설정 */
+  width: 100%;
+  height: 60px;
+  /* 적절한 높이로 설정 */
+  position: fixed;
+  top: 60px;
+  /* 헤더 높이 아래에 배치 (App-header가 60px로 가정) */
+  left: 0;
+  background-color: lightpink;
+  display: flex;
+  flex-direction: row;
+  /* 세로 → 가로 */
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  gap: 30px;
+  z-index: 15;
+  /* header보다 아래, 콘텐츠 위에 */
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-size: 25px;
   color: rgb(206, 73, 117);
   background-color: lightpink;
-  /* 가독성을 위해 추가 */
-  display: flex;
-  /* 내부 요소 배치를 위해 flex 사용 */
-  flex-direction: column;
-  /* 내부 요소들을 세로 정렬 */
-  align-items: flex-start;
-  /* 왼쪽 정렬 (필요에 따라 center로 변경 가능) */
-  padding: 20px;
-  padding-right: 20px;
-  padding-top: 100px;
-  gap: 20px;
-  height: 100vh;
-  /* Sidebar의 높이를 화면 전체 높이에 맞추기 */
-  font-family: "Alumni Sans Pinstripe", sans-serif;
-  font-size: 30px;
-  z-index: 10;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  /* Sidebar의 너비 */
-  height: 100vh;
-  /* 화면 전체 높이 */
 }
 
 .SideBar a {
@@ -92,8 +80,8 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  /* 가운데 정렬 대신 왼쪽 정렬로 수정 */
-  margin-left: 220px;
+  margin-left: 0;
+  margin-top: 120px;
   /* Sidebar 너비보다 조금 더 여백을 주어 겹치지 않도록 설정 */
   padding: 20px;
 }
@@ -324,7 +312,7 @@
   height: 500px;
 }
 
-.til0430twap { 
+.til0430twap {
   width: 1000px;
   height: 700px;
 }

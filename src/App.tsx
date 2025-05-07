@@ -20,6 +20,7 @@ import Mint from './Pages/NFTPlatform/NFTpages/Mint';
 import Viewer from './Pages/NFTPlatform/NFTpages/Viewer';
 import NFTHeader from './Pages/NFTPlatform/components/NFTHeader';
 import BCTheory from './Pages/BlogDaily/BCTheory/BCTheory';
+import TIL0205 from './Pages/BlogDaily/BCTheory/TIL0205';
 
 
 function App() {
@@ -46,7 +47,11 @@ function App() {
             <Route path="/" element={<div>Welcome to TeaHeeHouse!</div>}></Route>
             <Route path="/about" element={<About></About>}></Route>
             <Route path="/blog" element={<Blog></Blog>}></Route>
+
             <Route path="/blog/theory" element={<BCTheory></BCTheory>}></Route>
+            <Route path="/blog/theory/0205" element={<TIL0205></TIL0205>}></Route>
+            {/* 0207까지 마저 넣기  */}
+
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
