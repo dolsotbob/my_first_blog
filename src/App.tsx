@@ -19,6 +19,7 @@ import NFT from './Pages/NFT';
 import Mint from './Pages/NFTPlatform/NFTpages/Mint';
 import Viewer from './Pages/NFTPlatform/NFTpages/Viewer';
 import NFTHeader from './Pages/NFTPlatform/components/NFTHeader';
+import BCTheory from './Pages/BlogDaily/BCTheory/BCTheory';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/" element={<div>Welcome to TeaHeeHouse!</div>}></Route>
             <Route path="/about" element={<About></About>}></Route>
             <Route path="/blog" element={<Blog></Blog>}></Route>
+            <Route path="/blog/theory" element={<BCTheory></BCTheory>}></Route>
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
@@ -62,7 +64,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
