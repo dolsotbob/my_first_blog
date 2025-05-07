@@ -36,6 +36,68 @@ const TIL0326 = () => {
                 <li>상태 변수: 블록체인 저장소에 저장되고 가스 비용 발생됨(쓰기, 읽기 시)</li>
                 <li>로컬 변수: 메모리 또는 스택에 저장되고 가스 비용 적음; 함수 실행 시에만 존재하고 실행 후 소멸됨</li></ul>
 
+            <p>상태 변수 예시</p>
+            <pre><code>{`
+            // storedValue는 컨트랙트의 저장소에 저장되며, 블록체인에 영구적으로 남는다
+
+            contract StateVariableExample {
+                uint256 public storedValue = 10; // 상태 변수
+            }
+
+            // or
+
+            contract StorageExample {
+                struct User {
+                    string name;
+                    uint256 age;
+                }
+
+                User public user;
+
+                function setUser(string memory _name, uint256 _age) public {
+                    user = User(_name, _age); // 상태 변수를 storage에 저장
+                }
+
+                function updateAge(uint256 _newAge) public {
+                    User storage storedUser = user; // 상태 변수에 직접 접근
+                    storedUser.age = _newAge; // 값 수정 (영구 저장)
+                }
+            }
+            `}</code></pre>
+            <ul><li>user는 상태 변수이며, updateAge()에서는 storage 키워드를 사용해 상태 변수에 직접 접근하고 데이터를 영구히 수정한다
+            </li></ul>
+
+            <p>로컬 변수 예시</p>
+            <pre><code>{`
+            // sum은 함수 실행 중에만 존재하는 로컬 변수이며, 블록체인에 저장되지 않는다 
+
+            contract LocalVariableExample {
+                function calculateSum(uint256 a, uint256 b) public pure returns (uint256) {
+                    uint256 sum = a + b; // 로컬 변수
+                    return sum;
+                }
+            }
+
+            // or 
+
+            // tempUser는 user 상태 변수를 복사한 메모리 변수이며, 상태 변수에는 아무런 영향을 주지 않는다.
+            
+            contract MemoryExample { 
+                struct User { 
+                    string name; 
+                    uint256 age; 
+                } 
+                
+                User public user; 
+
+                function viewUser() public view returns (string memory, uint256) {
+                    User memory tempUser = user; // 메모리로 복사 
+                    return (tempUser.name, tempUser.age); // 읽기 전용 
+                } 
+            }
+            `}</code></pre>
+            <ul><li>로컬 변수는 임시 계산이나 읽기 용도로 사용되며, 저장소에 영향을 주지 않는다.</li></ul>
+
             <h4>상수Constant 및 불변Immutalbe 변수</h4>
             <ul><li>JavaScript의 const와 비슷</li>
                 <li>언제 값을 정하느냐의 차이</li>
@@ -63,14 +125,38 @@ const TIL0326 = () => {
                 <li>외부 호출 또는 내부 로직에서 사용</li>
                 <li>상태 변수에 접근하거나 외부에서 데이터를 가져오는 데 사용됨</li>
                 <li>가시성 및 상태 변경자(State Mutability)를 설정 가능</li>
+                <pre><code>{`
+        function functionName(<parameters>) <visibility> <modifier> returns (<returnType>) {
+            // 실행할 코드
+        }
+        `}</code></pre>
             </ul>
 
             <h4>상태 변경자State Mutability</h4>
             <p>함수가 스마트 컨트랙트의 상태 변수에 어떤 영향을 미치는지를 정의함</p>
             <ul><li>view: 상태 변수의 읽기만 허용(가스 비용 없음)</li>
-                <li>pure: 상태 변수의 읽기 및 쓰기 모두 금자(가스 비용 없음)</li>
+                <li>pure: 상태 변수의 읽기 및 쓰기 모두 금지(가스 비용 없음)</li>
                 <li>payable: 이더리움을 받을 수 있는 함수</li>
             </ul>
+
+            <p>상태 변경자 예시</p>
+            <pre><code>{`
+            contract StateMutabilityExample {
+                uint256 public value = 10;
+
+                function readValue() public view returns (uint256) {
+                    return value; // 읽기만 가능
+                }
+
+                function calculateSum(uint256 a, uint256 b) public pure returns (uint256) {
+                    return a + b; // 상태 변수 접근 없음
+                }
+
+                function deposit() public payable {
+                    // 이더를 받을 수 있는 함수
+                }
+            }
+            `}</code></pre>
 
             <h4>반환값Return Value</h4>
             <ul><li>함수는 returns 키워드를 사용해 반환값의 타입을 지정할 수 있음</li>
@@ -90,8 +176,13 @@ const TIL0326 = () => {
             `}</code></pre>
 
             <h4>함수 호출 방법</h4>
-            <ul><li>내부 호출: internalFunction()을 직접 호출할 수 있음</li>
-                <li>외부 호출: this.externalFunction() 형식으로 접근해야 함</li>
+            <ul><li>내부 호출: 내부에서 internalFunction()을 직접 호출할 수 있음</li>
+                <pre><code>{`
+            function callInternal() public pure returns (string memory) {
+                return internalFunction();
+            }
+            `}</code></pre>
+                <li>외부 호출: 외부 함수 호출은 this.externalFunction() 형식으로 접근해야 함</li>
                 <pre><code>{`
                 function callExternal() public view returns (string memory) { 
                     return this.externalFunction();
@@ -145,11 +236,12 @@ const TIL0326 = () => {
             <ul><li>참조 타입: (배열, 구조체, 매핑 등) 데이터는 딴 곳에 있고 메모리에는 주소만 있음</li>
                 <li>참조 타입을 함수에서 다룰 때 데이터를 어디에 저장할 지 명확히 지정해야 한다. 이를 위해 storage, memory, calldata 3가지 키워드를 사용함</li>
             </ul>
-            <ol><li>storage: Persistent Storage
-                <ul><li>함수를 통해 접근할 때 상태 변수를 직접 참조하기 위해 사용</li>
+            <ol><li>storage: 영구 저장소에 저장 (Persistent Storage)
+                <ul><li>영구적인 데이터 저장: 블록체인의 상태 변수를 가리킴</li>
+                    <li>함수를 통해 접근할 때 상태 변수를 직접 참조하기 위해 사용</li>
                     <li>가스 비용이 높지만 블록체인에 영구적으로 데이터 기록</li></ul>
                 <pre><code>{`
-                //사용자의 의름과 잔액을 저장하고 업뎃하는 기능 제공
+                //사용자의 이름과 잔액을 저장하고 업뎃하는 기능 제공
                 contract StorageExample {     
                     struct User {      // 사용자 정보 저장하는 구조체struct인 User 정의 
                         string name;
