@@ -589,3 +589,30 @@ export const excute = async () => {
   }
 };
 `
+
+export const TIL0507MiddlewareExample = `
+const express = require('express');
+const app = express();
+
+// 미들웨어 1: 모든 요청에 대해 로그 출력
+app.use((req, res, next) => {
+  console.log(₩[LOG] S{req.method} S{req.url}₩);
+  next(); // 다음 단계로 진행
+});
+
+// 미들웨어 2: 인증 여부 확인 (간단한 예시)
+app.use((req, res, next) => {
+  if (req.query.token === '1234') {
+    next();
+  } else {
+    res.status(403).send('Forbidden');
+  }
+});
+
+// 라우터 핸들러
+app.get('/', (req, res) => {
+  res.send('Hello, authorized user!');
+});
+
+app.listen(3000);
+`

@@ -232,7 +232,7 @@ const TIL0326 = () => {
                 <li>매개변수 있을 때는 이렇게, 없을 때는 저렇게 하고 싶다고 하는 것</li>
             </ul>
 
-            <h4>storage, memory, calldata</h4>
+            <h4>함수서 사용되는 storage, memory, calldata</h4>
             <ul><li>참조 타입: (배열, 구조체, 매핑 등) 데이터는 딴 곳에 있고 메모리에는 주소만 있음</li>
                 <li>참조 타입을 함수에서 다룰 때 데이터를 어디에 저장할 지 명확히 지정해야 한다. 이를 위해 storage, memory, calldata 3가지 키워드를 사용함</li>
             </ul>
@@ -290,6 +290,13 @@ const TIL0326 = () => {
                         <li>읽기 전용이며 입력받은 데이터를 수정할 수 없음</li>
                         <li>주로 대량의 입력 데이터 처리에 사용됨</li>
                         <li>external 가시성을 가진 함수에서 주로 사용됨</li>
+                        <pre><code>{`
+                function CalldataExample { 
+                    function logMessage(string calldata message) external pure returns (string memory) {
+                        return message;   // calldata에서 읽기만 가능
+                    } 
+                }
+                `}</code></pre>
                     </ul>
                 </li>
             </ol>
@@ -322,10 +329,20 @@ const TIL0326 = () => {
                 }
             }
             `}</code></pre>
+            <ul><li>결과:
+                <ul><li>storage: 상태 변수를 직접 참조하고 값 변경</li>
+                    <li>memory: 상태 변수를 복사해 임시로 사용 (원본 데이터 변경 X)</li>
+                    <li>calldata: 외부로부터 받은 데이터를 읽기 전용으로 처리
+                    </li></ul>
+            </li></ul>
 
             <h4>조건문 및 반복문Control Structure</h4>
             <ul><li>스마트 컨트랙트의 동작 흐름을 제어하는 데 사용됨</li>
-                <li>반복문 제어 키워드: break, continue</li></ul>
+                <li>반복문 제어 키워드:
+                    <ul><li>break: 반복문을 즉시 종료</li>
+                        <li>continue: 다음 반복으로 건너뛰기</li></ul>
+                </li>
+            </ul>
 
             <p>반복문 사용 시 주의사항(가스 비용 최적화)</p>
             <ol><li>가스 비용 고려: 반복문은 실행 횟수에 비례하여 가스 비용이 증가함</li>
