@@ -590,7 +590,7 @@ export const excute = async () => {
 };
 `
 
-export const TIL0507MiddlewareExample = `
+export const TIL0509MiddlewareExample = `
 const express = require('express');
 const app = express();
 
@@ -615,4 +615,29 @@ app.get('/', (req, res) => {
 });
 
 app.listen(3000);
+`
+
+export const TIL0509RoutingExample = `
+const express = require('express');
+const app = express();
+
+// GET 요청 처리
+app.get('/hello', (req, res) => {
+  res.send('Hello, world!');
+});
+
+// POST 요청 처리
+app.post('/users', (req, res) => {
+  res.send('New user created');
+});
+
+app.listen(3000);
+`
+
+export const TIL0509RoutingExample2 = `
+app.get('/products');          // 모든 상품 조회
+app.get('/products/:id');      // 특정 상품 조회
+app.post('/products');         // 상품 추가
+app.put('/products/:id');      // 상품 전체 수정
+app.delete('/products/:id');   // 상품 삭제
 `

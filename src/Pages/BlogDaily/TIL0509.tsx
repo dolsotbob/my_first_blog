@@ -1,6 +1,8 @@
-import React from 'react'
-import CodeBlock from '../../components/CodeBlock'
-import { TIL0507MiddlewareExample } from '../codeExamples'
+import React from 'react';
+import CodeBlock from '../../components/CodeBlock';
+import { TIL0509MiddlewareExample } from '../codeExamples';
+import { TIL0509RoutingExample } from '../codeExamples';
+import { TIL0509RoutingExample2 } from '../codeExamples';
 
 const ServersSupportingMiddleware = [
     {
@@ -42,6 +44,45 @@ const ServersSupportingMiddleware = [
         server: 'Low-level 서버 (C, nginx 등)',
         availability: '❌ 없음',
         details: '개념적으로는 없음, 직접 요청 흐름을 구현해야 함'
+    },
+];
+
+const HTTPmethod = [
+    {
+        method: 'GET',
+        meaning: '조회',
+        path: '/users',
+        details: '모든 사용자 목록 조회'
+    },
+    {
+        method: 'GET',
+        meaning: '조회',
+        path: '/users/1',
+        details: 'ID가 1인 사용자 조회'
+    },
+    {
+        method: 'POST',
+        meaning: '생성',
+        path: '/users',
+        details: '새로운 사용자 생성'
+    },
+    {
+        method: 'PUT',
+        meaning: '전체 수정',
+        path: '/users/1',
+        details: 'ID가 1인 사용자 정보 전체 수정'
+    },
+    {
+        method: 'PATCH',
+        meaning: '부분 수정',
+        path: '/users/1',
+        details: '일부 필드만 수정'
+    },
+    {
+        method: 'DELETE',
+        meaning: '삭제',
+        path: '/users/1',
+        details: 'ID가 1인 사용자 삭제'
     },
 ];
 
@@ -140,7 +181,7 @@ const TIL0509 = () => {
             <p>요청 처리 흐름(Express 기준)</p>
             <ul><li>[사용자 요청] → [미들웨어1] → [미들웨어2] → ... → [라우터 핸들러] → [응답 전송]</li>
                 <li>예시 코드:
-                    <CodeBlock code={TIL0507MiddlewareExample}></CodeBlock>
+                    <CodeBlock code={TIL0509MiddlewareExample}></CodeBlock>
                 </li>
             </ul>
 
@@ -172,7 +213,44 @@ const TIL0509 = () => {
             </div>
 
             <h4>다시보는 REST API와 라우팅 구조</h4>
+            <p>REST API란?</p>
+            <ul><li>REST는 "REpresentational State Transfer"의 약자</li>
+                <li>REST API는 웹에서 자원(Resource)을 다루는 일종의 설계 규칙</li>
+                <li>클라이언트가 서버에 요청을 보낼 때, URL과 HTTP 메서드를 조합하여 어떤 "행동"을 할지 표현한다</li>
+                <li>서버는 이 요청을 보고 어떤 자원에 어떤 처리를 할지 결정한다</li>
+            </ul>
 
+            <p>REST API의 예시</p>
+            <div className="ml-4">
+                {HTTPmethod.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.method}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong>의미:</strong> {type.meaning}</li>
+                            <li><strong>예시 경로:</strong> {type.path}</li>
+                            <li><strong>설명:</strong> {type.details}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
+
+            <p>라우팅이란?</p>
+            <ul><li>어떤 URL로 요청이 들어왔을 때 어떤 코드가 실행될지를 결정하는 과정</li>
+                <li>Express 예시:
+                    <CodeBlock code={TIL0509RoutingExample}></CodeBlock>
+                    <ul><li>→ /hello 경로로 GET 요청이 오면 "Hello, world!" 응답 → /users 경로로 POST 요청이 오면 "New user created" 응답</li></ul>
+                </li>
+            </ul>
+
+            <p>URL과 메서드를 조합해 표현력 높이기</p>
+            <CodeBlock code={TIL0509RoutingExample2}></CodeBlock>
+            <ul><li>:id는 URL 파라미터로, 경로 내에 동적인 값을 받을 수 있게 해줌</li>
+                <li>예: /products/7 요청이 오면 id = 7</li></ul>
+
+            <h4>과제</h4>
+            <ul><li><a href='https://github.com/dolsotbob/express'>express</a></li>
+                <li>Postman으로 API 요청 해보기</li>
+            </ul>
 
         </div>
     )
