@@ -1,6 +1,40 @@
 import React from 'react'
 
+const CodeBlock = ({ code }: { code: string }) => {
+    return (
+        <pre style={{ backgroundColor: '#f5f5f5', padding: '12px', borderRadius: '6px', overflowX: 'auto' }}>
+            <code>{code}</code>
+        </pre>
+    );
+};
+
 const TIL0326 = () => {
+    const breackCode = `
+    function breakExample(uint256 limit) public pure returns (uint256) {
+        uint256 sum = 0;
+        for (uint256 i = 1; i <= limit; i++) {
+            if (i == 5) {
+                break; // i가 5가 되면 반복 종료
+            }
+            sum += i;
+        }
+        return sum;
+    }
+    `;
+
+    const continueCode = `
+    function continueExample(uint256 limit) public pure returns (uint256) {
+        uint256 sum = 0;
+        for (uint256 i = 1; i <= limit; i++) {
+            if (i % 2 == 0) {
+                continue; // 짝수는 건너뜀
+            }
+            sum += i;
+        }
+        return sum;
+    }
+    `
+
     return (
         <div className='BlogDaily'>
             <p>2025년 3월 26일</p>
@@ -340,7 +374,9 @@ const TIL0326 = () => {
             <ul><li>스마트 컨트랙트의 동작 흐름을 제어하는 데 사용됨</li>
                 <li>반복문 제어 키워드:
                     <ul><li>break: 반복문을 즉시 종료</li>
+                        <CodeBlock code={breackCode} />
                         <li>continue: 다음 반복으로 건너뛰기</li></ul>
+                    <CodeBlock code={continueCode}></CodeBlock>
                 </li>
             </ul>
 
@@ -352,8 +388,14 @@ const TIL0326 = () => {
 
             <h3>Solidity에서 이벤트란?</h3>
             <ul><li>스마트 컨트랙트와 외부 애플리케이션(예: DApp 또는 프론트엔드) 간의 통신을 위한 메커니즘</li>
-                <li>블록체인에 기록되어 외부에서 읽기 가능</li>
-                <li>tnx log로 저장; 영구 저장은 아니지만 검색 가능</li></ul>
+                <li>이벤트는 스마트 컨트랙트 내에서 발생한 특정 동작을 기록하고, 해당 로그는 이더리움 블록체인에 저장되어 외부 애플리케이션이 이를 감지할 수 있다.</li>
+                <li>특징:
+                    <ul><li>블록체인에 기록되어 외부에서 읽기 가능</li>
+                        <li>트랜잭션 로그(logs)로 저장; 영구 저장은 아니지만 검색 가능</li>
+                        <li>스마트 컨트랙트와 외부 애플리케이션 간의 소통에 사용됨</li>
+                    </ul>
+                </li>
+            </ul>
 
             <h4>이벤트 선언 및 사용 방법</h4>
             <ul><li>이벤트 선언
