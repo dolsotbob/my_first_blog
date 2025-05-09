@@ -19,8 +19,24 @@ import NFT from './Pages/NFT';
 import Mint from './Pages/NFTPlatform/NFTpages/Mint';
 import Viewer from './Pages/NFTPlatform/NFTpages/Viewer';
 import NFTHeader from './Pages/NFTPlatform/components/NFTHeader';
+
 import BCTheory from './Pages/BlogDaily/BCTheory/BCTheory';
+import TIL0203 from './Pages/BlogDaily/BCTheory/TIL0203';
+import TIL0204 from './Pages/BlogDaily/BCTheory/TIL0204';
 import TIL0205 from './Pages/BlogDaily/BCTheory/TIL0205';
+import TIL0206 from './Pages/BlogDaily/BCTheory/TIL0206';
+import TIL0207 from './Pages/BlogDaily/BCTheory/TIL0207';
+
+import Web from './Pages/BlogDaily/Web/Web';
+import TIL0210 from './Pages/BlogDaily/Web/TIL0210';
+import TIL0211 from './Pages/BlogDaily/Web/TIL0211';
+import TIL0212 from './Pages/BlogDaily/Web/TIL0212';
+import TIL0213 from './Pages/BlogDaily/Web/TIL0213';
+
+
+
+
+
 
 
 function App() {
@@ -49,8 +65,17 @@ function App() {
             <Route path="/blog" element={<Blog></Blog>}></Route>
 
             <Route path="/blog/theory" element={<BCTheory></BCTheory>}></Route>
+            <Route path="/blog/theory/0203" element={<TIL0203></TIL0203>}></Route>
+            <Route path="/blog/theory/0204" element={<TIL0204></TIL0204>}></Route>
             <Route path="/blog/theory/0205" element={<TIL0205></TIL0205>}></Route>
-            {/* 0207까지 마저 넣기  */}
+            <Route path="/blog/theory/0206" element={<TIL0206></TIL0206>}></Route>
+            <Route path="/blog/theory/0207" element={<TIL0207></TIL0207>}></Route>
+
+            <Route path="/blog/web" element={<Web></Web>}></Route>
+            <Route path="/blog/web/0210" element={<TIL0210></TIL0210>}></Route>
+            <Route path="/blog/web/0211" element={<TIL0211></TIL0211>}></Route>
+            <Route path="/blog/web/0212" element={<TIL0212></TIL0212>}></Route>
+            <Route path="/blog/web/0213" element={<TIL0213></TIL0213>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>

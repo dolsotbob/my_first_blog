@@ -1,8 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
-import Signature from './BlogDaily/Signature'
-import Introduction from './BlogDaily/Introduction'
-import TIL0206 from './BlogDaily/TIL0206'
 import TILmain from './TILmain'
 
 const Blog = () => {
@@ -12,17 +9,6 @@ const Blog = () => {
   return (
     <div className="Daily">
       <TILmain />
-      <div className='section-wrapper'>
-        <div onClick={() => navigate("/blog/0203")}>0203</div>
-        <div onClick={() => navigate("/blog/0204")}>0204</div>
-        <div onClick={() => navigate("/blog/0205")}>0205</div>
-        <div onClick={() => navigate("/blog/0206")}>0206</div>
-        <div onClick={() => navigate("/blog/0207")}>0207</div>
-      </div>
-      <div onClick={() => navigate("/blog/0210")}>0210 기초 - 웹 개발 이해하기</div>
-      <div onClick={() => navigate("/blog/0211")}>0211 Git</div>
-      <div onClick={() => navigate("/blog/0212")}>0212 HTML</div>
-      <div onClick={() => navigate("/blog/0213")}>0213 Link 태그와 미디어 쿼리</div>
       <div onClick={() => navigate("/blog/0214")}>0214 Javascript 1</div>
       <div onClick={() => navigate("/blog/0217")}>0217 Javascript 2</div>
       <div onClick={() => navigate("/blog/0218")}>0218 계산기 만들기</div>

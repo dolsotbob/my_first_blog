@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Introduction = () => {
+const TIL0203 = () => {
   return (
     <div className='BlogDaily'>
       <h3>비트코인의 탄생 배경</h3>
@@ -42,7 +42,7 @@ const Introduction = () => {
         <li>탈중앙화 금융의 대안 제시</li>
       </ol>
       블록체인은 디지털 세상에서 데이터의 신뢰를 만들어내는 신뢰의 기술이다.
-      <br/>
+      <br />
       나만의 문제 인식과 그 해결을 위한 블록체인 활용법에 대해 스케치 하며 공부해보자.
 
 
@@ -50,7 +50,7 @@ const Introduction = () => {
   )
 }
 
-export default Introduction
+export default TIL0203
 
 
 
