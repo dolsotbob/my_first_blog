@@ -641,3 +641,51 @@ app.post('/products');         // 상품 추가
 app.put('/products/:id');      // 상품 전체 수정
 app.delete('/products/:id');   // 상품 삭제
 `
+
+export const TIL0512CreateServer = `
+// app.js 또는 server.js 
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// JSON 요청 파싱 미들웨어 등록 
+app.use(express.json());
+
+// 기본 라우팅 예시 
+app.get('/', (req, res) => {
+  res.send('Hello Express!');
+});
+
+app.listen(port, () => {
+  console.log(₩🚀 서버가 http://localhost:S{port} 에서 실행 중입니다.₩);
+});
+`
+
+export const TIL0512UserAPIExample = `
+// GET: 사용자 전체 목록 조회
+app.get('/users', (req, res) => {
+  res.json(users); // 예: [{ id: 1, name: 'Alice' }]
+});
+
+// POST: 사용자 생성
+app.post('/users', (req, res) => {
+  const newUser = req.body;
+  users.push(newUser);
+  res.status(201).json(newUser);
+});
+
+// PUT: 사용자 정보 수정
+app.put('/users/:id', (req, res) => {
+  const { id } = req.params;
+  const updated = req.body;
+  // 실제 수정 로직은 생략
+  res.json({ id, ...updated });
+});
+
+// DELETE: 사용자 삭제
+app.delete('/users/:id', (req, res) => {
+  const { id } = req.params;
+  // 실제 삭제 로직은 생략
+  res.status(204).send();
+});
+`

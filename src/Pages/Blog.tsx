@@ -52,6 +52,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0430')}>0430 Uniswap</div>
       <div onClick={() => navigate('/blog/0507')}>0507 Oracle</div>
       <div onClick={() => navigate('/blog/0509')}>0509 Server Intro</div>
+      <div onClick={() => navigate('/blog/0512')}>0512 Express</div>
       <div onClick={() => navigate('/blog/0402hw')}>주말 과제 예고</div>
       {/* <div href="/signature">0203</div> */}
     </div>
