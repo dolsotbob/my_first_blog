@@ -63,8 +63,9 @@ const TIL0220 = () => {
 
             <p>변수 선언 시 주의할 점</p>
             <ol>
-                <li>전역 변수는 최소화</li>
-                <ul>
+                <li>전역 변수에 너무 많은 변수를 선언하지 않는 것이 좋다</li>
+                <ul><li>전역변수는 어디서든 접근 가능한 변수라 편리한 대신,</li>
+                    <li>다른 함수 혹은 로직에 의해 의도되지 않은 변경이 발생할 수 있습니다</li>
                     <li>CSS 관심사 분리</li>
                 </ul>
                 <li>let, const 사용</li>
@@ -73,100 +74,133 @@ const TIL0220 = () => {
                     </li>
                 </ul>
                 <li>선언 없는 변수 할당 금지</li>
-                <li>실수 방지 위해 Strict Mode 사용</li>
+                <li>실수 방지 위해 Strict Mode 사용
+                    <ul><li>js 파일 상단에 'use strict' 라고 입력하면 사용할 수 있음</li></ul>
+                </li>
+                <li>Typescript 사용</li>
             </ol>
 
             <h4>클로져</h4>
-            함수 안쪽에서 바깥쪽의 변수를 사용할 수 있지만 그 반대는 안된다는 것. <br />
-            외변접내: 외부 함수의 변수에 접근할 수 있는 내부 함수 <br />
-            {/* <br>클로저가/ 중요/한 이유: <br>
-                  클로저의 함수는 어디에서 호출되느냐와 무관하게 선언된 함수 주변 환경에 따라 접근할 수 있는 변수가 정해짐.
-  
-                  <h4>클로저의 특징을/ 활용한 /사례</h4>
-                  <ul>
-                      <li>데이터를 보존하는 함수</li>
-                      <ul>아래 코드에서 getFoodRecipe가 클로저로서
-                          foodName, ingredient1, ingredient2에 접근할 수 있음. <br>
-                          이 때 createFoodRecipe('하이볼')으로 전달된 문자열 '하이볼'은 recipe 함수 호출 시 계속 재사용할 수 있음.<br>
-                          <br> function createFoodRecipe (foodName) {
-                          <ul>let ingredient1 = '탄산수';</ul>
-                          <ul>let ingredient2 = '위스키';</ul>
-                          <ul>const getFoodRecipe = function () {</ul>
-                          <ul>return `${ingredient1} + ${ingredient2} = ${foodName}!`;}</ul>
-                          <ul>return getFoodRecipe</ul>
-                          <br>
-                          <ul> const recipe = createFoodRecipe('하이볼');</ul>
-                          <ul>recipe(); // '탄산수 + 위스키 = 하이볼!'</ul><br>
-                      </ul>
-                      <li>커링</li>
-                      <ul>
-                          <li>여러 전달인자를 가진 함수를 함수를 연속적으로 리턴하는 함수로 변경하는 행위</li>
-                          <ul>function sum(a, b) {return a + b;}</ul><br>
-                          <ul>function currySum(a)
-                              <ul>{return function (b) {
-                                  <ul>return a + b; }; }</ul>
-                              </ul>
-                          </ul><br>
-                          <ul>console.log(sum(10,20) === currySum(10)(20))</ul>
-                      </ul>
-                      <ul>
-                          <li>전체 프로세스의 일정 부분까지 실행하는 경우 유용 </li>
-                      </ul><br>
-                      <li>모듈 패턴
-                          <ul>
-                              <li>모듈은 하나의 기능을 온전히 수행하기 위한
-                                  모든 코드를 가지고 있는 코드 모음으로 하나의 단위로서 역할을 함.
-                              </li>
-                          </ul>
-                      </li>
-                  </ul>
-                  <p>클로저는 특정 데이터를 다른 코드의 실행으로부터 보호해야할 때 용이하다.</p>
-  
-                  <h4>spread/rest 문법</h4>
-                  <ul>
-                      <li>spread 문법
-                          <ul>
-                              <li>배열을 풀어서 인자로 전달하거나, 배열을 풀어서 각각의 요소로 넣을 때 사용</li>
-                          </ul>
-                          <ul>function sum(x, y, z) {<br>
-                              <ul>return x + y + z; } </ul><br>
-                              <ul>const numbers = [1, 2, 3];</ul>
-                              <ul>sum(...numbers) //6</ul>
-                          </ul>
-  
-                      </li>
-                      <li>rest 문법
-                          <ul>
-                              <li>파라미터를 배열의 형태로 받아서 사용할 수 있음.</li>
-                              <ul>function sum(...theArgs) {
-                                  <ul>return theArgs.reduce((previous, current) => {
-                                      <ul>return previous + current; }); }</ul>
-                                  </ul>
-                              </ul><br>
-                              <ul>sum(1,2,2) ///6</ul>
-                          </ul>
-                      </li>
-                  </ul>
-  
-                  <h4>화살표 함수</h4>
-                  <p>함수를 정의하는 방법:
-                  <ul>
-                      <li>함수 선언문
-                          <ul>function sum (x, y) { </ul>
-                          <ul>return x + y; }</ul>
-                      </li>
-                      <li>함수 표현식
-                          <ul>const subtract = function (x, y) {</ul>
-                          <ul>return x - y; }</ul>
-                      </li>
-                  </ul>
-                  </p>
-                  <p>여기에 더해 화살표 함수가 있음. function 키워드 대신 화살표(=>)를 사용함.
-                  <ul>const multiply = (x, y) => {</ul>
-                  <ul>return x * y; }</ul>
-                  매개변수가 한 개일 때 소괄호 생략 가능.<br>
-                  함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능.
-                  </p> */}
+            <ul><li>함수 안쪽에서 바깥쪽의 변수를 사용할 수 있지만 그 반대는 안된다는 것</li>
+                <li>외변접내: 외부 함수의 변수에 접근할 수 있는 내부 함수</li></ul>
+
+            <p>클로저가 중요한 이유</p>
+            <ul><li>클로저의 함수는 어디에서 호출되느냐와 무관하게 선언된 함수 주변 환경에 따라 접근할 수 있는 변수가 정해짐</li></ul>
+
+
+            <h4>클로저의 활용</h4>
+
+            <p>데이터를 보존하는 함수</p>
+            <ul><li>아래 코드에서 getFoodRecipe가 클로저로서 foodName, ingredient1, ingredient2에 접근할 수 있음</li>
+                <li>이 때 createFoodRecipe('하이볼')으로 전달된 문자열 '하이볼'은 recipe 함수 호출 시 계속 재사용할 수 있음</li>
+                <pre><code>{`
+    function createFoodRecipe (foodName) {
+        let ingredient1 = '탄산수';
+        let ingredient2 = '위스키';
+        const getFoodRecipe = function () {
+            return ₩S{ingredient1} + S{ingredient2} = S{foodName}!₩;
+        }
+                    return getFoodRecipe;
+    }
+
+    const recipe = createFoodRecipe('하이볼');
+    recipe(); // '탄산수 + 위스키 = 하이볼!'
+                `}</code></pre>
+            </ul>
+
+            <p>커링</p>
+            <ul>
+                <li>여러 전달인자를 가진 함수를 함수를 연속적으로 리턴하는 함수로 변경하는 행위</li></ul>
+            <pre><code>{`
+function sum(a, b) {
+  return a + b;
+}
+
+function currySum(a) {
+	return function(b) {
+		return a + b;
+	};
+}
+
+console.log(sum(10, 20) === currySum(10)(20)) // true
+    `}</code></pre>
+            <ul>
+                <li>전체 프로세스의 일정 부분까지 실행하는 경우 유용 </li>
+            </ul>
+            <ul>모듈 패턴
+                <ul>
+                    <li>모듈은 하나의 기능을 온전히 수행하기 위한
+                        모든 코드를 가지고 있는 코드 모음으로 하나의 단위로서 역할을 함.
+                    </li>
+                </ul>
+            </ul>
+            <p>클로저는 특정 데이터를 다른 코드의 실행으로부터 보호해야할 때 용이하다.</p>
+
+            <h4>spread/rest 문법</h4>
+            <ul>
+                <li>spread 문법
+                    <ul>
+                        <li>배열을 풀어서 인자로 전달하거나, 배열을 풀어서 각각의 요소로 넣을 때 사용</li>
+                    </ul>
+                    <pre><code>{`
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+sum(...numbers) // 질문: 어떤 값을 리턴하나요?
+`}</code></pre>
+
+                </li>
+                <li>rest 문법
+                    <ul>
+                        <li>파라미터를 배열의 형태로 받아서 사용할 수 있음.</li>
+                        <pre><code>{`
+function sum(...theArgs) {
+  return theArgs.reduce((previous, current) => {
+    return previous + current;
+  });
+}
+
+sum(1,2,3) // 질문: 어떤 값을 리턴하나요?
+sum(1,2,3,4) // 질문: 어떤 값을 리턴하나요?
+`}</code></pre>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>화살표 함수</h4>
+            <p>함수를 정의하는 방법:
+                <ul>
+                    <li>함수 선언문과 함수 표현식
+                        <pre><code>{`
+// 함수선언문
+function sum (x, y) {
+	return x + y;
+}
+
+// 함수표현식
+const subtract = function (x, y) {
+	return x - y;
+}
+`}</code></pre>
+                    </li>
+                </ul>
+            </p>
+
+            <p>여기에 더해 화살표 함수가 있음. function 키워드 대신 화살표를 사용함</p>
+            <pre><code>{`
+// 화살표 함수
+const multiply = (x, y) => {
+	return x * y;
+}
+`}</code></pre>
+            <ul><li>매개변수가 한 개일 때 소괄호 생략 가능</li>
+                <li>함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능</li></ul>
+
+
+
 
 
         </div>
