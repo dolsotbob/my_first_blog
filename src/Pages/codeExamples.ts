@@ -702,13 +702,16 @@ function authenticate(req, res, next) {
    // 헤더가 없다면 인증 실패 
    if (!authHeader) return res.sendStatus(401); 
 
-  // Authorization 헤더는 "Bearer <token>" 형식이므로,
-	//	공백 기준으로 나눠서 두 번째 요소(token)만 추출 
-  // 첫 번째 요소는 Bearer임  
+   // Authorization 헤더는 "Bearer <token>" 형식이므로,
+	 //	공백 기준으로 나눠서 두 번째 요소(token)만 추출 
+   // 첫 번째 요소는 Bearer임  
    const token = authHeader.split(' ')[1];
 
    try { 
+     // jwt.verify() 로 토큰이 유효한지 검사 
+     // 검증 성공 시, 토큰에 담긴 payload가 decoded로 반환됨 
      const decoded = jwt.verify(token, 'my-secret-key');
+     // 검증에 성공하면 토큰에 담긴 사용자 정보를 req.user에 저장 
      req.user = decoded; 
      next();
    } catch (err) {
