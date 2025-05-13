@@ -33,9 +33,14 @@ import TIL0211 from './Pages/BlogDaily/Web/TIL0211';
 import TIL0212 from './Pages/BlogDaily/Web/TIL0212';
 import TIL0213 from './Pages/BlogDaily/Web/TIL0213';
 
-
-
-
+import JavaScript from './Pages/BlogDaily/JavaScript/JavaScript';
+import TIL0214 from './Pages/BlogDaily/JavaScript/TIL0214';
+import TIL0217 from './Pages/BlogDaily/JavaScript/TIL0217';
+import TIL0218 from './Pages/BlogDaily/JavaScript/TIL0218';
+import TIL0219 from './Pages/BlogDaily/JavaScript/TIL0219';
+import TIL0220 from './Pages/BlogDaily/JavaScript/TIL0220';
+import TIL0221 from './Pages/BlogDaily/JavaScript/TIL0221';
+import TIL0224 from './Pages/BlogDaily/JavaScript/TIL0224';
 
 
 
@@ -76,6 +81,15 @@ function App() {
             <Route path="/blog/web/0211" element={<TIL0211></TIL0211>}></Route>
             <Route path="/blog/web/0212" element={<TIL0212></TIL0212>}></Route>
             <Route path="/blog/web/0213" element={<TIL0213></TIL0213>}></Route>
+
+            <Route path="/blog/js" element={<JavaScript></JavaScript>}></Route>
+            <Route path="/blog/js/0214" element={<TIL0214></TIL0214>}></Route>
+            <Route path="/blog/js/0217" element={<TIL0217></TIL0217>}></Route>
+            <Route path="/blog/js/0218" element={<TIL0218></TIL0218>}></Route>
+            <Route path="/blog/js/0219" element={<TIL0219></TIL0219>}></Route>
+            <Route path="/blog/js/0220" element={<TIL0220></TIL0220>}></Route>
+            <Route path="/blog/js/0221" element={<TIL0221></TIL0221>}></Route>
+            <Route path="/blog/js/0224" element={<TIL0224></TIL0224>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>

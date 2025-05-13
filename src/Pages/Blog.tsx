@@ -9,13 +9,6 @@ const Blog = () => {
   return (
     <div className="Daily">
       <TILmain />
-      <div onClick={() => navigate("/blog/0214")}>0214 Javascript 1</div>
-      <div onClick={() => navigate("/blog/0217")}>0217 Javascript 2</div>
-      <div onClick={() => navigate("/blog/0218")}>0218 계산기 만들기</div>
-      <div onClick={() => navigate("/blog/0219")}>0219 Javascript 3</div>
-      <div onClick={() => navigate("/blog/0220")}>0220 Javascript 4</div>
-      <div onClick={() => navigate("/blog/0221")}>0221 DOM</div>
-      <div onClick={() => navigate("/blog/0224")}>0224 Javascript 5</div>
       <div onClick={() => navigate("/blog/0225")}>0225 객체 지향 프로그래밍(OOP)</div>
       <div onClick={() => navigate("/blog/0226")}>0226 심화 - 비동기</div>
       <div onClick={() => navigate("/blog/0227")}>0227 심화 - React 기초</div>

@@ -2,15 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import TIL0307 from './BlogDaily/TIL0307';
 import TIL0312 from './BlogDaily/TIL0312';
-import TIL0214 from './BlogDaily/TIL0214';
-import TIL0217 from './BlogDaily/TIL0217';
-import TIL0218 from './BlogDaily/TIL0218';
-import TIL0219 from './BlogDaily/TIL0219';
 import TIL0313 from './BlogDaily/TIL0313';
 import TIL0314 from './BlogDaily/TIL0314';
-import TIL0220 from './BlogDaily/TIL0220';
-import TIL0221 from './BlogDaily/TIL0221';
-import TIL0224 from './BlogDaily/TIL0224';
 import TIL0225 from './BlogDaily/TIL2025';
 import TIL0226 from './BlogDaily/TIL0226';
 import TIL0227 from './BlogDaily/TIL0227';
@@ -50,13 +43,6 @@ const Blogpage = () => {
 
     return (
         <div className='blogpage'>
-            {slug === "0214" && <TIL0214></TIL0214>}
-            {slug === "0217" && <TIL0217></TIL0217>}
-            {slug === "0218" && <TIL0218></TIL0218>}
-            {slug === "0219" && <TIL0219></TIL0219>}
-            {slug === "0220" && <TIL0220></TIL0220>}
-            {slug === "0221" && <TIL0221></TIL0221>}
-            {slug === "0224" && <TIL0224></TIL0224>}
             {slug === "0225" && <TIL0225></TIL0225>}
             {slug === "0226" && <TIL0226></TIL0226>}
             {slug === "0227" && <TIL0227></TIL0227>}

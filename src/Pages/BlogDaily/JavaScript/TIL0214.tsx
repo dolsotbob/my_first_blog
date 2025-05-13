@@ -96,12 +96,12 @@ const TIL0214 = () => {
 
       <h4>함수</h4>
       <ul><li>함수를 사용한다는 것은... 특정한 코드실행 과정을 하나의 묶음으로 묶어서 필요할 때마다 호출하여 실행한다는 것을 의미함</li>
-      <li>함수를 정의한다: 특정한 코드실행 과정을 묶어서 함수를 생성하는 것</li>
+        <li>함수를 정의한다: 특정한 코드실행 과정을 묶어서 함수를 생성하는 것</li>
       </ul>
 
       <p>함수를 정의하는 방법</p>
       <ul><li>함수선언문</li>
-      <li>함수표현식식: 변수에 함수를 할당하여 표현</li></ul>
+        <li>함수표현식식: 변수에 함수를 할당하여 표현</li></ul>
       <pre><code>{`
       let greeting = function () { 
         console.log('hello world')
@@ -110,7 +110,7 @@ const TIL0214 = () => {
 
       <p>매개변수와 전달인자</p>
       <ul><li>매개변수는 함수를 정의할 때 ()에 넣어 선언하고, 함수 코드 블록 안에서 변수처럼 취급됨</li>
-      <li>전달인자: 매개변수에 값을 할당하기 위해 함수 호출할 때 소괄호 안에 넣는 값</li></ul>
+        <li>전달인자: 매개변수에 값을 할당하기 위해 함수 호출할 때 소괄호 안에 넣는 값</li></ul>
       <pre><code>{`
       function greeting (name) { 
         console.log('hello' + name); 
@@ -121,8 +121,8 @@ const TIL0214 = () => {
 
       <p>매개변수에 대해 더 알아보자자</p>
       <ul><li>여러 개의 매개 변수 사용 가능</li>
-      <li>매개변수의 수보다 적은 전달인자가 전달되거나 매개변수보다 많은 전달인자가 전달된다면? ...undefined로 초기화됨</li>
-      <pre><code>{`
+        <li>매개변수의 수보다 적은 전달인자가 전달되거나 매개변수보다 많은 전달인자가 전달된다면? ...undefined로 초기화됨</li>
+        <pre><code>{`
       function getUserName (user1, user2) {
         console.log(user1);
         console.log(user2);
@@ -130,7 +130,7 @@ const TIL0214 = () => {
 
       getUserName('elice kim'); // 'elice kim' undefined
       `}</code></pre>
-      <li>매개변수는 함수 내부에서만 사용 가능; 함수 내부에서 선언한 변수도 함수 내부에서만 사용 가능</li></ul>
+        <li>매개변수는 함수 내부에서만 사용 가능; 함수 내부에서 선언한 변수도 함수 내부에서만 사용 가능</li></ul>
       <pre><code>{`
       function getUser (number) {
         let userName = 'elice kim';
@@ -142,18 +142,18 @@ const TIL0214 = () => {
 
       <p>return문/반환문</p>
       <ul><li>함수 외부에서 함수의 결과값을 사용할 수 있게 해줌</li>
-      <li>return문의 중요 역할
-        <ol><li>함수 내부의 코드가 차례대로 실행되다가 return문을 만나면 값을 반환한 후 함수는 종료됨; return문 뒤에 나오는 코드는 실행되지 않음</li>
-        <li>return문에 작성된 코드를 실행한 후 결과를 함수 외부로 리턴함</li>
-        <pre><code>{`
+        <li>return문의 중요 역할
+          <ol><li>함수 내부의 코드가 차례대로 실행되다가 return문을 만나면 값을 반환한 후 함수는 종료됨; return문 뒤에 나오는 코드는 실행되지 않음</li>
+            <li>return문에 작성된 코드를 실행한 후 결과를 함수 외부로 리턴함</li>
+            <pre><code>{`
         function add (x, y) {
             return x + y; // 반환문
         }
         
         console.log(add(3, 2));  //5 
         `}</code></pre>
-        <li>함수 호출의 결과를 변수에 할당하는 것도 가능</li>
-        <pre><code>{`
+            <li>함수 호출의 결과를 변수에 할당하는 것도 가능</li>
+            <pre><code>{`
         function add (x, y) {
             return x + y; // 반환문
         }
@@ -161,8 +161,8 @@ const TIL0214 = () => {
         let result = add(3, 2); 
         console.log(result);   // 5
         `}</code></pre>
-        <li>함수의 호출 결과끼리의 연산도 가능</li>
-        <pre><code>{`
+            <li>함수의 호출 결과끼리의 연산도 가능</li>
+            <pre><code>{`
         function add (x, y) {
             return x + y; // 반환문
         }
@@ -170,9 +170,9 @@ const TIL0214 = () => {
         let result = add(3, 2) + add(5, 7); 
         console.log(result);   // 17
         `}</code></pre>
-        </ol>  
-      </li></ul>
-    
+          </ol>
+        </li></ul>
+
       <p>기타 강의 노트:</p>
       <ul><li>문자열 주요 메서드: 지갑 주소 확인, 비교할 때 유용함</li>
         <li>논리 부정 연산자(!) 주로 언제 쓰이는지: 값이 없으면 오류를 내보내줘 할 때. 오류가 날 경우 다른 방식으로 할 수 있도록.</li>
