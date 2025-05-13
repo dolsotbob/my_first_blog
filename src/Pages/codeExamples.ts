@@ -689,3 +689,30 @@ app.delete('/users/:id', (req, res) => {
   res.status(204).send();
 });
 `
+
+export const TIL0513tokenAuthMiddleware = `
+// JSON Web Token을 검증하고 생성하는 jsonwebtoken 라이브러리를 가져온다 
+const jwt = require('jsonwebtoken');
+
+// 이 미들웨어 함수는 /auth/me 같은 인증이 필요한 라우터 전에 실행됩니다.
+function authenticate(req, res, next) {
+   // 요청 헤더에서 Authorization 값을 꺼낸다 
+   // 클라이언트는 이렇게 보낸다 -> Authorization: Bearer <JWT토큰>
+   const authHeader = req.headers.authorization; 
+   // 헤더가 없다면 인증 실패 
+   if (!authHeader) return res.sendStatus(401); 
+
+  // Authorization 헤더는 "Bearer <token>" 형식이므로,
+	//	공백 기준으로 나눠서 두 번째 요소(token)만 추출 
+  // 첫 번째 요소는 Bearer임  
+   const token = authHeader.split(' ')[1];
+
+   try { 
+     const decoded = jwt.verify(token, 'my-secret-key');
+     req.user = decoded; 
+     next();
+   } catch (err) {
+     return res.status(403).json({ message: '토큰이 유효하지 않습니다.' });
+   }
+}
+`
