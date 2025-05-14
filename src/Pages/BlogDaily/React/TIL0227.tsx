@@ -1,7 +1,7 @@
 import React from 'react'
-import { til0227stateExample } from '../codeExamples'
-import { til0227eventHandlerExample } from '../codeExamples';
-import CodeBlock from '../../components/CodeBlock';
+import { til0227stateExample } from '../../codeExamples'
+import { til0227eventHandlerExample } from '../../codeExamples';
+import CodeBlock from '../../../components/CodeBlock';
 
 
 const TIL0227 = () => {
@@ -138,12 +138,12 @@ const TIL0227 = () => {
                 <li>표현식 사용 시 중괄호{ } 이용</li>
                 <li>사용자 정의 컴포넌트는 대문자로 시작. 예: function Hello()</li>
                 <li>조건부 렌더링에 삼항연사자 사용
-                <pre><code>{`
+                    <pre><code>{`
                 (1+1 === 2) ? (<p>정답</p>) : (<p>탈락</p>)
                 `}</code></pre>
                 </li>
                 <li>여러 개의 HTML 엘리먼트를 표시할 때 map() 함수 이용
-                <pre><code>{`
+                    <pre><code>{`
                 const posts = [
                     {id: 1, title: 'Hello World', content: 'Welcome to learning React!'}, 
                     {id: 2, title: 'Installation', content: 'You can install React from npm.'}
@@ -168,7 +168,7 @@ const TIL0227 = () => {
                         <li>posts.map(...)를 사용해서 배열의 각 요소를 JSX 형태로 변환함함</li>
                         <li>반드시 "key" JSX 속성을 넣어햐 함</li>
                         <li>이 Blog 컴포넌트를 렌더링하면 다음과 같은 HTML 구조가 나옴
-                <pre><code>{`
+                            <pre><code>{`
                 <div>
                     <div>
                         <h3>Hello World</h3>

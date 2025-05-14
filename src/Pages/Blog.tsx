@@ -5,17 +5,18 @@ import TILmain from './TILmain'
 const Blog = () => {
   const navigate = useNavigate();
 
+  // const links = [
+  //   { path: "/blog/0225", label: "0225 객체 지향 프로그래밍(OOP)" },
+  // ]
+
 
   return (
     <div className="Daily">
       <TILmain />
-      <div onClick={() => navigate("/blog/0225")}>0225 객체 지향 프로그래밍(OOP)</div>
-      <div onClick={() => navigate("/blog/0226")}>0226 심화 - 비동기</div>
-      <div onClick={() => navigate("/blog/0227")}>0227 심화 - React 기초</div>
-      <div onClick={() => navigate("/blog/0228")}>0228 심화 - ReactSPA</div>
-      <div onClick={() => navigate("/blog/0304")}>0304 심화 - React State & Props</div>
-      <div onClick={() => navigate("/blog/0305")}>0305 HTT/네트워크</div>
-      <div onClick={() => navigate("/blog/0306")}>0306 React 클라이언트 Ajax 요청</div>
+      {/* {links.map(({ path, label }) => (
+        <div key={path} onClick={() => navigate(path)}>{label}</div>
+      ))} */}
+
       <div onClick={() => navigate("/blog/0307")}>0307 파이썬/타입스크립트</div>
       <div onClick={() => navigate("/blog/0311")}>0311 Research1 - Arweave에 대해서</div>
       <div onClick={() => navigate("/blog/0312")}>0312 다양한 개발 도구 1 - Ganache, Infura, Web3.js</div>

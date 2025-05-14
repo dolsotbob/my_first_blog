@@ -6,11 +6,11 @@ import blockchain from '../../assets/blockchain.png'
 const topics = [
     { path: "/blog/theory", label: "Blockchain Theory" },
     { path: "/blog/web", label: "Web" },
-    { path: "blog/js", label: "JavaScript" },
-    { path: "blog/react", label: "React" },
-    { path: "blog/tool", label: "개발도구" },
-    { path: "blog/solidity", label: "Solidity" },
-    { path: "blog/soladvanced", label: "Solidity 심화" },
+    { path: "/blog/js", label: "JavaScript" },
+    { path: "/blog/react", label: "React" },
+    { path: "/blog/tool", label: "개발도구" },
+    { path: "/blog/solidity", label: "Solidity" },
+    { path: "/blog/soladvanced", label: "Solidity 심화" },
 ];
 
 const TILmain = () => {

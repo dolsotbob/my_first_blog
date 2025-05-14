@@ -1,0 +1,43 @@
+.bc_card-container {
+    padding: 20px;
+}
+
+.bc_card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.bc_card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3개의 열로 고정 */
+    gap: 16px;
+}
+
+.bc_card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.bc_card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bc_card-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.bc_card-heading {
+    font-size: 16px;
+    font-weight: 600;
+}

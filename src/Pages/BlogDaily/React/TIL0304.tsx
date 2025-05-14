@@ -1,8 +1,8 @@
 import React from 'react';
-import CodeBlock from '../../components/CodeBlock';
-import { til0304onClickExample, til0304useStateExample } from '../codeExamples';
-import { til0304onChangeExample } from '../codeExamples';
-import cartimage from '../../assets/til0304shoppingcart.png'
+import CodeBlock from '../../../components/CodeBlock';
+import { til0304onClickExample, til0304useStateExample } from '../../codeExamples';
+import { til0304onChangeExample } from '../../codeExamples'
+import cartimage from '../../../assets/til0304shoppingcart.png';
 
 const TIL0304 = () => {
     return (

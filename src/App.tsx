@@ -41,6 +41,14 @@ import TIL0219 from './Pages/BlogDaily/JavaScript/TIL0219';
 import TIL0220 from './Pages/BlogDaily/JavaScript/TIL0220';
 import TIL0221 from './Pages/BlogDaily/JavaScript/TIL0221';
 import TIL0224 from './Pages/BlogDaily/JavaScript/TIL0224';
+import ReactPage from './Pages/BlogDaily/React/React';
+import TIL0225 from './Pages/BlogDaily/React/TIL2025';
+import TIL0226 from './Pages/BlogDaily/React/TIL0226';
+import TIL0227 from './Pages/BlogDaily/React/TIL0227';
+import TIL0228 from './Pages/BlogDaily/React/TIL0228';
+import TIL0304 from './Pages/BlogDaily/React/TIL0304';
+import TIL0305 from './Pages/BlogDaily/React/TIL0305';
+import TIL0306 from './Pages/BlogDaily/React/TIL0306';
 
 
 
@@ -90,6 +98,15 @@ function App() {
             <Route path="/blog/js/0220" element={<TIL0220></TIL0220>}></Route>
             <Route path="/blog/js/0221" element={<TIL0221></TIL0221>}></Route>
             <Route path="/blog/js/0224" element={<TIL0224></TIL0224>}></Route>
+
+            <Route path="/blog/react" element={<ReactPage></ReactPage>}></Route>
+            <Route path="/blog/react/0225" element={<TIL0225></TIL0225>}></Route>
+            <Route path="/blog/react/0226" element={<TIL0226></TIL0226>}></Route>
+            <Route path="/blog/react/0227" element={<TIL0227></TIL0227>}></Route>
+            <Route path="/blog/react/0228" element={<TIL0228></TIL0228>}></Route>
+            <Route path="/blog/react/0304" element={<TIL0304></TIL0304>}></Route>
+            <Route path="/blog/react/0305" element={<TIL0305></TIL0305>}></Route>
+            <Route path="/blog/react/0306" element={<TIL0306></TIL0306>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>

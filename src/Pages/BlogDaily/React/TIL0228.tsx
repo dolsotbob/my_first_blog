@@ -1,6 +1,6 @@
 import React from 'react'
-import CodeBlock from '../../components/CodeBlock';
-import { til0228reactRouterExample } from '../codeExamples';
+import CodeBlock from '../../../components/CodeBlock';
+import { til0228reactRouterExample } from '../../codeExamples';
 
 const TIL0228 = () => {
     return (
@@ -13,8 +13,8 @@ const TIL0228 = () => {
 
             <p>SPA 장점</p>
             <ul><li>전체 페이지가 아니라 필요한 부분의 데이터만 받아서 화면을 업데이트 하면 되기 대문에 사용자와의 interaction에 빠르게 반응한다</li>
-            <li>서버에서는 요청 받은 데이터만 넘겨주면 되기 때문에 서버 과부하 문제가 현저하게 줄어든다</li>
-            <li>전체 페이지를 렌더링 할 필요가 없기 때문에 더 나은 유저경험을 제공한다</li></ul>
+                <li>서버에서는 요청 받은 데이터만 넘겨주면 되기 때문에 서버 과부하 문제가 현저하게 줄어든다</li>
+                <li>전체 페이지를 렌더링 할 필요가 없기 때문에 더 나은 유저경험을 제공한다</li></ul>
 
             <p>SPA 단점</p>
             <ol>
@@ -23,7 +23,7 @@ const TIL0228 = () => {
                 </li>
                 <li>부족한 검색 엔진 최적화
                     <ul><li>검색 엔진 작동 방식: 검색 로봇이 웹 페이지에 있는 정보 수집 및 분석 &rarr; 그 결과값에 인덱스를 만들어 보관 &rarr; 사용자가 검색어를 입력하면 인덱스에서 검색어와 가장 연관성이 높은 웹 페이지들을 순서대로 보여줌</li>
-                    <li>SPA의 경우 HTML 파일은 별다른 자료가 없어서 검색 엔진이 적절히 동작하지 못함; SPA에서도 검색 엔진 최적화에 대응할 수 있도록 검색 엔진 발전하는 중임</li>
+                        <li>SPA의 경우 HTML 파일은 별다른 자료가 없어서 검색 엔진이 적절히 동작하지 못함; SPA에서도 검색 엔진 최적화에 대응할 수 있도록 검색 엔진 발전하는 중임</li>
                     </ul>
                 </li>
             </ol>
@@ -47,14 +47,14 @@ const TIL0228 = () => {
                     </ul></li>
                 <li>이 컴포넌트를 사용하기 위해서는 React Router 라이브러리에서 따로 불러와야 한다
                     <ol><li>react-router 라이브러리 설치</li>
-                    <pre><code>{`
+                        <pre><code>{`
                     npx craete-react-app example
                     cd example 
 
                     npm install react-router-dom
                     `}</code></pre>
-                    <li>App.js로 react-router 컴포넌트 꺼내오기</li>
-                    <pre><code>{`
+                        <li>App.js로 react-router 컴포넌트 꺼내오기</li>
+                        <pre><code>{`
                     import React from "react";
                     import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
                     
@@ -62,12 +62,12 @@ const TIL0228 = () => {
                         return (...)
                     }
                     `}</code></pre>
-                    <li>React Router 설정
-                    <CodeBlock code={til0228reactRouterExample}></CodeBlock>
-                    </li>
+                        <li>React Router 설정
+                            <CodeBlock code={til0228reactRouterExample}></CodeBlock>
+                        </li>
                     </ol>
                 </li>
-                
+
             </ul>
 
             <h4>과제 하면서</h4>

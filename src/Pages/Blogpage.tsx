@@ -4,13 +4,6 @@ import TIL0307 from './BlogDaily/TIL0307';
 import TIL0312 from './BlogDaily/TIL0312';
 import TIL0313 from './BlogDaily/TIL0313';
 import TIL0314 from './BlogDaily/TIL0314';
-import TIL0225 from './BlogDaily/TIL2025';
-import TIL0226 from './BlogDaily/TIL0226';
-import TIL0227 from './BlogDaily/TIL0227';
-import TIL0228 from './BlogDaily/TIL0228';
-import TIL0304 from './BlogDaily/TIL0304';
-import TIL0305 from './BlogDaily/TIL0305';
-import TIL0306 from './BlogDaily/TIL0306';
 import TIL0321 from './BlogDaily/TIL0321';
 import TIL0324 from './BlogDaily/TIL0324';
 import TIL0325 from './BlogDaily/TIL0325';
@@ -43,13 +36,6 @@ const Blogpage = () => {
 
     return (
         <div className='blogpage'>
-            {slug === "0225" && <TIL0225></TIL0225>}
-            {slug === "0226" && <TIL0226></TIL0226>}
-            {slug === "0227" && <TIL0227></TIL0227>}
-            {slug === "0228" && <TIL0228></TIL0228>}
-            {slug === "0304" && <TIL0304></TIL0304>}
-            {slug === "0305" && <TIL0305></TIL0305>}
-            {slug === "0306" && <TIL0306></TIL0306>}
             {slug === "0307" && <TIL0307></TIL0307>}
             {slug === "0312" && <TIL0312></TIL0312>}
             {slug === "0313" && <TIL0313></TIL0313>}
