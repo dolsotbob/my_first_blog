@@ -1,6 +1,6 @@
 import React from 'react'
-import CodeBlock from '../../components/CodeBlock'
-import { TIL0513tokenAuthMiddleware } from '../codeExamples'
+import CodeBlock from '../../../components/CodeBlock'
+import { TIL0513tokenAuthMiddleware } from '../../codeExamples'
 
 const JWTbasedLogin = [
     {

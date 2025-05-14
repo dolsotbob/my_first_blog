@@ -1,6 +1,6 @@
 import React from 'react'
-import twapimg from '../../assets/uniswapTWAP.png'
-import calctwapimg from '../../assets/uniswapCalcTWAP.png'
+import twapimg from '../../../assets/uniswapTWAP.png'
+import calctwapimg from '../../../assets/uniswapCalcTWAP.png'
 
 const TIL0430 = () => {
     return (
@@ -262,13 +262,13 @@ const TIL0430 = () => {
             <p>wETH의 도입으로 구조 개선</p>
             <ul><li>wETH란?
                 <ul><li>ETH를 ERC20 표준에 맞게 래핑(wrap)한 토큰</li>
-                <li>ETH처럼 사용할 수 있지만 ERC20 토큰처럼 작동</li></ul>
+                    <li>ETH처럼 사용할 수 있지만 ERC20 토큰처럼 작동</li></ul>
             </li>
-            <li>효과
-                <ul><li>ETH도 ERC20처럼 처리 가능 → 더 많은 조합의 스왑 가능</li>
-                <li>ETH-ERC20, wETH-ERC20 모두 지원됨</li>
-                <li>코드 복잡성 감소, 통일된 로직 적용 가능</li></ul>
-            </li>
+                <li>효과
+                    <ul><li>ETH도 ERC20처럼 처리 가능 → 더 많은 조합의 스왑 가능</li>
+                        <li>ETH-ERC20, wETH-ERC20 모두 지원됨</li>
+                        <li>코드 복잡성 감소, 통일된 로직 적용 가능</li></ul>
+                </li>
             </ul>
 
             <h4>v2 - Flash Swap & Flash Loan: 유니스왑 V2에서의 대출 메커니즘</h4>
@@ -283,8 +283,8 @@ const TIL0430 = () => {
             </li>
                 <li>플래시론
                     <ul><li>한 트랜잭션 내에서 대출 → 사용 → 상환 완료</li>
-                    <li>상환 실패 시 트랜잭션 자체가 취소됨 → 대출자 자산 보호</li>
-            <pre><code>{`
+                        <li>상환 실패 시 트랜잭션 자체가 취소됨 → 대출자 자산 보호</li>
+                        <pre><code>{`
             function doFlashLoan(uint256 amount){
                 uint256 loanAmount = flashLoan(amount);      // 1. 대출금 수령
                 uint256 profit = doSomething(loanAmount);    // 2. 대출금 사용
@@ -292,11 +292,11 @@ const TIL0430 = () => {
                 transfer(profit - amount - fee);             // 이익 수령
             }
             `}</code></pre>
-                    <li>핵심 특징:
-                        <ul><li>초단기 무담보 대출</li>
-                            <li>프로그램 가능한 돈(Ethereum)을 활용</li>
-                            <li>트랜잭션 도중 실패 시 → 전체 취소 → 자금 유출 없음</li></ul>
-                    </li>
+                        <li>핵심 특징:
+                            <ul><li>초단기 무담보 대출</li>
+                                <li>프로그램 가능한 돈(Ethereum)을 활용</li>
+                                <li>트랜잭션 도중 실패 시 → 전체 취소 → 자금 유출 없음</li></ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -313,11 +313,11 @@ const TIL0430 = () => {
             <ul><li>동성 풀의 토큰 리저브 일부(또는 전체)를 꺼내서 사용하고, 같은 트랜잭션 내에서 상환할 수 있도록 하는 기능
                 <ul><li>리저브란? 유동성 풀에 예치된 토큰 수량</li></ul>
             </li>
-            <li>Flash Swap의 순서
-                <ol><li>풀에서 ERC20 토큰을 꺼냄</li>
-                    <li>꺼낸 토큰을 활용해 수익을 창출 (예: 다른 DEX에서 판매)</li>
-                    <li>같은 트랜잭션 내에서 토큰을 전액 상환하거나, 다른 자산으로 교환 후 상환</li></ol>
-            </li>
+                <li>Flash Swap의 순서
+                    <ol><li>풀에서 ERC20 토큰을 꺼냄</li>
+                        <li>꺼낸 토큰을 활용해 수익을 창출 (예: 다른 DEX에서 판매)</li>
+                        <li>같은 트랜잭션 내에서 토큰을 전액 상환하거나, 다른 자산으로 교환 후 상환</li></ol>
+                </li>
             </ul>
 
             <p>플래시 스왑 활용 (초기 자본 없음)</p>
@@ -330,11 +330,11 @@ const TIL0430 = () => {
             <h4>v2 - Uniswap V2와 Price Oracle: 가격 조작을 막는 방법</h4>
             <p>Price Oracle이란?</p>
             <ul><li>외부에서 자산 가격 정보를 스마트 컨트랙트에 제공하는 장치</li>
-            <li>: DAI의 현재 시세를 알고 싶을 때, 오라클을 통해 가져와야 함</li></ul>
+                <li>: DAI의 현재 시세를 알고 싶을 때, 오라클을 통해 가져와야 함</li></ul>
 
             <p>바람직한 Price Oracle의 조건</p>
             <ul><li>탈중앙화 금융 서비스(DeFi)에서는 조작 불가능하고 신뢰할 수 있는 가격 정보가 중요</li>
-            <li>예시: Alice의 DAI 베팅 dApp</li></ul>
+                <li>예시: Alice의 DAI 베팅 dApp</li></ul>
 
             <p>온체인 Price Oracle로서의 Uniswap</p>
             <ul><li>Uniswap은 온체인 AMM이기 때문에 언제든지 유동성 풀의 리저브를 통해 실시간 가격을 구할 수 있다</li>
@@ -360,13 +360,13 @@ const TIL0430 = () => {
             <ul><li>Uniswap V2는 TWAP(Time-Weighted Average Price) 방식을 도입하여 가격 조작 위험을 낮춤</li>
                 <li>TWAP이란?
                     <ul><li>특정 시간 동안의 평균 가격</li>
-                    <li>순간적인 조작이 아닌, 시간을 기준으로 가격을 계산</li>
-                    <li>장기적인 가격 안정성과 신뢰성 확보</li></ul>
+                        <li>순간적인 조작이 아닌, 시간을 기준으로 가격을 계산</li>
+                        <li>장기적인 가격 안정성과 신뢰성 확보</li></ul>
                 </li>
                 <li>TWAP의 효과
                     <ul><li>짧은 시간에 가격을 조작해도 오라클에 미치는 영향 적음</li>
-                    <li>외부 dApp들이 더 안전한 가격 정보에 접근 가능</li>
-                    <li>유니스왑을 보다 신뢰할 수 있는 Price Oracle로 개선</li></ul>
+                        <li>외부 dApp들이 더 안전한 가격 정보에 접근 가능</li>
+                        <li>유니스왑을 보다 신뢰할 수 있는 Price Oracle로 개선</li></ul>
                 </li>
             </ul>
 
@@ -383,7 +383,7 @@ const TIL0430 = () => {
             <ul><li>각 유동성 풀에는 price0Cumulative, price1Cumulative가 존재</li>
                 <li>마지막 스왑 이후 경과한 시간 × 가격을 누적값에 더함</li>
                 <li>스왑이 발생할 때 _update() 함수가 실행되어 누적값이 갱신됨</li></ul>
-            
+
             <ul><li>_update() 함수 로직 요약
                 <ol><li>현재 블록 타임스탬프 저장</li>
                     <li>마지막 스왑 블록 이후 경과 시간 계산</li>
@@ -394,9 +394,9 @@ const TIL0430 = () => {
 
             <p>조작 방지 메커니즘</p>
             <ul><li>가격은 블록 단위로 결정됨
-                    <ul><li>특정 블록에서의 가격은 이전 블록의 마지막 스왑 트랜잭션으로 결정됨</li>
+                <ul><li>특정 블록에서의 가격은 이전 블록의 마지막 스왑 트랜잭션으로 결정됨</li>
                     <li>따라서, 스왑으로 가격을 바꾸더라도 그 가격은 다음 블록부터 반영됨</li></ul>
-                </li>
+            </li>
                 <li>블록 단위 누적
                     <ul><li>priceCumulative는 블록마다 갱신됨 → 공격자는 여러 블록을 연속 생성해야 조작 가능
                     </li></ul>
@@ -409,8 +409,8 @@ const TIL0430 = () => {
 
             <p>공격 시나리오 비교</p>
             <ul><li>V1
-                    <ul><li>한 블록 안에서 여러 트랜잭션 조작 가능 → 베팅 dApp 피해 발생</li></ul>
-                </li>
+                <ul><li>한 블록 안에서 여러 트랜잭션 조작 가능 → 베팅 dApp 피해 발생</li></ul>
+            </li>
                 <li>V2
                     <ul><li>두 블록 연속 조작이 필요 → 현실적으로 매우 어려움</li>
                         <li>공격자 입장에서 비용 상승 + 실패 확률 증가</li></ul>
@@ -419,14 +419,14 @@ const TIL0430 = () => {
             <p>TWAP 가격 계산 방법</p>
             <img src={calctwapimg} alt='calculate_twap_image'></img>
             <ol><li>priceCumulative의 두 시점 값을 구함 (예: pc1, pc2)</li>
-            <li>해당 구간의 경과 시간 구함 (예: t2 - t1)</li>
-            <li>평균 가격 = (pc2 - pc1) / (t2 - t1)</li></ol>
+                <li>해당 구간의 경과 시간 구함 (예: t2 - t1)</li>
+                <li>평균 가격 = (pc2 - pc1) / (t2 - t1)</li></ol>
             <ul><li>➡ 이 방식을 통해, 외부 컨트랙트는 안전하고 조작에 강한 가격 정보를 받아볼 수 있음</li></ul>
-            
+
             <p>고급 개념: 캐싱 이유</p>
             <ul><li>reserve는 공격자가 일방적으로 보낸 토큰을 제외한 실제 가격 기준</li>
-            <li>balance는 현재 토큰 풀의 상태로, 조작 가능성 존재</li>
-            <li>_update()는 계산 시 캐시된 reserve를 사용하여 조작을 방지하고, 이후에 balance로 업데이트함</li></ul>
+                <li>balance는 현재 토큰 풀의 상태로, 조작 가능성 존재</li>
+                <li>_update()는 계산 시 캐시된 reserve를 사용하여 조작을 방지하고, 이후에 balance로 업데이트함</li></ul>
 
 
 

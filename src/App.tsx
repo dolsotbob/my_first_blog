@@ -49,6 +49,11 @@ import TIL0228 from './Pages/BlogDaily/React/TIL0228';
 import TIL0304 from './Pages/BlogDaily/React/TIL0304';
 import TIL0305 from './Pages/BlogDaily/React/TIL0305';
 import TIL0306 from './Pages/BlogDaily/React/TIL0306';
+import Server from './Pages/BlogDaily/Server/Server';
+import TIL0509 from './Pages/BlogDaily/Server/TIL0509';
+import TIL0512 from './Pages/BlogDaily/Server/TIL0512';
+import TIL0513 from './Pages/BlogDaily/Server/TIL0513';
+import TIL0514 from './Pages/BlogDaily/Server/TIL0514';
 
 
 
@@ -73,6 +78,9 @@ function App() {
 
         <div className='MainContent'>
           <Routes>
+            {/* //리액트 다이내믹 루틴  */}
+            <Route path="/blog/:blogId" element={<Blogpage />} />
+
             <Route path="/" element={<div>Welcome to TeaHeeHouse!</div>}></Route>
             <Route path="/about" element={<About></About>}></Route>
             <Route path="/blog" element={<Blog></Blog>}></Route>
@@ -107,6 +115,12 @@ function App() {
             <Route path="/blog/react/0304" element={<TIL0304></TIL0304>}></Route>
             <Route path="/blog/react/0305" element={<TIL0305></TIL0305>}></Route>
             <Route path="/blog/react/0306" element={<TIL0306></TIL0306>}></Route>
+
+            <Route path="/blog/server" element={<Server></Server>}></Route>
+            <Route path="/blog/server/0509" element={<TIL0509></TIL0509>}></Route>
+            <Route path="/blog/server/0512" element={<TIL0512></TIL0512>}></Route>
+            <Route path="/blog/server/0513" element={<TIL0513></TIL0513>}></Route>
+            <Route path="/blog/server/0514" element={<TIL0514></TIL0514>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>

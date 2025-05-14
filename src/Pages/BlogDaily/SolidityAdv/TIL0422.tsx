@@ -1,6 +1,6 @@
 import React from 'react';
-import CodeBlock from '../../components/CodeBlock';
-import { til0422eip712SigningExample } from '../codeExamples';
+import CodeBlock from '../../../components/CodeBlock';
+import { til0422eip712SigningExample } from '../../codeExamples';
 
 const TIL0422 = () => {
     return (

@@ -1,8 +1,8 @@
 import React from 'react'
-import TIL0407abi from '../../assets/TIL0407abi.png'
-import CodeBlock from '../../components/CodeBlock'
-import { til0407deployExample } from '../codeExamples'
-import { til0407callContractExample } from '../codeExamples'
+import TIL0407abi from '../../../assets/TIL0407abi.png'
+import CodeBlock from '../../../components/CodeBlock'
+import { til0407deployExample } from '../../codeExamples'
+import { til0407callContractExample } from '../../codeExamples'
 
 const TIL0407 = () => {
     return (

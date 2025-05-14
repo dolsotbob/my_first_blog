@@ -1,8 +1,8 @@
 import React from 'react'
-import CodeBlock from '../../components/CodeBlock';
-import { til0410tokenURIJSONExample } from '../codeExamples';
-import { til0410tokenURIExample } from '../codeExamples';
-import { til0410ERC721Example } from '../codeExamples';
+import CodeBlock from '../../../components/CodeBlock';
+import { til0410tokenURIJSONExample } from '../../codeExamples';
+import { til0410tokenURIExample } from '../../codeExamples';
+import { til0410ERC721Example } from '../../codeExamples';
 
 const TIL0410 = () => {
     return (

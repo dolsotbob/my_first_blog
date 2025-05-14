@@ -1,7 +1,7 @@
 import React from 'react'
-import CodeBlock from '../../components/CodeBlock'
-import { TIL0512CreateServer } from '../codeExamples'
-import { TIL0512UserAPIExample } from '../codeExamples'
+import CodeBlock from '../../../components/CodeBlock'
+import { TIL0512CreateServer } from '../../codeExamples'
+import { TIL0512UserAPIExample } from '../../codeExamples'
 
 const CRUD = [
     {

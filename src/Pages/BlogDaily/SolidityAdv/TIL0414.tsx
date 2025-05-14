@@ -1,9 +1,9 @@
 import React from 'react'
-import { til0414MetadataExample } from '../codeExamples'
-import { til0414OnChainTokenURIExample } from '../codeExamples'
-import { til0414OffChainMintExample } from '../codeExamples'
-import CodeBlock from '../../components/CodeBlock'
-import til0414CreatingNFT from '../../assets/til0414CreatingNFT.jpg'
+import { til0414MetadataExample } from '../../codeExamples'
+import { til0414OnChainTokenURIExample } from '../../codeExamples'
+import { til0414OffChainMintExample } from '../../codeExamples'
+import CodeBlock from '../../../components/CodeBlock'
+import til0414CreatingNFT from '../../../assets/til0414CreatingNFT.jpg'
 
 const TIL0414 = () => {
     return (

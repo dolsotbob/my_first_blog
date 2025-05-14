@@ -1,12 +1,12 @@
 import React from 'react'
 import interfaceVsAbstract from "../../assets/interfaceVsAbstract.png"
 import libraryVsContract from "../../assets/libraryVsContract.png"
-import CodeBlock from '../../components/CodeBlock'
-import { til0327globalVariableExample } from '../codeExamples'
-import { til0327vulnerableContractExample } from '../codeExamples'
-import { til0327blockInfoExample } from '../codeExamples'
-import { til0327gasTrackerExample } from '../codeExamples'
-import { til0327generateHashExample } from '../codeExamples'
+import CodeBlock from '../../../components/CodeBlock'
+import { til0327globalVariableExample } from '../../codeExamples'
+import { til0327vulnerableContractExample } from '../../codeExamples'
+import { til0327blockInfoExample } from '../../codeExamples'
+import { til0327gasTrackerExample } from '../../codeExamples'
+import { til0327generateHashExample } from '../../codeExamples'
 
 const TIL0327 = () => {
     return (

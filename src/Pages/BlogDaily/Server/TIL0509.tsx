@@ -1,8 +1,8 @@
 import React from 'react';
-import CodeBlock from '../../components/CodeBlock';
-import { TIL0509MiddlewareExample } from '../codeExamples';
-import { TIL0509RoutingExample } from '../codeExamples';
-import { TIL0509RoutingExample2 } from '../codeExamples';
+import CodeBlock from '../../../components/CodeBlock';
+import { TIL0509MiddlewareExample } from '../../codeExamples';
+import { TIL0509RoutingExample } from '../../codeExamples';
+import { TIL0509RoutingExample2 } from '../../codeExamples';
 
 const ServersSupportingMiddleware = [
     {
