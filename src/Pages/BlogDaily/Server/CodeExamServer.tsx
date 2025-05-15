@@ -186,3 +186,15 @@ login(@Body() userDto: LoginDto) {
   return this.authService.login(user);
 }
 `
+
+export const TIL0515NestJSClassConstructor = `
+@Injectable()
+export class DatatypeService { 
+  constructor(private readonly ethersService: EthersService) {}
+
+  async positive() { 
+    // EthersService 안에 있는 함수 호출 
+    return await this.ethersService.positiveNumber();
+  }
+}
+`

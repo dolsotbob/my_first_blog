@@ -1,4 +1,5 @@
 import React from 'react'
+import './JavaScript.css'; // CSS 파일 추가
 
 const TIL0220 = () => {
     return (
@@ -134,7 +135,7 @@ console.log(sum(10, 20) === currySum(10)(20)) // true
                     </li>
                 </ul>
             </ul>
-            <p>클로저는 특정 데이터를 다른 코드의 실행으로부터 보호해야할 때 용이하다.</p>
+            <span style={{ fontStyle: "italic", fontWeight: "bold" }}>클로저는 특정 데이터를 다른 코드의 실행으로부터 보호해야할 때 용이하다.</span>
 
             <h4>spread/rest 문법</h4>
             <ul>
@@ -149,7 +150,7 @@ function sum(x, y, z) {
 
 const numbers = [1, 2, 3];
 
-sum(...numbers) // 질문: 어떤 값을 리턴하나요?
+sum(...numbers) // 6
 `}</code></pre>
 
                 </li>
@@ -163,18 +164,26 @@ function sum(...theArgs) {
   });
 }
 
-sum(1,2,3) // 질문: 어떤 값을 리턴하나요?
-sum(1,2,3,4) // 질문: 어떤 값을 리턴하나요?
+sum(1,2,3) // 6
+sum(1,2,3,4) // 10
 `}</code></pre>
                     </ul>
                 </li>
             </ul>
 
+            <p>배열에서 사용하기</p>
+            <ul><li>spread 문법은 배열에서 강력한 힘을 발휘한다.</li></ul>
+            {/* // 여기 
+할 
+차례임
+// */}
+
+
             <h4>화살표 함수</h4>
-            <p>함수를 정의하는 방법:
-                <ul>
-                    <li>함수 선언문과 함수 표현식
-                        <pre><code>{`
+            <p>함수를 정의하는 방법:</p>
+            <ul>
+                <li>함수 선언문과 함수 표현식
+                    <pre><code>{`
 // 함수선언문
 function sum (x, y) {
 	return x + y;
@@ -185,16 +194,16 @@ const subtract = function (x, y) {
 	return x - y;
 }
 `}</code></pre>
-                    </li>
-                </ul>
-            </p>
+                </li>
+            </ul>
+
 
             <p>여기에 더해 화살표 함수가 있음. function 키워드 대신 화살표를 사용함</p>
             <pre><code>{`
-// 화살표 함수
-const multiply = (x, y) => {
-	return x * y;
-}
+    // 화살표 함수
+    const multiply = (x, y) => {
+        return x * y;
+    }
 `}</code></pre>
             <ul><li>매개변수가 한 개일 때 소괄호 생략 가능</li>
                 <li>함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능</li></ul>

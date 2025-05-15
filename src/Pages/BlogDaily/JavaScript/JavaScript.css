@@ -41,3 +41,43 @@
     font-size: 16px;
     font-weight: 600;
 }
+
+.BlogDaily {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.blogpage {
+    padding-left: 20px;
+}
+
+div {
+    /* 각 블로그 항목에 여백 추가 */
+    padding-left: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h3 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: darkgreen;
+}
+
+h4 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    color: palevioletred;
+}
+
+h5 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(85, 176, 215);
+    padding-left: 20px;
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+}

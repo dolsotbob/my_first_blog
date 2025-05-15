@@ -54,6 +54,7 @@ import TIL0509 from './Pages/BlogDaily/Server/TIL0509';
 import TIL0512 from './Pages/BlogDaily/Server/TIL0512';
 import TIL0513 from './Pages/BlogDaily/Server/TIL0513';
 import TIL0514 from './Pages/BlogDaily/Server/TIL0514';
+import TIL0515 from './Pages/BlogDaily/Server/TIL0515';
 
 
 
@@ -121,6 +122,7 @@ function App() {
             <Route path="/blog/server/0512" element={<TIL0512></TIL0512>}></Route>
             <Route path="/blog/server/0513" element={<TIL0513></TIL0513>}></Route>
             <Route path="/blog/server/0514" element={<TIL0514></TIL0514>}></Route>
+            <Route path="/blog/server/0515" element={<TIL0515></TIL0515>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
