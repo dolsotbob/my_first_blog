@@ -1,6 +1,6 @@
 import React from 'react'
-import interfaceVsAbstract from "../../assets/interfaceVsAbstract.png"
-import libraryVsContract from "../../assets/libraryVsContract.png"
+import interfaceVsAbstract from "../../../assets/interfaceVsAbstract.png"
+import libraryVsContract from "../../../assets/libraryVsContract.png"
 import CodeBlock from '../../../components/CodeBlock'
 import { til0327globalVariableExample } from '../../codeExamples'
 import { til0327vulnerableContractExample } from '../../codeExamples'

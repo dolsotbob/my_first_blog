@@ -8,6 +8,7 @@ const cardData = [
     { date: '5/13', title: '인증/보안', path: '/blog/server/0513' },
     { date: '5/14', title: 'NestJS', path: '/blog/server/0514' },
     { date: '5/15', title: 'NestJS - 컨트랙트 요청 API 1', path: '/blog/server/0515' },
+    { date: '5/16', title: 'NestJS - 컨트랙트 요청 API 2', path: '/blog/server/0516' },
 ];
 
 const Server = () => {

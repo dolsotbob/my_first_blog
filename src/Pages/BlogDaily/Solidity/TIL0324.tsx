@@ -1,8 +1,8 @@
 import React from 'react'
-import contractState from '../../assets/contractState.png'
-import contractCheck from '../../assets/contractCheck.png'
-import til0324uint from '../../assets/til0324uint.png'
-import til0324int from '../../assets/til0324int.png'
+import contractState from '../../../assets/contractState.png'
+import contractCheck from '../../../assets/contractCheck.png'
+import til0324uint from '../../../assets/til0324uint.png'
+import til0324int from '../../../assets/til0324int.png'
 import CodeBlock from '../../../components/CodeBlock'
 import { til0324contractExample } from '../../codeExamples'
 

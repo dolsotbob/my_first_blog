@@ -1,7 +1,7 @@
 import React from 'react'
-import til0402 from '../../assets/til0402.png'
-import til0402hardhatTest from '../../assets/til0402hardhatTest.png'
-import til0402truffleTest from '../../assets/til0402truffleTest.png'
+import til0402 from '../../../assets/til0402.png'
+import til0402hardhatTest from '../../../assets/til0402hardhatTest.png'
+import til0402truffleTest from '../../../assets/til0402truffleTest.png'
 
 const TIL0402 = () => {
     return (

@@ -198,3 +198,108 @@ export class DatatypeService {
   }
 }
 `
+
+export const TIL0516SetBalanceDto = `
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+
+export class SetBalanceDto {
+  @IsNotEmpty()
+  @IsString()
+  address: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  value: number;
+}
+`
+export const TIL0516SetUserDto = `
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+
+export class SetUserDto {
+  @IsNotEmpty()
+  @IsString()
+  address: string;
+
+  @IsOptional()
+  @IsString()
+  name: string;
+
+  @IsOptional()
+  @IsNumber()
+  age: number;
+}
+`
+
+export const TIL0516DTOinController = `
+@Patch('balance')
+  async setBalance(@Body() setBalanceDto: SetBalanceDto) {
+    return await this.datatype2Service.balance(
+      setBalanceDto.address,
+      setBalanceDto.value
+    );
+  }
+`
+
+export const TIL0516DTOinService = `
+setBalance(address: string, value: number) {
+  // 실제 DB 저장 or 스마트 컨트랙트 호출 등
+}
+`
+export const TIL0516exceptionClass = `
+import { NotFoundException } from '@nestjs/common';
+
+throw new NotFoundException('사용자를 찾을 수 없습니다');
+`
+
+export const TIL0516exceptionClass2 = `
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "statusCode": 404,
+  "message": "사용자를 찾을 수 없습니다",
+  "error": "Not Found"
+}
+`
+
+export const TIL0516CustomException = `
+// exception.config.ts
+import { HttpException } from '@nestjs/common';
+
+function createException(
+  message: string,
+  statusCode: number,
+  description?: string
+): HttpException {
+  return new HttpException(message, statusCode, { description });
+}
+
+export const exceptions = {
+  NOT_FOUND: createException('Not Found', 404),
+  INDEX_OUT_OF_BOUNDS: createException('Index out of bounds', 400),
+  NAME_CANNOT_BE_EMPTY: createException('Name cannot be empty', 400),
+  USER_NOT_FOUND: createException('User not found', 400),
+
+  // 동적으로 BadRequest 생성
+  createBadRequestException: (message: string) =>
+    createException(message, 400),
+};
+`
+export const TIL0516CustomExceptionExample = `
+import { exceptions } from '../exceptions/exception.config';
+
+if (name === '') {
+  throw exceptions.NAME_CANNOT_BE_EMPTY;
+}
+
+try {
+  const user = await contract.getUser(addr);
+} catch (error) {
+  if (error.reason === 'User not found') {
+    throw exceptions.USER_NOT_FOUND;
+  }
+
+  throw exceptions.createBadRequestException(error.message);
+}
+`
+

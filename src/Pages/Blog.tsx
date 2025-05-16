@@ -25,16 +25,7 @@ const Blog = () => {
       <div onClick={() => navigate('/blog/0314')}>0314 Dapp - 지갑</div>
       <div onClick={() => navigate('/blog/0318')}>0318 Explorer 만들기</div>
       <div onClick={() => navigate('/blog/0321')}>0321 다양한 개발 도구 2 - Truffle과 Hardhat</div>
-      <div onClick={() => navigate('/blog/0324')}>0324 Solidity - 기본 문법 1 - 원시 타입</div>
-      <div onClick={() => navigate('/blog/0325')}>0325 Solidity - 기본 문법 2 - 참조 타입</div>
-      <div onClick={() => navigate('/blog/0326')}>0326 Solidity - 기본 문법 3 - 변수와 함수</div>
-      <div onClick={() => navigate('/blog/0327')}>0327 Solidity 기본 문법 4 - 주요 전역 변수와 전역 함수</div>
-      <div onClick={() => navigate('/blog/0328')}>0328 Solidity 기본 문법 5 - 데이터 타입 심화</div>
-      <div onClick={() => navigate('/blog/0331')}>0331 Solidity 실습 1 - Getter & Setter</div>
-      <div onClick={() => navigate('/blog/0401')}>0401 Solidity 실습 2 - 구조체의 Getter & Setter</div>
-      <div onClick={() => navigate('/blog/0402')}>0402 Solidity 실습 3 - 테스트의 중요성</div>
-      <div onClick={() => navigate('/blog/0403')}>0403 Solidity 실습 4 - Vault & Bank 컨트랙트</div>
-      <div onClick={() => navigate('/blog/0404')}>0404 Solidity 실습 5 - Interface, Library, Abstract Contract</div>
+
       <div onClick={() => navigate('/blog/0407')}>0407 컨트랙트 호출(ABI)</div>
       <div onClick={() => navigate('/blog/0408')}>0408 ERC-20</div>
       <div onClick={() => navigate('/blog/0410')}>0410 ERC-721</div>
