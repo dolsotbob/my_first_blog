@@ -1,5 +1,7 @@
 import React from 'react'
 import './JavaScript.css'; // CSS 파일 추가
+import CodeBlock from '../../../components/CodeBlock';
+import { TIL0220ObjectDestructuring } from './CodeExamJS';
 
 const TIL0220 = () => {
     return (
@@ -173,11 +175,74 @@ sum(1,2,3,4) // 10
 
             <p>배열에서 사용하기</p>
             <ul><li>spread 문법은 배열에서 강력한 힘을 발휘한다.</li></ul>
-            {/* // 여기 
-할 
-차례임
-// */}
+            <ol><li>배열 합치기</li>
+                <pre><code>{`
+    let parts = ['shoulders', 'knees'];
+    let lyrics = ['head', ...parts, 'and', 'toes'];
 
+    // 질문: ['head', 'shoulders', 'knees', 'and', 'toes']
+    `}</code></pre>
+                <li>배열 복사</li>
+                <pre><code>{`
+    let arr = [1, 2, 3];
+    let arr2 = [...arr]; // arr.slice() 와 유사
+    arr2.push(4);  // 참고: spread 문법은 기존 배열을 변경하지 않으므로(immutable), arr2를 수정한다고, arr이 바뀌지 않습니다.
+
+    // 질문: arr의 값 = [1, 2, 3]; arr2의 값 = [1, 2, 3, 4]
+    `}</code></pre>
+            </ol>
+
+            <p>객체에서 사용하기</p>
+            <pre><code>{`
+    let obj1 = { foo: 'bar', x: 42 };
+    let obj2 = { foo: 'baz', y: 13 };
+
+    let clonedObj = { ...obj1 };
+    let mergedObj = { ...obj1, ...obj2 };
+
+    // 질문: clonedObj와 mergedObj의 값은 각각 무엇인가요?
+    // clonedOb의 값 = {foo: 'baz', x: 42}
+    // mergedObj의 값 = {foo: 'baz', x: 42, y: 13}
+    `}</code></pre>
+
+            <p>함수에서 나머지 파라미터 받아오기</p>
+            <pre><code>{`
+    function myFun(a, b, ...manyMoreArgs) {
+    console.log("a", a);
+    console.log("b", b);
+    console.log("manyMoreArgs", manyMoreArgs);
+    }
+
+    myFun("one", "two", "three", "four", "five", "six");
+
+    // 질문: 콘솔은 순서대로 어떻게 찍힐까? 
+    // a one
+    // b two 
+    // manyMoreArgs ['three', 'four', 'five', 'six']
+            `}</code></pre>
+
+
+            <h4>구조 분해 할당</h4>
+            <ul><li>구조 분해 할당은 spread 문법을 이용하여 값을 해체한 후, 개별 값을 변수에 새로 할당하는 과정을 말함</li></ul>
+
+            <p>분해 후 새 변수에 할당</p>
+            <ul><li>배열</li>
+                <pre><code>{`
+    const [a, b, ...rest] = [10, 20, 30, 40, 50];
+
+    // 질문: a, b, rest는 각각 어떤 값인가요?
+    // a는 10, b는 20, rest는 [30, 40, 50]
+            `}</code></pre>
+                <li>객체</li></ul>
+            <pre><code>{`
+    const {a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40}
+    `}</code></pre>
+            <ul><li>객체에서 구조 분해 할당을 사용하는 경우, 선언(const, let, var)과 함께 사용하지 않으면 에러가 발생할 수 있다.</li>
+                <li>선언 없이 할당하는 경우, 이 콘텐츠의 하단에 있는 공식 문서 링크를 통해 내용을 확인할 수 있습니다.
+                </li></ul>
+
+            <p>유용한 예제: 함수에서 객체 분해</p>
+            <CodeBlock code={TIL0220ObjectDestructuring}></CodeBlock>
 
             <h4>화살표 함수</h4>
             <p>함수를 정의하는 방법:</p>
@@ -205,8 +270,32 @@ const subtract = function (x, y) {
         return x * y;
     }
 `}</code></pre>
-            <ul><li>매개변수가 한 개일 때 소괄호 생략 가능</li>
-                <li>함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능</li></ul>
+            <ol><li>매개변수가 한 개일 때 소괄호 생략 가능</li>
+                <pre><code>{`
+    // 매개변수가 한 개일 때, 소괄호를 생략할 수 있습니다.
+    const square = x => { return x * x }
+
+    // 위 코드와 동일하게 동작합니다.
+    const square = ( x ) => { return x * x }
+
+    // 단, 매개변수가 없는 경우엔 소괄호를 생략할 수 없습니다.
+    const greeting = () => { return 'hello world' }
+    `}</code></pre>
+                <li>함수 코드 블록 내부가 하나의 문으로 구성되어 있다면 중괄호 생략 가능
+                    <ul><li>이 때  블록 내부의 문이 값으로 평가될 수 있으면 return 키워드를 생략 가능</li></ul>
+                </li>
+                <pre><code>{`
+    const squre = x => x * x
+
+    // 위 코드와 동일하게 동작합니다.
+    const square = x => { return x * x }
+
+    // 위 코드와 동일하게 동작합니다.
+    const square = function (x) {
+        return x * x
+    }
+    `}</code></pre>
+            </ol>
 
 
 
