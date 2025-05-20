@@ -7,7 +7,29 @@ const TIL0221 = () => {
             <ul><li>Document Object Model</li>
                 <li>HTML 요소를 Object처럼 조작할 수 있는 모델</li></ul>
 
-            <p>script 코드는 body가 끝나기 전에 넣기</p>
+            <h4>HTML에 Javascript 적용하기</h4>
+            <ul><li>HTML에 JavaScript를 적용하기 위해서는 script 태그를 이용한다.</li>
+                <li> 아래의 경우 HTML 파일과 같은 디렉토리에 존재하는 myScriptFile.js을 불러온다.</li>
+                <pre><code>{`
+        <script src="myScriptFile.js"></script>        
+        `}</code></pre>
+                <li>script 요소는 등장과 함께 실행된다.</li>
+            </ul>
+
+            <p>script 요소를 head가 아닌 body에 넣길 권하는 이유</p>
+            <ul><li>HTML 요소를 JavaScript 코드에서 조작하려면, DOM이 완전히 로드된 후에 실행되어야 한다.</li>
+                <li>따라서 script 태그를 body 맨 끝에 넣어 모든 요소가 로딩된 후 실행되도록 하는 것이 적합하다.</li>
+                <li>이러면 	document.getElementById(...)가 정상 작동고 </li>
+                <li>DOM 조작 시 에러 날 확률이 낮다.</li>
+            </ul>
+
+            <p>DOM 구조 조회할 때</p>
+            <ul><li>console.dir이 유용함: DOM을 객체의 모습으로 출력함</li></ul>
+
+            {/* CRUD
+            // 다음 학습에서는 document 객체를 통해 HTML 엘리먼트를 만들고, 조회하고, 갱신하고, 삭제하는 법 학습하자
+            // 그리고 HTML에 적용(APPEND)하는 메서드까지 학습하하  */}
+
             <p>CREATE, APPEND, READ를 통해 새로운 DOM 객체를 만들고, 기존의 DOM 객체에 붙이고, DOM 객체를 선택해서 조회할 수 있음.</p>
             <p>READ, UPDATE, DELETE</p>
 
