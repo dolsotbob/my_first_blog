@@ -305,17 +305,22 @@ try {
 
 export const TIL0520AOPExample = `
 import {
-  Injectable,
+  Injectable,  // NestJS에서 의존성 주입이 가능한 클래스라는 뜻
   NestInterceptor,
-  ExecutionContext,
-  CallHandler,
+  ExecutionContext,  // 요청 정보 포함 
+  CallHandler,  // 다음 처리 단계; next() 처럼 
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
+// 이 클래스는 NestInterceptor 인터페이스를 구현함. 즉, Nest의 요청/응답 사이 개입 가능
 export class SuccessInterceptor implements NestInterceptor {
+  //  intercept(context, next) 메서드. 이 메서드로 인터셉트가 동작함 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    // 핵심 로직 
+    // next.handle() → 실제 컨트롤러 메서드를 실행해서 응답 스트림(Observable) 을 가져옵니다.
+	  // pipe(map(...)) → 응답 데이터를 가공합니다.
     return next.handle().pipe(
       map((data) => ({
         status: 'SUCCESS',
