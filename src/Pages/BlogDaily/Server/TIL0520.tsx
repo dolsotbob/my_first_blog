@@ -11,6 +11,7 @@ const TIL0520 = () => {
             <h4>Interceptor</h4>
             <p>Interceptor란?</p>
             <ul><li>축구 인터셉트 같은 것</li>
+                <li>modifier 같은 것</li>
                 <li>요청(request)과 응답(response) 사이에서 동작하는 미들웨어와 유사한 컴포넌트</li>
                 <li>NestJS의 AOP(관점 지향 프로그래밍) 기능 중 하나
                     <ul><li>Aspect-Oriented Programming</li>

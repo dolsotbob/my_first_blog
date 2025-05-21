@@ -2,6 +2,16 @@ import React from 'react'
 import interfaceVsAbstract from "../../../assets/interfaceVsAbstract.png"
 import libraryVsContract from "../../../assets/libraryVsContract.png"
 import CodeBlock from '../../../components/CodeBlock'
+import { TIL0327InheritanceBasic } from './CodeExamSol'
+import { TIL0327OverridingExample } from './CodeExamSol'
+import { TIL0327VisibilitySpecifiers } from './CodeExamSol'
+import { TIL0327InterfaceDef } from './CodeExamSol'
+import { TIL0327InterfaceImported } from './CodeExamSol'
+import { TIL0327InterfaceUsage } from './CodeExamSol'
+import { TIL0327LibraryDef } from './CodeExamSol'
+import { TIL0327LibraryInContract } from './CodeExamSol'
+import { TIL0327usingForLibrary } from './CodeExamSol'
+import { TIL0327usingFor } from './CodeExamSol'
 import { til0327globalVariableExample } from '../../codeExamples'
 import { til0327vulnerableContractExample } from '../../codeExamples'
 import { til0327blockInfoExample } from '../../codeExamples'
@@ -107,27 +117,8 @@ const TIL0327 = () => {
                         <li>가독성 향상 및 코드의 명확성 증가</li></ul>
                 </li></ul>
 
-            <h4>기본 상속 문법</h4>
             <p>기본 상속 문법</p>
-            <pre><code>{`
-            // 부모 계약 (Parent Contract)
-            pragma solidity ^0.8.0; 
-
-            contract Parent { 
-                string public parentName = "Parent Contract"; 
-
-                function greet() public view returns (string memory) { 
-                    return "Hello from the Parent Contract!";
-                } 
-            }
-
-            // 자식 계약 (Child Contract)
-            contract Child is Parent { 
-                function childGreet() public view returns (string memory) {
-                    return "Hello from the Child Contract!"; 
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={TIL0327InheritanceBasic}></CodeBlock>
 
             <ul><li>is 키워드로 부모 계약 상속</li>
                 <li>자식 계약은 부모 계약의 함수나 변수에 접근할 수 있음</li>
@@ -136,22 +127,8 @@ const TIL0327 = () => {
                 <li>JavaScript와 다른 점: Solidity에서는 가시성이 있음</li>
             </ul>
 
-            <h4 style={{ color: 'deeppink' }}>함수 Overriding</h4>
-            <pre><code>{`
-            // 부모 계약 
-            contract Animal { 
-                function sound() public virtual pure returns (string memory) { 
-                    return "Generic Animal Sound";
-                }
-            }
-
-            // 자식 계약 
-            contract Dog is Animal { 
-                function sound() public pure override returns (string memory) {
-                    return "Bark";
-                }
-            }
-            `}</code></pre>
+            <h4 style={{ color: 'deeppink' }}>함수 오버라이딩(Overriding)</h4>
+            <CodeBlock code={TIL0327OverridingExample}></CodeBlock>
 
             <ul><li>"다형성"과 "확장성"을 위한 기능</li>
                 <li>다형성: 하나의 함수가 여러 형태를 가질 수 있다는 의미
@@ -195,30 +172,7 @@ const TIL0327 = () => {
             <ul><li>public: 상속받은 계약에서 접근 가능</li>
                 <li>internal: 상속받은 계약에서 접근 가능 (외부에서는 접근 불가)</li>
                 <li>private: 상속받은 계약서에서도 접근 불가</li></ul>
-            <pre><code>{`
-            contract Base { 
-                string public publicData = "Public"; 
-                string internal internalData = "Internal"; 
-                string private privateData = "Private"; 
-
-                function getPrivateData() private pure returns (string memroy) { 
-                    return "Only within Base";
-                }
-            }
-
-            contract Derived is Base { 
-                function accessData() public view returns (string memory, string memory) { 
-                    // 접근 가능 
-                    string memory publicVal = publicData; 
-                    string memory internalVal = internalData; 
-                    
-                    // 접근 불가 (컴파일 에러 발생)
-                    // string memory privateVal = privateData; 
-                    
-                    return (publicVal, internalVal);
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={TIL0327VisibilitySpecifiers}></CodeBlock>
 
 
             <h3>인터페이스와 추상 계약</h3>
@@ -238,56 +192,21 @@ const TIL0327 = () => {
                 `}</code></pre>
                 <li>다형성을 보여주는 예제 (IAnimal 인터페이스를 통해 Dog와 Cat을 동일한 방식으로 사용 가능):
                     <ul><li>인터페이스 정의
-                        <pre><code>{`
-            // SPDX-License-Identifier: MIT
-            pragma solidity ^0.8.0;
-
-            interface IAnimal {
-                function makeSound() external view returns (string memory);                            
-            }
-                `}</code></pre>
+                        <CodeBlock code={TIL0327InterfaceDef}></CodeBlock>
                         <ul><li>interface IAnimal: IAnimal 이라는 이름의 인터페이스 정의</li>
                             <li>makesound 함수는 모든 동물이 구현해야 하는 공통적인 함수</li>
                             <li>external view: 외부에서 호출 가능하며 상태를 변경하지 않음</li>
                             <li>returns (string memory): 문자열 반환</li></ul>
                     </li><br />
                         <li>인테피이스 구현
-                            <pre><code>{`
-            // SPDX-License-Identifier: MIT
-            pragma solidity ^0.8.0;
-
-            import "./IAnimal.sol";
-
-            contract Dog is IAnimal {
-                function makeSound() external pure override returns (string memory) {
-                    return "Bark";
-                }
-            }
-
-            contract Cat is IAnimal {
-                function makeSound() external pure override returns (string memory) {
-                    return "Meow";
-                }
-            }
-                        `}</code></pre>
+                            <CodeBlock code={TIL0327InterfaceImported}></CodeBlock>
                             <ul><li>Dog, Cat 계약은 IAnimal 인터페이스를 구현하고 있음</li>
                                 <li>makeSound 함수를 반드시 구현해야 하며 override 키워드를 사용해 명시적으로 재정의</li>
                                 <li>pure 키워드는 상태를 변경하거나 읽지 않음을 의미함</li></ul>
 
                         </li>
                         <li>사용 방법
-                            <pre><code>{`
-            // SPDX-License-Identifier: MIT
-            pragma solidity ^0.8.0;
-
-            import "./IAnimal.sol";
-
-            contract AnimalSound {
-                function getSound(IAnimal animal) public view returns (string memory) {
-                    return animal.makeSound();
-                }
-            }
-            `}</code></pre>
+                            <CodeBlock code={TIL0327InterfaceUsage}></CodeBlock>
                             <ul><li>getSound 함수는 IAnimal 타입의 변수를 받아 makeSound() 함수를 호출함</li>
                                 <li>즉 Dog나 Cat 계약의 인스턴스를 IAnimal 타입으로 전달하면, 해당 계약의 makeSound 함수가 실행됨</li></ul>
                         </li></ul>
@@ -365,49 +284,23 @@ const TIL0327 = () => {
                         <li>내장된 가스 최적화 기능이 적용됨</li></ul>
                 </li>
                 <li>문법: </li>
-                <pre><code>{`
+            </ul>
+            <pre><code>{`
             library LibraryName { 
                 function functionName(parameters) public pure returns (type) {
                     // logic here 
                 }
             }
             `}</code></pre>
-                <li>라이브러리 사용 예시 - 정수 연산 라이브러리
-                    <ul><li>라이브러리 정의</li>
-                        <pre><code>{`
-                    // SPDX-License-Identifier: MIT
-                    pragma solidity ^0.8.0;
 
-                    library MathLibrary {
-                        function add(uint256 a, uint256 b) public pure returns (uint256) {
-                            return a + b;
-                        }
-
-                        function subtract(uint256 a, uint256 b) public pure returns (uint256) {
-                            require(b <= a, "Underflow error");
-                            return a - b;
-                        }
-                    }
-                    `}</code></pre>
-                        <li>스마트 계약에서 사용하기</li></ul>
-                    <pre><code>{`
-                    // SPDX-License-Identifier: MIT
-                    pragma solidity ^0.8.0;
-
-                    import "./MathLibrary.sol";
-
-                    contract Calculator {
-                        function addNumbers(uint256 a, uint256 b) public pure returns (uint256) {
-                            return MathLibrary.add(a, b);
-                        }
-
-                        function subtractNumbers(uint256 a, uint256 b) public pure returns (uint256) {
-                            return MathLibrary.subtract(a, b);
-                        }
-                    }
-                    `}</code></pre>
-                </li>
+            <p>라이브러리 사용 예시</p>
+            <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>🔢 정수 연산 라이브러리</span>
+            <ul><li>라이브러리 정의</li>
+                <CodeBlock code={TIL0327LibraryDef}></CodeBlock>
+                <li>스마트 계약에서 사용하기</li>
+                <CodeBlock code={TIL0327LibraryInContract}></CodeBlock>
             </ul>
+
 
             <h4>using for 구문 활용</h4>
             <ul><li>라이브러리 함수를 특정 데이터 타입에 연결시켜, 메서드 형식으로 사용할 수 있게 해줌</li>
@@ -415,59 +308,17 @@ const TIL0327 = () => {
                     <ul><li>코드의 가독성이 높아짐</li>
                         <li>특정 데이터 타입에 맞는 함수를 명확하게 사용할 수 있음</li></ul>
                 </li>
-                <li>문법: using LibraryName for Type; </li>
+                <li>문법:
+                    <pre><code>{`
+    using LibraryName for Type; 
+    `}</code></pre>
+                </li>
                 <li>예시: 배열 관련 라이브러리
                     <ul><li>라이브러리 정의</li>
-                        <pre><code>{`
-                    // SPDX-License-Identifier: MIT
-                    pragma solidity ^0.8.0;
-
-                    library ArrayUtils {
-                        function findMax(uint256[] memory self) public pure returns (uint256) {
-                            require(self.length > 0, "Array is empty");
-                            uint256 max = self[0];
-                            for (uint256 i = 1; i < self.length; i++) {
-                                if (self[i] > max) {
-                                    max = self[i];
-                                }
-                            }
-                            return max;
-                        }
-
-                        function sum(uint256[] memory self) public pure returns (uint256) {
-                            uint256 total = 0;
-                            for (uint256 i = 0; i < self.length; i++) {
-                                total += self[i];
-                            }
-                            return total;
-                        }
-                    }
-                    `}</code></pre>
-                        <li>using for 구문을 활용한 계약</li></ul>
-                    <pre><code>{`
-                    // SPDX-License-Identifier: MIT
-                    pragma solidity ^0.8.0;
-
-                    import "./ArrayUtils.sol";
-
-                    contract ArrayProcessor {
-                        using ArrayUtils for uint256[];
-
-                        uint256[] private data;
-
-                        function addElement(uint256 value) public {
-                            data.push(value);
-                        }
-
-                        function getMax() public view returns (uint256) {
-                            return data.findMax();
-                        }
-
-                        function getSum() public view returns (uint256) {
-                            return data.sum();
-                        }
-                    }
-                    `}</code></pre>
+                        <CodeBlock code={TIL0327usingForLibrary}></CodeBlock>
+                        <li>using for 구문을 활용한 계약</li>
+                        <CodeBlock code={TIL0327usingFor}></CodeBlock>
+                    </ul>
                     <ul><li>using ArrayUtils for uint256[];: uint256[] 타입의 배열에서 findMax()와 sum() 함수를 메서드처럼 호출할 수 있게 설정</li>
                         <li>data.findMax(); → 배열 내 최대값 반환</li>
                         <li>data.sum(); → 배열 요소의 합 반환</li></ul>
@@ -480,7 +331,7 @@ const TIL0327 = () => {
             <p>참고:</p>
             <ul><li>과제: <a href='https://github.com/dolsotbob/animal_contract_practice'>Animal Contract</a></li></ul>
 
-        </div>
+        </div >
     )
 }
 

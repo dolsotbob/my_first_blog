@@ -26,11 +26,54 @@ const TIL0221 = () => {
             <p>DOM 구조 조회할 때</p>
             <ul><li>console.dir이 유용함: DOM을 객체의 모습으로 출력함</li></ul>
 
-            {/* CRUD
-            // 다음 학습에서는 document 객체를 통해 HTML 엘리먼트를 만들고, 조회하고, 갱신하고, 삭제하는 법 학습하자
-            // 그리고 HTML에 적용(APPEND)하는 메서드까지 학습하하  */}
+            <p><span style={{ fontStyle: "italic" }}>CREATE, APPEND, READ를 통해 새로운 DOM 객체를 만들고, 기존의 DOM 객체에 붙이고, DOM 객체를 선택해서 조회할 수 있음.</span></p>
 
-            <p>CREATE, APPEND, READ를 통해 새로운 DOM 객체를 만들고, 기존의 DOM 객체에 붙이고, DOM 객체를 선택해서 조회할 수 있음.</p>
+            <h4>READ</h4>
+            <ul><li>“DOM에서 변수 값을 조회한다”는 건, HTML 요소를 JavaScript로 불러온다는 말임</li>
+                <li>웹 페이지에 있는 HTML 요소(DOM)는 querySelector를 이용해서 찾아야 한다.</li>
+                <li>querySeelctor는 선택자를 조회한다는 의미를 가지고 있음</li>
+                <li>선택자(selector)로는 다음 세 가지가 가장 많이 사용된다.
+                    <ul><li>HTML 요소("div")</li>
+                        <li>id("#tweetList")</li>
+                        <li>class(.tweet)</li></ul>
+                </li>
+            </ul>
+
+            <p>querySelector</p>
+            <ul><li>querySelector에 '.tweet'을 첫 번째 인자로 넣으면,</li>
+                <li>클래스 이름이 tweet 인 HTML 엘리먼트 중 첫 번째 엘리먼트를 조회할 수 있습니다.</li>
+                <pre><code>{`
+    const oneTweet = document.querySelector('.tweet')
+    `}</code></pre>
+            </ul>
+
+            <ul><li>여러 개의 요소를 한 번에 가져오기 위해서는, querySelectorAll을 사용</li>
+                <li>이렇게 조회한 HTML 요소들은 배열처럼 for문을 사용하실 수 있다.</li>
+                <li>주의!: 앞서 조회한 HTML 요소들은 배열이 아니다! Array-like Object이다.</li>
+                <pre><code>{`
+    const Tweets = document.querySelectorAll('.tweet')
+    `}</code></pre>
+            </ul>
+
+            <ul><li>get으로 시작하는 DOM 조회 메서드도 있음</li>
+                <li>querySelector와 비슷한 역할을 하는 오래된 방식</li>
+                <pre><code>{`
+    // getElementById와 querySelector로 각각 받아 온 container 요소는 하나의 요소입니다.
+    const getOneTweet = document.getElementById('container')
+    const queryOneTweet = document.querySelector('#container')
+    console.log(getOneTweet === queryOneTweet) // true
+    `}</code></pre>
+            </ul>
+
+            <ul><li>CREATE에서 생성한 div 요소를 container에 넣을 준비 마침</li>
+                <li>다음 코드를 입력하면 container의 맨 마지막 자식 요소로 tweetDiv를 추가함</li>
+                <pre><code>{`
+    const container = document.querySelector('#container')
+    const tweetDiv = document.createElement('div')
+    container.append(tweetDiv)
+    `}</code></pre>
+            </ul>
+
             <p>READ, UPDATE, DELETE</p>
 
             <h4>여러 개의 자식 요소 지우기</h4>
