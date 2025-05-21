@@ -121,6 +121,10 @@ const TIL0521 = () => {
             <ul><li>GET /createCalculation?a=5&b=3&operation=add ❌</li>
                 <li>POST /calculation/do ❌</li></ul>
 
+            <h4>Param, Query, Body는 언제 쓰일까?</h4>
+            <p>@Param(): 경로(주소)에서 값을 추출할 때</p>
+            <p>@Query(): URL 뒤의 ?key=value 형식의 값을 추출할 때</p>
+            <p>@Body(): 요청 본문(Body)에서 JSON 데이터 추출</p>
 
         </div>
     )
