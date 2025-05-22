@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import CodeBlock from '../../../components/CodeBlock';
+import { TIL0325removeAndShift } from './CodeExamSol';
 
 const TIL0325 = () => {
     return (
@@ -67,48 +69,106 @@ const TIL0325 = () => {
                 } 
             }
             `}</code></pre>
-
-                <li>Solidity에서 문자열을 다룰 때 주의할 점
-                    <ul>
-                        <li>Solidity는 문자열 조작 기능이 제한적 → bytes 타입을 활용하는 것이 더 효율적</li>
-                        <li>string.length가 없기 때문에 bytes(str).length를 사용해야 함</li>
-                        <li>문자열을 비교할 때 keccak256(abi.encodePacked(str))를 사용해야 함</li>
-                        <li>문자열 연결은 abi.encodePacked()를 사용하여 처리</li></ul>
-                </li>
             </ol>
+
+            <p>Solidity에서 문자열을 다룰 때 주의할 점</p>
+            <ul><li>✔ Solidity는 문자열 조작 기능이 제한적 → bytes 타입을 활용하는 것이 더 효율적</li>
+                <li>✔ string.length가 없기 때문에 bytes(str).length를 사용해야 함</li>
+                <li>✔ 문자열을 비교할 때 keccak256(abi.encodePacked(str))를 사용해야 함</li>
+                <li>✔ 문자열 연결은 abi.encodePacked()를 사용하여 처리</li></ul>
 
             <h4>배열</h4>
             <ul><li>배열 안에 여러 타입 들어갈 수 없다. 다만 구조체에서 혼합 타입을 배열로 넣을 수 있다. </li>
-                <li>동적 크기와 고정 크기 배열로 나뉨</li>
+                <li>배열은 동적 크기와 고정 크기 배열로 나뉨</li>
                 <li>push(), poop() 등의 내장 함수 제공</li>
                 <li>특정 요소 접근 및 수정 가능(array[index])</li>
-                <li>Solidity의 배열은 가스 비용이 높을 수 있어 최적화 필요</li>
-                <li>배열을 반복문으로 조회하기</li>
-                <pre><code>{`
-                contract ArrayLoop { 
-                    uint256[] public numbers = [1, 2, 3, 4, 5];
+                <li>Solidity의 배열은 가스 비용이 높을 수 있어 최적화 필요</li></ul>
 
-                    functions sumArray() public view returns (uint256 sum) {
-                        for (uint256 i = 0; i < number.length; i++) {
-                            sum += numbers[i];
-                        } 
-                    }
-                }
-                `}</code></pre>
-                <ul>⁕ 배열의 모든 요소를 합산하는 sumArray() 함수</ul>
-                <li>다차원 배열: 배열 안에 배열을 저장할 수 있음</li>
-                <li>특정 인덱스 요소 삭제(delete)</li>
+            <p>1. 배열의 종류</p>
+            <ul><li>동적 크기 배열(Dynamic Array)
+                <ul><li>배열의 크기가 고정되지 않으며, push()를 통해 요소를 추가할 수 있다.</li></ul>
+            </li>
                 <pre><code>{`
-                constract ArrayDelete { 
-                    uint256[] public numbers = [10, 20, 30, 40];
+        contract DynamicArray {
+            uint256[] public numbers;
 
-                    function removeElement(uint256 index) public {
-                        require(index < numbers.length, "Index out of bounds");
-                        delete numbers[index];
-                    }
-                }
-                `}</code></pre>
-                <li>특정 요소 삭제 후 배열 크기 줄이기: 가스비 높아 최적화 필요</li>
+            function addNumber(uint256 num) public {
+                numbers.push(num);
+            }
+        }
+        `}</code></pre>
+                <li>고정 크기 배열(Fixed-Size Array)
+                    <ul><li>배열의 크기가 고정되며, 선언할 때 크기를 지정해야 한다.</li>
+                        <li>고정 크기 배열은 선언 후 크기를 변경할 수 없음</li></ul>
+                </li>
+                <pre><code>{`
+        contract FixedArray {
+            uint256[3] public fixedNumbers = [1, 2, 3];
+        }    
+        `}</code></pre>
+            </ul>
+
+            <p>2. 배열의 주요 기능 (내장 함수 및 연산)</p>
+            <ul><li>요소 추가(push())
+                <ul><li>📌 push()를 사용하여 배열 끝에 요소 추가 가능 (동적 배열에서만 사용 가능)</li></ul>
+            </li>
+                <li>요소 제거(pop())
+                    <ul><li>📌 pop()을 사용하면 배열의 마지막 요소 제거 (고정 크기 배열에서는 사용 불가)</li></ul>
+                </li>
+                <li>특정 인덱스 값 가져오기(array[index])
+                    <ul><li>📌 배열의 특정 인덱스에 접근하려면 array[index] 형식 사용</li></ul>
+                </li>
+                <li>배열 길이 확인(.length)
+                    <ul><li>📌 .length 속성을 사용하여 배열 크기 확인 가능</li></ul>
+                </li>
+            </ul>
+
+            <p>3. 배열과 루프 활용</p>
+            <ul><li>배열을 반복문으로 조회하기</li>
+                <pre><code>{`
+        contract ArrayLoop { 
+            uint256[] public numbers = [1, 2, 3, 4, 5];
+
+            functions sumArray() public view returns (uint256 sum) {
+                for (uint256 i = 0; i < number.length; i++) {
+                    sum += numbers[i];
+                } 
+            }
+        }
+        `}</code></pre>
+                <li>배열의 모든 요소를 합산하는 sumArray() 함수</li></ul>
+
+            <p>4. 다차원 배열(Multi-dimensional Array)</p>
+            <ul><li>배열 안에 배열을 저장할 수 있음</li>
+                <li>2차원 배열 선언 및 사용</li></ul>
+            <pre><code>{`
+    contract MultiDimArray {
+        uint256[][] public matrix;
+
+        function addRow(uint256[] memory row) public {
+            matrix.push(row);
+        }
+    }
+    `}</code></pre>
+            <ul><li>배열의 배열(2D 배열) 구조로 데이터를 저장 가능</li></ul>
+
+            <p>5. 배열에서 특정 요소 삭제</p>
+            <ul><li><span style={{ fontWeight: 'bold' }}>특정 인덱스 요소 삭제(delete)</span>
+                <pre><code>{`
+    constract ArrayDelete { 
+         uint256[] public numbers = [10, 20, 30, 40];
+
+        function removeElement(uint256 index) public {
+            require(index < numbers.length, "Index out of bounds");
+            delete numbers[index];
+        }
+    }
+    `}</code></pre>
+                <li>📌 delete numbers[index]를 사용하면 해당 인덱스의 값이 0으로 초기화됨 (배열 크기는 변하지 않음)</li>
+            </li><br />
+                <li><span style={{ fontWeight: 'bold' }}>특정 요소 삭제 후 배열 크기 줄이기</span></li>
+                <CodeBlock code={TIL0325removeAndShift}></CodeBlock>
+                <li>가스비 높아 최적화 필요</li>
             </ul>
 
             <h4>매핑</h4>
@@ -132,8 +192,8 @@ const TIL0325 = () => {
                 }
             }
             `}</code></pre>
-            ⁕ 여기서 변수명은 balances <br />
-            ⁕ 변수를 함수 밖에서 선언해야 전약적으로 사용할 수 있다 <br />
+            ⁕ 여기서 변수명은 balances < br />
+            ⁕ 변수를 함수 밖에서 선언해야 전약적으로 사용할 수 있다 < br />
 
             <p>매핑의 주요 기능</p>
             <ul><li>값 설정(쓰기 연산)
@@ -162,7 +222,7 @@ const TIL0325 = () => {
                 }
             }
             `}</code></pre>
-            ⁕ 주소별 특정 ID의 권한을 설정 및 조회할 수 있는 중첩 매핑 예제 <br />
+            ⁕ 주소별 특정 ID의 권한을 설정 및 조회할 수 있는 중첩 매핑 예제 < br />
 
             <p>매핑과 구조체(Struct) 결합</p>
             <pre><code>{`
@@ -184,7 +244,7 @@ const TIL0325 = () => {
             }
 
             `}</code></pre>
-            ⁕ 사용자 정보를 저장하는 구조체와 매핑을 조합한 예제<br />
+            ⁕ 사용자 정보를 저장하는 구조체와 매핑을 조합한 예제 < br />
 
             <p>매핑 사용 시 주의할 점</p>
             <ul><li>storage에서만 사용 가능하며 memory 변수로 선언 불가</li>
@@ -220,7 +280,7 @@ const TIL0325 = () => {
             }
             `}</code></pre>
             <ul><li>📌 구조체를 사용하여 사용자 정보를 저장 및 조회하는 예제</li></ul>
-            
+
             <p>구조체를 배열로 저장하기</p>
             <pre><code>{`
             contract StructArray {
@@ -334,7 +394,7 @@ const TIL0325 = () => {
             }
             `}</code></pre>
             <ul><li>📌 저장소(storage)에 데이터를 저장하면 영구적으로 보관됨</li></ul>
-            
+
             <p></p>
             <pre><code>{``}</code></pre>
 
@@ -343,12 +403,12 @@ const TIL0325 = () => {
                 <li>고정 크기(bytes1 ~ bytes32)와 가변 크기(bytes) 배열이 존재</li>
                 <li>string 보다 효율적인 저장 및 조작이 가능하며, 가스 비용 절감 효과가 있음</li>
                 <li>string과 쌍쌍바임</li></ul>
-            
+
             <p>바이트 배열의 종류</p>
             <ul><li>고정 크기 바이트 배열(bytes1 ~ bytes32)
-                    <ul><li>더 적은 가스를 사용하며, 연산 속도가 빠름</li>
-                        <li>크기가 정해져 있어 push()나 pop() 등의 조작이 불가능</li></ul>
-                </li>
+                <ul><li>더 적은 가스를 사용하며, 연산 속도가 빠름</li>
+                    <li>크기가 정해져 있어 push()나 pop() 등의 조작이 불가능</li></ul>
+            </li>
                 <li>가변 크기 바이트 배열 (bytes)
                     <ul><li>bytes는 동적 크기의 바이트 배열</li>
                         <li>string과 유사하지만, 더 적은 가스를 사용하며 개별 바이트 접근 가능</li>
@@ -358,17 +418,17 @@ const TIL0325 = () => {
 
             <p>바이트 배열의 주요 기능</p>
             <ul><li>바이트 배열 길이 확인(.length)
-            <pre><code>{`
+                <pre><code>{`
             contract BytesLength {
                 function getLength(bytes memory data) public pure returns (uint) {
                     return data.length;
                 }
             }
             `}</code></pre>
-                    <ul><li>📌 bytes("Hello")를 입력하면 5 반환</li></ul>
-                    </li>
+                <ul><li>📌 bytes("Hello")를 입력하면 5 반환</li></ul>
+            </li>
                 <li>특정 바이트 값 접근
-                <pre><code>{`
+                    <pre><code>{`
                 contract BytesAccess {
                     function getByteAt(bytes memory data, uint256 index) public pure returns (bytes1) {
                         require(index < data.length, "Index out of bounds");
@@ -377,13 +437,13 @@ const TIL0325 = () => {
                 }
                 `}</code></pre>
                     <ul><li>📌 getByteAt(bytes("Hello"), 1) → "e" 반환
-                            <ul><li>bytes("Hello") &rarr;  "Hello"를 바이트 배열로 변환</li>
+                        <ul><li>bytes("Hello") &rarr;  "Hello"를 바이트 배열로 변환</li>
                             <li>bytes("Hello") == [0x48, 0x65, 0x6c, 0x6c, 0x6f]</li>
                             <li>getByteAt(..., 1): 인덱스 1에 해당하는 바이트 값을 가져옴</li></ul>
-                        </li></ul>
+                    </li></ul>
                 </li>
                 <li>바이트 배열 추가(push())
-                <pre><code>{`
+                    <pre><code>{`
                 contract BytesPush {
                     bytes public data; 
 
@@ -391,12 +451,12 @@ const TIL0325 = () => {
                         data.push(newByte);
                     }
                 }
-                `}</code></pre> 
-                <ul><li>📌 push()를 사용하여 바이트 배열 끝에 요소 추가 가능 (동적 배열에서만 가능)</li>
-                    <li>외부에서 1바이트(bytes1)를 입력 받아 data 배열에 push()로 추가</li></ul>
+                `}</code></pre>
+                    <ul><li>📌 push()를 사용하여 바이트 배열 끝에 요소 추가 가능 (동적 배열에서만 가능)</li>
+                        <li>외부에서 1바이트(bytes1)를 입력 받아 data 배열에 push()로 추가</li></ul>
                 </li>
                 <li>바이트 배열 삭제(pop())
-                <pre><code>{`
+                    <pre><code>{`
                 contract BytesPop {
                     bytes public data = "Hello"; 
 
@@ -405,42 +465,42 @@ const TIL0325 = () => {
                     }
                 }
                 `}</code></pre>
-                <ul><li>📌 pop()을 사용하면 배열의 마지막 요소 제거 가능 (고정 크기 배열에서는 불가능)</li></ul>
+                    <ul><li>📌 pop()을 사용하면 배열의 마지막 요소 제거 가능 (고정 크기 배열에서는 불가능)</li></ul>
                 </li>
-                </ul>
+            </ul>
 
-                <p>바이트 배열과 문자열 변환</p>
-                <ul><li>Solidity에서 문자열을 다룰 때 bytes 타입을 활용하면 더 효율적임</li>
-                    <li>string → bytes 변환
-                <pre><code>{`
+            <p>바이트 배열과 문자열 변환</p>
+            <ul><li>Solidity에서 문자열을 다룰 때 bytes 타입을 활용하면 더 효율적임</li>
+                <li>string → bytes 변환
+                    <pre><code>{`
                 contract StringToBytes {
                     function convertToBytes(string memory str) public pure returns (bytes memory) { 
                         return bytes(str);
                     }
                 }
                 `}</code></pre>
-                    </li>
-                    <li>bytes → string 변환
-                <pre><code>{`
+                </li>
+                <li>bytes → string 변환
+                    <pre><code>{`
                 contract BytesToString {
                     function convertToString(bytes memory byteData) public pure returns (string memory) { 
                         return string(byteData);
                     }
                 } 
                 `}</code></pre>
-                    </li>
-                </ul>
+                </li>
+            </ul>
 
-                <p>바이트 배열과 문자열의 차이점</p>
-                <ul><li>string: 문자열 저장, UTF-8 지원; 가스 비용 높음; 개별 문자 접근 불가능</li>
-                    <li>bytes: 바이트 배열 저장, UTF-8 X; 가스 비용 낮음; 개별 문자 접근 가능</li>
-                    <li>📌 Solidity에서 문자열을 조작할 필요가 있다면 bytes를 사용하는 것이 더 가스 효율적임임</li></ul>
+            <p>바이트 배열과 문자열의 차이점</p>
+            <ul><li>string: 문자열 저장, UTF-8 지원; 가스 비용 높음; 개별 문자 접근 불가능</li>
+                <li>bytes: 바이트 배열 저장, UTF-8 X; 가스 비용 낮음; 개별 문자 접근 가능</li>
+                <li>📌 Solidity에서 문자열을 조작할 필요가 있다면 bytes를 사용하는 것이 더 가스 효율적임임</li></ul>
 
 
             <h4>컨트랙트 코딩시 꼭 할 일</h4>
             <ul><li>보안성이 입증된 건지 확인하기; Zeppelin에서 코드 가져다 써보기</li></ul>
 
-        </div>
+        </div >
     )
 }
 

@@ -183,4 +183,21 @@ contract ArrayProcessor {
 }
 `
 
+export const TIL0325removeAndShift = `
+// 배열에서 특정 요소를 삭제하고 뒤의 요소들을 앞으로 당김 
+contract RemoveAndShift {
+    // numbers라는 이름의 동적 배열을 선언하고 초기갑으로 [10, 20, 30, 40]으로 설정한다
+    // public이기 때문에 자동으로 getter 함수가 만들어져 외부에서 numbers(0), numbers(1) 등으로 조회 가능
+    uint256[] public numbers = [10, 20, 30, 40];
+
+    function removeAt(uint256 index) public {
+        require(index < numbers.length, "Index out of bounds");
+        for (uint256 i = index; i < numbers.length - 1; i++) {
+            numbers[i] = numbers[i + 1];
+        }
+        numbers.pop();
+    }
+}
+`
+
 
