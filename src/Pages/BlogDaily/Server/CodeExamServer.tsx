@@ -331,3 +331,49 @@ export class SuccessInterceptor implements NestInterceptor {
   }
 }
 `
+
+export const TIL0522scheduleModule = `
+// app.module.ts
+import { Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
+import { SchedulerService } from './scheduler.service';
+
+@Module({
+  imports: [ScheduleModule.forRoot()],  // CRON 등 예약 작업 기능 활성화
+  providers: [SchedulerService],  // 예약 작업을 정의한 서비스
+})
+export class AppModule {}
+`
+
+export const TIL0522schedulerLogger = `
+// NestJS의 예약 작업 기능(@nestjs/schedule)을 사용해서 30초마다 자동으로 실행되는 작업을 정의한 예시
+// scheduler.service.ts
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+
+@Injectable()
+export class SchedulerService {
+  private readonly logger = new Logger(SchedulerService.name);
+
+  // 매 30초마다 실행
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  handleCron() {
+    this.logger.log('30초마다 실행되는 작업');
+  }
+}
+`
+
+export const TIL0522LoggerExample = `
+import { Injectable, Logger } from '@nestjs/common';
+
+@Injectable()
+export class MyService {
+  private readonly logger = new Logger(MyService.name); // 클래스명 자동 로깅 prefix
+
+  example() {
+    this.logger.log('기본 로그입니다.');
+    this.logger.warn('경고 로그입니다.');
+    this.logger.error('에러 로그입니다.');
+  }
+}
+`

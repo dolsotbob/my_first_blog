@@ -156,7 +156,7 @@ function App() {
             <Route path="/blog/server/0519" element={<TIL0519></TIL0519>}></Route>
             <Route path="/blog/server/0520" element={<TIL0520></TIL0520>}></Route>
             <Route path="/blog/server/0521" element={<TIL0521></TIL0521>}></Route>
-            <Route path="/blog/server/0521" element={<TIL0522></TIL0522>}></Route>
+            <Route path="/blog/server/0522" element={<TIL0522></TIL0522>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
