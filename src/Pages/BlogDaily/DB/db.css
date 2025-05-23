@@ -81,3 +81,24 @@ p {
     font-size: 20px;
     font-weight: bold;
 }
+
+.TIL0523tableImg {
+    width: 1000px;
+    height: 200px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.TIL0523ForeignKeyImg {
+    width: 800px;
+    height: 150px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.TIL0523PostgresVsOthersImg {
+    width: 700px;
+    height: 400px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
