@@ -12,6 +12,7 @@ const topics = [
     { path: "/blog/solidity", label: "Solidity" },
     { path: "/blog/soladvanced", label: "Solidity 심화" },
     { path: "/blog/server", label: "서버" },
+    { path: "/blog/db", label: "DB" },
 ];
 
 const TILmain = () => {

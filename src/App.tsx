@@ -72,6 +72,9 @@ import TIL0519 from './Pages/BlogDaily/Server/TIL0519';
 import TIL0520 from './Pages/BlogDaily/Server/TIL0520';
 import TIL0521 from './Pages/BlogDaily/Server/TIL0521';
 import TIL0522 from './Pages/BlogDaily/Server/TIL0522';
+import TIL0523 from './Pages/BlogDaily/DB/TIL0523';
+import Database from './Pages/BlogDaily/DB/Database';
+
 
 
 
@@ -157,6 +160,9 @@ function App() {
             <Route path="/blog/server/0520" element={<TIL0520></TIL0520>}></Route>
             <Route path="/blog/server/0521" element={<TIL0521></TIL0521>}></Route>
             <Route path="/blog/server/0522" element={<TIL0522></TIL0522>}></Route>
+
+            <Route path="/blog/db" element={<Database></Database>}></Route>
+            <Route path="/blog/db/0523" element={<TIL0523></TIL0523>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
