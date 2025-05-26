@@ -1,8 +1,8 @@
 import React from 'react'
-import til0321 from '../../assets/til0321.png'
-import til0321_config1 from '../../assets/til0321_config1.jpeg'
-import til0321_config2 from '../../assets/til0321_config2.jpeg'
-import til0321_config4 from '../../assets/til0321_config4.png'
+import til0321 from './til0321.png'
+import til0321_config1 from './til0321_config1.jpeg'
+import til0321_config2 from './til0321_config2.jpeg'
+import til0321_config4 from './til0321_config4.png'
 
 
 const TIL0321 = () => {

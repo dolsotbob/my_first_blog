@@ -5,7 +5,6 @@ import Sidebar from './Sidebar';
 import About from './Pages/About';
 import Blog from './Pages/Blog';
 import Misc from './Pages/FurtherStudies';
-import Blogpage from './Pages/Blogpage';
 import Wallet from './Pages/Wallet';
 import 'font-awesome/css/font-awesome.min.css';
 import Explorer from './Pages/Explorer';
@@ -86,6 +85,13 @@ import TIL0429 from './Pages/BlogDaily/SolidityAdv/TIL0429';
 import TIL0430 from './Pages/BlogDaily/SolidityAdv/TIL0430';
 import TIL0507 from './Pages/BlogDaily/SolidityAdv/TIL0507';
 import TIL0526 from './Pages/BlogDaily/DB/TIL0526';
+import DevTools from './Pages/BlogDaily/DevTools/DevTools';
+import TIL0307 from './Pages/BlogDaily/DevTools/TIL0307';
+import TIL0312 from './Pages/BlogDaily/DevTools/TIL0312';
+import TIL0313 from './Pages/BlogDaily/DevTools/TIL0313';
+import TIL0314 from './Pages/BlogDaily/DevTools/TIL0314';
+import TIL0318 from './Pages/BlogDaily/DevTools/TIL0318';
+import TIL0321 from './Pages/BlogDaily/DevTools/TIL0321';
 
 
 
@@ -112,7 +118,6 @@ function App() {
         <div className='MainContent'>
           <Routes>
             {/* //리액트 다이내믹 루틴  */}
-            <Route path="/blog/:blogId" element={<Blogpage />} />
 
             <Route path="/" element={<div>Welcome to TeaHeeHouse!</div>}></Route>
             <Route path="/about" element={<About></About>}></Route>
@@ -148,6 +153,14 @@ function App() {
             <Route path="/blog/react/0304" element={<TIL0304></TIL0304>}></Route>
             <Route path="/blog/react/0305" element={<TIL0305></TIL0305>}></Route>
             <Route path="/blog/react/0306" element={<TIL0306></TIL0306>}></Route>
+
+            <Route path="/blog/tool" element={<DevTools></DevTools>}></Route>
+            <Route path="/blog/tool/0307" element={<TIL0307></TIL0307>}></Route>
+            <Route path="/blog/tool/0312" element={<TIL0312></TIL0312>}></Route>
+            <Route path="/blog/tool/0313" element={<TIL0313></TIL0313>}></Route>
+            <Route path="/blog/tool/0314" element={<TIL0314></TIL0314>}></Route>
+            <Route path="/blog/tool/0318" element={<TIL0318></TIL0318>}></Route>
+            <Route path="/blog/tool/0321" element={<TIL0321></TIL0321>}></Route>
 
             <Route path="/blog/solidity" element={<Solidity></Solidity>}></Route>
             <Route path="/blog/solidity/0324" element={<TIL0324></TIL0324>}></Route>
@@ -189,7 +202,6 @@ function App() {
             <Route path="/blog/db/0523" element={<TIL0523></TIL0523>}></Route>
             <Route path="/blog/db/0526" element={<TIL0526></TIL0526>}></Route>
 
-            <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
             <Route path="/wallet" element={<Wallet></Wallet>}></Route>

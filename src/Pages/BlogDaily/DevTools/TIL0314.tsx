@@ -1,7 +1,7 @@
 import React from 'react'
-import hdwalletimg4 from '../../assets/hdwallet.png'
-import mnemonic7img from '../../assets/mnemonic7step.png'
-import mnemonic9img from '../../assets/mnemonic9step.png'
+import hdwalletimg4 from './hdwallet.png'
+import mnemonic7img from './mnemonic7step.png'
+import mnemonic9img from './mnemonic9step.png'
 
 const TIL0314 = () => {
     return (
