@@ -18,7 +18,7 @@ const cardData = [
 const SolidityAdv = () => {
     return (
         <div className="bc_card-container">
-            <h2 className="bc_card-title">Server</h2>
+            <h2 className="bc_card-title">Solidity 심화</h2>
             <div className="bc_card-grid">
                 {cardData.map((item, index) => (
                     <Link to={item.path} className="bc_card" key={index}>

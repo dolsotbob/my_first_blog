@@ -10,7 +10,7 @@ const topics = [
     { path: "/blog/react", label: "React" },
     { path: "/blog/tool", label: "개발도구" },
     { path: "/blog/solidity", label: "Solidity" },
-    { path: "/blog/soladvanced", label: "Solidity 심화" },
+    { path: "/blog/solidityadv", label: "Solidity 심화" },
     { path: "/blog/server", label: "서버" },
     { path: "/blog/db", label: "DB" },
 ];

@@ -74,6 +74,18 @@ import TIL0521 from './Pages/BlogDaily/Server/TIL0521';
 import TIL0522 from './Pages/BlogDaily/Server/TIL0522';
 import TIL0523 from './Pages/BlogDaily/DB/TIL0523';
 import Database from './Pages/BlogDaily/DB/Database';
+import SolidityAdv from './Pages/BlogDaily/SolidityAdv/SolidityAdv';
+import TIL0407 from './Pages/BlogDaily/SolidityAdv/TIL0407';
+import TIL0408 from './Pages/BlogDaily/SolidityAdv/TIL0408';
+import TIL0410 from './Pages/BlogDaily/SolidityAdv/TIL0410';
+import TIL0414 from './Pages/BlogDaily/SolidityAdv/TIL0414';
+import TIL0421 from './Pages/BlogDaily/SolidityAdv/TIL0421';
+import TIL0422 from './Pages/BlogDaily/SolidityAdv/TIL0422';
+import TIL0423 from './Pages/BlogDaily/SolidityAdv/TIL0423';
+import TIL0429 from './Pages/BlogDaily/SolidityAdv/TIL0429';
+import TIL0430 from './Pages/BlogDaily/SolidityAdv/TIL0430';
+import TIL0507 from './Pages/BlogDaily/SolidityAdv/TIL0507';
+import TIL0526 from './Pages/BlogDaily/DB/TIL0526';
 
 
 
@@ -149,6 +161,18 @@ function App() {
             <Route path="/blog/solidity/0403" element={<TIL0403></TIL0403>}></Route>
             <Route path="/blog/solidity/0404" element={<TIL0404></TIL0404>}></Route>
 
+            <Route path="/blog/solidityadv" element={<SolidityAdv></SolidityAdv>}></Route>
+            <Route path="/blog/solidityadv/0407" element={<TIL0407></TIL0407>}></Route>
+            <Route path="/blog/solidityadv/0408" element={<TIL0408></TIL0408>}></Route>
+            <Route path="/blog/solidityadv/0410" element={<TIL0410></TIL0410>}></Route>
+            <Route path="/blog/solidityadv/0414" element={<TIL0414></TIL0414>}></Route>
+            <Route path="/blog/solidityadv/0421" element={<TIL0421></TIL0421>}></Route>
+            <Route path="/blog/solidityadv/0422" element={<TIL0422></TIL0422>}></Route>
+            <Route path="/blog/solidityadv/0423" element={<TIL0423></TIL0423>}></Route>
+            <Route path="/blog/solidityadv/0429" element={<TIL0429></TIL0429>}></Route>
+            <Route path="/blog/solidityadv/0430" element={<TIL0430></TIL0430>}></Route>
+            <Route path="/blog/solidityadv/0507" element={<TIL0507></TIL0507>}></Route>
+
             <Route path="/blog/server" element={<Server></Server>}></Route>
             <Route path="/blog/server/0509" element={<TIL0509></TIL0509>}></Route>
             <Route path="/blog/server/0512" element={<TIL0512></TIL0512>}></Route>
@@ -163,6 +187,7 @@ function App() {
 
             <Route path="/blog/db" element={<Database></Database>}></Route>
             <Route path="/blog/db/0523" element={<TIL0523></TIL0523>}></Route>
+            <Route path="/blog/db/0526" element={<TIL0526></TIL0526>}></Route>
 
             <Route path="/blog/:slug" element={<Blogpage></Blogpage>}></Route>
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
