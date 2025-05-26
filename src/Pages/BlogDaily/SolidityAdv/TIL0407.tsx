@@ -1,8 +1,15 @@
 import React from 'react'
 import TIL0407abi from '../../../assets/TIL0407abi.png'
 import CodeBlock from '../../../components/CodeBlock'
-import { til0407deployExample } from '../../codeExamples'
-import { til0407callContractExample } from '../../codeExamples'
+import { til0407deployExample } from './CodeExamSolAdv'
+import { til0407afterDeploymentExample } from './CodeExamSolAdv'
+import { til0407callContractExample } from './CodeExamSolAdv'
+import { TIL0407TxCallSolidity } from './CodeExamSolAdv'
+import { TIL0407TxCallJS } from './CodeExamSolAdv'
+import { TIL0407CallSolidity } from './CodeExamSolAdv'
+import { TIL0407CallJS } from './CodeExamSolAdv'
+import { TIL0407ContractExample } from './CodeExamSolAdv'
+
 
 const TIL0407 = () => {
     return (
@@ -12,54 +19,30 @@ const TIL0407 = () => {
             <ul><li>학습 목표: JavaScript를 사용해서 스마트 컨트랙트를 어떻게 불러오고, 그 안의 기능을 어떻게 사용할 수 있는지 배우기</li></ul>
 
             <h4>컨트랙트 호출(Call)</h4>
-            <ul><li>뭘까?: 컨트랙트의 특정 기능(함수)를 실행하거나 데이터를 가져오는 것</li>
-                <li>컨트랙트 호출 방식
-                    <ol><li>트랜잭션 호출(Transaction Call)
-                        <ul><li>상태 변경이 발생하는 함수 호출; 가스 비용이 듦; tx이 블록체인에 기록됨</li>
-                            <li>트랜잭션 호출 예제 (Solidity)</li>
-                            <pre><code>{`
-                        // SPDX-License-Identifier: MIT
-                        pragma solidity ^0.8.0; 
+            <ul><li>뭘까?: 컨트랙트의 특정 기능(함수)를 실행하거나 데이터를 가져오는 것</li></ul>
 
-                        contract TransactionExample { 
-                            uint public value; 
+            <p>컨트랙트 호출(Call) 방식</p>
+            <ul><li>트랜잭션(Transaction) 호출: 상태 변경이 발생하는 함수 호출 (가스 비용이 듦)</li>
+                <li>조회(Call) 호출: 읽기 전용 함수 호출 (가스 비용이 없음)</li></ul>
 
-                            //트랜잭션 호출 
-                            function setValue(uint256 _value) public { 
-                                value = _value; 
-                            }
-                        }
-                        `}</code></pre>
-                            <li>트랜잭션 호출 예제 (JavaScript)</li></ul>
-                        <pre><code>{`
-                        const contract = new ethers.Contract(contractAddress, abi, signer); 
-                        await contract.setValue(42);  // 상태 변경 -> 가스 필요 
-                        `}</code></pre>
-                        <ul><li>signer: set 함수 쓸 때 signer가 가스비를 소모함</li>
-                            <li>signer는 msg.sender (혹은 tx.origin이 될 수도)</li></ul>
-
-                    </li>
-                        <li>조회 호출(Call)
-                            <ul><li>읽기 전용 함수 호출; 가스 비용 없음; tx이 블록체인에 기록되지 않음</li>
-                                <li>조회 호출 예제 (Solidity)</li>
-                                <pre><code>{`
-                        contract CallExample { 
-                            uint256 public value = 100; 
-
-                            // 조회 호출 (가스 없음)
-                            function getValue() public view returns (uint256) { 
-                                return value; 
-                            }
-                        }
-                        `}</code></pre>
-                                <li>조회 호출 예제(JavaScript)</li>
-                                <pre><code>{`
-                        const value = await contract.getValue();  // 가스 없이 데이터 조회 
-                        console.log(value.toString());  // "100" 
-                        `}</code></pre>
-                            </ul>
-                        </li></ol>
+            <p>1. 트랜잭션 호출 (Transaction Call)</p>
+            <ul><li>상태 변경이 발생하는 함수 호출; 가스 비용이 듦; tx이 블록체인에 기록됨</li>
+                <li>트랜잭션 호출 예제 (Solidity)</li>
+                <CodeBlock code={TIL0407TxCallSolidity}></CodeBlock>
+                <li>트랜잭션 호출 예제 (JavaScript)
+                    <CodeBlock code={TIL0407TxCallJS}></CodeBlock>
+                    <ul><li>signer: set 함수 쓸 때 signer가 가스비를 소모함</li>
+                        <li>signer는 msg.sender (혹은 tx.origin이 될 수도)</li></ul>
                 </li></ul>
+
+            <p>2. 조회 호출 (Call)</p>
+            <ul><li>읽기 전용 함수 호출; 가스 비용 없음; tx이 블록체인에 기록되지 않음</li>
+                <li>조회 호출 예제 (Solidity)</li>
+                <CodeBlock code={TIL0407CallSolidity}></CodeBlock>
+                <li>조회 호출 예제(JavaScript)</li>
+                <CodeBlock code={TIL0407CallJS}></CodeBlock>
+            </ul>
+
 
             <h4>ABI(Application Binary Interface)</h4>
             <ul><li>Evm과 대화하기 위한 번역기 </li>
@@ -98,32 +81,21 @@ const TIL0407 = () => {
             <img className='TIL0407abi' src={TIL0407abi} alt="abi-img"></img>
 
             <h4>Hardhat을 사용한 스마트 컨트랙트 배포 & ABI 생성 과정</h4>
+            <p>Hardhat</p>
+            <ul><li>Hardhat은 Ethereum 스마트 컨트랙트 개발 및 테스트를 위한 개발 환경</li>
+                <li>스마트 컨트랙트를 배포하면 ABI가 자동 생성되며, 이를 사용하여 애플리케이션과 상호작용할 수 있다.</li></ul>
+
+            <p>Hardhat을 이용한 배포 & ABI 사용 과정</p>
             <ol><li>Solidity 스마트 컨트랙트 작성</li>
                 <li>Hardhat을 사용해 컴파일</li>
                 <li>Hardhat을 사용해 배포 (ABI가 생성됨)</li>
                 <li>JavaScript (Ethers.js) 또는 Web3.js로 ABI 활용하여 컨트랙트 호출</li></ol>
 
             <p>1. Solidity 스마트 컨트랙트 작성</p>
-            <ul><li>예제: contracts/MyContract.sol</li></ul>
-            <pre><code>{`
-            // SPDX-License-Identifier: MIT
-            pragma solidity ^0.8.0;
+            <ul><li>예제: contracts/MyContract.sol</li>
+                <CodeBlock code={TIL0407ContractExample}></CodeBlock>
+            </ul>
 
-            contract MyContract {
-                uint256 public value;                    // public 키워드 덕에 자동 getter 함수 
-
-                event ValueChanged(uint256 newValue);
-
-                function setValue(uint256 _value) public {          // setter 함수 
-                    value = _value;
-                    emit ValueChanged(_value);
-                }
-
-                function getValue() public view returns (uint256) {  // getter 함수 
-                    return value;
-                }
-            }
-            `}</code></pre>
             <p>2. Hardhat을 사용해 컴파일</p>
             <ol><li>Hardhat 프로젝트 초기화</li>
                 <pre><code>{`
@@ -146,25 +118,7 @@ const TIL0407 = () => {
             <p>3. Hardhat을 사용해 배포 (ABI가 생성됨)</p>
             <ul><li>npx hardhat run scripts/deploy.js --network hardhat</li>
                 <li>배포 후 터미널 출력 예시:</li>
-                <pre><code>{`
-            📌 스마트 컨트랙트 배포 완료! 주소: 0x1234567890abcdef1234567890abcdef12345678
-            📌 ABI: [
-                {
-                    "inputs": [{"internalType": "uint256","name": "_value","type": "uint256"}],
-                    "name": "setValue",
-                    "outputs": [],
-                    "stateMutability": "nonpayable",
-                    "type": "function"
-                },
-                {
-                    "inputs": [],
-                    "name": "getValue",
-                    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
-                    "stateMutability": "view",
-                    "type": "function"
-                }
-            ]
-            `}</code></pre>
+                <CodeBlock code={til0407afterDeploymentExample}></CodeBlock>
                 <li>배포 후, artifacts/ 폴더 내에서 자동 생성된 ABI 파일을 확인할 수 있음</li>
             </ul>
 

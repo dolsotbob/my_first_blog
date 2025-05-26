@@ -200,4 +200,134 @@ contract RemoveAndShift {
 }
 `
 
+export const TIL0328MappingofStructs =
+    `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract UserProfile {
+    struct Profile {
+        string name;
+        uint256 age;
+        string email;
+    }
+
+    mapping(address => Profile) public profiles;
+
+    // 사용자 정보 등록
+    function setProfile(string memory _name, uint256 _age, string memory _email) public {
+        profiles[msg.sender] = Profile(_name, _age, _email);
+    }
+
+    // 사용자 정보 조회
+    function getProfile(address _user) public view returns (string memory, uint256, string memory) {
+        Profile memory profile = profiles[_user];
+        return (profile.name, profile.age, profile.email);
+    }
+}
+`
+
+export const TIL0328NestedMappings =
+    `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract PermissionSystem {
+    // permissions 매핑: 사용자(address)의 역할(string)에 대한 권한(bool)을 저장함 
+    // 첫 번째 매핑은 address를, 두 번째 매핑은 string을 키로 사용함 
+    // permissions[_user][_role] = true로 사용자가 특정 역할을 가지도록 설정하거나 false로 설정해 권한을 회수할 수 있다
+    mapping(address => mapping(string => bool)) public permissions;
+
+    // 권한 부여
+    function grantPermission(address _user, string memory _role) public {
+        permissions[_user][_role] = true;
+    }
+
+    // 권한 회수
+    function revokePermission(address _user, string memory _role) public {
+        permissions[_user][_role] = false;
+    }
+
+    // 권한 확인
+    function hasPermission(address _user, string memory _role) public view returns (bool) {
+        return permissions[_user][_role];
+    }
+}
+`
+
+export const TIL0328functionReceive =
+    `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ReceiveExample {
+    event Received(address sender, uint amount);
+
+    // 이더 수신 시 호출 
+    receive() external payable { 
+        emit Received(msg.sender, msg.value);
+    }
+}
+`
+
+export const TIL0328functionFallback =
+    `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract FallbackExample {
+    event FallbackCalled(address sender, uint amount, bytes data);
+
+    // 정의되지 않은 호출 발생 시 자동 실행
+    fallback() external payable {
+        emit FallbackCalled(msg.sender, msg.value, msg.data);
+    }
+}
+`
+
+export const TIL0328tryCatch =
+    `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ErrorHandlingExample {
+    event ErrorCaught(string reason);
+
+    function divide(uint256 a, uint256 b) public pure returns (uint256) {
+        require(b != 0, "Cannot divide by zero");
+        return a / b;
+    }
+
+    function safeDivide(uint256 a, uint256 b) public {
+        try this.divide(a, b) returns (uint256 result) {
+            // 성공 시 처리
+        } catch Error(string memory reason) {
+            emit ErrorCaught(reason);
+        }
+    }
+}
+`
+
+export const TIL0328CustomErrors =
+    `
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract CustomErrorExample {
+    error NotOwner(address caller);
+
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // 소유자만 실행 가능한 함수
+    function restrictedFunction() public {
+        if (msg.sender != owner) {
+            revert NotOwner(msg.sender);
+        }
+    }
+}
+`
 

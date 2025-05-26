@@ -1,4 +1,6 @@
 import React from 'react'
+import { til0408OpenZeppelinCreatingToken } from './CodeExamSolAdv'
+import CodeBlock from '../../../components/CodeBlock'
 
 const TIL0408 = () => {
     return (
@@ -126,18 +128,7 @@ const TIL0408 = () => {
                 npm install @openzeppelin/contracts
                 `}</code></pre>
                 <li>ERC-20 토큰 생성(컨트랙트 개발)</li>
-                <pre><code>{`
-                // SPDX-License-Identifier: MIT
-                pragma solidity ^0.8.0;
-
-                import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
-                contract MyToken is ERC20 {
-                    constructor() ERC20("MyToken", "MTK") {
-                        _mint(msg.sender, 1000000 * 10 ** decimals());
-                    }
-                }
-                `}</code></pre>
+                <CodeBlock code={til0408OpenZeppelinCreatingToken}></CodeBlock>
                 <ul><li>_mint 함수는 오픈 재플린의 ERC-20에서 가져온 것</li>
                     <li>언더바: 내부에서만 사용됨을 식별하기 위해; 상속 받은자까지 사용 가능</li></ul>
             </ul>
