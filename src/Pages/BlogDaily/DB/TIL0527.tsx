@@ -39,14 +39,17 @@ const whyNormalization = [
     {
         reason: '데이터 중복 제거',
         details: '똑같은 데이터를 여러 번 저장하지 않게 함',
+        details2: 'users 테이블과 orders 테이블에서 겹치는 데이터 제거',
     },
     {
         reason: '데이터 무결성 강화',
-        details: '데이터 오류를 줄임 (한 곳만 수정하면 됨)'
+        details: '데이터 오류를 줄임 (한 곳만 수정하면 됨)',
+        details2: 'users 테이블에서 데이터가 변경되면 orders에서도 당연히 변경되어야',
     },
     {
         reason: '유지보수 용이',
         details: '구조가 명확해서 관리하기 쉬움',
+        details2: '',
     }
 ]
 
@@ -54,7 +57,7 @@ const NormalizationSteps = [
     {
         step: '1NF (제1정규형)',
         meaning: '테이블의 각 컬럼이 원자값(atomic value)만 갖는다',
-        example: '리스트 형태 X, 하나의 값만 저장',
+        example: '리스트 형태 X, 하나의 값만 저장, 특정 유저 핸드폰 2개여도 2개 번호를 phone 에 모두 저장 못함',
     },
     {
         step: '2NF (제2정규형)',
@@ -218,8 +221,9 @@ const TIL0527 = () => {
 
             <p>인덱스가 필요한 상황</p>
             <ul><li>WHERE로 특정 값을 자주 검색할 때; 빠른 조건 검색 가능</li>
-                <li>JOIN에 사용하는 컬럼일 때; 조인 성능 향상</li>
-                <li>ORDER BY나 GROUP BY에 쓰이는 컬럼일 때; 정렬 성능 향상</li></ul>
+                <li>JOIN에 사용하는 컬럼일 때(조인하면 느려짐); 조인 성능 향상</li>
+                <li>ORDER BY나 GROUP BY에 쓰이는 컬럼일 때; 정렬 성능 향상</li>
+                <li>페이지네이션 할 때</li></ul>
 
             <p>주의사항</p>
             <div className="ml-4">
@@ -260,6 +264,7 @@ const TIL0527 = () => {
                         <summary className="cursor-pointer font-medium">{type.reason}</summary>
                         <ul className="list-disc list-inside ml-4">
                             <li><strong>설명:</strong> {type.details}</li>
+                            <li><strong></strong> {type.details2}</li>
                         </ul>
                     </details>
                 ))}
