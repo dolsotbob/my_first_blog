@@ -92,6 +92,8 @@ import TIL0313 from './Pages/BlogDaily/DevTools/TIL0313';
 import TIL0314 from './Pages/BlogDaily/DevTools/TIL0314';
 import TIL0318 from './Pages/BlogDaily/DevTools/TIL0318';
 import TIL0321 from './Pages/BlogDaily/DevTools/TIL0321';
+import TIL0415 from './Pages/BlogDaily/SolidityAdv/TIL0415';
+import TIL0527 from './Pages/BlogDaily/DB/TIL0527';
 
 
 
@@ -179,6 +181,7 @@ function App() {
             <Route path="/blog/solidityadv/0408" element={<TIL0408></TIL0408>}></Route>
             <Route path="/blog/solidityadv/0410" element={<TIL0410></TIL0410>}></Route>
             <Route path="/blog/solidityadv/0414" element={<TIL0414></TIL0414>}></Route>
+            <Route path="/blog/solidityadv/0415" element={<TIL0415></TIL0415>}></Route>
             <Route path="/blog/solidityadv/0421" element={<TIL0421></TIL0421>}></Route>
             <Route path="/blog/solidityadv/0422" element={<TIL0422></TIL0422>}></Route>
             <Route path="/blog/solidityadv/0423" element={<TIL0423></TIL0423>}></Route>
@@ -201,6 +204,7 @@ function App() {
             <Route path="/blog/db" element={<Database></Database>}></Route>
             <Route path="/blog/db/0523" element={<TIL0523></TIL0523>}></Route>
             <Route path="/blog/db/0526" element={<TIL0526></TIL0526>}></Route>
+            <Route path="/blog/db/0527" element={<TIL0527></TIL0527>}></Route>
 
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>

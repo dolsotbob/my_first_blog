@@ -123,10 +123,33 @@ const TIL0414 = () => {
                 <li>Kairos(KAIA testnet) 이용하기
                     <ul><li>RPC URL: https://public-en-kairos.node.kaia.io </li></ul>
                 </li>
+                <li>성공적으로 NFT 민팅이 완료되면 민팅을 진행한 컨트랙트 주소를 다음의 URL에 넣어서 확인하기
+                    <pre><code>{`
+    https://testnets.opensea.io/assets/baobab/{CA}       
+    `}</code></pre>
+                </li>
+                <li>CA 확인하는 방법: 컨트랙트 배포 후 abis/MyNFT.json 에서 하단에 있는 address 값 확인</li>
                 <li><a href='https://app.pinata.cloud/ipfs/files'>Pinata 사이트</a>에서 API 키 발급하기</li>
                 <li><a href='https://github.com/dolsotbob/decentralized-storage-pinata'>decentralized-storage-pinata</a></li>
                 <li><a href='https://testnets.opensea.io/assets/baobab/0x5c224e075ef60737257dce4ff004e1126160eb11/4'>과제 결과</a></li>
             </ul>
+
+            <h4>분산 저장소 - Pinata</h4>
+            <ul><li>IPFS 기반의 분산형 파일 저장 및 관리 플랫폼</li>
+                <li>사용자가 IPFS를 보다 쉽게 활용할 수 있도록 도와주는 서비스</li>
+                <li>NFT 메타데이터 저장 및 웹3 애플리케이션 개발을 위한 솔루션으로 많이 사용됨</li></ul>
+
+            <p>Pinata API Key 발급</p>
+            <ol><li><a href='https://app.pinata.cloud/auth/signin'>Pinata 사이트</a>에 가입</li>
+                <li>API Key 발급: API Keys 탭으로 들어가서 + New Key 버튼을 눌러 API Key 발급</li>
+                <li>발급받은 API Key 복사하여 다른 곳에 메모(다른 사람에게 보여주면 안됨)</li></ol>
+
+            <p>Pinata 환경설정(.env)</p>
+            <ul><li>.env 파일의 PINATA_JWT 값을 넣는다.</li>
+                <li>PINATA_JWT는 Pinata API Key를 발급 받을 때의 JWT 토큰을 사용한다.</li></ul>
+
+            <p>이미지 끌어다 놓기</p>
+            <li>pinata/input 폴더를 보면 .gitkeep 파일만 있는데 여기에 넣기</li>
 
         </div>
     )

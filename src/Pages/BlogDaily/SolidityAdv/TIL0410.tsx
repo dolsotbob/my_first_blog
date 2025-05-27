@@ -57,43 +57,43 @@ const TIL0410 = () => {
             <p>ERC-721 필수 기능</p>
             <ol><li>특정 토큰의 소유자 확인
                 <pre><code>{`
-                function ownerOf(uint256 tokenId) external view returns (address);
-                `}</code></pre>
+    function ownerOf(uint256 tokenId) external view returns (address);
+    `}</code></pre>
                 <ul><li>특정 토큰 ID(tokenID)의 소유자 주소를 반환함</li>
                     <li>NFT는 개별적으로 구별되므로 각 토큰 ID가 특정 주소에 귀속됨</li></ul>
             </li> <br />
 
                 <li>토큰 전송 (소유자가 직접 실행)
                     <pre><code>{`
-                function transferFrom(address from, address to, uint256 tokenId) external;
-                function safeTransferFrom(address from, address to, uint256 tokenId) external;
-                `}</code></pre>
+    function transferFrom(address from, address to, uint256 tokenId) external;
+    function safeTransferFrom(address from, address to, uint256 tokenId) external;
+    `}</code></pre>
                     <ul><li>transferFrom: from 주소에서 to 주소로 특정 NFT(tokenId) 를 전송함</li>
                         <li>safeTransferFrom: transferFrom과 동일하지만, 수신자가 컨트랙트일 경우, 수신 컨트랙트가 ERC-721을 지원하는지 확인 후 전송함</li>
                         <li>소유자만 실행할 수 있으며, approve()를 통해 다른 계정도 실행할 수 있음</li>
                         <li><span style={{ color: "green", fontStyle: 'italic' }}>cf: ERC20에서의 transferFrom</span>
                             <pre><code>{`
-                function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)
-                `}</code></pre>
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)
+    `}</code></pre>
                         </li>
                         <li><span style={{ color: "green", fontStyle: 'italic' }}>cf: ERC-20에는 ERC-721에 없는 transfer()가 있음 - 내가 직접 누군가에게 보낼 때</span>
                             <pre><code>{`
-                function transfer(address _to, uint256 _value) public returns (bool success)
-                `}</code></pre>
+    function transfer(address _to, uint256 _value) public returns (bool success)
+    `}</code></pre>
                         </li>
                     </ul>
                 </li><br />
 
                 <li>승인 기능
                     <pre><code>{`
-                function approve(address to, uint256 tokenId) external;
-                `}</code></pre>
+    function approve(address to, uint256 tokenId) external;
+    `}</code></pre>
                     <ul><li>특정 토큰(tokenId) 에 대한 제어 권한을 다른 계정(to)에게 부여한다</li>
                         <li>이 기능을 사용하면 위임받은 계정이 transferFrom()을 실행할 수 있음</li><br />
                         <li><span style={{ color: "green", fontStyle: 'italic' }}>cf: ERC-20의 approve(): 사람들이 위조 토큰 만드는 것을 방지하며 토큰의 총 발행량을 확인하여 tx을 허용하거나 거부함</span>
                             <pre><code>{`
-                function approve(address _spender, uint256 _value) public returns (bool success)
-                `}</code></pre>
+    function approve(address _spender, uint256 _value) public returns (bool success)
+    `}</code></pre>
                             <ul><li><span style={{ color: "green", fontStyle: 'italic' }}>Allows _spender to withdraw from your account multiple times, up to the _value amount</span></li>
                                 <li><span style={{ color: "green", fontStyle: 'italic' }}>ERC20에서의 approve()는 누군가에게 특정 수량(value)를 보내는 것을 승인 하는 것</span>
                                     <ul><li>ERC721에서의 approve()는 누군가에게 어떤 개체를 보내는 것에 대해 승인하는 것</li></ul>
@@ -105,58 +105,58 @@ const TIL0410 = () => {
 
                 <li>전체 승인(Operator Approval) 기능
                     <pre><code>{`
-                function setApprovalForAll(address operator, bool approved) external;
-                `}</code></pre>
+    function setApprovalForAll(address operator, bool approved) external;
+    `}</code></pre>
                     <ul><li>특정 주소(operator)가 모든 토큰을 관리할 수 있도록 승인함</li>
                         <li>true이면 operator는 소유자의 모든 토큰을 전송할 수 있으며, false이면 권한을 해제함</li></ul>
                 </li><br />
 
                 <li>승인된 주소 조회
                     <pre><code>{`
-                function getApproved(uint256 tokenId) external view returns (address);
-                function isApprovedForAll(address owner, address operator) external view returns (bool);
-                `}</code></pre>
+    function getApproved(uint256 tokenId) external view returns (address);
+    function isApprovedForAll(address owner, address operator) external view returns (bool);
+    `}</code></pre>
                     <ul><li>getApproved(): 특정 토큰(tokenId) 에 대해 승인된 계정(위임받은 계정)을 반환함</li>
                         <li>isApprovedForAll(): 특정 owner의 모든 토큰을 전송할 수 있는 operator인지 확인함</li></ul>
                 </li><br />
 
                 <li>토큰(NFT)의 개수 조회
                     <pre><code>{`
-                function balanceOf(address _owner) external view returns (uint256);
-                `}</code></pre>
+    function balanceOf(address _owner) external view returns (uint256);
+    `}</code></pre>
                     <ul><li>특정 주소가 보유한 ERC-721 토큰(NFT)의 개수를 조회하는 함수</li></ul>
                 </li></ol>
 
             <p>ERC-721 필수 이벤트</p>
             <ol><li>전송 이벤트
                 <pre><code>{`
-                event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-                `}</code></pre>
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    `}</code></pre>
                 <ul><li>NFT가 from 주소에서 to 주소로 전송될 때 발생하는 이벤트</li>
                     <li>새로운 NFT가 생성될 경우 from은 0x0이 됨</li>
                     <li><span style={{ color: "green", fontStyle: 'italic' }}>cf. ERC20의 event Transfer: </span></li>
                     <pre><code>{`
-                event Transfer(address indexed _from, address indexed _to, uint256 _value)
-                `}</code></pre>
+    event Transfer(address indexed _from, address indexed _to, uint256 _value)
+    `}</code></pre>
                 </ul>
             </li><br />
 
                 <li>승인 이벤트
                     <pre><code>{`
-                event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-                `}</code></pre>
+        event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+        `}</code></pre>
                     <ul><li>특정 NFT(tokenId) 에 대한 사용 권한이 approved 주소에 부여될 때 발생함</li>
                         <li><span style={{ color: "green", fontStyle: 'italic' }}>cf. ERC20의 event Approval:</span></li>
                         <pre><code>{`
-                    event Approval(address indexed _owner, address indexed _spender, uint256 _value)
-                    `}</code></pre>
+    event Approval(address indexed _owner, address indexed _spender, uint256 _value)
+    `}</code></pre>
                     </ul>
                 </li><br />
 
                 <li>전체 승인(Operator Approval) 이벤트
                     <pre><code>{`
-                event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
-                `}</code></pre>
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+    `}</code></pre>
                     <ul><li>owner가 operator에게 모든 NFT에 대한 권한을 부여하거나 해제할 때 발생함</li></ul>
                 </li>
             </ol><br />
@@ -226,6 +226,7 @@ const TIL0410 = () => {
                 <li>ERC721URIStorage 를 상속받아 각 NFT(토큰 ID)에 대한 메타데이터(URI)를 저장하고 관리할 수 있도록 하는 기능을 사용할 수 있음</li>
                 <li>ERC721Enumerable 을 상속받아 총 공급량 조회 및 개별 보유자 목록 조회 기능을 사용할 수 있음</li></ul>
 
+
             <h4>과제: 나만의 NFT 만들기</h4>
             <ul><li>ERC721 토큰 컨트랙트를 구현하고, Ethers.js를 이용하여 컨트랙트 호출(Call) 해보기</li>
                 <li>Ganache 로컬 블록체인을 Hardhat에 연결</li>
@@ -237,6 +238,8 @@ const TIL0410 = () => {
                 </li>
                 <li>npm run test 하면 후반부에 오래 걸리는 이유: 무언가 꼬였다가 스스로 풀렀다는 의미 &rarr; 웹3에서 테스트 여러 번 해야 하는 이유임</li>
             </ul>
+
+
 
         </div >
     )

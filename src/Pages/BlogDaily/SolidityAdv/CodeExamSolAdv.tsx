@@ -158,4 +158,42 @@ contract MyToken is ERC20 {
 }
 `
 
+export const TIL0415UploadHanler = `
+const handleUpload = async () => {
+    if (!file) {
+      alert('파일을 선택해주세요.');
+      return;
+    }
 
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('name', file.name);
+    formData.append('network', 'public');
+
+    try {
+      const result = await uploadFileToIPFS(formData);
+      handleImageUpload({
+        url: result,
+        preview: preview,
+      });
+    } catch (error) {
+      console.error('파일 업로드 실패:', error);
+      alert('파일 업로드 실패!');
+    } finally {
+      setUploading(false);
+    }
+};
+`
+
+export const TIL0415UploadUI = `
+return (
+  <div>
+    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+    <button onClick={handleUpload} disabled={uploading}>
+      {uploading ? '업로드 중...' : '업로드'}
+    </button>
+  </div>
+);
+`

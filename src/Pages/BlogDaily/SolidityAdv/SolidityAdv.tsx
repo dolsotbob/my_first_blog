@@ -7,6 +7,7 @@ const cardData = [
     { date: '4/8', title: 'ERC-20', path: '/blog/solidityadv/0408' },
     { date: '4/10', title: 'ERC-721', path: '/blog/solidityadv/0410' },
     { date: '4/14', title: 'NFT Storage', path: '/blog/solidityadv/0414' },
+    { date: '4/15', title: '웹 기반 민팅', path: '/blog/solidityadv/0415' },
     { date: '4/21', title: 'Test-Driven Contract Development', path: '/blog/solidityadv/0421' },
     { date: '4/22', title: 'Gassless - EIP 2612(Permit)', path: '/blog/solidityadv/0422' },
     { date: '4/23', title: 'Gassless - EIP 2771(Meta Transaction)', path: '/blog/solidityadv/0423' },

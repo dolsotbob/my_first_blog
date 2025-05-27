@@ -6,6 +6,7 @@ import './db.css'; // CSS 파일 추가
 const cardData = [
     { date: '5/23', title: 'DB', path: '/blog/db/0523' },
     { date: '5/26', title: 'SQL 기본 문법', path: '/blog/db/0526' },
+    { date: '5/27', title: '고급 SQL과 성능', path: '/blog/db/0527' },
 ];
 
 const Database = () => {
