@@ -1,5 +1,5 @@
 export const TIL0407TxCallSolidity =
-    `
+  `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -14,13 +14,13 @@ contract TransactionExample {
 `
 
 export const TIL0407TxCallJS =
-    `
+  `
 const contract = new ethers.Contract(contractAddress, abi, signer);
 await contract.setValue(42); // 상태 변경 -> 가스 필요
 `
 
 export const TIL0407CallSolidity =
-    `
+  `
 contract CallExample {
     uint256 public value = 100;
 
@@ -32,13 +32,13 @@ contract CallExample {
 `
 
 export const TIL0407CallJS =
-    `
+  `
 const value = await contract.getValue();  // 가스 없이 데이터 조회  
 console.log(value.toString());  // "100"
 `
 
 export const TIL0407ContractExample =
-    `
+  `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -84,7 +84,7 @@ main().catch((error) => {
 `;
 
 export const til0407afterDeploymentExample =
-    `
+  `
 예시
 
 📌 스마트 컨트랙트 배포 완료! 주소: 0x1234567890abcdef1234567890abcdef12345678
@@ -145,7 +145,7 @@ getContractValue();
 `;
 
 export const til0408OpenZeppelinCreatingToken =
-    `
+  `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -196,4 +196,15 @@ return (
     </button>
   </div>
 );
+`
+
+export const TIL0422SendTxGas = `
+await sender.sendTransaction({
+  to: recipient, 
+  value: ethers.utils.parseEther("1.0"),
+});
+`
+
+export const TIL0422ContractGas = `
+await token.transfer(recipient, ethers.utils.parseUnits("100", 18));
 `

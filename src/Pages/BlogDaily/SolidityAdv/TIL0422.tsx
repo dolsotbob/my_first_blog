@@ -1,6 +1,8 @@
 import React from 'react';
 import CodeBlock from '../../../components/CodeBlock';
 import { til0422eip712SigningExample } from '../../codeExamples';
+import { TIL0422SendTxGas } from './CodeExamSolAdv';
+import { TIL0422ContractGas } from './CodeExamSolAdv';
 
 const TIL0422 = () => {
     return (
@@ -13,14 +15,19 @@ const TIL0422 = () => {
             </li></ul>
 
             <h4>가스를 소모하는 트랜잭션</h4>
-            <ul><li>기본 트랜잭션(ETH 전송)
-                <ul><li>가스 소모: 약 21,000 Gas (가장 기본적인 트랜잭션)</li></ul>
-            </li>
-                <li>스마트 컨트랙트 실행 트랜잭션
-                    <ul><li>세터 함수 실행되면 가스비 소모됨</li>
-                        <li>가스 소모: 40,000 ~ 65,000 Gas </li>
-                        <li>ETH 전송보다 더 많은 Gas가 소모됨 &rarr; 컨트랜트 상태 변경 필요</li></ul>
-                </li></ul>
+            <p>기본 트랜잭션 (ETH 전송)</p>
+            <ul><li>예제: Alice &rarr; Bob 에게 1 ETH 전송</li>
+                <li>가스 소모: 약 21,000 Gas (가장 기본적인 트랜잭션)</li>
+                <CodeBlock code={TIL0422SendTxGas}></CodeBlock>
+            </ul>
+
+            <p>스마트 컨트랙트 실행 트랜잭션</p>
+            <ul><li>스마트 컨트랙트와 상호작용하는 모든 트랜잭션은 Gas를 소모함</li>
+                <li>세터 함수 실행되면 가스비 소모됨</li>
+                <li>가스 소모: 40,000 ~ 65,000 Gas </li>
+                <li>ETH 전송보다 더 많은 Gas가 소모됨 &rarr; 컨트랜트 상태 변경 필요</li>
+                <CodeBlock code={TIL0422ContractGas}></CodeBlock>
+            </ul>
 
             <h4>되짚어보는 ERC20</h4>
             <p>EFC-20의 기본 전송 메커니즘</p>
