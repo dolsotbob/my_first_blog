@@ -1,6 +1,6 @@
 import React from 'react'
-import usersTableImg from './usersTable.png'
-import normalizationImg from './NormalizationExample.png'
+import usersTableImg from './Images/usersTable.png'
+import normalizationImg from './Images/NormalizationExample.png'
 
 const SubqueryAt = [
     {
