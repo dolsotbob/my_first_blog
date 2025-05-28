@@ -245,6 +245,35 @@ const TIL0527 = () => {
                 <li>WHERE name = 'Alice' AND age = 25 같은 쿼리에 최적화</li>
                 <li>(하지만 순서 주의: 인덱스는 왼쪽 컬럼부터 최우선 적용됩니다.)</li></ul>
 
+            <p>생성한 인덱스 목록 조회하기</p>
+            <span>이러한 인덱스를 생성했다고 쳤을 때,</span>
+            <pre><code>{`
+CREATE INDEX idx_products_category ON products (category);
+`}</code></pre>
+
+            <ol><li>products 테이블에 존재하는 인덱스 전체 조회</li>
+                <pre><code>{`
+    SELECT
+        indexname, 
+        indexdef
+    FROM 
+        pg_indexes
+    WHERE
+        tablename = 'products';
+    `}</code></pre>
+                <li>전체 테이블에 존재하는 인덱스 조회</li>
+                <pre><code>{`
+    SELECT
+        tablename, 
+        indexname, 
+        indexdef
+    FROM 
+        pg_indexes
+    WHERE
+        schemaname = 'public';
+    `}</code></pre>
+            </ol>
+
             <h4>정규화와 비정규화</h4>
             <span>정규화와 비정규화는 데이터를 다루는 이론적인 설계 개념이다.</span>
 
@@ -256,6 +285,7 @@ const TIL0527 = () => {
                         <li>변경(update)할 때 문제가 생기지 않도록 만든다</li></ul>
                 </li>
             </ul>
+
 
             <p>정규화가 필요한 이유</p>
             <div className="ml-4">
