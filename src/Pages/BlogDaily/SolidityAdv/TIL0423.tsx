@@ -2,7 +2,63 @@ import React from 'react';
 import CodeBlock from '../../../components/CodeBlock';
 import { til0423getUserAddressExample } from '../../codeExamples';
 import { til0423erc277MetaTnxExecuteExample } from '../../codeExamples';
+import { TIL0423burn, TIL0423ContractCallingContract, TIL0423TransferFrom } from './CodeExamSolAdv';
+import { TIL0423TransferToken } from './CodeExamSolAdv';
+import { TIL0423Approve } from './CodeExamSolAdv';
+import { TIL0423mint } from './CodeExamSolAdv';
+import { TIL0423msgSender } from './CodeExamSolAdv';
+import { TIL0423msgData } from './CodeExamSolAdv';
 
+const EIP2771functions = [
+    {
+        function: 'isTrustedForwarder(address forwarder) → bool',
+        detail1: '특정 Forwarder(중계자)가 신뢰할 수 있는지 확인하는 함수입니다.',
+        detail2: 'Recipient(최종 실행 컨트랙트)는 Forwarder가 신뢰할 수 있는지를 검증해야 합니다.',
+        detail3: '신뢰할 수 없는 Forwarder가 msg.sender를 조작하는 것을 방지',
+        example: 'function isTrustedForwarder(address forwarder) external view returns (bool);',
+        exDetail: '메타 트랜잭션을 수락할지를 결정하는 필터 역할',
+    },
+    {
+        function: '_msgSender() → address',
+        detail1: '일반 트랜잭션에서는 msg.sender가 그대로 반환되지만',
+        detail2: 'Forwarder를 통한 메타 트랜잭션일 경우 실제 사용자 주소를 반환',
+        detail3: '스마트 컨트랙트가 올바른 사용자 권한을 확인할 수 있도록 보장',
+        example: <CodeBlock code={TIL0423msgSender}></CodeBlock>,
+        exDetail: '메타 트랜잭션을 통해 실행되는 경우, Forwarder가 아닌 실제 사용자(Transaction Signer)의 주소를 반환',
+    },
+    {
+        function: '_msgData() → bytes calldata',
+        detail1: '일반 트랜잭션에서는 msg.data를 그대로 반환하지만',
+        detail2: '메타 트랜잭션에서는 추가된 데이터(사용자 주소를 포함) 부분을 제거하고 반환',
+        detail3: '',
+        example: <CodeBlock code={TIL0423msgData}></CodeBlock>,
+        exDetail: '메타 트랜잭션을 사용할 때, 추가된 Forwarder 정보 없이 원래의 데이터를 처리할 수 있도록 한다',
+    },
+    {
+        function: 'execute(ForwardRequest request) → bool',
+        detail1: 'Relayer가 메타 트랜잭션을 실제로 실행하는 함수',
+        detail2: '사용자의 서명을 검증한 후, Forwarder가 Recipient 컨트랙트에 트랜잭션을 전달',
+        detail3: '',
+        example: 'function execute(ForwardRequest calldata request) public payable;',
+        exDetail: 'Forwarder가 요청을 받아 서명을 검증한 후, 실제 트랜잭션을 실행',
+    },
+    {
+        function: 'verify(ForwardRequest request) → bool',
+        detail1: '사용자의 서명이 올바른지 검증하는 함수',
+        detail2: '잘못된 서명이 제출될 경우, 메타 트랜잭션이 실행되지 않도록 방지',
+        detail3: 'Forwarder가 악성 서명을 실행하지 않도록 보장',
+        example: 'function verify(ForwardRequest calldata request) public view returns (bool);',
+        exDetail: '서명을 검증하여 Replay Attack 및 위조된 트랜잭션을 방지',
+    },
+    {
+        function: 'nonces(address signer) → uint256',
+        detail1: '각 사용자의 Nonce(트랜잭션 실행 순서)를 관리',
+        detail2: '메타 트랜잭션이 중복 실행되지 않도록 방지하는 역할을 함',
+        detail3: '',
+        example: 'function nonces(address signer) public view returns (uint256);',
+        exDetail: '동일한 서명이 여러 번 사용되지 않도록 방지 (Replay Attack 방지)',
+    },
+]
 
 const TIL0423 = () => {
     return (
@@ -21,19 +77,7 @@ const TIL0423 = () => {
 
             <p>컨트랙트가 컨트랙트를 호출하는 경우</p>
             <ul><li>만약 A 컨트랙트가 B 컨트랙트를 호출하면, msg.sender는 A 컨트랙트의 주소가 된다</li></ul>
-            <pre><code>{`
-            contract A { 
-                function callB(address _b) public view returns (address) {
-                    return B(_b).whoIsSender();
-                }
-            }
-
-            concract B {
-                function whoIsSender() public view returns (address) {
-                    return msg.sender;
-                }
-            }
-            `}</code></pre>
+            <CodeBlock code={TIL0423ContractCallingContract}></CodeBlock>
 
             <ol><li>Alice(EOA: 0xABC)가 A 컨트랙트의 callB() 함수를 실행하면</li>
                 <li>A 컨트랙트가 B 컨트랙트의 whoIsSender()를 호출</li>
@@ -44,17 +88,8 @@ const TIL0423 = () => {
 
             <p>transfer: 토큰 전송 (msg.sender = 토큰을 보내는 사람)</p>
             <ul><li>기능: msg.sender가 자신의 토큰을 다른 주소로 전송할 때 사용됨</li></ul>
-            <pre><code>{`
-            function transfer(address recipient, uint256 amount) public returns (bool) {
-                require(recipient != address(0), "Invalid recipient");
-                require(_balances[msg.sender] >= amount, "Insufficient balance");
+            <CodeBlock code={TIL0423TransferToken}></CodeBlock>
 
-                _balance[msg.sender] -= amount; 
-                _balance[recipient] += amount;
-                emit Transfer(msg.sender, recipient, amount);
-                return true; 
-            }            
-            `}</code></pre>
             <ul><li>msg.sender 역할:
                 <ul><li>송금자(토큰 보유자)의 주소를 나타냄</li>
                     <li>_balances[msg.sender]를 확인하여 잔액이 충분한지 검증</li>
@@ -64,15 +99,7 @@ const TIL0423 = () => {
 
             <p>approve: 토큰 사용 권한 위임 (msg.sender = 토큰 소유자)</p>
             <ul><li>기능: msg.sender가 특정 spender 주소에게 자신의 토큰을 사용할 수 있도록 허락</li></ul>
-            <pre><code>{`
-            function adpprove(address spender, uint256 amount) public returns (bool) { 
-                require(spender != address(0), "Invalid spender");
-
-                _allowances[msg.sender][spender] = amount; 
-                emit Approval(msg.sender, spender, amount); 
-                return true; 
-            }
-            `}</code></pre>
+            <CodeBlock code={TIL0423Approve}></CodeBlock>
             <ul><li>msg.sender역할:
                 <ul><li>msg.sender(토큰 소유자)가 spender(제3자, 보통 스마트 컨트랙트)에게 일정량의 토큰 사용을 허가</li>
                     <li>_allowances[msg.sender][spender]에 허용된 금액 저장.</li></ul>
@@ -80,21 +107,7 @@ const TIL0423 = () => {
 
             <p>transferFrom: 위임된 토큰 전송 (msg.sender = 승인받은 사용자)</p>
             <ul><li>기능: msg.sender가 approve를 통해 허가받은 토큰을 대신 전송</li></ul>
-            <pre><code>{`
-            function transfer(address sender, address recipient, uint256 amount) public returns (bool) {
-                require(sender != address(0)), "Invalid sender");
-                require(recipient != address(0), "Invalid recipient");
-                require(_balances[msg.sender] >= amount, "Insufficient balance");
-                require(_allowances[sender][msg.sender] >= amount, "Allowance exceeded");
-
-                _balance[sender] -= amount; 
-                _balance[recipient] += amount;
-                _allowances[sender][msg.sender] -= amount; 
-
-                emit Transfer(sender, recipient, amount);
-                return true; 
-            }    
-            `}</code></pre>
+            <CodeBlock code={TIL0423TransferFrom}></CodeBlock>
             <ul><li>msg.sender역할:
                 <ul><li>msg.sender는 spender 역할 (토큰 소유자로부터 위임받은 계정)</li>
                     <li>_allowances[sender][msg.sender]를 확인하여 권한 내에서 실행하는지 검증</li>
@@ -104,7 +117,8 @@ const TIL0423 = () => {
             <ul><li>실제 사례:
                 <ul><li>내가 RPG 게임을 하는데 스마트 계약으로 된 게임내 상점에서 뭔가를 사고 싶어함 </li>
                     <li>내가 상점에 내 토큰 100개까지 사용할 권한을 줌 (프론트에서 실행)</li>
-                    <pre><code>{`token.approve(shopAddress, 100);`}</code></pre>
+                    <pre><code>
+                        {`token.approve(shopAddress, 100);`}</code></pre>
                     <li>상점(스마트 계약 또는 spender)이 내 지갑에서 50개 토큰을 자기 지갑으로 보냄
                         <pre><code>{`token.transfer(jungah, Shop, 50);`}</code></pre>
                         <ul><li>상점이 실행함으로 msg.sender = 상점!</li></ul>
@@ -113,15 +127,7 @@ const TIL0423 = () => {
 
             <p>_mint: 새로운 토큰 발행 (msg.sender = 발행자)</p>
             <ul><li>기능: 컨트랙트 배포자(관리자)가 새로운 토큰을 생성</li></ul>
-            <pre><code>{`
-            function _mint(address account, uint256 amount) internal { 
-                require(account != address(0), "Invalid account");
-
-            _totalSupply += amount;
-            _balances[account] += amount;
-            emit Transfer(address(0), account, amount);
-            }
-            `}</code></pre>
+            <CodeBlock code={TIL0423mint}></CodeBlock>
             <ul><li>msg.sender역할:
                 <ul><li>_mint는 보통 onlyOwner 제한이 있으며, 토큰 발행 권한이 있는 관리자만 호출 가능</li>
                     <li>msg.sender가 새로운 토큰을 생성하고 특정 주소에 할당</li></ul>
@@ -136,16 +142,7 @@ const TIL0423 = () => {
 
             <p>_burn: 토큰 소각 (msg.sender = 토큰 소유자)</p>
             <ul><li>기능: msg.sender가 자신의 토큰을 소각(삭제)</li></ul>
-            <pre><code>{`
-            function _burn(address account, uint256 amount) internal {
-                require(account != address(0), "Invalid account");
-                require(_balances[account] >= amount, "Insufficient balance");
-
-                _balances[account] -= amount;
-                _totalSupply -= amount;
-                emit Transfer(account, address(0), amount);
-            }
-            `}</code></pre>
+            <CodeBlock code={TIL0423burn}></CodeBlock>
             <ul><li>msg.sender역할:
                 <ul><li>msg.sender가 자신의 토큰을 소각할 때 호출</li>
                     <li>_balances[msg.sender]에서 소각할 수량만큼 차감</li></ul>
@@ -153,6 +150,7 @@ const TIL0423 = () => {
             <ul><li>기타 노트:
                 <ul><li>당장 사용하지 않더라도 민트가 있으면 번도 있는게 좋음</li></ul>
             </li></ul>
+
 
             <h4>ERC-2771: Secure Protocol for Native Meta Transactions</h4>
             <ul><li>ERC-2771은 메타 트랜잭션(Meta Transaction)을 쉽게 구현할 수 있도록 도와주는 표준</li>
@@ -203,6 +201,22 @@ const TIL0423 = () => {
                 </li></ul>
 
             <p>EIP-2771 주요 함수</p>
+            <div className="ml-4">
+                {EIP2771functions.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.function}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong></strong> {type.detail1}</li>
+                            <li><strong></strong> {type.detail2}</li>
+                            <li><strong></strong> {type.detail3}</li>
+                            <li><strong>예시:</strong> {type.example}</li>
+                            <li><strong></strong> {type.exDetail}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
+
+
             <h5>1. isTrustedForwarder(address forwarder) &rarr; bool</h5>
             <ul><li>신뢰할 수 없는 Forwarder가 msg.sender를 조작하는 것을 방지한다</li>
                 <li>메타 트랜잭션을 수락할지를 결정하는 필터 역할</li></ul>
@@ -213,18 +227,18 @@ const TIL0423 = () => {
             <ul><li>일반 트랜잭션에서는 msg.data를 그대로 반환하지만,</li>
                 <li>메타 트랜잭션에서는 추가된 데이터(사용자 주소를 포함) 부분을 제거하고 반환함</li>
                 <li>메타 트랜잭션을 사용할 때, 추가된 Forwarder 정보 없이 원래의 데이터를 처리할 수 있도록 함</li></ul>
-            <h5>execute(ForwardRequest request) &rarr; bool</h5>
+            <h5>4. execute(ForwardRequest request) &rarr; bool</h5>
             <ul><li>Relayer가 메타 트랜잭션을 실제로 실행하는 함수</li>
                 <li>사용자의 서명을 검증한 후, Forwarder가 Recipient 컨트랙트에 트랜잭션을 전달한다</li></ul>
-            <h5>verify(ForwardRequest request) &rarr; bool</h5>
+            <h5>5. verify(ForwardRequest request) &rarr; bool</h5>
             <ul><li>서명을 검증하여 Replay Attack 및 위조된 트랜잭션을 방지한다.</li>
                 <li>Forwarder가 악성 서명을 실행하지 않도록 보장한다.</li></ul>
-            <h5>nonces(address signer) &rarr; uint256</h5>
+            <h5>6. nonces(address signer) &rarr; uint256</h5>
             <ul><li>각 사용자의 Nonce(트랜잭션 실행 순서)를 관리함 </li>
                 <li>메타 트랜잭션이 중복 실행되지 않도록 방지하는 역할을 함</li>
                 <li>동일한 서명이 여러 번 사용되지 않도록 방지 (Replay Attack 방지)</li></ul>
 
-            <p>execute 함수</p>
+            <p><span style={{ color: 'violet', fontWeight: 'bold' }}>execute 함수</span></p>
             <CodeBlock code={til0423erc277MetaTnxExecuteExample}></CodeBlock>
 
             <p>참고 자료</p>

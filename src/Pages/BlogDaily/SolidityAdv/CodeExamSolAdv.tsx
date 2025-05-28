@@ -220,3 +220,98 @@ DOMAIN_SEPARATOR = keccak256(
     )
 );
 `
+
+export const TIL0423ContractCallingContract = `
+contract A {
+    function callB(address _b) public view returns (address) {
+        return B(_b).whoIsSender();
+    }
+}
+
+contract B {
+    function whoIsSender() public view returns (address) {
+        return msg.sender;
+    }
+}
+`
+
+export const TIL0423TransferToken = `
+function transfer(address recipient, uint256 amount) public returns (bool) {
+    require(recipient != address(0), "Invalid recipient");
+    require(_balances[msg.sender] >= amount, "Insufficient balance");
+
+    _balances[msg.sender] -= amount;
+    _balances[recipient] += amount;
+    emit Transfer(msg.sender, recipient, amount);
+    return true;
+}
+`
+
+export const TIL0423Approve = `
+function approve(address spender, uint256 amount) public returns (bool) {
+    require(spender != address(0), "Invalid spender");
+
+    _allowances[msg.sender][spender] = amount;
+    emit Approval(msg.sender, spender, amount);
+    return true;
+}
+`
+
+export const TIL0423TransferFrom = `
+function transferFrom(address sender, address recipient, uint256 amount) public returns (bool) {
+    require(sender != address(0), "Invalid sender");
+    require(recipient != address(0), "Invalid recipient");
+    require(_balances[sender] >= amount, "Insufficient balance");
+    require(_allowances[sender][msg.sender] >= amount, "Allowance exceeded");
+
+    _balances[sender] -= amount;
+    _balances[recipient] += amount;
+    _allowances[sender][msg.sender] -= amount;
+
+    emit Transfer(sender, recipient, amount);
+    return true;
+}
+`
+
+export const TIL0423mint = `
+function _mint(address account, uint256 amount) internal {
+    require(account != address(0), "Invalid account");
+
+    _totalSupply += amount;
+    _balances[account] += amount;
+    emit Transfer(address(0), account, amount);
+}
+`
+
+export const TIL0423burn = `
+function _burn(address account, uint256 amount) internal {
+    require(account != address(0), "Invalid account");
+    require(_balances[account] >= amount, "Insufficient balance");
+
+    _balances[account] -= amount;
+    _totalSupply -= amount;
+    emit Transfer(account, address(0), amount);
+}
+`
+
+export const TIL0423msgSender = `
+function _msgSender() internal view returns (address) {
+    if (msg.data.length >= 20 && isTrustedForwarder(msg.sender)) {
+        address signer;
+        assembly {
+            signer := shr(96, calldataload(sub(calldatasize(), 20)))
+        }
+        return signer;
+    }
+    return msg.sender;
+}
+`
+
+export const TIL0423msgData = `
+function _msgData() internal view returns (bytes calldata) {
+    if (msg.data.length >= 20 && isTrustedForwarder(msg.sender)) {
+        return msg.data[:msg.data.length - 20];
+    }
+    return msg.data;
+}
+`
