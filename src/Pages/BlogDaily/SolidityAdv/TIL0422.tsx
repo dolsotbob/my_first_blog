@@ -3,6 +3,7 @@ import CodeBlock from '../../../components/CodeBlock';
 import { til0422eip712SigningExample } from '../../codeExamples';
 import { TIL0422SendTxGas } from './CodeExamSolAdv';
 import { TIL0422ContractGas } from './CodeExamSolAdv';
+import { TIL0422DomainSeparator } from './CodeExamSolAdv';
 
 const TIL0422 = () => {
     return (
@@ -30,7 +31,7 @@ const TIL0422 = () => {
             </ul>
 
             <h4>되짚어보는 ERC20</h4>
-            <p>EFC-20의 기본 전송 메커니즘</p>
+            <p>ERC-20의 기본 전송 메커니즘</p>
             <ol><li>기본 전송(transfer) &rarr; 직접 송신자가 수신자에게 토큰을 전송</li>
                 <li>승인 후 대리 전송(approve + transferFrom) &rarr; 제3자가 송신자를 대신해 토큰을 전송
                     <ul><li>approve 및 transferFrom을 사용하면 스마트 컨트랙트나 다른 사용자가 일정량의 토큰을 대신 사용할 수 있도록 허가할 수 있다
@@ -65,7 +66,18 @@ const TIL0422 = () => {
                     <li>예시: 구독 서비스, 게임 내 결제, 스테이킹 및 리워드 시스템</li></ul>
             </li>
                 <li>Dapp에서의 토큰 거래
-                    <ul><li>Uniswap 같은 DEX or Dapp에서 ERC-20 토큰을 거래할 때, DEX 컨트랙트에 먼저 approve를 호출하여 토큰을 사용할 권한을 부여해야 한다</li></ul>
+                    <ul><li>Uniswap 같은 DEX or Dapp에서 ERC-20 토큰을 거래할 때, DEX 컨트랙트에 먼저 approve를 호출하여 토큰을 사용할 권한을 부여해야 한다</li>
+                        <li>예시:
+                            <ol><li>사용자 지갑이 approve()를 호출하여 Uniswap 컨트랙트에 “DAI 100개까지 써도 돼”라고 허락함</li>
+                                <pre><code>{`
+                daiToken.approve(uniswapAddress, 100);
+                `}</code></pre>
+                                <li>Uniswap 컨트랙트가 transferFrom()을 호출해서 사용자의 DAI 100개를 가져감</li>
+                                <pre><code>{`
+                 daiToken.transferFrom(userAddress, uniswapAddress, 100);
+                 `}</code></pre>
+                            </ol>
+                        </li></ul>
                 </li>
             </ul>
 
@@ -191,6 +203,12 @@ const TIL0422 = () => {
             </li>
             </ul>
 
+            <span>Permit() 조건</span>
+            <ul><li>현재 블록 시간이 deadline보다 작아야 함 (즉, 만료되지 않아야 함)</li>
+                <li>owner가 0x0이 아니어야 함</li>
+                <li>nonce 값이 현재 nonces[owner]와 같아야 함 (Replay Attack 방지)</li>
+                <li>r, s, v 값이 secp256k1 서명 검증을 통과해야 함</li></ul>
+
             <h5>nonces</h5>
             <pre><code>{`
             function nonces(address owner) external view returns (uint);
@@ -207,23 +225,16 @@ const TIL0422 = () => {
                 <li>도메인 분리자는 네트워크, 컨트랙트 주소 등을 포함하여 서명이 특정 컨트랙트에서만 유효하도록 보장</li>
                 <li>체인 간 리플레이 공격(Replay Attack) 방지 기능을 수행</li>
                 <li>예제:
-                    <pre><code>{`
-            DOMAIN_SEPARATOR = keccak256(
-                abi.encode(
-                    keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
-                    keccak256(bytes(name)),
-                    keccak256(bytes(version)),
-                    chainid,
-                    address(this)
-                )
-            );
-            `}</code></pre>
+                    <CodeBlock code={TIL0422DomainSeparator}></CodeBlock>
                 </li>
             </ul>
 
             <p>참고 자료</p>
             <ul><li><a href='https://eips.ethereum.org/EIPS/eip-2612'>EIP-2612 공식 자료</a></li>
-                <li>과제: <a href='https://github.com/dolsotbob/permit'>permit</a></li></ul>
+                <li>과제: <a href='https://github.com/dolsotbob/permit'>permit</a>
+                    <ul><li>utils/ethers.ts 파일 구현하기</li>
+                        <li>ethers.js를 이용하여 permit을 실행시킬 수 있어야 한다.</li></ul>
+                </li></ul>
 
         </div>
     )

@@ -208,3 +208,15 @@ await sender.sendTransaction({
 export const TIL0422ContractGas = `
 await token.transfer(recipient, ethers.utils.parseUnits("100", 18));
 `
+
+export const TIL0422DomainSeparator = `
+DOMAIN_SEPARATOR = keccak256(
+    abi.encode(
+        keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
+        keccak256(bytes(name)),
+        keccak256(bytes(version)),
+        chainid,
+        address(this)
+    )
+);
+`
