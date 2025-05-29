@@ -113,6 +113,7 @@ const TIL0528 = () => {
 
             <h4>과제</h4>
             <ul><li>NestJS를 이용하여 User Entity를 만들고, DB와 연결하여, users 테이블에 새로운 user의 정보를 추가하는 과제</li>
+                <li><a href='https://github.com/dolsotbob/db-setting'>db-setting</a></li>
             </ul>
 
             <p>db.config.ts 설정</p>

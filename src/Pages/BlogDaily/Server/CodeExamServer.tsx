@@ -332,6 +332,42 @@ export class SuccessInterceptor implements NestInterceptor {
 }
 `
 
+export const TIL0521Param = `
+// 요청: GET /users/123
+@Get(':id')
+getUser(@Param('id') id: string) {
+  return ₩User ID is S{id}₩;
+}
+`
+
+export const TIL0521Query = `
+// 요청: GET /users?role=admin&active=true
+@Get()
+getUsers(@Query('role') role: string, @Query('active') active: string) {
+  return ₩Role: S{role}, Active: S{active}₩;
+}
+`
+
+export const TIL0521Body = `
+// 요청: POST /users
+// Body: { "name": "Alice", "email": "alice@example.com" }
+@Post()
+createUser(@Body() userData: { name: string; email: string }) {
+  return ₩Name: S{userData.name}, Email: S{userData.email}₩;
+}
+`
+
+export const TIL0521CalAPI = `
+@Post()
+calculate(@Body() dto: { a: number; b: number; operation: string }) {}
+
+@Get(':address')
+getHistoryLength(@Param('address') address: string) {}
+
+@Get('/history')
+filterHistory(@Query('operation') op: string) {}
+`
+
 export const TIL0522scheduleModule = `
 // app.module.ts
 import { Module } from '@nestjs/common';

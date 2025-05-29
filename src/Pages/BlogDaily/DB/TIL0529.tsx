@@ -118,6 +118,53 @@ const TIL0529 = () => {
                 <CodeBlock code={TIL0529repositorySoftDelete2}></CodeBlock>
             </ul>
 
+            <h4>과제</h4>
+            <ul><li>Postman을 통해 API 요청을 보내고, DB에 데이터가 생성되고, 적용되는지 확인하며 "구현"을 생각하며 진행</li>
+                <li>user.repository 구현</li></ul>
+
+            <p>구현시 알아야 할 API</p>
+            <ul><li>auth : 회원가입, 로그인 등의 API</li>
+                <li>user : 실제 유저 데이터에 관한 CRUD API</li>
+                <li>jwt : 모든 API요청은 jwt가 필요합니다.(로그인)</li></ul>
+
+            <p>과제물: <a href='https://github.com/dolsotbob/nestjs-db'>nestjs-db</a></p>
+
+            <p>전체 폴더/파일 구조 요약</p>
+            <pre><code>{`
+src/
+├── common/          🔁 공통 유틸/설정/엔티티 등 공유 코드
+│   ├── db/
+│   │   ├── entities/         📦 엔티티 정의 (User 엔티티 등)
+│   │   └── db.config.ts      ⚙️ TypeORM DB 설정
+│   ├── exceptions/           ❗ 공통 예외 처리 로직
+│   └── interceptors/         📦 NestJS 인터셉터 정의
+├── modules/         🧩 기능별 모듈 구분
+│   ├── auth/                🔐 인증/인가 관련 모듈
+│   │   ├── controller/
+│   │   │   └── auth.controller.ts
+│   │   ├── jwt/             🔐 JWT 관련 가드/전략
+│   │   │   ├── jwt-auth.guard.ts
+│   │   │   └── jwt.strategy.ts
+│   │   ├── service/
+│   │   │   └── auth.service.ts
+│   │   └── auth.module.ts   📦 AuthModule 등록
+│   └── user/                👤 유저 관련 모듈
+│       ├── controller/
+│       │   └── user.controller.ts
+│       ├── dto/
+│       │   └── create-user.dto.ts   📄 유저 생성 DTO
+│       ├── repository/
+│       │   └── user.repository.ts   🗄 사용자 데이터 접근 로직
+│       ├── service/
+│       │   └── user.service.ts      🔧 비즈니스 로직
+│       └── user.module.ts           📦 UserModule 등록
+├── app.controller.ts        📡 전체 앱용 컨트롤러 (기본 라우터)
+├── app.module.ts            📦 루트 모듈
+├── app.service.ts           ⚙️ 앱 전역 서비스
+├── main.ts                  🚀 엔트리 포인트
+`}</code></pre>
+
+
         </div>
     )
 }

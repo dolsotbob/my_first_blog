@@ -1,4 +1,9 @@
 import React from 'react'
+import CodeBlock from '../../../components/CodeBlock'
+import { TIL0521Param } from './CodeExamServer'
+import { TIL0521Query } from './CodeExamServer'
+import { TIL0521Body } from './CodeExamServer'
+import { TIL0521CalAPI } from './CodeExamServer'
 
 const restfulUrlPrinciples = [
     {
@@ -123,8 +128,36 @@ const TIL0521 = () => {
 
             <h4>Param, Query, Body는 언제 쓰일까?</h4>
             <p>@Param(): 경로(주소)에서 값을 추출할 때</p>
+            <ul><li>URL 안에 있는 값을 변수처럼 사용하는 경우</li>
+                <li>필수값인 경우가 많고, 리소스를 식별할 때 사용됨</li>
+                <li>예제:
+                    <CodeBlock code={TIL0521Param}></CodeBlock>
+                    <ul><li>경로에 :id를 지정해주고,</li>
+                        <li>클라이언트가 /users/123 요청 시, id = '123'으로 전달됨</li></ul>
+                </li></ul>
+
             <p>@Query(): URL 뒤의 ?key=value 형식의 값을 추출할 때</p>
+            <ul><li>검색 필터, 정렬 조건, 페이징 정보 등 선택적 조건 전달</li>
+                <li>값이 없어도 동작할 수 있도록 설계하는 게 일반적</li>
+                <li>예시:
+                    <CodeBlock code={TIL0521Query}></CodeBlock>
+                    <ul><li>role=admin, active=true는 모두 쿼리 파라미터</li>
+                        <li>사용자는 선택적으로 여러 조건을 조합할 수 있습니다.</li></ul>
+                </li></ul>
+
             <p>@Body(): 요청 본문(Body)에서 JSON 데이터 추출</p>
+            <ul><li>POST, PUT, PATCH에서 클라이언트가 보내는 실제 데이터</li>
+                <li>구조화된 객체 형태로 DTO에 매핑해서 사용</li>
+                <li>예시:
+                    <CodeBlock code={TIL0521Body}></CodeBlock>
+                    <ul><li>사용자로부터 데이터를 받아 저장하거나 처리할 때 필수</li></ul>
+                </li></ul>
+
+            <p>실전 예시 - 계산기 API라면?</p>
+            <CodeBlock code={TIL0521CalAPI}></CodeBlock>
+
+            <h4>과제</h4>
+            <ul><li><a href='https://github.com/dolsotbob/nestjs-SolidityConcepts3'>nestjs-SolidityConcepts3 Repository</a></li></ul>
 
         </div>
     )
