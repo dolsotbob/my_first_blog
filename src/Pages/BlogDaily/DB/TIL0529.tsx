@@ -1,6 +1,21 @@
 import React from 'react'
 import CodeBlock from '../../../components/CodeBlock'
 import { TIL0529repositoryExample } from './CodeExamDB'
+import { TIL0529repositoryFind } from './CodeExamDB'
+import { TIL0529repositoryFindone } from './CodeExamDB'
+import { TIL0529repositoryFindOneBy } from './CodeExamDB'
+import { TIL0529repositoryFindBy } from './CodeExamDB'
+import { TIL0529repositoryfindOneOrFail } from './CodeExamDB'
+import { TIL0529repositorySave } from './CodeExamDB'
+import { TIL0529repositoryInsert } from './CodeExamDB'
+import { TIL0529repositoryUpdate } from './CodeExamDB'
+import { TIL0529repositoryCount } from './CodeExamDB'
+import { TIL0529repositoryExist } from './CodeExamDB'
+import { TIL0529repositoryCreateQueryBuilder } from './CodeExamDB'
+import { TIL0529repositoryRemoveDelete } from './CodeExamDB'
+import { TIL0529repositorySoftDelete1 } from './CodeExamDB'
+import { TIL0529repositorySoftDelete2 } from './CodeExamDB'
+
 
 const TIL0529 = () => {
     return (
@@ -140,6 +155,13 @@ const TIL0529 = () => {
             }
             `}</code></pre>
 
+            <p>softDelete()</p>
+            <ul><li>softDelete()는 실제로 데이터를 DB에서 완전히 지우지 않고,</li>
+                <li>특정 필드(예: deletedAt)에 삭제된 시간만 기록하는 방식</li>
+                <li>softDelete를 사용하기 위한 전제조건으로는 UserEntity에서 @DeleteDateColumn()이 선언되어 있어야 함</li>
+                <CodeBlock code={TIL0529repositorySoftDelete1}></CodeBlock>
+            </ul>
+            <CodeBlock code={TIL0529repositorySoftDelete2}></CodeBlock>
 
         </div>
     )

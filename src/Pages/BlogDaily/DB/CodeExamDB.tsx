@@ -137,4 +137,133 @@ export class UserService {
 }
 `
 
+export const TIL0529repositoryFind = `
+// SELECT * FROM user;
+async findAllUsers(): Promise<User[]> {
+  return this.userRepository.find();
+}
+`
+
+export const TIL0529repositoryFindone = `
+// SELECT * FROM user WHERE email = 'test@example.com' LIMIT 1;
+async findUserByEmail(email: string): Promise<User | null> {
+  return this.userRepository.findOne({ where: { email } });
+}
+`
+
+export const TIL0529repositoryFindOneBy = `
+// SELECT * FROM user WHERE userId = 'abc123' LIMIT 1;
+async findUserById(userId: string): Promise<User | null> {
+  return this.userRepository.findOneBy({ userId });
+}
+`
+
+export const TIL0529repositoryFindBy = `
+// SELECT * FROM user WHERE email = 'test@example.com';
+async findUsersByEmail(email: string): Promise<User[]> {
+  return this.userRepository.findBy({ email });
+}
+`
+
+export const TIL0529repositoryfindOneOrFail = `
+/*
+	SELECT * FROM user WHERE id = 1 LIMIT 1;
+	결과가 없으면 예외가 발생한다는 점 외에는 findOne과 SQL 동일
+*/
+async mustFindUser(id: number): Promise<User> {
+  return this.userRepository.findOneOrFail({ where: { id } });
+}
+`
+
+export const TIL0529repositorySave = `
+/*
+	-- id가 없는 경우 (INSERT)
+	INSERT INTO user (name, email) VALUES ('Alice', 'alice@example.com');
+
+	-- id가 있는 경우 (UPDATE)
+	UPDATE user SET name = 'Alice', email = 'alice@example.com' WHERE id = 1;
+*/
+async saveUser(user: Partial<User>): Promise<User> {
+  return this.userRepository.save(user); // id가 있으면 update, 없으면 insert
+}
+`
+
+export const TIL0529repositoryInsert = `
+// INSERT INTO user (name, email) VALUES ('Alice', 'alice@example.com');
+async insertUser(user: Partial<User>): Promise<void> {
+  await this.userRepository.insert(user); // 반환값은 InsertResult
+}
+`
+
+export const TIL0529repositoryUpdate = `
+// UPDATE user SET email = 'new@example.com' WHERE userId = 'abc123';
+async updateUserEmail(userId: string, newEmail: string): Promise<void> {
+  await this.userRepository.update({ userId }, { email: newEmail });
+}
+`
+
+export const TIL0529repositoryRemoveDelete = `
+/*
+	DELETE FROM user WHERE id = 1;
+	먼저 SELECT로 엔티티를 로딩한 뒤 삭제
+*/
+async removeUserById(id: number): Promise<void> {
+  const user = await this.userRepository.findOneBy({ id });
+  if (user) await this.userRepository.remove(user);
+}
+
+or
+​
+/*
+	DELETE FROM user WHERE userId = 'abc123';
+	바로 삭제, 엔티티 로딩 없이 실행됨
+*/
+async deleteUserByUserId(userId: string): Promise<void> {
+  await this.userRepository.delete({ userId });
+}
+`
+
+export const TIL0529repositoryCount = `
+// SELECT COUNT(*) FROM user;
+async countAllUsers(): Promise<number> {
+  return this.userRepository.count();
+}
+`
+
+export const TIL0529repositoryExist = `
+/*
+	SELECT 1 FROM user WHERE email = 'test@example.com' LIMIT 1;
+	exist()는 결과가 존재하면 true, 없으면 false
+*/
+async isEmailTaken(email: string): Promise<boolean> {
+  return this.userRepository.exist({ where: { email } });
+}
+`
+
+export const TIL0529repositoryCreateQueryBuilder = `
+// SELECT * FROM user WHERE email LIKE '%keyword%';
+async searchUsersByEmailPattern(keyword: string): Promise<User[]> {
+  return this.userRepository
+    .createQueryBuilder('user')
+    .where('user.email LIKE :email', { email: ₩%S{keyword}%₩ })
+    .getMany();
+}
+`
+
+export const TIL0529repositorySoftDelete1 = `
+@DeleteDateColumn()
+deletedAt?: Date;
+`
+
+export const TIL0529repositorySoftDelete2 = `
+/*
+	UPDATE "user"
+	SET "deletedAt" = CURRENT_TIMESTAMP
+	WHERE "id" = 1;
+*/ 
+async softDeleteUser(id: number): Promise<void> {
+  await this.userRepository.softDelete({ id });
+}
+`
+
 
