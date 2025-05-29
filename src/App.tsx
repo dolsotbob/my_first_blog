@@ -108,18 +108,17 @@ function App() {
 
   return (
     <div className="App">
-      {/* 헤더를 숨길 경로가 아닌 경우에만 표시 */}
-      {isHomePage && (
-        <header className="App-header">
-          <p>TeaHeeHouse</p>
-        </header>
-      )}
-
       {/* /* /* Sidebar와 MainContent를 감싸는 컨테이너 */}
       <div className={`Container ${isHomePage ? 'has-header' : ''}`}>
         <Sidebar />
 
         <div className='MainContent'>
+          {/* {isHomePage && (
+            <header className="App-header">
+              <p>TeaHeeHouse</p>
+            </header>
+          )} */}
+
           <Routes>
             {/* //리액트 다이내믹 루틴  */}
 
