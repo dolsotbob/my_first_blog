@@ -98,8 +98,6 @@ import TIL0528 from './Pages/BlogDaily/DB/TIL0528';
 import TIL0529 from './Pages/BlogDaily/DB/TIL0529';
 
 
-
-
 function App() {
   const location = useLocation(); //현재 경로 확인 
 
