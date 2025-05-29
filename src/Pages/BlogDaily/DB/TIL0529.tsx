@@ -45,123 +45,78 @@ const TIL0529 = () => {
             <ul><li>실무에서 자주 쓰이는, TypeORM의 Repository에서 제공하는 주요 메서드별 설명과 예시 코드</li></ul>
 
             <p>find()</p>
-            <ul><li>모든 레코드 조회</li></ul>
-            <pre><code>{`
-            async findAllUsers(): Promise<User[]> { 
-                return this.userRepository.find();
-            }
-            `}</code></pre>
+            <ul><li>모든 레코드 조회</li>
+                <CodeBlock code={TIL0529repositoryFind}></CodeBlock>
+            </ul>
+            <br />
 
             <p>findOne()</p>
             <ul><li>단일 레코드 조회 (복합 조건 포함 가능)</li>
-                <li>TypeORM 0.3 이후에는 findOneBy 또는 아래 예제와 같이 where을 넣은 형태로 사용</li></ul>
-            <pre><code>{`
-            async findUserByEmail(email: string): Promise<User | null>{ 
-                return this.userRepository.findOne({ where: { email } });
-            }
-            `}</code></pre>
+                <li>TypeORM 0.3 이후에는 findOneBy 또는 아래 예제와 같이 where을 넣은 형태로 사용</li>
+                <CodeBlock code={TIL0529repositoryFindone}></CodeBlock>
+            </ul>
 
             <p>findOneBy()</p>
             <ul><li>단일 조건만 받을 때 사용</li>
-                <li>findOne보다 간결함</li></ul>
-            <pre><code>{`
-            async findUserById(userId: string): Promise<User | null> {
-                return this.userRepository.findOneBy({ userId });
-            }
-            `}</code></pre>
+                <li>findOne보다 간결함</li>
+                <CodeBlock code={TIL0529repositoryFindOneBy}></CodeBlock>
+            </ul>
 
             <p>findBy()</p>
-            <ul><li>여러 조건으로 여러 개의 레코드 조회</li></ul>
-            <pre><code>{`
-            async findUsersByEmail(email: string): Promise<User[]> {
-                return this.userRepository.findBy({ email });
-            }
-            `}</code></pre>
+            <ul><li>여러 조건으로 여러 개의 레코드 조회</li>
+                <CodeBlock code={TIL0529repositoryFindBy}></CodeBlock>
+            </ul>
 
             <p>findOneOrFail()</p>
-            <ul><li>결과가 없으면 예외(EntityNotFoundError) 발생</li></ul>
-            <pre><code>{`
-            async mustFindUser(id: number): Promise<User> {
-                return this.userRepository.findOneOrFail({ where: { id } });
-            }
-            `}</code></pre>
+            <ul><li>결과가 없으면 예외(EntityNotFoundError) 발생</li>
+                <CodeBlock code={TIL0529repositoryfindOneOrFail}></CodeBlock>
+            </ul>
 
             <p>save()</p>
             <ul><li>데이터 저장</li>
-                <li>id가 있으면 업데이트, 없으면 생성 (Upsert)</li></ul>
-            <pre><code>{`
-            async saveUser(user: Partial<User>): Promise<User> {
-                return this.userRepository.save(user); // id가 있으면 update, 없으면 insert
-            }
-            `}</code></pre>
+                <li>id가 있으면 업데이트, 없으면 생성 (Upsert)</li>
+                <CodeBlock code={TIL0529repositorySave}></CodeBlock>
+            </ul>
 
             <p>insert()</p>
             <ul><li>항상 새 데이터 삽입 (업데이트 안 됨)</li>
-                <li>반환값: InsertResult</li></ul>
-            <pre><code>{`
-            async insertUser(user: Partial<User>): Promise<void> {
-                await this.userRepository.insert(user); // 반환값은 InsertResult
-            }
-            `}</code></pre>
+                <li>반환값: InsertResult</li>
+                <CodeBlock code={TIL0529repositoryInsert}></CodeBlock>
+            </ul>
 
             <p>update()</p>
             <ul><li>기존 데이터 업데이트</li>
-                <li>조건으로 선택, 전체 또는 부분 업데이트</li></ul>
-            <pre><code>{`
-            async updateUserEmail(userId: string, newEmail: string): Promise<void> {
-                await this.userRepository.update({ userId }, { email: newEmail });
-            }
-            `}</code></pre>
+                <li>조건으로 선택, 전체 또는 부분 업데이트</li>
+                <CodeBlock code={TIL0529repositoryUpdate}></CodeBlock>
+            </ul>
 
             <p>remove() / delete()</p>
-            <ul><li>remove()는 엔티티 객체를 넣고, delete()는 조건을 넣음</li></ul>
-            <pre><code>{`
-            async removeUserById(id: number): Promise<void> {
-                const user = await this.userRepository.findOneBy({ id });
-                if (user) await this.userRepository.remove(user);
-            }
-
-            or
-                ​
-            async deleteUserByUserId(userId: string): Promise<void> {
-                await this.userRepository.delete({ userId });
-            }
-            `}</code></pre>
+            <ul><li>remove()는 엔티티 객체를 넣고, delete()는 조건을 넣음</li>
+                <CodeBlock code={TIL0529repositoryRemoveDelete}></CodeBlock>
+            </ul>
 
             <p>count()</p>
-            <ul><li>조건에 맞는 레코드 개수 반환</li></ul>
-            <pre><code>{`
-            async countAllUsers(): Promise<number> {
-                return this.userRepository.count();
-            }
-            `}</code></pre>
+            <ul><li>조건에 맞는 레코드 개수 반환</li>
+                <CodeBlock code={TIL0529repositoryCount}></CodeBlock>
+            </ul>
 
             <p>exist()</p>
-            <ul><li>조건에 맞는 데이터가 존재하는지 boolean 반환 (v0.3+)</li></ul>
-            <pre><code>{`
-            async isEmailTaken(email: string): Promise<boolean> {
-                return this.userRepository.exist({ where: { email } });
-            }
-            `}</code></pre>
+            <ul><li>조건에 맞는 데이터가 존재하는지 boolean 반환 (v0.3+)</li>
+                <CodeBlock code={TIL0529repositoryExist}></CodeBlock>
+            </ul>
 
             <p>createQueryBuilder()</p>
-            <ul><li>복잡한 쿼리를 직접 작성할 때 사용</li></ul>
-            <pre><code>{`
-            async searchUsersByEmailPattern(keyword: string): Promise<User[]> {
-                return this.userRepository
-                    .createQueryBuilder('user')
-                    .where('user.email LIKE :email', { email: ₩%S{keyword}%₩ })
-                    .getMany();
-            }
-            `}</code></pre>
+            <ul><li>복잡한 쿼리를 직접 작성할 때 사용</li>
+                <CodeBlock code={TIL0529repositoryCreateQueryBuilder}></CodeBlock>
+            </ul>
 
             <p>softDelete()</p>
             <ul><li>softDelete()는 실제로 데이터를 DB에서 완전히 지우지 않고,</li>
                 <li>특정 필드(예: deletedAt)에 삭제된 시간만 기록하는 방식</li>
                 <li>softDelete를 사용하기 위한 전제조건으로는 UserEntity에서 @DeleteDateColumn()이 선언되어 있어야 함</li>
                 <CodeBlock code={TIL0529repositorySoftDelete1}></CodeBlock>
+                <CodeBlock code={TIL0529repositorySoftDelete2}></CodeBlock>
             </ul>
-            <CodeBlock code={TIL0529repositorySoftDelete2}></CodeBlock>
 
         </div>
     )
