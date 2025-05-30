@@ -8,6 +8,7 @@ const FurtherStudies = () => {
     <div className="furtherStudies">
       <div onClick={() => navigate("/furtherstudies/0311")}>0311 Arweave</div>
       <div onClick={() => navigate("/furtherstudies/0313")}>0313 Satoshi Airlines</div>
+      <div onClick={() => navigate("/furtherstudies/0530")}>0530 consensus</div>
     </div>
   )
 }
