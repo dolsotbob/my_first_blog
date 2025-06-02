@@ -96,6 +96,9 @@ import TIL0415 from './Pages/BlogDaily/SolidityAdv/TIL0415';
 import TIL0527 from './Pages/BlogDaily/DB/TIL0527';
 import TIL0528 from './Pages/BlogDaily/DB/TIL0528';
 import TIL0529 from './Pages/BlogDaily/DB/TIL0529';
+import Security from './Pages/BlogDaily/Security/Security';
+import TIL0602 from './Pages/BlogDaily/Security/TIL0602';
+import Research0602 from './Pages/FurtherResearch/Research0602';
 
 
 function App() {
@@ -207,8 +210,12 @@ function App() {
             <Route path="/blog/db/0528" element={<TIL0528></TIL0528>}></Route>
             <Route path="/blog/db/0529" element={<TIL0529></TIL0529>}></Route>
 
+            <Route path="/blog/security" element={<Security></Security>}></Route>
+            <Route path="/blog/security/0602" element={<TIL0602></TIL0602>}></Route>
+
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
+            <Route path="/furtherstudies/0602" element={<Research0602></Research0602>}></Route>
             <Route path="/wallet" element={<Wallet></Wallet>}></Route>
             <Route path="/explorer" element={<Explorer></Explorer>}></Route>
             {/* <Route path="/explorerhome" element={<ExplorerHome />} /> */}
