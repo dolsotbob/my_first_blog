@@ -9,6 +9,7 @@ import SMTOverflowImg from './R0602SMTOverflowAttack.png'
 import SafeMathImg from './R0602SafeMath.png'
 import VulnerableCodeImg from './R0602VulnerableCode.png'
 import CEIPatternImg from './R0602CEIPattern.png'
+import StateLockImg from './R0602StateLock.png'
 
 const Research0602 = () => {
     return (
@@ -110,12 +111,49 @@ const Research0602 = () => {
             </li>
             </ul>
 
-            <p>CEI 패턴, 재진입 공격을 방지하기 위한 보안 패턴</p>
-            <img className='' src={CEIPatternImg} alt='CEI Pattern Image'></img>
+            <p>Secure Mode 1: CEI 패턴, 재진입 공격을 방지하기 위한 보안 패턴</p>
+            <img className='R0602CEIPatternImg' src={CEIPatternImg} alt='CEI Pattern Image'></img>
             <ol><li>Check (검사): 요구 조건들을 먼저 확인</li>
                 <li>Effects (상태 변경): 잔고 등 내부 상태를 먼저 변경</li>
                 <li>Interactions (외부 호출): 외부로 이더 전송 등 마지막에 실행</li></ol>
             <span style={{ fontStyle: 'italic' }}>위 순서를 지키면 재진입 공격을 막을 수 있다.</span>
+            <ul><li>함수: withdraw(uint256 amount)</li>
+                <pre><code>{`
+    require(balances[msg.sender] > amount);              // 1. Check
+    require(address(this).balance >= amount);            // 2. Check
+    balances[msg.sender] -= amount;                      // 3. Effects: 상태 먼저 업데이트
+    msg.sender.call{value: amount}("");                  // 4. Interactions: 마지막에 외부 전송
+    `}</code></pre>
+                <li>포인트:
+                    <ul><li>과거 취약한 코드에서는 "call(value:)"가 먼저 실행되어,
+                        <ul><li>이더를 받은 공격자의 fallback 함수가 withdraw()를 다시 호출함</li>
+                            <li>→ 잔고가 줄기 전에 반복 인출이 가능</li></ul>
+                    </li>
+                        <li>이 코드는 먼저 balances[msg.sender] -= amount;를 실행하므로,
+                            <ul><li>재진입하더라도 require()에서 막힘</li></ul>
+                        </li></ul>
+                </li>
+            </ul>
+
+            <p>Secure Mode 2: State Lock</p>
+            <ul><li>한 번에 한 사람만 출금 처리할 수 있도록 잠금장치를 거는 것</li></ul>
+            <img className='R0602StateLockImg' src={StateLockImg} alt='State Lock Image'></img>
+            <span>🔍 코드 설명</span>
+            <ul><li>bool state = false;  // 상태 잠금 초기값 (잠금 안 됨)</li>
+                <li>✅ withdraw(uint256 amount) 함수
+                    <ul><li>require(!state);  // 이미 잠금 상태면 실행 거부</li>
+                        <li>출금 중이 아닌 상태여야 진행 가능</li>
+                        <li>이미 누군가 출금 중이면 재진입 차단</li></ul>
+                </li>
+                <li>🔒 Lock & Unlock 구조</li>
+                <pre><code>{`
+    state = true;                          // 잠금 설정
+    msg.sender.call{value:amount}("");     // 이더 전송
+    state = false;                         // 잠금 해제
+    `}</code></pre>
+                <li>중간에 fallback() 함수가 재진입을 시도해도 require(!state)에서 막힘</li>
+                <li>call로 외부 호출을 하기 전에 잠그고, 호출이 끝난 뒤에만 다시 열기 때문에 안전함</li>
+            </ul>
 
 
 
