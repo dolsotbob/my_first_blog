@@ -1,0 +1,41 @@
+.R0602TransferImage {
+    width: 500px;
+    height: 500px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.R0602ReceiveImage {
+    width: 500px;
+    height: 500px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.R0602BECOverflowImg {
+    width: 900px;
+    height: 600px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.R0602SMTOverflowImg {
+    width: 900px;
+    height: 600px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.R0602SafeMathImg {
+    width: 900px;
+    height: 600px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.R0602VulnerableCodeImg {
+    width: 1200px;
+    height: 1000px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
