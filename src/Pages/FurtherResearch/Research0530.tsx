@@ -1,5 +1,5 @@
 import react from 'react'
-           
+
 type CardData = {
   title: string;
   content: string[];
@@ -57,32 +57,90 @@ const cards: CardData[] = [
   },
 ];
 
+const comparisonCards: CardData[] = [
+  {
+    title: "🔒 PoW (Proof of Work)",
+    content: [
+      "✅ Strongest security.",
+      "⚡ Very energy-hungry.",
+      "🐢 Slow, not good for IoT.",
+    ],
+  },
+  {
+    title: "💰 PoS (Proof of Stake)",
+    content: [
+      "✅ Energy efficient.",
+      "🚀 Scalable with sharding.",
+      "⚠️ Rich users have an advantage.",
+    ],
+  },
+  {
+    title: "🪪 PoA (Proof of Authority)",
+    content: [
+      "✅ Fast and efficient.",
+      "🔌 Good for private chains and IoT.",
+      "⚠️ More centralized, needs trust.",
+    ],
+  },
+  {
+    title: "🗳️ PoV (Proof of Vote)",
+    content: [
+      "✅ Energy saving + fast block creation.",
+      "📦 Uses voting to validate blocks.",
+      "❓ Still rarely used in practice.",
+    ],
+  },
+];
+
+
 const Research0530 = () => {
-    return (
-        <div className='BlogDaily'>
-            <h3>Consensus</h3>
-            <h4>Summary on </h4>
-            <ul><li>A Comprehensive Review of Blockchain Consensus Mechanisms by BAHAREH LASHKARI1, PETR MUSILEK1,2(Senior Member, IEEE), 2021</li></ul>
+  return (
+    <div className='BlogDaily'>
+      <h3>Consensus</h3>
+      <h4>Summary on </h4>
+      <ul><li>A Comprehensive Review of Blockchain Consensus Mechanisms by BAHAREH LASHKARI1, PETR MUSILEK1,2(Senior Member, IEEE), 2021</li></ul>
 
 
-    <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {cards.map((card, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition"
-        >
-          <h2 className="text-xl font-bold mb-4">{card.title}</h2>
-          <ul className="list-disc list-inside space-y-1 text-gray-700">
-            {card.content.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cards.map((card, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition"
+          >
+            <h2 className="text-xl font-bold mb-4">{card.title}</h2>
+            <ul className="list-disc list-inside space-y-1 text-gray-700">
+              {card.content.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <h4>Summary on</h4>
+      <ul><li>Blockchain: A Comparative Study of Consensus Algorithms PoW, PoS, PoA, PoV, March 2023 by
+        Fahim, Mahmood, S M Katibur Rahman</li></ul>
+
+      <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {comparisonCards.map((card, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition"
+          >
+            <h2 className="text-xl font-bold mb-4">{card.title}</h2>
+            <ul className="list-disc list-inside space-y-1 text-gray-700">
+              {card.content.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+
+
     </div>
-
-    </div>
-    )
+  )
 }
 
 export default Research0530
