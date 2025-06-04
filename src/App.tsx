@@ -101,6 +101,7 @@ import TIL0602 from './Pages/BlogDaily/Security/TIL0602';
 import Research0602 from './Pages/FurtherResearch/Research0602';
 import ResearchP0604 from './Pages/FurtherResearch/ResearchP0604';
 import TIL0604 from './Pages/BlogDaily/Security/TIL0604';
+import Research0604 from './Pages/FurtherResearch/Research0604';
 
 
 function App() {
@@ -219,7 +220,8 @@ function App() {
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
             <Route path="/furtherstudies/0602" element={<Research0602></Research0602>}></Route>
-            <Route path="/furtherstudies/0604" element={<ResearchP0604></ResearchP0604>}></Route>
+            <Route path="/furtherstudies/0604" element={<Research0604></Research0604>}></Route>
+            <Route path="/furtherstudies/p0604" element={<ResearchP0604></ResearchP0604>}></Route>
             <Route path="/wallet" element={<Wallet></Wallet>}></Route>
             <Route path="/explorer" element={<Explorer></Explorer>}></Route>
             {/* <Route path="/explorerhome" element={<ExplorerHome />} /> */}
