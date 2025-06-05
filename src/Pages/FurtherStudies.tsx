@@ -12,6 +12,7 @@ const FurtherStudies = () => {
       <div onClick={() => navigate("/furtherstudies/0602")}>0602 Contract Security</div>
       <div onClick={() => navigate("/furtherstudies/0604")}>0604 Phishing Detection</div>
       <div onClick={() => navigate("/furtherstudies/p0604")}>0604 프로젝트 준비</div>
+      <div onClick={() => navigate("/furtherstudies/notes")}>기타 노트</div>
     </div>
   )
 }

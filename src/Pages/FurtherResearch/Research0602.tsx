@@ -2,14 +2,14 @@ import React from 'react'
 import './Research.css';
 import CodeBlock from '../../components/CodeBlock';
 import { R0602AttackerSol } from './CodeExampFS';
-import transferPatternImg from './R0602TransferPattern.png'
-import receivePatternImg from './R0602ReceiverPattern.png'
-import BECOverflowImg from './R0602BECOverflowAttack.png'
-import SMTOverflowImg from './R0602SMTOverflowAttack.png'
-import SafeMathImg from './R0602SafeMath.png'
-import VulnerableCodeImg from './R0602VulnerableCode.png'
-import CEIPatternImg from './R0602CEIPattern.png'
-import StateLockImg from './R0602StateLock.png'
+import transferPatternImg from './ImagesFR/R0602TransferPattern.png'
+import receivePatternImg from './ImagesFR/R0602ReceiverPattern.png'
+import BECOverflowImg from './ImagesFR/R0602BECOverflowAttack.png'
+import SMTOverflowImg from './ImagesFR/R0602SMTOverflowAttack.png'
+import SafeMathImg from './ImagesFR/R0602SafeMath.png'
+import VulnerableCodeImg from './ImagesFR/R0602VulnerableCode.png'
+import CEIPatternImg from './ImagesFR/R0602CEIPattern.png'
+import StateLockImg from './ImagesFR/R0602StateLock.png'
 
 const Research0602 = () => {
     return (
