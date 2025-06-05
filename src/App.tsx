@@ -103,6 +103,7 @@ import ResearchP0604 from './Pages/FurtherResearch/ResearchP0604';
 import TIL0604 from './Pages/BlogDaily/Security/TIL0604';
 import Research0604 from './Pages/FurtherResearch/Research0604';
 import ResearchNotes from './Pages/FurtherResearch/ResearchNotes';
+import TIL0605 from './Pages/BlogDaily/Security/TIL0605';
 
 
 function App() {
@@ -217,6 +218,7 @@ function App() {
             <Route path="/blog/security" element={<Security></Security>}></Route>
             <Route path="/blog/security/0602" element={<TIL0602></TIL0602>}></Route>
             <Route path="/blog/security/0604" element={<TIL0604></TIL0604>}></Route>
+            <Route path="/blog/security/0605" element={<TIL0605></TIL0605>}></Route>
 
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
