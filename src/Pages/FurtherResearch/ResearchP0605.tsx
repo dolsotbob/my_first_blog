@@ -43,24 +43,39 @@ const exampleApplications = [
 ];
 
 const ResearchP0605 = () => {
-    // ✅ 요약 함수
-    const summarizePQCBlockchain = () => {
-        console.log('⚠️ 양자컴퓨터는 기존 암호체계를 해독할 수 있음:', quantumAlgorithms);
-        console.log('✅ 포스트 양자 암호 기술:', postQuantumCryptoTypes);
-        console.log('❗ 적용 시 과제:', pqcChallenges);
-        console.log('🔎 적용 사례:', exampleApplications);
-    };
-
-    summarizePQCBlockchain();
-
     return (
-        <div>
-            <p>원문</p>
-            <span style={{ fontStyle: 'italic' }}>
-                <a href='https://ieeexplore.ieee.org/document/8967098' target='_blank' rel='noopener noreferrer'>
-                    Towards Post-Quantum Blockchain: A Review on Blockchain Cryptography Resistant to Quantum Computing Attacks, 2019, FERNÁNDEZ-CARAMÉS, FRAGA-LAMAS
-                </a>
-            </span>
+        <div className="p-4">
+            <h2>📖 논문 요약: Post-Quantum Blockchain</h2>
+
+            <p><strong>원문 링크:</strong> <a href='https://ieeexplore.ieee.org/document/8967098' target='_blank' rel='noopener noreferrer'>
+                Towards Post-Quantum Blockchain: A Review on Blockchain Cryptography Resistant to Quantum Computing Attacks (2019)</a></p>
+
+            <h3>⚠️ 양자컴퓨터의 위협</h3>
+            <ul>
+                <li><strong>Shor 알고리즘:</strong> 정수 소인수분해, 공개키 해독 가능</li>
+                <li><strong>Grover 알고리즘:</strong> 해시 충돌 및 대칭키 공격 가속</li>
+            </ul>
+
+            <h3>✅ 포스트 양자 암호 기술</h3>
+            <ul>
+                {postQuantumCryptoTypes.map((type, index) => <li key={index}>{type}</li>)}
+            </ul>
+
+            <h3>❗ 적용 시 고려사항</h3>
+            <ul>
+                <li><strong>성능 저하:</strong> {pqcChallenges.performance}</li>
+                <li><strong>블록 크기:</strong> {pqcChallenges.blockSize}</li>
+                <li><strong>호환성:</strong> {pqcChallenges.compatibility}</li>
+            </ul>
+
+            <h3>🔎 적용 사례</h3>
+            <ul>
+                {exampleApplications.map((app, index) => (
+                    <li key={index}>
+                        <strong>{app.name}:</strong> {app.type}, <em>{app.status}</em>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
