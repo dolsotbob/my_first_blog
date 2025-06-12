@@ -105,6 +105,10 @@ import Research0604 from './Pages/FurtherResearch/Research0604';
 import ResearchNotes from './Pages/FurtherResearch/ResearchNotes';
 import TIL0605 from './Pages/BlogDaily/Security/TIL0605';
 import ResearchP0605 from './Pages/FurtherResearch/ResearchP0605';
+import TIL0609 from './Pages/BlogDaily/Theory2/TIL0609';
+import Theory2 from './Pages/BlogDaily/Theory2/Theory2';
+import TIL0610 from './Pages/BlogDaily/Theory2/TIL0610';
+import TIL0611 from './Pages/BlogDaily/Theory2/TIL0611';
 
 
 function App() {
@@ -220,6 +224,11 @@ function App() {
             <Route path="/blog/security/0602" element={<TIL0602></TIL0602>}></Route>
             <Route path="/blog/security/0604" element={<TIL0604></TIL0604>}></Route>
             <Route path="/blog/security/0605" element={<TIL0605></TIL0605>}></Route>
+
+            <Route path="/blog/theory2" element={<Theory2></Theory2>}></Route>
+            <Route path="/blog/theory2/0609" element={<TIL0609></TIL0609>}></Route>
+            <Route path="/blog/theory2/0610" element={<TIL0610></TIL0610>}></Route>
+            <Route path="/blog/theory2/0611" element={<TIL0611></TIL0611>}></Route>
 
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
