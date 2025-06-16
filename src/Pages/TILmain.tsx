@@ -14,7 +14,8 @@ const topics = [
     { path: "/blog/server", label: "서버" },
     { path: "/blog/db", label: "DB" },
     { path: "/blog/security", label: "보안" },
-    { path: "/blog/theory2", label: "이론" }
+    { path: "/blog/theory2", label: "이론" },
+    { path: "/blog/aws", label: "AWS" },
 ];
 
 const TILmain = () => {
