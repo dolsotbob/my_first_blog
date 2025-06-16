@@ -51,6 +51,34 @@ const rollupVSstateChannel = [
     }
 ]
 
+const validiumVsZKRollup = [
+    {
+        category: '증명방식',
+        zkrollup: ': ZK Proof',
+        validium: ': ZK Proof'
+    },
+    {
+        category: '데이터 저장 위치',
+        zkrollup: ': Layer 1 (온체인)',
+        validium: ': 오프체인'
+    },
+    {
+        category: '데이터 가용성',
+        zkrollup: ': 완전 보장',
+        validium: ': 외부 의존 (중앙화 위험 있음)'
+    },
+    {
+        category: '가스비',
+        zkrollup: ': 중간',
+        validium: ': 매우 낮음'
+    },
+    {
+        category: '사용 사례',
+        zkrollup: ': 일반 DeFi, 스마트 계약 등',
+        validium: ': 대규모 게임, NFT, 소셜 데이터 등'
+    },
+]
+
 const TIL0611 = () => {
     return (
         <div className='BlogDaily'>
@@ -257,7 +285,67 @@ const TIL0611 = () => {
                 <li>ZK Proof 기반 - 데이터는 오프체인이지만, 정확성은 암호학적으로 보장</li></ul>
 
             <p>단점 및 주의점</p>
-            {/* 여기 할 차례  */}
+            <ul><li>데이터 가용성 문제- Layer 1에 데이터가 없으므로 오프체인 저장소가 다운되면 복구 어려움</li>
+                <li>탈중앙화 낮음 - 데이터 저장소가 중앙화되면 위험 가능</li>
+                <li>자산 출금 지연 - L1에 데이터가 없기 때문에 상태 동기화가 복잡함</li>
+            </ul>
+            <span style={{ fontStyle: 'italic' }}>→ ZK Rollup보다 보안 수준이 떨어질 수 있음 (특히 데이터 가용성 측면에서)</span>
+
+            <p>Validium vs ZK Rollup 비교</p>
+            <div className="ml-4">
+                {validiumVsZKRollup.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.category}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong>ZK Rollup</strong> {type.zkrollup}</li>
+                            <li><strong>Validium</strong> {type.validium}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
+
+            <p>실제 사례</p>
+            <ul><li>StarkEx (by StarkWare) - ZK STARK 기반 Validium 기술 적용</li>
+                <li>Immutable X	- StarkEx 위에 구축된 NFT 특화 Validium</li>
+                <li>DeversiFi - 거래소 속도의 유동성과 프라이버시를 위한 Validium 채택</li></ul>
+
+            <h4>이더리움의 확장 전략과 롤업 중심 로드맵</h4>
+            <p>롤업 중심 로드맵(Rollup-Centric Roadmap)이란?</p>
+            <ul><li>이더리움은 Layer 1은 ‘보안과 합의의 역할’만 수행하고, 실질적인 확장은 Layer 2(Rollup)에서 이루어진다는 전략</li>
+                <li>이 전략은 2020년 이후 비탈릭 부테린이 지속적으로 강조하며, 이더리움 커뮤니티의 공식 로드맵으로 자리 잡았다.</li></ul>
+
+            <p>롤업 중심 구조의 철학</p>
+            <ul><li>Layer 1 (이더리움 본체)
+                <ul><li>역할: 보안, 데이터 기록, 최종 합의</li>
+                    <li>예시: Beacon Chain, Danksharding 등</li></ul>
+            </li>
+                <li>Layer 2 (롤업)
+                    <ul><li>역할: 빠른 트랜잭션 처리, 수수료 절감</li>
+                        <li>예시: Arbitrum, Optimism, zkSync 등</li></ul>
+                </li>
+            </ul>
+            <span style={{ fontStyle: "italic" }}>Layer 1은 “법원”, Layer 2는 “실생활 공간”처럼 구분됨</span>
+
+            <p>기술 로드맵 단계(2024~)</p>
+            <ul><li>이더리움의 확장 로드맵은 종종 "S.C.O.U.R.G.E"라는 키워드로 요약되며,</li>
+                <li>여기서 확장성 관련 핵심 단계는 아래와 같습니다.
+                    <ul><li>The Surge – 롤업 활성화를 위한 기반 다지기</li>
+                        <li>Danksharding 준비 (샤딩 기반 데이터 블롭 제공)</li>
+                        <li>Proto-Danksharding (EIP-4844): Rollup 전용 공간 제공 (2024 상반기 도입)</li></ul>
+                </li>
+                <li>The Scourge 이후 – 더 나은 블록 생산, 롤업 간 상호운용성</li></ul>
+
+            <p>Proto-Danksharding과 Rollup의 관계</p>
+            <ul><li>Danksharding - 이더리움이 롤업을 위한 데이터 저장소로 진화하는 샤딩 전략</li>
+                <li>Blob (데이터 블롭) - Rollup이 Layer 1에 제출할 수 있는 대용량 데이터 공간</li>
+                <li>Proto-Danksharding (EIP-4844) - Rollup 확장을 위한 임시 블롭 지원안 (이미 테스트넷 적용 중)</li></ul>
+            <span style={{ fontStyle: 'italic' }}>이더리움은 자신을 “Rollup의 데이터 게시판”으로 바꾸는 중입니다.</span>
+
+            <p>주의할 점</p>
+            <ul><li>Layer 2마다 UX, 보안, 비용이 다름 (사용자가 직접 선택해야 함)</li>
+                <li>Rollup 간 호환성과 통합성은 여전히 과제</li>
+                <li>Layer 2는 탈중앙화 수준이 프로젝트마다 다름</li></ul>
+
         </div>
     )
 }
