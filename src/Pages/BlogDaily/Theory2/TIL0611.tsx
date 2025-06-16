@@ -33,6 +33,23 @@ const rollupData = [
     },
 ];
 
+const rollupVSstateChannel = [
+    {
+        category: '거래 참여자',
+        rollup: ': 누구나 참여 가능',
+        channel: ': 채널 참가자만'
+    },
+    {
+        category: '거래 확정',
+        rollup: ': Layer 1에 정기적으로 기록',
+        channel: ': 마지막에 한 번만 기록'
+    },
+    {
+        category: '사용성',
+        rollup: ': 스마트 계약, DApp 호환',
+        channel: ': 주로 송금, 간단한 상태 변경에 적합'
+    }
+]
 
 const TIL0611 = () => {
     return (
@@ -130,11 +147,117 @@ const TIL0611 = () => {
             </table>
 
             <h4>대표적인 Layer 2: 플라즈마</h4>
+            <ul><li>이더리움의 확장성을 높이기 위해 제안된 레이어 2 솔루션</li>
+                <li>메인 체인(Layer 1) 바깥에 하위 체인(Plasma 체인)을 만들고,</li>
+                <li>대부분의 트랜잭션을 그 하위 체인에서 처리한 뒤,</li>
+                <li>요약된 결과만 메인 체인에 기록하는 방식
+                </li></ul>
 
-            <h4>대표적인 Layer 2: 채널</h4>
+            <p>작동 방식 요약</p>
+            <ol><li>하위 체인(Plasma 체인) 생성</li>
+                <li>사용자는 자산을 Plasma 체인으로 전송</li>
+                <li>트랜잭션은 Plasma 체인에서 오프체인 처리</li>
+                <li>정기적으로 요약 정보(상태 루트 등)를 메인 체인에 제출</li>
+                <li>문제가 있을 경우 “이의 제기(Challenge)” 가능</li>
+                <li>사용자가 자산을 다시 인출(Withdraw)하려면 일정 기간 “이상 없음”을 증명해야 완료됨</li></ol>
+
+            <p>플라즈마의 장점</p>
+            <ul><li>처리 속도 매우 빠름</li>
+                <li>가스비 절감</li>
+                <li>보안 유지 - Layer 1의 스마트 계약과 증명 구조를 통해 보안 확보</li>
+                <li>구조 유연성 - 체인마다 다양한 구조 설계 가능 (Plasma Cash, Plasma MVP 등)</li></ul>
+
+            <p>플라즈마의 한계</p>
+            <ul><li>스마트 계약 처리 불가</li>
+                <li>인출 지연 - 자산 인출 시 수 일의 대기 시간이 필요 (Challenge 기간)</li>
+                <li>이의제기, 증명 제출 등 복잡한 사용자 흐름</li>
+                <li>탈중앙화 미흡 - 운영자가 있는 체인 구조는 중앙화 위험 존재</li></ul>
+
+            <p>플라즈마는 지금도 쓰일까?</p>
+            <ul><li>현재는 Rollup(Rollup-centric) 구조가 주류로 떠오르면서 플라즈마는 거의 쓰이지 않음</li>
+                <li>과거에는 OMG Network, Matic Network (초기 Polygon) 등에서 사용</li>
+                <li>하지만 Rollup이 더 강력하고 범용적인 구조로 평가되며 대부분 전환됨</li></ul>
+
+
+            <h4>대표적인 Layer 2: 채널(State Channel)</h4>
+            <ul><li>블록체인 외부에서(off-chain) 여러 번의 트랜잭션을 빠르게 주고받고, 마지막 결과만 블록체인에 기록하는 레이어 2 확장 기술</li>
+                <li>즉, “잠깐 블록체인을 벗어나서 둘이 계산 다 하고, 마지막에 정산만 블록체인에 올리자”는 방식
+                </li></ul>
+
+            <p>작동 방식 요약</p>
+            <span>예: Alice와 Bob이 자주 송금한다고 가정</span>
+            <ol><li>채널 열기
+                <ul><li>Alice와 Bob이 양쪽에서 이더(ETH)를 예치해 채널을 엶</li>
+                    <li>이 작업은 블록체인에 기록됨 (on-chain)</li></ul>
+            </li>
+                <li>오프체인 거래 진행
+                    <ul><li>Alice ↔ Bob 간 송금, 상호작용 등을 서명 기반 메시지로 교환</li>
+                        <li>이 모든 트랜잭션은 블록체인에 기록되지 않음 (빠르고 무료)</li></ul>
+                </li>
+                <li>채널 닫기
+                    <ul><li>둘이 합의한 최종 상태만 블록체인에 기록</li>
+                        <li>이로써 블록체인 리소스를 크게 절약</li></ul>
+                </li>
+            </ol>
+
+            <p>장점</p>
+            <ul><li>빠름 - 블록 생성 기다릴 필요 없이 즉시 처리</li>
+                <li>수수료 없음 - 블록에 기록 안 되니 가스비 없음</li>
+                <li>오프라인 상태에서도 가능 - 서명 메시지로 교환만 하면 됨</li>
+                <li>보안 - 분쟁 시 언제든 블록체인에 증거 제출 가능 (스마트 계약 보증)</li></ul>
+
+            <p>단점 및 한계</p>
+            <ul><li>실시간 참여자 필요 - 거래 양쪽이 모두 온라인이어야 함 (특히 결제 채널)</li>
+                <li>참여자 수 제한 - 주로 1:1 구조 (N:N은 복잡함)</li>
+                <li>정산 전에는 상태 반영이 블록체인에 없음 - 완전히 탈중앙화된 서비스에 적용은 어려움</li>
+                <li>분쟁 해결 구조 복잡 - 일방이 잘못된 서명을 제출하면 대응해야 함</li></ul>
+
+
+            <p>대표 사례</p>
+            <ul><li>Lightning Network</li>
+                <li>Raiden Network - 이더리움 기반의 State Channel 프로젝트 (현재는 비활성화 상태)</li></ul>
+
+            <p>Rollup과의 차이</p>
+            <div className="ml-4">
+                {rollupVSstateChannel.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.category}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong>Rollup</strong> {type.rollup}</li>
+                            <li><strong>State Channel</strong> {type.channel}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
+
 
             <h4>대표적인 Layer 2: Validium</h4>
+            <span>ZK Rollup과 유사하게 영지식 증명(ZK Proof)을 사용하는 Layer 2 기술</span><br />
+            <span>트랜잭션 데이터를 Layer 1이 아닌, 오프체인에 보관</span>
+            <ul><li>ZK Rollup: 증명 + 데이터 모두 Layer 1에 기록</li>
+                <li>Validium: 증명은 L1에 기록, 데이터는 L1 밖(off-chain)에 저장</li></ul>
 
+            <p>왜 등장했을까?</p>
+            <span>ZK Rollup은 데이터와 증명을 모두 Layer 1에 기록하므로</span>
+            <ul><li>보안은 뛰어나지만</li>
+                <li>Layer 1 저장소를 많이 차지함</li>
+                <li>가스비가 줄어들긴 해도 완전히 낮지는 않음</li></ul>
+            <span style={{ fontStyle: 'italic' }}>그래서 데이터까지 오프체인으로 내보내서 속도와 비용을 극단적으로 줄이자는 발상 → Validium 탄생</span>
+
+            <p>작동 방식 요약</p>
+            <ol><li>트랜잭션은 Validium Layer 2에서 처리됨</li>
+                <li>처리된 결과를 ZK Proof로 압축</li>
+                <li>Proof만 Layer 1에 기록 (데이터는 저장하지 않음)</li>
+                <li>사용자는 상태를 오프체인 저장소에서 읽고, 증명 검증은 온체인에서 수행</li></ol>
+
+            <p>장점</p>
+            <ul><li>매우 빠름 - 데이터 저장이 오프체인이므로 지연 거의 없음</li>
+                <li>가스비 절감 - Layer 1에 데이터 안 올리니 저장 비용 거의 없음</li>
+                <li>대용량 처리 - NFT, 게임 등 대규모 데이터 사용에 적합</li>
+                <li>ZK Proof 기반 - 데이터는 오프체인이지만, 정확성은 암호학적으로 보장</li></ul>
+
+            <p>단점 및 주의점</p>
+            {/* 여기 할 차례  */}
         </div>
     )
 }
