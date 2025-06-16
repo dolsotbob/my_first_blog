@@ -112,6 +112,7 @@ import TIL0611 from './Pages/BlogDaily/Theory2/TIL0611';
 import AWS from './Pages/BlogDaily/AWS/AWS';
 import TIL0616 from './Pages/BlogDaily/AWS/TIL0616';
 import TIL0612 from './Pages/BlogDaily/Theory2/TIL0612';
+import TIL0613 from './Pages/BlogDaily/Theory2/TIL0613';
 
 
 function App() {
@@ -233,6 +234,7 @@ function App() {
             <Route path="/blog/theory2/0610" element={<TIL0610></TIL0610>}></Route>
             <Route path="/blog/theory2/0611" element={<TIL0611></TIL0611>}></Route>
             <Route path="/blog/theory2/0612" element={<TIL0612></TIL0612>}></Route>
+            <Route path="/blog/theory2/0613" element={<TIL0613></TIL0613>}></Route>
 
             <Route path="/blog/aws" element={<AWS></AWS>}></Route>
             <Route path="/blog/aws/0616" element={<TIL0616></TIL0616>}></Route>

@@ -1,5 +1,38 @@
 import React from 'react'
 
+const celestiaVsEthDanksharding = [
+    {
+        category: '구조 철학',
+        celestia: '- 완전한 모듈형 체인',
+        danksharding: '- 롤업 중심 Layer 1 구조'
+    },
+    {
+        category: '처리 역할',
+        celestia: '- 데이터 + 합의',
+        danksharding: '- 데이터 + 보안 + 정산'
+    },
+    {
+        category: '실행 계층',
+        celestia: '- 없음 (Rollup 의존)',
+        danksharding: '- 없음 (Rollup 의존)'
+    },
+    {
+        category: 'Rollup 연동성',
+        celestia: '- 체인 외부 개발자에 개방',
+        danksharding: '- 이더리움 생태계 내부 집중'
+    },
+    {
+        category: '샤딩 적용 방식',
+        celestia: '- 체인 자체가 샤딩됨',
+        danksharding: '- 블롭을 통한 데이터 샤딩'
+    },
+    {
+        category: '목표',
+        celestia: '- 다양한 모듈형 체인 인프라',
+        danksharding: '- 이더리움 생태계 내 Rollup 지원'
+    },
+]
+
 const TIL0612 = () => {
     return (
         <div className='BlogDaily'>
@@ -170,6 +203,62 @@ const TIL0612 = () => {
             <p>Celestia: 세계 최초의 모듈형 블록체인</p>
             <ul><li>Celestia는 블록체인의 “데이터 가용성”과 “합의”만을 담당하는 모듈형 블록체인이다.</li>
                 <li>실행은 Rollup 등 외부 시스템이 담당하며, 모든 기능을 한 체인에 몰지 않는 설계 철학을 따른다.</li></ul>
+
+            <span>핵심 기능:</span>
+            <ul><li>데이터 가용성 - Rollup이 만든 트랜잭션 데이터를 블록체인에 안전하게 게시</li>
+                <li>합의 - 어떤 데이터가 유효한지를 네트워크 합의로 결정</li>
+                <li>실행 - 트랜잭션 처리나 스마트 계약 실행은 하지 않음</li>
+                <li>상태 저장 - 상태(state)는 외부에서 관리됨</li></ul>
+
+            <span>특징:</span>
+            <ul><li>모듈형 블록체인의 대표 사례</li>
+                <li>실행 계층과 완전히 분리 → 다양한 Rollup과 연동 가능</li>
+                <li>블록체인을 쉽게 “빌드”할 수 있게 해줌 (Rollup SDK 제공)</li></ul>
+
+            <span>장점:</span>
+            <ul><li>높은 확장성 (TPS 수천 단위 가능)</li>
+                <li>체인 간 유연한 상호 운용성</li>
+                <li>노드 부담 적음 (Data Availability Sampling 활용)</li></ul>
+
+            <span>Celestia를 어디서 사용할까?</span>
+            <ul><li>Rollup 개발 프로젝트들: Eclipse, Dymension, Sovereign SDK 등</li></ul>
+
+            <p>Ethereum Danksharding: 롤업을 위한 데이터 샤딩</p>
+            <ul><li>Danksharding은 이더리움이 Rollup 중심 로드맵을 지원하기 위해 개발 중인 차세대 샤딩 구조</li>
+                <li>실행은 Rollup에게 맡기고, 이더리움은 데이터 게시판 역할에 집중함</li></ul>
+
+            <span>발전 과정:</span>
+            <ol><li>이더리움 1.0: 모놀리식 구조 (모든 기능 직접 수행)</li>
+                <li>Ethereum 2.0: 지분증명(PoS) 도입, Beacon Chain 출현</li>
+                <li>Proto-Danksharding (EIP-4844): Rollup 전용 데이터 저장 공간(Blob) 제공</li>
+                <li>Danksharding (진화형): 진짜 데이터 샤딩 구현 → Rollup 성능 극대화</li></ol>
+
+            <span>Danksharding의 구조 특징:</span>
+            <ul><li>Blob - Rollup 데이터 저장을 위한 특수 슬롯 (일시적 데이터)</li>
+                <li>Proposer/Builder 분리 - 블록 생성과 수집을 나누어 효율화</li>
+                <li>데이터 샤딩	- 다수의 샤드에 Rollup 데이터를 분산 저장 (확장성 극대화)</li></ul>
+
+            <span>장점:</span>
+            <ul><li>Rollup 성능 비약적 향상 (저렴한 수수료, 빠른 처리)</li>
+                <li>이더리움은 보안과 정산만 집중 → Layer 2 확장과의 조화</li>
+                <li>점진적 도입 가능 (EIP-4844 → Danksharding)</li></ul>
+
+            <span>현재 상태 (2025 기준)</span>
+            <ul><li>Proto-Danksharding(EIP-4844)은 메인넷 적용</li>
+                <li>Danksharding은 개발 중, Celestia와 철학적으로 유사</li></ul>
+
+            <p>Celestia, Ethereum Danksharding 요약</p>
+            <div className="ml-4">
+                {celestiaVsEthDanksharding.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.category}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong>Celestia</strong> {type.celestia}</li>
+                            <li><strong>Ethereum Danksharding</strong> {type.danksharding}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
 
 
         </div >
