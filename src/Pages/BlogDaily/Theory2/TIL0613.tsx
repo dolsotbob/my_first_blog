@@ -73,6 +73,56 @@ const crosschainExample = [
     }
 ]
 
+const overcomeTrilemma = [
+    {
+        tech: '레이어 2 확장 (Rollups)',
+        detail1: 'Layer 1(보안, 탈중앙성) + Layer 2(성능) 분리',
+        detail2: '탈중앙화 구조는 유지하면서 처리 성능 개선',
+        detail3: '예: Optimism, zkSync, Arbitrum'
+    },
+    {
+        tech: '모듈형 블록체인 구조',
+        detail1: '실행, 합의, 데이터 저장을 분리 → 각 기능에 최적화된 구조 설계',
+        detail2: '탈중앙성은 데이터·합의 계층에서 유지, 성능은 Rollup에서 구현',
+        detail3: '예: Celestia + Rollup'
+    },
+    {
+        tech: '지분증명(PoS)과 검증자 위임',
+        detail1: '모든 사람이 직접 블록 생성하는 대신, 대표자에게 위임',
+        detail2: '예: Cosmos, Avalanche, Polkadot',
+        detail3: '중앙화 리스크 있으나 성능 향상 효과 큼'
+    },
+    {
+        tech: '샤딩',
+        detail1: '네트워크를 샤드로 나눠서 병렬 처리',
+        detail2: '성능을 확보하면서 전체 네트워크의 부담을 분산',
+        detail3: '이더리움의 Danksharding이 대표 사례'
+    }
+]
+
+const securityMethod = [
+    {
+        method: 'Zero-Knowledge Proofs',
+        example: 'zkSync, StarkNet',
+        strategy: '수학적으로 증명된 정당성 확보'
+    },
+    {
+        method: 'DA Layer 별도 분리',
+        example: 'Celestia',
+        strategy: '데이터 게시와 보안 분리'
+    },
+    {
+        method: 'Rollup-Centric Design',
+        example: 'Ethereum',
+        strategy: '실행은 외부, 보안은 L1 유지'
+    },
+    {
+        method: 'Prover/Verifier 모델 강화',
+        example: 'ZK Rollup',
+        strategy: '신뢰 없이 검증 가능한 구조 확립'
+    }
+]
+
 const TIL0613 = () => {
     return (
         <div className='BlogDaily'>
@@ -225,9 +275,100 @@ const TIL0613 = () => {
                 <li>모듈형 블록체인 + 크로스체인 메시지 구조 확산</li></ul>
 
             <h4>확장성과 탈중앙화의 균형점 모색</h4>
+            <p>블록체인 트릴레마</p>
+            <ul><li>보안- 블록체인이 해킹이나 오류 없이 안전하게 작동하는 능력</li>
+                <li>탈중앙화 - 누구나 참여하고 소수에 의존하지 않는 구조</li>
+                <li>확장성 - 많은 사용자와 트랜잭션을 쁘빠르게 처리하는 능력</li></ul>
+
+            <p>균형을 찾기 위한 기술적 시도들</p>
+            <div className="ml-4">
+                {overcomeTrilemma.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.tech}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong></strong> {type.detail1}</li>
+                            <li><strong></strong> {type.detail2}</li>
+                            <li><strong></strong> {type.detail3}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
+
+            <p>앞으로의 방향성</p>
+            <ul><li>단일 체인 최적화보다는 다층적 구조(Layered Architecture)</li>
+                <li>탈중앙화는 줄이지 않고, 성능은 위임/샤딩/병렬화로 높이는 전략이 대세</li>
+                <li>사용자에게는 빠른 속도, 개발자에게는 유연한 설계가 중요</li></ul>
+
+
+            <h4>확장성 기술 도입 시 보안 고려 사항</h4>
+            <ul><li>블록체인은 기본적으로 보안과 신뢰를 분산된 구조로 보장한다.</li>
+                <li>그러나 확장성 기술은 이를 빠르게 만들기 위해 기능을 분리하거나 요약하거나 오프체인으로 옮기게 된다.</li>
+                <li>그러나 이 과정에서 다음과 같은 보안 리스크가 생길 수 있다.</li>
+            </ul>
+
+            <span>*** 확장 기술별 보안 고려 사항 ***</span>
+            <p>1. Rollup (optimistic/ZK)의 리스크</p>
+            <ul><li>Data Availability(DA) - Rollup 트랜잭션 데이터가 Layer 1에 게시되지 않으면 검증 불가</li>
+                <li>Challenge Period 지연(Optimistic) - 부정확한 트랜잭션을 찾아내는 데 시간이 걸림</li>
+                <li>Prover 신뢰성(ZK) - ZK Proof 생성 과정이 신뢰 불가능하거나 위조될 경우 전체 오류</li>
+                <li>Exit Fraud - 롤업에서 출금 시, 유효하지 않은 상태를 제출하고 탈취 시도 가능</li></ul>
+
+            <span style={{ fontWeight: 'bold' }}>대응 전략:</span>
+            <ul><li>Data Availability Layer 사용 (예: Celestia, EIP-4844)</li>
+                <li>Fraud-proof / Validity-proof 검증 강화</li>
+                <li>사용자 출금 시 지연 기간 및 감시자 보상 구조 설계</li></ul>
+
+            <p>2. 샤딩(Sharding)의 리스크</p>
+            <ul><li>샤드 간 보안 불균형 - 일부 샤드에 공격자 집중 시, 해당 샤드 점령 가능</li>
+                <li>Cross-shard 통신 취약성 - 샤드 간 트랜잭션 전달 중 위조 또는 중간 탈취 위험</li>
+                <li>노드 정보 제한 - 각 샤드는 전체 체인을 모니터링하지 않음 → 사기 탐지 어려움</li></ul>
+
+            <span style={{ fontWeight: 'bold' }}>대응 전략:</span>
+            <ul><li>랜덤 샤드 배정 (적대적 노드 분산)</li>
+                <li>크로스샤드 트랜잭션에 체크포인트 사용</li>
+                <li>샤드 간 상태 증명 포함</li></ul>
+
+            <p>3. 브릿지 & 크로스체인 통신의 리스크</p>
+            <ul><li>브릿지 해킹 - 중개 브릿지 자산 탈취 (예: Ronin, Wormhole 사건)</li>
+                <li>검증자 집중화 - 다중 서명 브릿지(Federated)에서 신뢰 손상 발생 가능</li>
+                <li>위조된 상태 제출 - Light client 검증이 없거나 약하면 메시지 위조 가능</li></ul>
+
+            <span style={{ fontWeight: 'bold' }}>대응 전략:</span>
+            <ul><li>Trustless Bridge 도입 (ZK/Light Client 기반)</li>
+                <li>다중 감시자 구조 + 슬래시/보상</li>
+                <li>Interchain Security 또는 공유 보안 모델</li></ul>
+
+            <p>4. 병렬 실행(Parallel Execution)의 리스크</p>
+            <ul><li>상태 충돌 오판 - 병렬로 처리 중 동일 상태를 조작할 경우 충돌 발생</li>
+                <li>결과 불일치 위험 - 예상 순서와 실제 처리 순서가 다를 경우 정합성 붕괴</li></ul>
+
+            <span style={{ fontWeight: 'bold' }}>대응 전략:</span>
+            <ul><li>트랜잭션 간 의존성 분석 알고리즘 강화</li>
+                <li>Conflict Graph 생성 → 병렬 실행 전 선별</li>
+                <li>블록 생성 시 실행 순서 고정 후 검증</li></ul>
+
+            <p>보안을 지키면서 확장하는 방법</p>
+            <div className="ml-4">
+                {securityMethod.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.method}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong>적용 사례: </strong> {type.example}</li>
+                            <li><strong>핵심 전략: </strong> {type.strategy}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
+
+            <span style={{ fontStyle: 'italic' }}>확장성 기술은 블록체인의 성능을 끌어올리는 핵심 도구지만, 보안과 탈중앙화의 원칙을 손상시키지 않도록 설계하는 것이 중요하다.</span><br />
+            <span style={{ fontStyle: 'italic' }}>결국 이를 위해선 데이터 가용성, 검증 가능성, 상태 정합성, 브릿지 안전성 같은 요소를 기술적으로 증명하거나 감시 체계를 도입해야 한다.</span>
+
+
+
+
             {/* 여기 할 차례 */}
 
-        </div>
+        </div >
     )
 }
 
