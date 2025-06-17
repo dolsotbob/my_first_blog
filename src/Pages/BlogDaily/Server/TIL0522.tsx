@@ -67,19 +67,19 @@ const TIL0522 = () => {
             </ul>
 
             <p>NestJS에서 스케줄러 구현 순서</p>
-            <ol><li>의존성 설치
+            <ol><li><strong>의존성 설치</strong>
                 <ul><li>먼저 스케줄러 기능을 위한 공식 패키지 설치하기</li></ul>
                 <pre><code>{`
     npm install --save @nestjs/schedule
     `}</code></pre>
             </li>
 
-                <li>모듈 등록</li>
+                <li><strong>모듈 등록</strong></li>
                 <ul><li>AppModule 또는 사용하는 모듈에서 ScheduleModule.forRoot() 등록</li></ul>
                 <CodeBlock code={TIL0522scheduleModule}></CodeBlock>
                 <ul><li>forRoot()는 글로벌하게 스케줄 기능을 활성화 시켜줌</li></ul>
 
-                <li>스케줄 함수 작성</li>
+                <li><strong>스케줄 함수 작성</strong></li>
                 <ul><li>@Cron() 데코레이터를 이용해 원하는 주기로 작업을 실행할 수 있음</li>
                     <li>Logger를 활용하면 언제 실행되었는지도 확인할 수 있음</li></ul>
                 <CodeBlock code={TIL0522schedulerLogger}></CodeBlock>

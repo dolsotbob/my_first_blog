@@ -399,7 +399,7 @@ const TIL0523 = () => {
                 </li>
             </ul>
 
-            <p>Foreign key (외래 키)</p>
+            <p>Foreign Key (외래 키)</p>
             <ul><li>다른 테이블의 기본 키를 참조하는 열</li>
                 <li>두 테이블 사이에 관계를 정의하는 역할</li>
                 <li>특징:

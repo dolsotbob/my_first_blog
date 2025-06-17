@@ -11,6 +11,8 @@ import { TIL0514AuthModuleSetting } from './CodeExamServer'
 import { TIL0514JwtStrategy } from './CodeExamServer'
 import { TIL0514GuardExample } from './CodeExamServer'
 
+// ** 가의 노트 추가 업뎃 하기 
+
 const TIL0514 = () => {
     return (
         <div className='BlogDaily'>
@@ -30,7 +32,7 @@ const TIL0514 = () => {
             </ul>
             <ul><li>NestJS는 Express뿐만 아니라 Fastify와 같은 다른 백엔드 서버도 선택적으로 사용할 수 있고,</li>
                 <li>기본적으로 TypeScript를 적극 지원하여 자동완성, 타입 체크, 테스트 작성 등에서 높은 생산성을 보장합니다.</li>
-                <li>Express 보다 더 구조적이고 확장 가능한 백엔드 애플리케이션이다</li>
+                <li>Express 보다 <strong>더 구조적이고 확장 가능한 백엔드 애플리케이션</strong>이다</li>
             </ul>
 
             <h4>NestJS</h4>
@@ -44,10 +46,47 @@ const TIL0514 = () => {
             </ul>
 
             <p>NestJS의 주요 특징</p>
-            <ul><li>의존성 주입(Dependency injection)</li>
-                <li>데코레이터 기반 라우팅</li>
-                <li>모듈 기반 설계</li>
-                <li>테스트 친화적 구조</li></ul>
+            <ul><li>의존성 주입(Dependency injection)
+                <ul><li>클래스 간 결합도를 낮추고 유지보수를 쉽게 한다.</li></ul>
+            </li>
+                <li>데코레이터 기반 라우팅
+                    <pre><code>{`
+        @Get('/user')
+        getUser() {
+            return '사용자 정보';
+        }
+        `}</code></pre>
+                </li>
+                <li>모듈 기반 설계
+                    <ul><li>각 기능은 Module 단위로 분리되며, Controller와 Service가 함께 구성된다.</li></ul>
+                </li>
+                <li>테스트 친화적 구조
+                    <ul><li>Nest는 TestingModule과 의존성 주입을 통해 단위 테스트와 통합 테스트를 쉽게 할 수 있다.</li></ul>
+                </li>
+            </ul>
+
+            <p>Nest CLI로 프로젝트 생성하기</p>
+            <ul><li>설치: npm i -g @nestjs/cli</li>
+                <li>프로젝트 생성: nest new my-nest-app</li>
+                <li>실행:
+                    <ul>cd my-nest-app</ul>
+                    <ul>npm run start:dev</ul>
+                </li>
+            </ul>
+
+            <p>기본 디렉토리 구조</p>
+            <pre><code>{`
+    my-nest-app/
+    ├── src/
+    │   ├── app.controller.ts      # 컨트롤러 (요청 처리)
+    │   ├── app.service.ts         # 서비스 (로직 처리)
+    │   ├── app.module.ts          # 루트 모듈
+    │   └── main.ts                # 앱 진입점
+    ├── test/                      # 테스트 코드
+    ├── package.json               # 의존성, 스크립트
+    └── tsconfig.json              # TypeScript 설정
+    `}</code></pre>
+
 
             <h4>NestJS 프로젝트 구성예시 - User</h4>
             <p>1. Controller - HTTP 요청을 처리하는 진입점</p>
@@ -78,12 +117,19 @@ const TIL0514 = () => {
             <p>의존선 주입(Dependency Injection)</p>
             <ul><li>NestJS에서는 생성자 인자를 통해 자동으로 필요한 서비스를 주입받을 수 있다.</li></ul>
             <pre><code>{`
-constructor(private readonly userService: UserService) {}
-`}</code></pre>
+        constructor(private readonly userService: UserService) {}
+        `}</code></pre>
             <ul><li>NestJS는 내부적으로 이 의존성을 주입해 연결해 준다.</li></ul>
 
             <p>환경변수 설정 - ConfigModule</p>
+            <ul><li>애플리케이션 설정을 .env 파일로 관리하려면 @nestjs/config 모듈을 사용한다.</li>
+            </ul>
 
+            <pre><code>{`
+            npm install @nestjs/config
+            `}</code></pre>
+
+            {/* // 예시 넣기  */}
 
             <h4>요청 처리 고급 기능</h4>
             <p>DTO와 유효성 검사를 통해 안전한 입력 데이터 확보</p>
@@ -144,7 +190,7 @@ npm install --save-dev @types/passport-jwt
 
             <p>4. 인증된 사용자 정보 요청하기</p>
             <ul><li>Guard 적용</li>
-                <li>커스텀 데코레이션 (@User)</li></ul>
+                <li>커스텀 데코레이터 (@User)</li></ul>
 
 
             <h4>환경변수 관리 - @nestjs/config</h4>
