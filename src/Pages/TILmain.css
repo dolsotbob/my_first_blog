@@ -1,4 +1,4 @@
-.til-container {
+/* .til-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 16px;
@@ -24,4 +24,45 @@
     text-decoration: none;
     color: #333;
     font-weight: bold;
+} */
+
+
+.til-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* 또는 space-between, flex-start 등 */
+    gap: 16px;
+    /* 카드 간 여백 */
+    padding: 20px;
+}
+
+.til-card {
+    background-color: #f0f0f0;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    width: calc(20% - 16px);
+    /* 한 행에 약 5개 카드 (5 * 20% = 100%) */
+    min-width: 160px;
+    /* 너무 작아지는 것 방지 */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.til-card:hover {
+    transform: translateY(-4px);
+}
+
+.til-card a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .til-card {
+        width: calc(50% - 16px);
+        /* 모바일에서는 2개씩 */
+    }
 }
