@@ -15,7 +15,7 @@ const CRUD = [
         details: '데이터를 읽거나 조회'
     },
     {
-        action: 'Updaate(수정)',
+        action: 'Update(수정)',
         httpmethod: 'PUT / PATCH',
         details: '데이터 수정'
     },
@@ -66,18 +66,18 @@ npm init -y
             <p>서버 만들기</p>
             <ul><li>index.js 파일을 생성하고 아래와 같이 작성한다</li></ul>
             <pre><code>{`
-const express = require('express');
-const app = express();
-const port = 3000;
+    const express = require('express');
+    const app = express();
+    const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello Express!');
-});
+    app.get('/', (req, res) => {
+    res.send('Hello Express!');
+    });
 
-app.listen(port, () => {
-  console.log(₩🚀 서버가 http://localhost:S{port} 에서 실행 중입니다.₩);
-});
-`}</code></pre>
+    app.listen(port, () => {
+    console.log(₩🚀 서버가 http://localhost:S{port} 에서 실행 중입니다.₩);
+    });
+    `}</code></pre>
             <br />
             <p>실행</p>
             <ul><li>node index.js</li>
@@ -102,17 +102,17 @@ app.listen(port, () => {
                 <li>모든 Express 앱은 미들웨어의 연속체로 구성되어 있다</li></ul>
 
             <p>주요 미들웨어 예시</p>
-            <ol><li>express.json()
+            <ol><li><strong>express.json()</strong>
                 <ul><li>JSON 요청 본문을 자동으로 파싱해 req.body에 넣어준다
                     <ul><li>“파싱하다(parse)”는 어떤 데이터를 읽어서 구조를 이해하고, 프로그래밍에서 사용할 수 있는 형태로 바꾸는 것을 말함</li></ul>
                 </li>
                     <li>app.use(express.json());</li></ul>
             </li>
-                <li>express.static()
+                <li><strong>express.static()</strong>
                     <ul><li>정적 파일(CSS, JS, 이미지 등)을 제공할 때 사용</li>
                         <li>app.use(express.static('public'));</li></ul>
                 </li>
-                <li>커스텀 미들웨어
+                <li><strong>커스텀 미들웨어</strong>
                     <pre><code>{`
 app.use((req, res, next) => { 
     console.log(₩S{req.method} S{req.url}₩);
@@ -127,14 +127,14 @@ app.use((req, res, next) => {
             <ul><li>클라이언트의 요청 URL과 메서드(GET, POST 등)에 따라 어떤 동작을 할지 정의하는 것</li>
                 <li>기본 라우팅 메서드:
                     <pre><code>{`
-app.get('/hello', (req, res) => {
-  res.send('GET 요청 받음');
-});
+    app.get('/hello', (req, res) => {
+    res.send('GET 요청 받음');
+    });
 
-app.post('/submit', (req, res) => {
-  res.send('POST 요청 받음');
-});
-`}</code></pre>
+    app.post('/submit', (req, res) => {
+    res.send('POST 요청 받음');
+    });
+    `}</code></pre>
                 </li>
                 <li>기타 메서드:
                     <ul><li>app.put()</li>
@@ -152,7 +152,7 @@ app.get('/', (req, res) => {
 });
 `}</code></pre>
                 <br />
-                <li>req 객체 얘시:
+                <li>req 객체 예시:
                     <ul><li>req.method: 요청 방식 (GET, POST 등)</li>
                         <li>req.url: 요청 경로</li>
                         <li>req.query: URL 쿼리 파라미터</li>
@@ -168,18 +168,18 @@ app.get('/', (req, res) => {
                 </li>
             </ul >
             <pre><code>{`
-app.post('/user', (req, res) => {
-    const name = req.body.name;
-    res.status(201).json({ message: ₩hello, S{name}₩ });
-});
-`}</code></pre>
+    app.post('/user', (req, res) => {
+        const name = req.body.name;
+        res.status(201).json({ message: ₩hello, S{name}₩ });
+    });
+    `}</code></pre>
             <br />
 
             <h4>REST API 가능 설계</h4>
             <ul><li>Express를 사용하면 간단하게 REST API를 설계할 수 있음</li></ul>
 
             <p>CRUD 구조</p>
-            <ul><li>REST API는 보통 다음과 같은 3가지 동작을 기반으로 구성된다:</li>
+            <ul><li>REST API는 보통 다음과 같은 4가지 동작을 기반으로 구성된다:</li>
             </ul>
 
             <div className="ml-4">
@@ -199,14 +199,14 @@ app.post('/user', (req, res) => {
 
             <p>파라미터 처리</p>
             <ul><li>Express는 요청의 다양한 정보를 다음과 같은 방식으로 받을 수 있다:
-                <ol><li>req.params (경로 파라미터)</li>
+                <ol><li><strong>req.params (경로 파라미터)</strong></li>
                     <pre><code>{`
 app.get('/users/:id', (req, res) => {
   const id = req.params.id;
   res.send(₩User ID: S{id}₩);
 });
                     `}</code></pre>
-                    <li>req.query (쿼리 스트링)</li>
+                    <li><strong>req.query (쿼리 스트링)</strong></li>
                     <pre><code>{`
 app.get('/search', (req, res) => {
   const keyword = req.query.q;
@@ -214,7 +214,7 @@ app.get('/search', (req, res) => {
 });
 // 예: /search?q=apple
                     `}</code></pre>
-                    <li>req.body (본문 데이터)</li>
+                    <li><strong>req.body (본문 데이터)</strong></li>
                     <pre><code>{`
 app.use(express.json());
 
@@ -275,9 +275,9 @@ app.use((err, req, res, next) => {
             </ul>
 
             <p>라우터 분리 (express.Router())</p>
-            <ul><li>하나의 파일에 모든 API를 넣기보다는 기능 단위로 라우터를 분리하는 것이 유지보수에 좋다.</li>
+            <ul><li>하나의 파일에 모든 API를 넣기보다는 <strong>기능 단위로 라우터를 분리</strong>하는 것이 유지보수에 좋다.</li>
                 <li>예시: 사용자 라우터
-                    <ul><li>routes/user.js</li>
+                    <ul><li><strong>routes/user.js</strong></li>
                         <pre><code>{`
     express = require('express');
     const router = express.Router();
@@ -288,7 +288,7 @@ app.use((err, req, res, next) => {
 
     module.exports = router;
     `}</code></pre>
-                        <li>app.js</li>
+                        <li><strong>app.js</strong></li>
                         <pre><code>{`
     const userRouter = require('./routes/user');
     app.use('/users', userRouter);
@@ -302,7 +302,7 @@ app.use((err, req, res, next) => {
                 <li>Contrller: 요청(req)을 받아 응답(res)을 처리하는 레벨</li>
                 <li>Service: 실제 로직을 수행하는 계층 (DB 조회, 데이터 가공 등)</li>
                 <li>예시:
-                    <ul><li>controllers/userController.js</li>
+                    <ul><li><strong>controllers/userController.js</strong></li>
                         <pre><code>{`
     const userService = require('../services/userService');
 
@@ -318,7 +318,7 @@ app.use((err, req, res, next) => {
     };
 `}</code></pre>
                         <br />
-                        <li>services/userService.js</li>
+                        <li><strong>services/userService.js</strong></li>
                         <pre><code>{`
     const users = [
     { id: '1', name: 'Alice' },

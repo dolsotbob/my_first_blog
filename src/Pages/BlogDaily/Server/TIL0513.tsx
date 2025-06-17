@@ -142,7 +142,8 @@ const TIL0513 = () => {
             </ul>
 
             <h4>쿠키(Cookie)</h4>
-            <ul><li>서버가 여러분의 브라우저에게 “이거 기억해줘” 하고 보내는 정보</li>
+            <ul><li>웹 브라우저에 저장되는 작고 간단한 정보 조각</li>
+                <li>서버가 여러분의 브라우저에게 “이거 기억해줘” 하고 보내는 정보</li>
                 <li>쿠키는 클라이언트(브라우저)가 저장하는 정보입니다</li></ul>
 
             <p>왜 쿠키가 필요할까?</p>
@@ -191,9 +192,17 @@ const TIL0513 = () => {
                 <li>세션 고정 공격(Session Fixation) 방지를 위해 → 로그인 시 세션 ID 재발급</li>
                 <li>로그아웃 시 req.session.destroy()로 명확히 세션 제거</li></ul>
 
+
             <h4>JWT(JSON Web Token)</h4>
             <ul><li>JSON 형식의 데이터를 Base64로 인코딩한 문자열 토큰으로, 사용자 인증 및 정보 전달에 사용됨</li>
                 <li>주로 무상태 인증 (Stateless Authentication) 방식에서 사용되며, 서버에 세션을 저장하지 않고 클라이언트가 토큰을 보관하고 매 요청마다 서버에 전달한다</li></ul>
+
+            <p>왜 JWT를 사용하는가?</p>
+            <ul><li>세션 서버 저장 불필요 (무상태)</li>
+                <li>프론트/백 분리된 구조에서 효율적</li>
+                <li>다양한 서비스 간 인증 연동에 유용 (OAuth 등)</li>
+                <li>Payload에 유저 정보 포함 가능 (단, 민감한 정보는 넣지 않도록 주의)</li></ul>
+
 
             <p>Express에서 JWT 구현 예시</p>
             <ol><li>설치
@@ -201,12 +210,12 @@ const TIL0513 = () => {
             </li>
                 <li>토큰 생성</li>
                 <pre><code>{`
-const jwt = require('jsonwebtoken');
+    const jwt = require('jsonwebtoken');
 
-const token = jwt.sign({ 
-    userId: 'alice01' }, 'my-secret-key', { expiresIn: '1h',
-});
-`}</code></pre><br />
+    const token = jwt.sign({ 
+        userId: 'alice01' }, 'my-secret-key', { expiresIn: '1h',
+    });
+    `}</code></pre><br />
                 <li>토큰 검증 미들웨어</li>
                 <CodeBlock code={TIL0513tokenAuthMiddleware}></CodeBlock>
                 <li>사용 예시</li>
@@ -218,6 +227,12 @@ app.get('/me', authenticate, (req, res) => {
             </ol>
 
             <p>주의할 점</p>
+            <ul><li>민감한 정보는 Payload에 절대 넣지 않기</li>
+                <li>토큰은 탈취되면 위험 → HTTPS 필수</li>
+                <li>토큰 만료 설정 필수 (expiresIn)</li>
+                <li>필요 시 Refresh Token을 함께 사용해 갱신</li></ul>
+
+            <p>로그인 요청 흐름</p>
             <div className="ml-4">
                 {JWTbasedLogin.map((type, index) => (
                     <details key={index} className="mb-2">

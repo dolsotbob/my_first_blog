@@ -4,6 +4,33 @@ import { TIL0509MiddlewareExample } from '../../codeExamples';
 import { TIL0509RoutingExample } from '../../codeExamples';
 import { TIL0509RoutingExample2 } from '../../codeExamples';
 
+const serverType = [
+    {
+        type: '웹 서버',
+        detail1: 'HTML/CSS/JS 파일을 브라우저에 보내줌',
+        detail2: '예: Apache, Nginx, Express',
+        detail3: ''
+    },
+    {
+        type: 'API 서버 (Back-end Server)',
+        detail1: '데이터 중심: JSON 형식으로 클라이언트에 응답',
+        detail2: '웹/앱/dApp에서 버튼 클릭 시 동작하는 서버는 대부분 이 유형',
+        detail3: '예: Express, NestJS, Django REST, Spring Boot'
+    },
+    {
+        type: '파일 서버',
+        detail1: '이미지, 영상, 문서 등 정적 파일을 저장하고 전송',
+        detail2: '예: AWS S3, FTP 서버',
+        detail3: ''
+    },
+    {
+        type: '데이터베이스 서버',
+        detail1: '데이터를 저장, 검색, 수정, 삭제 처리',
+        detail2: '클라이언트는 직접 DB에 접근하지 않고, API 서버를 통해 접근',
+        detail3: '예: MySQL, PostgreSQL, MongoDB'
+    },
+]
+
 const ServersSupportingMiddleware = [
     {
         server: 'Express(Node.js)',
@@ -127,10 +154,18 @@ const TIL0509 = () => {
             </ul>
 
             <p>어떤 종류의 서버가 있을까?</p>
-            <ol><li>웹 서버</li>
-                <li>API 서버 (Back-end Server)</li>
-                <li>파일 서버</li>
-                <li>데이터베이스 서버</li></ol>
+            <div className="ml-4">
+                {serverType.map((type, index) => (
+                    <details key={index} className="mb-2">
+                        <summary className="cursor-pointer font-medium">{type.type}</summary>
+                        <ul className="list-disc list-inside ml-4">
+                            <li><strong></strong> {type.detail1}</li>
+                            <li><strong></strong> {type.detail2}</li>
+                            <li><strong></strong> {type.detail3}</li>
+                        </ul>
+                    </details>
+                ))}
+            </div>
 
             <h4>Node.js</h4>
             <ul><li>브라우저 밖에서 JavaScript를 실행할 수 있게 해주는 런타임 환경</li></ul>
