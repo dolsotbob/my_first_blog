@@ -144,7 +144,13 @@ const TIL0618 = () => {
                 <li>실시간성이 낮고 리소스 낭비 가능</li></ul>
             <span>Long Polling</span>
             <ul><li>Consumer가 일정 시간 큐의 응답을 기다림 (더 효율적)</li>
-                <li>AWS SQS에서는 기본적으로 Long Polling 권장</li></ul>
+                <li>메세지가 생기면 바로 응답을 줌</li>
+                <li>AWS SQS에서는 기본적으로 Long Polling 권장</li>
+                <li>장점:
+                    <ul><li>리소스 절약: 불필요한 반복 요청 없음</li>
+                        <li>반응성 높음: 메세지가 생기면 즉시 전달 가능</li></ul>
+                </li>
+            </ul>
 
 
             <h4>Amazon SQS</h4>
