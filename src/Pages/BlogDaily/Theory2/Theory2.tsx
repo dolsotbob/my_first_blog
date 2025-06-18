@@ -8,7 +8,7 @@ const cardData = [
     { date: '6/11', title: '레이어 2 확장 솔루션', path: '/blog/theory2/0611' },
     { date: '6/12', title: '샤딩과 모듈형 블록체인', path: '/blog/theory2/0612' },
     { date: '6/13', title: '미래의 확장성 기술과 전망', path: '/blog/theory2/0613' },
-    { date: '6/18', title: 'Messaging', path: '/blog/theory2/0618' },
+    { date: '6/18', title: 'Message Queue', path: '/blog/theory2/0618' },
 ]
 
 const Theory2 = () => {
