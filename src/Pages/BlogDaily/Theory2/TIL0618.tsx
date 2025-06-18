@@ -73,9 +73,14 @@ const TIL0618 = () => {
                 <li>서비스 간 느슨한 결합(Loosely Coupled) 실현</li></ul>
             <span style={{ fontStyle: 'italic' }}>느슨한 결합은 시스템의 구성 요소(예: 서비스, 모듈, 클래스)들이 서로 최소한의 정보만 공유하며 독립적으로 동작하도록 설계된 상태를 말합니다.</span>
 
-            <p>MQ의 예시 시스템</p>
-            <ul><li>RabbitMQ - AMQP 기반, 경량 메시지 처리에 적합</li>
-                <li>Apache Kafka - 대용량 로그 스트리밍에 강력</li>
+            <p>MQ의 예시 시스템 - 브로커</p>
+            <ul><li>Apache Kafka - 대용량 로그 스트리밍에 강력
+                <ul><li>처리 속도로 1위</li>
+                    <li>무겁고 구현이 어려움 &rarr; 작은 기업에서 굳이 안함; 링크드인 같은 큰 기업이 씀</li></ul>
+            </li>
+                <li>RabbitMQ - AMQP 기반, 경량 메시지 처리에 적합
+                    <ul><li>코빗에서 사용</li></ul>
+                </li>
                 <li>Amazon SQS - 완전 관리형 클라우드 MQ</li>
                 <li>Redis Streams - Redis 기반의 메시지 큐 대안</li></ul>
 
@@ -204,6 +209,24 @@ const TIL0618 = () => {
                 <li>FIFO Queue는 처리량이 제한적이므로 트래픽이 많은 경우 병렬 처리 전략이 필요</li>
                 <li>메시지 순서가 중요한 경우에는 반드시 FIFO Queue를 명시적으로 생성해야 함</li>
                 <li>TTL(Time To Live)이 지나면 메시지가 자동 삭제됨 → DLQ 설정 중요</li></ul>
+
+
+            <h4>AWS SQS 생성</h4>
+            <span>AWS에서 SQS 대기열(Queue) 생성 해보기</span>
+            <ol><li>SQS 대시보드 입장</li>
+                <li>Simple Queue Service에서 '대기열 생성' 클릭
+                    <ul><li>FIFO의 경우 대기열 이름에 000.fifo 라고 해줘야 함</li></ul>
+                </li>
+                <li>'구성' 설정
+                    <ul><li>구성 세부 내용: 표시 제한 시간, 메시지 보존 기간, 전송 지연, 최대 메시지 크기, 메시지 수신 대기 기간, 콘텐츠 기반 중복 제거, 높은 처리량 FIFO 대기열</li></ul>
+                </li>
+                <li>'암호화' 설정</li>
+                <li>'액세스 정책' 설정</li>
+                <li>리드라이브 허용 정책 & 배달 못한 편지 대기열</li>
+                <li>대기열 확인
+                    <ul><li>여기서 URL 값을 프로젝트에 써야 함</li></ul>
+                </li>
+            </ol>
 
 
         </div>
