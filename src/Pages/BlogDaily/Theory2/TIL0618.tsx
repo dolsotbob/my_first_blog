@@ -200,7 +200,6 @@ const TIL0618 = () => {
                 <li>TTL(Time To Live)이 지나면 메시지가 자동 삭제됨 → DLQ 설정 중요</li></ul>
 
 
-
         </div>
     )
 }
