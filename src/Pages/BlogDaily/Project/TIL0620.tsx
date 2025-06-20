@@ -39,9 +39,9 @@ git init
 
 ⚒️ Step 2. 프로젝트 초기화 (Hardhat 기반)
 
-npm init -y              # package.json 생성
-npm install --save-dev hardhat
-npx hardhat
+npm init -y                     # package.json 생성
+npm install --save-dev hardhat  # hardhat 설치
+npx hardhat                     # 프로젝트 초기화 마법사 실행 
 
 ▶️ hardhat 실행 시 선택 사항:
 	•	❓ What do you want to do?
