@@ -4,6 +4,7 @@ import './Project.css'; // CSS 파일 추가
 
 const cardData = [
     { date: '6/20', title: '프로젝트 시작', path: '/blog/project/0620' },
+    { date: '6/23', title: '프로젝트 기획', path: '/blog/project/0623' },
 ];
 
 const Project = () => {
