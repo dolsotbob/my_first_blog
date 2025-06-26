@@ -21,7 +21,6 @@ const Blog = () => {
 
       <div onClick={() => navigate("/blog/research2")}>Research2</div>
 
-      <div onClick={() => navigate('/blog/0402hw')}>주말 과제 예고</div>
       {/* <div href="/signature">0203</div> */}
     </div>
   )

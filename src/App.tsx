@@ -118,6 +118,8 @@ import TIL0618 from './Pages/BlogDaily/Theory2/TIL0618';
 import Project from './Pages/BlogDaily/Project/Project';
 import TIL0620 from './Pages/BlogDaily/Project/TIL0620';
 import TIL0623 from './Pages/BlogDaily/Project/TIL0623';
+import TIL0624 from './Pages/BlogDaily/Misc/TIL0624';
+import Miscellaneous from './Pages/BlogDaily/Misc/Miscellaneous';
 
 
 function App() {
@@ -249,6 +251,9 @@ function App() {
             <Route path="/blog/project" element={<Project></Project>}></Route>
             <Route path="/blog/project/0620" element={<TIL0620></TIL0620>}></Route>
             <Route path="/blog/project/0623" element={<TIL0623></TIL0623>}></Route>
+
+            <Route path="/blog/misc" element={<Miscellaneous></Miscellaneous>}></Route>
+            <Route path="/blog/misc/0624" element={<TIL0624></TIL0624>}></Route>
 
             <Route path="/furtherstudies" element={<FurtherStudies></FurtherStudies>}></Route>
             <Route path="/furtherstudies/:slug" element={<Furtherpage></Furtherpage>}></Route>
