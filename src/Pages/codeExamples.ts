@@ -474,7 +474,7 @@ export const til0423getUserAddressExample = `
 `
 
 export const til0423erc277MetaTnxExecuteExample = `
-export const excute = async () => {
+export const execute = async () => {
   try {
     const deadline = Math.floor(Date.now() / 1000) + 3600;
 
@@ -521,7 +521,7 @@ export const excute = async () => {
     const execute = await forwarder.execute(request);
     await execute.wait();
   } catch (error) {
-    console.error('Error in excute:', error);
+    console.error('Error in execute:', error);
   }
 };
 `
