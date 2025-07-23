@@ -12,7 +12,7 @@ const cardData = [
     { date: '4/22', title: 'Gassless - EIP 2612(Permit)', path: '/blog/solidityadv/0422' },
     { date: '4/23', title: 'Gassless - EIP 2771(Meta Transaction)', path: '/blog/solidityadv/0423' },
     { date: '4/29', title: 'Upgradable', path: '/blog/solidityadv/0429' },
-    { date: '4/30', title: 'Unisawp', path: '/blog/solidityadv/0430' },
+    { date: '4/30', title: 'Uniswap', path: '/blog/solidityadv/0430' },
     { date: '5/7', title: 'Oracle', path: '/blog/solidityadv/0507' },
 ];
 
