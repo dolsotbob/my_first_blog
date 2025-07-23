@@ -44,7 +44,7 @@ const TIL0429 = () => {
             <h4>Storage - 스마트 컨트랙트에서 데이터가 저장되는 방식</h4>
             <ul><li>컨트랙트 주소와 연결된 고유한 저장공간</li>
                 <li>값은 트랜잭션 이후에도 계속 유지됨</li>
-                <li>가스 비용이 높음(쓰기 비요이 큼)</li></ul>
+                <li>가스 비용이 높음(쓰기 비용이 큼)</li></ul>
 
             <p>저장 방식 - Slot 단위로 저장됨</p>
             <ul><li>storage는 기본적으로 32바이트 단위(slot)로 구성되어 있음</li>
@@ -147,7 +147,7 @@ const TIL0429 = () => {
             <ul><li>Upgradable Contract 개념이 나오면서 핵심 구성요소의 위치나 역할 분리 방식에 따라 다양한 업그레이드 패턴이 생김</li>
                 <li>쌤은 이 중 두 번째 것까지 써보셨음</li></ul>
 
-            <ol><li>Transparent Proxy Pattern (투명 프록시 패턴)
+            <ol><li><strong>Transparent Proxy Pattern (투명 프록시 패턴)</strong>
                 <ul><li>OpenZeppelin에서 기본으로 제공하는 패턴이며, OpenZeppelin자체적으로 개발한 패턴</li>
                     <li>핵심 개념:
                         <ul><li>Proxy와 Implementation 분리</li>
@@ -164,8 +164,8 @@ const TIL0429 = () => {
                             <li>업그레이드 로직이 Proxy에 고정됨 (유연성 ↓)</li></ul>
                     </li>
                 </ul>
-            </li>
-                <li>UUPS(Universal Upgradeable Proxy Standard)
+            </li><br />
+                <li><strong>UUPS(Universal Upgradeable Proxy Standard)</strong>
                     <ul><li>더 최근의 업그레이드 패턴이며, OpenZeppelin도 권장하는 방식</li>
                         <li>핵심 개념:
                             <ul><li>업그레이드 로직이 로직 컨트랙트(Implementation)에 포함됨</li>
@@ -182,8 +182,8 @@ const TIL0429 = () => {
                             <ul><li>업그레이드 로직이 로직 컨트랙트에 있으므로 실수하면 위험</li>
                                 <li>잘못된 Implementation이 upgradeTo를 덮어쓸 수도 있음 (보안 이슈 주의)</li></ul>
                         </li></ul>
-                </li>
-                <li>Beacon Proxy (Beacon 기반 프록시)
+                </li><br />
+                <li><strong>Beacon Proxy (Beacon 기반 프록시)</strong>
                     <ul><li>많은 Proxy들이 하나의 Beacon을 공유하는 구조</li>
                         <li>핵심 개념:
                             <ul><li>Beacon이라는 컨트랙트가 Implementation 주소를 저장하고 있음</li>
@@ -201,8 +201,8 @@ const TIL0429 = () => {
                                 <li>Beacon이 단일 실패 지점(SPoF)이 될 수 있음
                                 </li></ul>
                         </li></ul>
-                </li>
-                <li>Diamond Pattern
+                </li><br />
+                <li><strong>Diamond Pattern</strong>
                     <ul><li>복잡한 스마트 컨트랙트를 모듈화하고 확장성을 높이기 위해 등장한 업그레이더블 방식</li>
                         <li>특히 함수 수가 많아지면 발생하는 contract size 한도 초과 문제를 해결하기 위해 사용됨
                         </li>
