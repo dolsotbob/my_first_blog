@@ -13,15 +13,7 @@ const Blog = () => {
   return (
     <div className="Daily">
       <TILmain />
-      {/* {links.map(({ path, label }) => (
-        <div key={path} onClick={() => navigate(path)}>{label}</div>
-      ))} */}
 
-      <div onClick={() => navigate("/blog/0311")}>0311 Research1 - Arweave에 대해서</div>
-
-      <div onClick={() => navigate("/blog/research2")}>Research2</div>
-
-      {/* <div href="/signature">0203</div> */}
     </div>
   )
 }
